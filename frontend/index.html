@@ -9,66 +9,28 @@ git
 </head>
 
 <body>
-<div class="page-loader active" id="pageLoader">
+<div class="page-loader" id="pageLoader">
     <div class="loader-glass-window">
-        <div class="loader-pothole-scene">
-            <div class="cute-worker-scene">
-                <!-- Suelo y bache -->
-                <div class="ground-base"></div>
-                <div class="pothole-dig">
-                    <div class="pothole-filling-liquid"></div>
-                    <!-- Efectos de calor y vapor -->
-                    <div class="asphalt-heat-haze"></div>
-                    <div class="asphalt-steam"></div>
+        <div class="loader-pothole-scene-smooth">
+            <div class="smooth-repair-scene">
+                <!-- El suelo con la grieta inicial -->
+                <div class="road-surface-crack"></div>
+                
+                <!-- El asfalto líquido que rellena -->
+                <div class="liquid-asphalt-pour">
+                    <div class="asphalt-drip drip-1"></div>
+                    <div class="asphalt-drip drip-2"></div>
                 </div>
                 
-                <!-- Conos de señalamiento -->
-                <div class="safety-cone cone-left">
-                    <div class="cone-tip"></div>
-                    <div class="cone-stripe"></div>
-                    <div class="cone-base"></div>
-                </div>
-                <div class="safety-cone cone-right">
-                    <div class="cone-tip"></div>
-                    <div class="cone-stripe"></div>
-                    <div class="cone-base"></div>
+                <!-- La zona rellenada y el icono final -->
+                <div class="healed-road-patch">
+                    <div class="repair-confirm-icon">✓</div>
                 </div>
 
-                <!-- Camión de mantenimiento GRANDE y DETALLADO -->
-                <div class="maintenance-truck-large">
-                    <div class="truck-cabin-detailed">
-                        <div class="cabin-window"></div>
-                    </div>
-                    <div class="truck-body-hopper">
-                        <div class="asphalt-material-pile"></div>
-                        <div class="hopper-lid"></div>
-                        <div class="truck-logo">D</div>
-                    </div>
-                    <div class="truck-wheels-heavy">
-                        <div class="wheel heavy-f"></div>
-                        <div class="wheel heavy-m"></div>
-                        <div class="wheel heavy-b"></div>
-                    </div>
-                    <!-- Sistema de vertido -->
-                    <div class="asphalt-chute-system">
-                        <div class="chute-hinge"></div>
-                        <div class="chute-tube"></div>
-                    </div>
-                    <div class="pouring-stream-heavy"></div>
-                </div>
-
-                <!-- Trabajador más pequeño y detallado (sin pala) -->
-                <div class="worker-small-detailed">
-                    <div class="worker-leg left-leg"></div>
-                    <div class="worker-leg right-leg"></div>
-                    <div class="worker-torso">
-                        <div class="vest-reflective"></div>
-                        <div class="worker-arms"></div>
-                    </div>
-                    <div class="worker-head">
-                        <div class="worker-circle-head"></div>
-                        <div class="worker-helmet-hard"></div>
-                    </div>
+                <!-- El icono del trabajador que vierte el material -->
+                <div class="worker-pour-icon">
+                    <div class="worker-helmet-icon"></div>
+                    <div class="worker-body-icon"></div>
                 </div>
             </div>
         </div>
@@ -77,7 +39,7 @@ git
         <div class="loader-status-bar">
             <div class="loader-status-progress"></div>
         </div>
-        <div class="loader-subtitle">Validando e infraestructura...</div>
+        <div class="loader-subtitle">Reporte en proceso...</div>
     </div>
 </div>
     <div class="page-loader water-leak-loader" id="waterLeakLoader">

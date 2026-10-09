@@ -1873,366 +1873,173 @@ body.modal-active .logo-icon .dahlia-center {
   transform: translateY(0) scale(1);
   opacity: 1;
 }
-/* Ajuste del contenedor para la nueva escala */
-.loader-pothole-scene {
+
+/* Escena interior del loader (más limpia y amplia) */
+.loader-pothole-scene-smooth {
   position: relative;
-  width: 280px; /* Escena más ancha */
-  height: 150px;
-  margin-bottom: 25px;
+  width: 200px;
+  height: 140px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: visible;
 }
 
-.cute-worker-scene {
+.smooth-repair-scene {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.ground-base {
+/* 1. La grieta que aparece y desaparece (bucle) */
+.road-surface-crack {
   position: absolute;
-  bottom: 18px;
-  left: 10px;
-  width: 260px;
-  height: 5px;
-  background: rgba(186, 230, 253, 0.5);
-  border-radius: 2.5px;
-}
-
-/* Bache y proceso de relleno con animación de temperatura */
-.pothole-dig {
-  position: absolute;
-  bottom: 12px;
-  left: 125px;
-  width: 65px; /* Bache más grande para el camión pesado */
-  height: 15px;
-  background: #090d16;
+  top: 50px;
+  left: 60px;
+  width: 80px;
+  height: 25px;
+  background: #0f172a; /* Color de asfalto oscuro */
   border-radius: 50%;
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.9);
-  overflow: visible;
+  animation: crackOpenClose 3s ease-in-out infinite;
   z-index: 1;
 }
 
-.pothole-filling-liquid {
+/* 2. El asfalto líquido que cae */
+.liquid-asphalt-pour {
   position: absolute;
-  bottom: 2px;
-  left: 5px;
-  width: 55px;
-  height: 10px;
-  background: linear-gradient(90deg, #38bdf8, #bae6fd);
-  border-radius: 50%;
-  animation: fillPotholeSmooth 3s ease-in-out infinite;
-}
-
-/* Efectos de calor y vapor del asfalto caliente */
-.asphalt-heat-haze {
-  position: absolute;
-  top: -15px;
-  left: 10px;
-  width: 45px;
-  height: 10px;
-  background: rgba(250, 204, 21, 0.15); /* Tono amarillo suave */
-  filter: blur(4px);
-  border-radius: 50%;
-  animation: heatWiggle 1.5s ease-in-out infinite;
-}
-
-.asphalt-steam {
-  position: absolute;
-  top: -25px;
-  left: 20px;
+  top: -40px; /* Comienza fuera de escena */
+  left: 90px;
   width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+  height: 60px;
+  pointer-events: none;
+  z-index: 3;
+  animation: pourContainerMove 3s ease-in-out infinite;
+}
+
+.asphalt-drip {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 50%;
   opacity: 0;
-  animation: steamRise 2s ease-out infinite;
 }
 
-/* Conos de señalamiento (más pequeños) */
-.safety-cone {
-  position: absolute;
-  bottom: 20px;
-  width: 10px;
-  height: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.drip-1 {
+  left: 7px;
+  animation: dripFall1 3s ease-in infinite;
 }
-.cone-left { left: 35px; }
-.cone-right { right: 20px; }
-
-.cone-tip {
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 10px solid #f97316;
-  filter: drop-shadow(0 0 3px rgba(249, 115, 22, 0.6));
-}
-.cone-stripe {
-  position: absolute;
-  top: 5px;
-  width: 8px;
-  height: 2px;
-  background: #38bdf8;
-  border-radius: 1px;
-  box-shadow: 0 0 3px rgba(56, 189, 248, 0.8);
-}
-.cone-base {
-  width: 12px;
-  height: 2px;
-  background: #f97316;
-  border-radius: 2px;
+.drip-2 {
+  left: 7px;
+  animation: dripFall2 3s ease-in infinite 0.2s;
 }
 
-/* --- CAMIÓN DE MANTENIMIENTO GRANDE Y DETALLADO --- */
-.maintenance-truck-large {
+/* 3. El parche de asfalto que sana y confirma */
+.healed-road-patch {
   position: absolute;
-  bottom: 20px;
-  left: 65px;
-  width: 135px; /* Mucho más ancho */
-  height: 65px; /* Más alto */
-  animation: truckWorkVibration 1.5s ease-in-out infinite;
+  top: 50px;
+  left: 60px;
+  width: 80px;
+  height: 25px;
+  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 15px rgba(125, 211, 252, 0.8);
+  animation: patchHeal 3s ease-in-out infinite;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Cabina detallada */
-.truck-cabin-detailed {
-  position: absolute;
-  bottom: 0;
-  left: 95px;
-  width: 38px;
-  height: 38px;
-  background: linear-gradient(135deg, #ffffff, #bae6fd);
-  border-radius: 10px 12px 2px 2px;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+.repair-confirm-icon {
+  color: #0f172a;
+  font-size: 1.5rem;
+  font-weight: bold;
+  opacity: 0;
+  animation: checkmarkPop 3s ease-in-out infinite;
 }
-.cabin-window {
+
+/* 4. El icono del trabajador vertiendo */
+.worker-pour-icon {
+  position: absolute;
+  top: 15px;
+  left: 75px; /* Misma posición horizontal que el vertido */
+  width: 40px;
+  height: 40px;
+  z-index: 4;
+  animation: workerTilt 3s ease-in-out infinite;
+}
+
+.worker-helmet-icon {
+  position: absolute;
+  top: 0;
+  left: 13px;
+  width: 14px;
+  height: 7px;
+  background: #ffffff;
+  border-radius: 7px 7px 2px 2px;
+}
+
+.worker-body-icon {
   position: absolute;
   top: 8px;
-  left: 8px;
-  width: 22px;
-  height: 14px;
-  background: #0f172a;
-  border-radius: 4px;
-}
-
-/* Tolva de material */
-.truck-body-hopper {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 105px;
-  height: 55px;
-  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 12px 12px 4px 4px;
-  box-shadow: 0 0 20px rgba(125, 211, 252, 0.9);
-}
-.asphalt-material-pile {
-  position: absolute;
-  top: -15px;
-  left: 15px;
-  width: 70px;
-  height: 20px;
-  background: #020617; /* Asfalto almacenado */
-  border-radius: 50% 50% 0 0;
-  filter: drop-shadow(0 -5px 2px rgba(0,0,0,0.2));
-}
-.hopper-lid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: #ffffff;
-  border-radius: 2px;
-}
-.truck-logo {
-  position: absolute;
-  top: 12px;
-  left: 42px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffffff;
-  font-family: monospace;
-}
-
-/* Ruedas pesadas (6 ruedas) */
-.truck-wheels-heavy {
-  position: absolute;
-  bottom: -8px;
-  width: 100%;
-}
-.wheel {
-  width: 16px;
-  height: 16px;
-  background: #0f172a;
-  border: 3px solid #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #38bdf8;
-}
-.heavy-f { left: 100px; bottom: 0; }
-.heavy-m { left: 55px; bottom: 0; }
-.heavy-b { left: 15px; bottom: 0; }
-
-/* Sistema de vertido de asfalto (más complejo) */
-.asphalt-chute-system {
-  position: absolute;
-  bottom: 10px;
-  left: 65px;
-  width: 35px;
-  height: 15px;
-}
-.chute-hinge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  background: #ffffff;
-  border-radius: 50%;
-}
-.chute-tube {
-  position: absolute;
-  top: 3px;
-  left: 5px;
-  width: 30px;
-  height: 8px;
-  background: #ffffff;
-  border-radius: 4px;
-  transform: rotate(-25deg);
-}
-
-.pouring-stream-heavy {
-  position: absolute;
-  bottom: -10px;
-  left: 75px;
-  width: 8px;
-  height: 35px; /* Flujo más largo y espeso */
-  background: linear-gradient(180deg, #38bdf8, #bae6fd);
-  border-radius: 4px;
-  animation: pourStreamHeavy 2s ease-in-out infinite;
-}
-
-/* --- Trabajador más pequeño y detallado --- */
-.worker-small-detailed {
-  position: absolute;
-  bottom: 18px;
-  left: 10px;
-  width: 22px;
-  height: 60px;
-  animation: workerInspectMotion 4s ease-in-out infinite;
-  z-index: 3;
-}
-
-.worker-leg {
-  position: absolute;
-  bottom: 0;
-  width: 5px;
+  left: 11px;
+  width: 18px;
   height: 18px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 2px;
-}
-.left-leg { left: 4px; }
-.right-leg { right: 4px; }
-
-.worker-torso {
-  position: absolute;
-  bottom: 16px;
-  left: 3px;
-  width: 16px;
-  height: 24px;
-  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 4px;
-}
-.vest-reflective {
-  width: 10px;
-  height: 3px;
-  background: #ffffff; /* Banda reflejante */
-  border-radius: 1px;
-  margin-bottom: 3px;
-}
-.worker-arms {
-  width: 18px;
-  height: 5px;
-  background: #bae6fd;
-  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.7);
 }
 
-.worker-head {
-  position: absolute;
-  bottom: 41px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-}
-.worker-circle-head {
-  position: absolute;
-  bottom: 0;
-  left: 2px;
-  width: 14px;
-  height: 14px;
-  background: #ffdbac; /* Tono de piel */
-  border-radius: 50%;
-}
-.worker-helmet-hard {
-  position: absolute;
-  top: -2px;
-  left: -1px;
-  width: 18px;
-  height: 9px;
-  background: #ffffff;
-  border-radius: 9px 9px 3px 3px;
-  box-shadow: 0 0 6px #ffffff;
+/* --- ANIMACIONES --- */
+
+/* Ciclo de la grieta (Aparece y desaparece) */
+@keyframes crackOpenClose {
+  0%, 15%, 100% { transform: scale(0.1); opacity: 0; }
+  20%, 95% { transform: scale(1); opacity: 1; }
 }
 
-/* --- NUEVAS ANIMACIONES COMPLEJAS --- */
-
-/* 1. Vibración del camión pesado en funcionamiento */
-@keyframes truckWorkVibration {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  25% { transform: translateY(-0.5px) translateX(0.5px); }
-  75% { transform: translateY(0.5px) translateX(-0.5px); }
-}
-
-/* 2. Flujo de asfalto espeso y pulsante */
-@keyframes pourStreamHeavy {
-  0%, 100% { transform: scaleY(0.95); opacity: 0.8; }
-  50% { transform: scaleY(1.05); opacity: 1; }
-}
-
-/* 3. Relleno del bache suave y continuo */
-@keyframes fillPotholeSmooth {
-  0%, 100% { transform: scaleX(0.85) scaleY(0.9); opacity: 0.7; }
-  50% { transform: scaleX(1) scaleY(1); opacity: 1; }
-}
-
-/* 4. Efecto de ondulación de calor (wiggle) */
-@keyframes heatWiggle {
-  0%, 100% { transform: translateX(0); opacity: 0.5; }
-  50% { transform: translateX(3px) scaleY(1.1); opacity: 1; }
-}
-
-/* 5. Vapor ascendente que se disipa */
-@keyframes steamRise {
-  0% { transform: translateY(0) scale(0.5); opacity: 0; }
-  50% { opacity: 0.7; }
-  100% { transform: translateY(-25px) scale(1.2); opacity: 0; }
-}
-
-/* 6. Pequeño movimiento de inspección del trabajador */
-@keyframes workerInspectMotion {
+/* Ciclo del icono de trabajador (Se inclina para ver) */
+@keyframes workerTilt {
   0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-5deg); } /* Mira a la izquierda */
-  75% { transform: rotate(3deg); } /* Mira a la derecha */
+  25% { transform: rotate(-15deg); }
+  60% { transform: rotate(10deg); }
 }
 
-/* --- Mantén tus animaciones de la barra de estado y el fundido --- */
-/* ... (las animaciones para .page-loader, .loader-glass-window y .loader-status-progress permanecen igual) ... */
+/* Movimiento del contenedor de gotas (sigue al trabajador) */
+@keyframes pourContainerMove {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  60% { transform: translateX(10px); }
+}
+
+/* Ciclo de caída de gotas 1 */
+@keyframes dripFall1 {
+  0%, 25% { transform: translateY(0); opacity: 0; }
+  30% { opacity: 1; }
+  60%, 100% { transform: translateY(90px); opacity: 0; }
+}
+
+/* Ciclo de caída de gotas 2 */
+@keyframes dripFall2 {
+  0%, 28% { transform: translateY(0); opacity: 0; }
+  33% { opacity: 1; }
+  63%, 100% { transform: translateY(90px); opacity: 0; }
+}
+
+/* Ciclo del parche de asfalto (Aparece cuando caen las gotas) */
+@keyframes patchHeal {
+  0%, 38% { transform: scale(0.5); opacity: 0; }
+  45%, 90% { transform: scale(1); opacity: 1; }
+  95%, 100% { transform: scale(1.2); opacity: 0; }
+}
+
+/* Ciclo del checkmark (Aparece cuando el parche está listo) */
+@keyframes checkmarkPop {
+  0%, 55% { transform: scale(0.5); opacity: 0; }
+  60%, 85% { transform: scale(1); opacity: 1; }
+  90%, 100% { transform: scale(0.5); opacity: 0; }
+}
