@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     statCards.forEach((card, index) => {
         setTimeout(() => {
             card.classList.add("visible");
-        }, 300 + (index * 250)); 
+        }, 300 + (index * 250)); // <--- Corregido el asterisco de multiplicación (*)
     });
 
     const statNumbers = document.querySelectorAll(".stat-card h3");
