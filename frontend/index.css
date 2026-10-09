@@ -1966,7 +1966,7 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   bottom: 0;
   width: 5px;
-  height: 28px;
+  height: 32px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 2px;
   box-shadow: 0 0 6px rgba(125, 211, 252, 0.5);
@@ -1979,8 +1979,8 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   bottom: 27px;
   left: 2px;
-  width: 22px;
-  height: 32px;
+  width: 23px;
+  height: 30px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 7px;
   box-shadow: 0 0 10px rgba(125, 211, 252, 0.7);
