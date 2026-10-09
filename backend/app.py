@@ -4,6 +4,8 @@ from PIL import Image
 from google import genai
 import os
 import psycopg2
+import time
+import json
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -23,29 +25,37 @@ def home():
     })
 
 def validar_imagen_con_gemini(image_path, tipo_reporte):
+    descripciones_esperadas = {
+        "baches": "un bache, pavimento roto, bacheo o daño severo en la calle o asfalto",
+        "fuga-agua": "una tubería rota, fuga de agua, chorro de agua o aniegos en la vía pública",
+        "poste-luz": "un poste de luz dañado, luminaria fallando, cables colgando o poste eléctrico"
+    }
+    criterio = descripciones_esperadas.get(tipo_reporte, "una incidencia de infraestructura urbana")
+    
     try:
-        descripciones_esperadas = {
-            "baches": "un bache, pavimento roto, bacheo o daño severo en la calle o asfalto",
-            "fuga-agua": "una tubería rota, fuga de agua, chorro de agua o aniegos en la vía pública",
-            "poste-luz": "un poste de luz dañado, luminaria fallando, cables colgando o poste eléctrico"
-        }
-        criterio = descripciones_esperadas.get(tipo_reporte, "una incidencia de infraestructura urbana")
         imagen = Image.open(image_path)
-        
-        prompt = (
-            f"Analiza con atención esta fotografía. El ciudadano reporta: '{tipo_reporte}'. "
-            f"Para ser considerada válida, la imagen debe mostrar claramente {criterio}. "
-            "Responde estrictamente en el siguiente formato JSON simulado (sin bloques de código markdown adicionales): "
-            '{"valido": true o false, "razon": "Explicación breve y clara del motivo"}'
-        )
-
-        # Corregido al modelo vigente de Gemini Flash
-        response = client.models.generate_content(model='gemini-3.8-flash', contents=[imagen, prompt])
-        texto_respuesta = response.text.strip().replace("```json", "").replace("```", "").strip()
-        resultado_ia = json.loads(texto_respuesta)
-        return resultado_ia.get("valido", False), resultado_ia.get("razon", "Análisis completado.")
     except Exception as e:
-        return False, f"Error en validación con IA: {str(e)}"
+        return False, f"Error al abrir la imagen: {str(e)}"
+    
+    prompt = (
+        f"Analiza con atención esta fotografía. El ciudadano reporta: '{tipo_reporte}'. "
+        f"Para ser considerada válida, la imagen debe mostrar claramente {criterio}. "
+        "Responde estrictamente en el siguiente formato JSON simulado (sin bloques de código markdown adicionales): "
+        '{"valido": true o false, "razon": "Explicación breve y clara del motivo"}'
+    )
+
+    # Sistema de reintentos automáticos ante picos de alta demanda (Error 503)
+    max_intentos = 3
+    for intento in range(max_intentos):
+        try:
+            response = client.models.generate_content(model='gemini-3.8-flash', contents=[imagen, prompt])
+            texto_respuesta = response.text.strip().replace("```json", "").replace("```", "").strip()
+            resultado_ia = json.loads(texto_respuesta)
+            return resultado_ia.get("valido", False), resultado_ia.get("razon", "Análisis completado.")
+        except Exception as e:
+            if intento == max_intentos - 1:
+                return False, f"Error en validación con IA tras varios intentos: {str(e)}"
+            time.sleep(2) # Espera 2 segundos antes de reintentar automáticamente
 
 @app.route('/api/enviar-reporte', methods=['POST'])
 def enviar_reporte():
