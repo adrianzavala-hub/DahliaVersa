@@ -1877,7 +1877,7 @@ body.modal-active .logo-icon .dahlia-center {
 .loader-pothole-scene {
   position: relative;
   width: 200px;
-  height: 120px;
+  height: 130px;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -1958,29 +1958,29 @@ body.modal-active .logo-icon .dahlia-center {
   bottom: 16px;
   left: 82px;
   width: 30px;
-  height: 70px;
+  height: 80px;
 }
 
-/* Piernas independientes estáticas abajo */
+/* Piernas independientes */
 .worker-leg {
   position: absolute;
   bottom: 0;
   width: 8px;
-  height: 25px;
+  height: 28px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 4px;
   box-shadow: 0 0 6px rgba(125, 211, 252, 0.5);
 }
-.left-leg { left: 4px; }
-.right-leg { right: 4px; }
+.left-leg { left: 3px; }
+.right-leg { right: 3px; }
 
-/* Torso independiente */
+/* Torso más largo y proporcionado */
 .worker-torso {
   position: absolute;
-  bottom: 23px;
-  left: 2px;
-  width: 26px;
-  height: 24px;
+  bottom: 26px;
+  left: 1px;
+  width: 28px;
+  height: 32px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(125, 211, 252, 0.7);
@@ -1989,7 +1989,7 @@ body.modal-active .logo-icon .dahlia-center {
 /* Cabeza independiente (círculo + casco) */
 .worker-head {
   position: absolute;
-  bottom: 46px;
+  bottom: 56px;
   left: 5px;
   width: 20px;
   height: 20px;
@@ -2028,23 +2028,35 @@ body.modal-active .logo-icon .dahlia-center {
   border-radius: 2px;
 }
 
-/* Brazos independientes con animación de pala */
+/* Brazos visibles y extendidos con animación de pala */
 .worker-arms-shovel {
   position: absolute;
-  bottom: 30px;
-  left: -6px;
-  width: 40px;
-  height: 14px;
-  transform-origin: 14px center;
+  bottom: 38px;
+  left: -8px;
+  width: 44px;
+  height: 16px;
+  transform-origin: 16px center;
   animation: shovelDiggingMotion 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   z-index: 4;
 }
 
+.worker-arm {
+  position: absolute;
+  top: 2px;
+  width: 14px;
+  height: 6px;
+  background: #bae6fd;
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(125, 211, 252, 0.8);
+}
+.left-arm { left: 4px; transform: rotate(-15deg); }
+.right-arm { right: 8px; transform: rotate(15deg); }
+
 .worker-shovel-tool {
   position: absolute;
-  top: 4px;
-  right: 0;
-  width: 38px;
+  top: 5px;
+  right: -4px;
+  width: 40px;
   height: 5px;
   background: #ffffff;
   border-radius: 2px;
