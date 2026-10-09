@@ -9,27 +9,27 @@ git
 </head>
 
 <body>
-    <div class="page-loader" id="pageLoader">
+<div class="page-loader" id="pageLoader">
     <div class="loader-glass-window">
         <div class="loader-pothole-scene">
-            <!-- Escena del trabajador con pala -->
-            <div class="worker-scene">
-                <!-- Suelo y bache/excavación -->
-                <div class="loader-ground"></div>
-                <div class="loader-hole"></div>
-                <!-- Tierra salpicando al cavar -->
-                <div class="dirt-particles">
-                    <span class="dirt-particle dp-1"></span>
-                    <span class="dirt-particle dp-2"></span>
-                    <span class="dirt-particle dp-3"></span>
+            <!-- Escena gráfica unificada del trabajador -->
+            <div class="worker-graphic-container">
+                <!-- Suelo y bache -->
+                <div class="ground-line"></div>
+                <div class="excavation-pit"></div>
+                
+                <!-- Partículas de tierra lanzadas -->
+                <div class="dirt-spray">
+                    <span class="dirt-dot d1"></span>
+                    <span class="dirt-dot d2"></span>
+                    <span class="dirt-dot d3"></span>
                 </div>
-                <!-- Trabajador estilizado -->
-                <div class="worker-body">
-                    <div class="worker-helmet"></div>
-                    <div class="worker-torso"></div>
-                    <div class="worker-shovel-arm">
-                        <div class="loader-shovel"></div>
-                    </div>
+
+                <!-- Figura unificada del trabajador -->
+                <div class="worker-character">
+                    <div class="head-helmet"></div>
+                    <div class="torso-suit"></div>
+                    <div class="shovel-tool"></div>
                 </div>
             </div>
         </div>
@@ -41,7 +41,6 @@ git
         <div class="loader-subtitle">Cargando sistema...</div>
     </div>
 </div>
-
     <div class="page-loader water-leak-loader" id="waterLeakLoader">
         <div class="loader-glass-window">
             <div class="water-leak-animation-scene">
