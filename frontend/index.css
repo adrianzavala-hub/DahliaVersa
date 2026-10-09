@@ -1871,209 +1871,213 @@ body.modal-active .logo-icon .dahlia-center {
   transform: translateY(0) scale(1);
   opacity: 1;
 }
+/* --- Reemplaza tus estilos anteriores con estos --- */
 
-/* Contenedor gráfico del trabajador */
+/* Ajuste del contenedor para centrar la escena gráfica */
 .loader-pothole-scene {
   position: relative;
-  width: 140px;
-  height: 100px;
-  margin-bottom: 25px;
+  width: 160px; /* Un poco más ancho para el movimiento */
+  height: 140px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* Para que nada se salga de la ventana */
 }
 
-.worker-graphic-container {
+.cute-worker-scene {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-/* Suelo y zona de excavación */
-.ground-line {
+/* --- Gráficos del Entorno --- */
+.ground-base {
+  position: absolute;
+  bottom: 25px;
+  left: 10px;
+  width: 140px;
+  height: 8px;
+  background: #865966; /* Un tono más oscuro del rosa principal */
+  border-radius: 4px;
+}
+
+.pothole-dig {
   position: absolute;
   bottom: 20px;
-  left: 10px;
-  width: 120px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #7dd3fc, #bae6fd, transparent);
-  border-radius: 2px;
-  box-shadow: 0 0 10px rgba(125, 211, 252, 0.5);
-}
-
-.excavation-pit {
-  position: absolute;
-  bottom: 16px;
-  left: 72px;
-  width: 32px;
-  height: 8px;
-  background: #0f172a;
+  left: 75px;
+  width: 40px;
+  height: 15px;
+  background: #5e444d; /* Color tierra oscura/hoyo */
   border-radius: 50%;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.4);
 }
 
-/* Personaje unificado con animación de palada */
-.worker-character {
+/* --- Estilos del Trabajador (Dibujo Bonito) --- */
+.worker-character-art {
   position: absolute;
-  bottom: 22px;
-  left: 35px;
-  width: 45px;
-  height: 50px;
-  transform-origin: bottom center;
-  animation: digMotion 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  bottom: 28px;
+  left: 40px;
+  width: 60px;
+  height: 80px;
+  /* El punto de pivote para todo el cuerpo es la base */
+  transform-origin: bottom center; 
+  animation: bodyWorkMotion 1.6s ease-in-out infinite;
 }
 
-/* Casco gráfico detallado */
-.head-helmet {
+/* Cabeza y Casco */
+.worker-head {
   position: absolute;
   top: 0;
-  left: 12px;
-  width: 22px;
-  height: 12px;
-  background: #ffffff;
-  border-radius: 12px 12px 2px 2px;
-  box-shadow: 0 0 12px #ffffff, inset -2px -2px 4px rgba(125, 211, 252, 0.6);
+  left: 18px;
+  width: 24px;
+  height: 24px;
 }
 
-.head-helmet::after {
+.worker-helmet-hard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: #ffffff; /* Casco blanco brillante */
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.worker-helmet-hard::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: -3px;
+  bottom: 2px;
+  left: -2px;
   width: 28px;
-  height: 3px;
-  background: #ffffff;
+  height: 4px;
+  background: #e5e7eb; /* Borde gris del casco */
   border-radius: 2px;
 }
 
-/* Torso del trabajador conectado */
-.torso-suit {
+.worker-face {
   position: absolute;
-  top: 11px;
-  left: 10px;
-  width: 24px;
-  height: 28px;
-  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 10px 10px 6px 6px;
-  box-shadow: 0 0 14px rgba(125, 211, 252, 0.7);
-}
-
-/* Pala integrada firmemente al personaje */
-.shovel-tool {
-  position: absolute;
-  top: 14px;
-  left: 20px;
-  width: 36px;
-  height: 6px;
-  background: #ffffff;
-  border-radius: 3px;
-  transform-origin: left center;
-  transform: rotate(-15deg);
-  box-shadow: 0 0 8px #bae6fd;
-}
-
-/* Hoja de la pala */
-.shovel-tool::after {
-  content: '';
-  position: absolute;
-  right: -8px;
-  top: -5px;
+  bottom: 3px;
+  left: 5px;
   width: 14px;
-  height: 16px;
-  background: #ffffff;
-  border-radius: 3px 50% 50% 3px;
-  box-shadow: 0 0 10px #7dd3fc;
+  height: 6px;
+  background: #ffdbac; /* Color de piel */
+  border-radius: 0 0 7px 7px; /* Simple sonrisa */
 }
 
-/* Partículas de tierra lanzadas al aire */
-.dirt-spray {
+/* Cuerpo (Traje) */
+.worker-body-suit {
   position: absolute;
-  bottom: 35px;
-  left: 80px;
-  width: 20px;
-  height: 20px;
+  top: 18px;
+  left: 10px;
+  width: 40px;
+  height: 35px;
+  background: linear-gradient(135deg, #bae6fd, #7dd3fc); /* Chaleco azul */
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+/* Brazos y Pala (Unidad gráfica) */
+.worker-arms-holding {
+  position: absolute;
+  top: 25px;
+  left: 5px;
+  width: 50px;
+  height: 15px;
+  transform-origin: left center;
+  /* Animación principal de la palada */
+  animation: shovelScoopMotion 1.6s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+.worker-shovel-tool {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45px;
+  height: 6px;
+  background: #64748b; /* Palo de la pala gris oscuro */
+  border-radius: 3px;
+}
+
+.shovel-blade {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  width: 18px;
+  height: 18px;
+  background: #e0e7ff; /* Hoja de pala metálica clara */
+  border-radius: 2px 6px 6px 2px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+}
+
+/* --- Animación de Tierra Volando --- */
+.dirt-splat-spray {
+  position: absolute;
+  bottom: 50px;
+  left: 90px;
+  width: 30px;
+  height: 30px;
   pointer-events: none;
 }
 
-.dirt-dot {
+.dirt-chunk {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #bae6fd;
+  width: 6px;
+  height: 6px;
+  background: #865966; /* Mismo color de tierra */
   border-radius: 50%;
   opacity: 0;
-  box-shadow: 0 0 6px #7dd3fc;
 }
 
-.d1 { animation: throwDirt1 1.1s ease-out infinite; }
-.d2 { animation: throwDirt2 1.1s ease-out infinite 0.15s; }
-.d3 { animation: throwDirt3 1.1s ease-out infinite 0.3s; }
+/* Sincronización de partículas con la palada */
+.c1 { animation: dirtFlyArc1 1.6s ease-out infinite 0.2s; }
+.c2 { animation: dirtFlyArc2 1.6s ease-out infinite 0.3s; }
+.c3 { animation: dirtFlyArc3 1.6s ease-out infinite 0.4s; }
 
-.loader-brand-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 1.5px;
-  margin-bottom: 14px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+/* --- Keyframes de Movimiento Mejorado --- */
+
+/* 1. Movimiento suave de todo el cuerpo (se balancea levemente al cavar) */
+@keyframes bodyWorkMotion {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(-3deg) translateY(2px); } /* Entra en fuerza */
+  75% { transform: rotate(2deg) translateY(0); } /* Se relaja al lanzar */
 }
 
-.loader-status-bar {
-  width: 100%;
-  height: 4px;
-  background: rgba(226, 169, 179, 0.25);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 14px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.loader-status-progress {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, #bae6fd, #7dd3fc, transparent);
-  animation: progressBarMove 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-.loader-subtitle {
-  font-size: 0.88rem;
-  color: #fbe8ec;
-  font-weight: 500;
-  letter-spacing: 0.8px;
-}
-
-/* Keyframes de movimiento sincronizado */
-@keyframes digMotion {
-  0%, 100% {
-    transform: rotate(0deg) translateY(0);
+/* 2. Movimiento complejo de brazos + pala (la acción de excavar y lanzar) */
+@keyframes shovelScoopMotion {
+  0%, 100% { 
+    transform: rotate(0deg) translateX(0); /* Posición inicial */
   }
-  40% {
-    transform: rotate(18deg) translateY(4px) translateX(-3px);
+  15% { 
+    transform: rotate(15deg) translateX(10px); /* Entra la pala en la tierra */
   }
-  55% {
-    transform: rotate(-14deg) translateY(-5px) translateX(4px);
+  35% { 
+    transform: rotate(-50deg) translateX(-5px) translateY(10px); /* Carga tierra hacia atrás */
+  }
+  45% { 
+    transform: rotate(30deg) translateX(0) translateY(-5px); /* Impulso hacia adelante/arriba (lanzamiento) */
+  }
+  60% { 
+    transform: rotate(40deg) translateX(5px) translateY(-8px); /* Finaliza el lanzamiento */
   }
 }
 
-@keyframes throwDirt1 {
-  0%, 38% { transform: translate(0, 0) scale(0); opacity: 0; }
+/* 3. Trayectorias de las partículas de tierra (más naturales) */
+@keyframes dirtFlyArc1 {
+  0%, 35% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  40% { opacity: 1; } /* Aparece al lanzar */
+  100% { transform: translate(40px, -50px) rotate(720deg) scale(1.2); opacity: 0; } /* Cae lejos */
+}
+@keyframes dirtFlyArc2 {
+  0%, 37% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  42% { opacity: 1; }
+  100% { transform: translate(55px, -40px) rotate(360deg) scale(1); opacity: 0; }
+}
+@keyframes dirtFlyArc3 {
+  0%, 40% { transform: translate(0, 0) scale(0.6); opacity: 0; }
   45% { opacity: 1; }
-  100% { transform: translate(30px, -30px) scale(1.3); opacity: 0; }
+  100% { transform: translate(25px, -60px) rotate(1080deg) scale(0.8); opacity: 0; } /* Sube más alto */
 }
 
-@keyframes throwDirt2 {
-  0%, 40% { transform: translate(0, 0) scale(0); opacity: 0; }
-  48% { opacity: 1; }
-  100% { transform: translate(40px, -20px) scale(1); opacity: 0; }
-}
-
-@keyframes throwDirt3 {
-  0%, 42% { transform: translate(0, 0) scale(0); opacity: 0; }
-  52% { opacity: 1; }
-  100% { transform: translate(22px, -40px) scale(1.1); opacity: 0; }
-}
-
-@keyframes progressBarMove {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
+/* --- Mantén tus animaciones de la barra de estado y el fundido --- */
+/* ... (tus animaciones existentes para .page-loader, .loader-glass-window y .loader-status-progress no cambian) ... */

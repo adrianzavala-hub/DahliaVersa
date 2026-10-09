@@ -9,36 +9,48 @@ git
 </head>
 
 <body>
-<div class="page-loader" id="pageLoader">
+<div class="page-loader" id="pageLoader"> <!-- Mantenlo 'active' para probarlo -->
     <div class="loader-glass-window">
         <div class="loader-pothole-scene">
-            <!-- Escena gráfica unificada del trabajador -->
-            <div class="worker-graphic-container">
-                <!-- Suelo y bache -->
-                <div class="ground-line"></div>
-                <div class="excavation-pit"></div>
+            <!-- Contenedor principal de la escena -->
+            <div class="cute-worker-scene">
                 
-                <!-- Partículas de tierra lanzadas -->
-                <div class="dirt-spray">
-                    <span class="dirt-dot d1"></span>
-                    <span class="dirt-dot d2"></span>
-                    <span class="dirt-dot d3"></span>
+                <!-- Elementos del suelo -->
+                <div class="ground-base"></div>
+                <div class="pothole-dig"></div>
+                
+                <!-- El trabajador (dibujo unificado) -->
+                <div class="worker-character-art">
+                    <!-- Cuerpo y cabeza -->
+                    <div class="worker-body-suit">
+                        <div class="worker-head">
+                            <div class="worker-helmet-hard"></div>
+                            <div class="worker-face"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Brazos sosteniendo la pala (unidos) -->
+                    <div class="worker-arms-holding">
+                        <div class="worker-shovel-tool">
+                            <div class="shovel-blade"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Figura unificada del trabajador -->
-                <div class="worker-character">
-                    <div class="head-helmet"></div>
-                    <div class="torso-suit"></div>
-                    <div class="shovel-tool"></div>
+                <!-- Tierra volando (partículas) -->
+                <div class="dirt-splat-spray">
+                    <div class="dirt-chunk c1"></div>
+                    <div class="dirt-chunk c2"></div>
+                    <div class="dirt-chunk c3"></div>
                 </div>
             </div>
         </div>
+        
         <div class="loader-brand-title">DahliaVersa</div>
-
         <div class="loader-status-bar">
             <div class="loader-status-progress"></div>
         </div>
-        <div class="loader-subtitle">Cargando sistema...</div>
+        <div class="loader-subtitle">Validando infraestructura...</div>
     </div>
 </div>
     <div class="page-loader water-leak-loader" id="waterLeakLoader">
