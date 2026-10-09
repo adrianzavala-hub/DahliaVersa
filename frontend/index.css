@@ -1875,7 +1875,7 @@ body.modal-active .logo-icon .dahlia-center {
 }
 .loader-pothole-scene {
   position: relative;
-  width: 240px;
+  width: 250px;
   height: 140px;
   margin-bottom: 20px;
   display: flex;
@@ -1894,19 +1894,19 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   bottom: 16px;
   left: 10px;
-  width: 220px;
+  width: 230px;
   height: 4px;
   background: rgba(186, 230, 253, 0.4);
   border-radius: 2px;
 }
 
-/* Bache que se va rellenando dinámicamente */
+/* Bache y líquido asfaltico */
 .pothole-dig {
   position: absolute;
   bottom: 11px;
-  left: 110px;
-  width: 42px;
-  height: 11px;
+  left: 115px;
+  width: 48px;
+  height: 12px;
   background: #090d16;
   border-radius: 50%;
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.9);
@@ -1916,9 +1916,9 @@ body.modal-active .logo-icon .dahlia-center {
 .pothole-filling-liquid {
   position: absolute;
   bottom: 1px;
-  left: 3px;
-  width: 36px;
-  height: 6px;
+  left: 4px;
+  width: 40px;
+  height: 7px;
   background: linear-gradient(90deg, #38bdf8, #bae6fd);
   border-radius: 50%;
   animation: fillPotholeProgress 2s ease-in-out infinite;
@@ -1935,8 +1935,8 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-.cone-left { left: 16px; }
-.cone-right { right: 16px; }
+.cone-left { left: 14px; }
+.cone-right { right: 14px; }
 
 .cone-tip {
   width: 0;
@@ -1964,46 +1964,46 @@ body.modal-active .logo-icon .dahlia-center {
   border-radius: 2px;
 }
 
-/* Camión parado sobre el bache */
+/* Camión más grande y proporcionado sobre el bache */
 .maintenance-truck {
   position: absolute;
   bottom: 18px;
-  left: 90px;
-  width: 75px;
-  height: 38px;
+  left: 92px;
+  width: 95px;
+  height: 46px;
   animation: truckBounce 2s ease-in-out infinite;
 }
 
 .truck-body {
   position: absolute;
-  bottom: 10px;
-  left: 15px;
-  width: 50px;
-  height: 22px;
+  bottom: 12px;
+  left: 18px;
+  width: 64px;
+  height: 28px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 6px 6px 4px 4px;
-  box-shadow: 0 0 10px rgba(125, 211, 252, 0.7);
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: 0 0 14px rgba(125, 211, 252, 0.8);
 }
 
 .truck-stripe {
   position: absolute;
-  top: 6px;
-  left: 6px;
-  width: 38px;
+  top: 8px;
+  left: 8px;
+  width: 48px;
   height: 3px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 2px;
 }
 
 .truck-cabin {
   position: absolute;
-  bottom: 10px;
-  left: 55px;
-  width: 20px;
-  height: 20px;
+  bottom: 12px;
+  left: 82px;
+  width: 25px;
+  height: 25px;
   background: linear-gradient(135deg, #ffffff, #bae6fd);
-  border-radius: 6px 8px 2px 2px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  border-radius: 8px 10px 2px 2px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
 }
 
 .truck-wheels {
@@ -2015,22 +2015,22 @@ body.modal-active .logo-icon .dahlia-center {
 .wheel {
   position: absolute;
   bottom: 0;
-  width: 11px;
-  height: 11px;
+  width: 14px;
+  height: 14px;
   background: #0f172a;
   border: 2px solid #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 4px #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
 }
-.front-w { left: 56px; }
-.back-w { left: 22px; }
+.front-w { left: 74px; }
+.back-w { left: 28px; }
 
 /* Tubo vertedor de asfalto */
 .asphalt-chute {
   position: absolute;
-  bottom: 8px;
-  left: 45px;
-  width: 12px;
+  bottom: 10px;
+  left: 52px;
+  width: 14px;
   height: 6px;
   background: #ffffff;
   border-radius: 2px;
@@ -2040,84 +2040,96 @@ body.modal-active .logo-icon .dahlia-center {
 .pouring-stream {
   position: absolute;
   bottom: -4px;
-  left: 42px;
-  width: 4px;
-  height: 14px;
+  left: 48px;
+  width: 5px;
+  height: 16px;
   background: linear-gradient(180deg, #38bdf8, #bae6fd);
   border-radius: 2px;
   animation: pourStream 2s ease-in-out infinite;
 }
 
-/* Trabajador de pie con pala a un lado */
-.worker-rigged {
+/* Trabajador más pequeño a un lado con brazos (sin pala) */
+.worker-small {
   position: absolute;
   bottom: 16px;
-  left: 42px;
-  width: 26px;
-  height: 75px;
+  left: 36px;
+  width: 20px;
+  height: 56px;
 }
 
 .worker-leg {
   position: absolute;
   bottom: 0;
-  width: 6.5px;
-  height: 24px;
+  width: 5px;
+  height: 18px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 3px;
-  box-shadow: 0 0 6px rgba(125, 211, 252, 0.6);
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(125, 211, 252, 0.6);
 }
-.left-leg { left: 4px; }
-.right-leg { right: 4px; }
+.left-leg { left: 3px; }
+.right-leg { right: 3px; }
 
 .worker-torso {
   position: absolute;
-  bottom: 22px;
-  left: 3px;
-  width: 20px;
-  height: 28px;
+  bottom: 16px;
+  left: 2px;
+  width: 16px;
+  height: 22px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 7px;
-  box-shadow: 0 0 10px rgba(125, 211, 252, 0.7);
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .vest-stripe {
-  width: 12px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.7);
+  width: 10px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 2px;
+}
+
+/* Brazos naturales del trabajador a los lados */
+.worker-arms {
+  position: absolute;
+  top: 6px;
+  left: -3px;
+  width: 22px;
+  height: 6px;
+  background: linear-gradient(90deg, #bae6fd, #ffffff, #bae6fd);
+  border-radius: 3px;
+  box-shadow: 0 0 4px rgba(125, 211, 252, 0.8);
 }
 
 .worker-head {
   position: absolute;
-  bottom: 52px;
-  left: 3px;
-  width: 20px;
-  height: 20px;
+  bottom: 38px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
 }
 
 .worker-circle-head {
   position: absolute;
   bottom: 0;
-  left: 2px;
-  width: 16px;
-  height: 16px;
+  left: 1px;
+  width: 14px;
+  height: 14px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(125, 211, 252, 0.8);
+  box-shadow: 0 0 6px rgba(125, 211, 252, 0.8);
 }
 
 .worker-helmet-hard {
   position: absolute;
   top: -2px;
-  left: -1px;
-  width: 22px;
-  height: 11px;
+  left: -2px;
+  width: 18px;
+  height: 9px;
   background: #ffffff;
-  border-radius: 11px 11px 3px 3px;
-  box-shadow: 0 0 10px #ffffff, inset -1px -1px 3px rgba(125, 211, 252, 0.5);
+  border-radius: 9px 9px 3px 3px;
+  box-shadow: 0 0 8px #ffffff, inset -1px -1px 2px rgba(125, 211, 252, 0.5);
   z-index: 5;
 }
 
@@ -2126,44 +2138,13 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   bottom: 1px;
   left: -2px;
-  width: 26px;
+  width: 22px;
   height: 2px;
   background: #ffffff;
   border-radius: 2px;
 }
 
-.worker-arms-shovel {
-  position: absolute;
-  bottom: 34px;
-  left: -8px;
-  width: 36px;
-  height: 12px;
-  transform: rotate(-10deg);
-}
-
-.worker-shovel-tool {
-  position: absolute;
-  top: 2px;
-  right: 0;
-  width: 32px;
-  height: 4px;
-  background: #ffffff;
-  border-radius: 2px;
-  box-shadow: 0 0 6px #bae6fd;
-}
-
-.shovel-blade {
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 12px;
-  height: 12px;
-  background: #ffffff;
-  border-radius: 50% 2px 2px 50%;
-  box-shadow: 0 0 8px #7dd3fc;
-}
-
-/* Animaciones del proceso */
+/* Animaciones */
 @keyframes truckBounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-1px); }
