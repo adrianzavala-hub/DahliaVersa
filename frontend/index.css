@@ -1874,12 +1874,12 @@ body.modal-active .logo-icon .dahlia-center {
   opacity: 1;
 }
 
-/* Escena interior del loader con más espacio y proporción */
+/* Escena interior del loader */
 .loader-pothole-scene {
   position: relative;
   width: 200px;
-  height: 110px;
-  margin-bottom: 25px;
+  height: 120px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1892,10 +1892,10 @@ body.modal-active .logo-icon .dahlia-center {
   height: 100%;
 }
 
-/* Suelo y hoyo de excavación */
+/* Suelo y bache */
 .ground-base {
   position: absolute;
-  bottom: 18px;
+  bottom: 16px;
   left: 15px;
   width: 170px;
   height: 4px;
@@ -1905,7 +1905,7 @@ body.modal-active .logo-icon .dahlia-center {
 
 .pothole-dig {
   position: absolute;
-  bottom: 14px;
+  bottom: 12px;
   left: 105px;
   width: 35px;
   height: 9px;
@@ -1914,10 +1914,10 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* --- Conos de señalamiento (Azul y Naranja) --- */
+/* --- Conos de señalamiento --- */
 .safety-cone {
   position: absolute;
-  bottom: 20px;
+  bottom: 18px;
   width: 12px;
   height: 18px;
   display: flex;
@@ -1925,20 +1925,15 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-.cone-left {
-  left: 28px;
-}
-
-.cone-right {
-  right: 25px;
-}
+.cone-left { left: 28px; }
+.cone-right { right: 25px; }
 
 .cone-tip {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 12px solid #f97316; /* Naranja brillante */
+  border-bottom: 12px solid #f97316;
   filter: drop-shadow(0 0 4px rgba(249, 115, 22, 0.6));
 }
 
@@ -1947,7 +1942,7 @@ body.modal-active .logo-icon .dahlia-center {
   top: 6px;
   width: 10px;
   height: 3px;
-  background: #38bdf8; /* Azul luminoso */
+  background: #38bdf8;
   border-radius: 1px;
   box-shadow: 0 0 4px rgba(56, 189, 248, 0.8);
 }
@@ -1959,35 +1954,36 @@ body.modal-active .logo-icon .dahlia-center {
   border-radius: 2px;
 }
 
-/* --- Trabajador estilizado y mejor proporcionado --- */
+/* --- Trabajador con la silueta de cuerpo completo, piernas y casco --- */
 .worker-character-art {
   position: absolute;
-  bottom: 20px;
-  left: 65px;
-  width: 45px;
-  height: 70px;
+  bottom: 16px;
+  left: 70px;
+  width: 40px;
+  height: 75px;
   transform-origin: bottom center;
   animation: workerBodyMotion 1.5s ease-in-out infinite;
 }
 
-/* Cabeza con proporciones anatómicas correctas */
+/* Cabeza con casco de trabajador */
 .worker-head-group {
   position: absolute;
   top: 0;
-  left: 12px;
-  width: 22px;
-  height: 30px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
 }
 
 .worker-helmet-hard {
   position: absolute;
-  top: 0;
+  top: -3px;
   left: -3px;
-  width: 28px;
-  height: 13px;
+  width: 30px;
+  height: 14px;
   background: #ffffff;
-  border-radius: 14px 14px 4px 4px;
+  border-radius: 15px 15px 4px 4px;
   box-shadow: 0 0 10px #ffffff, inset -2px -2px 3px rgba(125, 211, 252, 0.6);
+  z-index: 3;
 }
 
 .worker-helmet-hard::after {
@@ -1995,7 +1991,7 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   bottom: 1px;
   left: -3px;
-  width: 34px;
+  width: 36px;
   height: 3px;
   background: #ffffff;
   border-radius: 2px;
@@ -2003,50 +1999,79 @@ body.modal-active .logo-icon .dahlia-center {
 
 .worker-neck {
   position: absolute;
-  top: 12px;
-  left: 8px;
+  top: 10px;
+  left: 9px;
   width: 6px;
-  height: 7px;
-  background: #ffdbac; /* Tono de piel natural */
-  border-radius: 1px;
-}
-
-.worker-face {
-  position: absolute;
-  top: 16px;
-  left: 6px;
-  width: 10px;
   height: 5px;
-  background: #ffdbac;
-  border-radius: 0 0 5px 5px;
+  background: #bae6fd;
+  z-index: 1;
 }
 
-/* Torso con los tonos azules originales de la plataforma */
-.worker-body-suit {
+.worker-head-circle {
   position: absolute;
-  top: 20px;
-  left: 7px;
-  width: 30px;
-  height: 32px;
+  top: 3px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 10px 10px 6px 6px;
-  box-shadow: 0 0 14px rgba(125, 211, 252, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.8);
+  z-index: 2;
 }
 
-/* Brazos y pala con movimiento fluido */
+/* Cuerpo completo (torso y piernas con separación clara) */
+.worker-full-body {
+  position: absolute;
+  top: 22px;
+  left: 4px;
+  width: 32px;
+  height: 50px;
+}
+
+.worker-torso {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 28px;
+  height: 26px;
+  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: 0 0 12px rgba(125, 211, 252, 0.7);
+}
+
+.worker-legs-container {
+  position: absolute;
+  top: 25px;
+  left: 4px;
+  width: 24px;
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leg {
+  width: 9px;
+  height: 24px;
+  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
+  border-radius: 4px 4px 5px 5px;
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.6);
+}
+
+/* Brazos y pala con animación de excavación */
 .worker-arms-holding {
   position: absolute;
-  top: 8px;
-  left: -5px;
-  width: 44px;
+  top: 26px;
+  left: -4px;
+  width: 40px;
   height: 14px;
   transform-origin: 12px center;
   animation: shovelDiggingMotion 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  z-index: 4;
 }
 
 .worker-shovel-tool {
   position: absolute;
-  top: 3px;
+  top: 2px;
   right: 0;
   width: 38px;
   height: 5px;
@@ -2066,11 +2091,11 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 10px #7dd3fc;
 }
 
-/* Partículas de tierra lanzadas al cavar */
+/* Partículas de tierra lanzadas */
 .dirt-splat-spray {
   position: absolute;
   bottom: 35px;
-  left: 110px;
+  left: 115px;
   width: 25px;
   height: 25px;
   pointer-events: none;
@@ -2090,10 +2115,10 @@ body.modal-active .logo-icon .dahlia-center {
 .c2 { animation: dirtSpray2 1.5s ease-out infinite 0.25s; }
 .c3 { animation: dirtSpray3 1.5s ease-out infinite 0.35s; }
 
-/* Animaciones sincronizadas */
+/* Animaciones fluidas */
 @keyframes workerBodyMotion {
   0%, 100% { transform: rotate(0deg) translateY(0); }
-  30% { transform: rotate(-5deg) translateY(2px); }
+  30% { transform: rotate(-4deg) translateY(2px); }
   70% { transform: rotate(2deg) translateY(-1px); }
 }
 
