@@ -15,7 +15,9 @@ git
             <div class="cute-worker-scene">
                 <!-- Suelo y bache -->
                 <div class="ground-base"></div>
-                <div class="pothole-dig"></div>
+                <div class="pothole-dig">
+                    <div class="pothole-fill-layer"></div>
+                </div>
                 
                 <!-- Conos de señalamiento -->
                 <div class="safety-cone cone-left">
@@ -29,36 +31,38 @@ git
                     <div class="cone-base"></div>
                 </div>
 
-                <!-- Trabajador con grosor sutilmente ajustado -->
-                <div class="worker-rigged">
-                    <!-- Piernas un poco más anchas pero juntas -->
-                    <div class="worker-leg left-leg"></div>
-                    <div class="worker-leg right-leg"></div>
+                <!-- Nuevo trabajador agachado/arrodillado arreglando el bache -->
+                <div class="worker-kneeling-rig">
+                    <!-- Piernas dobladas en posición de cuclillas -->
+                    <div class="kneeling-legs">
+                        <div class="leg-back"></div>
+                        <div class="leg-front"></div>
+                    </div>
 
-                    <!-- Torso largo con un ligero toque más de ancho -->
-                    <div class="worker-torso">
+                    <!-- Torso inclinado hacia adelante -->
+                    <div class="worker-torso-bent">
                         <div class="vest-stripe"></div>
                     </div>
 
                     <!-- Cabeza con casco compacto -->
-                    <div class="worker-head">
+                    <div class="worker-head-bent">
                         <div class="worker-circle-head"></div>
                         <div class="worker-helmet-hard"></div>
                     </div>
 
-                    <!-- Brazos y pala con animación fluida -->
-                    <div class="worker-arms-shovel">
-                        <div class="worker-shovel-tool">
-                            <div class="shovel-blade"></div>
+                    <!-- Brazos y herramienta (llana/espátula de pavimentación) en movimiento de alisado -->
+                    <div class="worker-arms-trowel">
+                        <div class="trowel-tool">
+                            <div class="trowel-blade"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Partículas de tierra lanzadas -->
-                <div class="dirt-splat-spray">
-                    <div class="dirt-chunk c1"></div>
-                    <div class="dirt-chunk c2"></div>
-                    <div class="dirt-chunk c3"></div>
+                <!-- Partículas de chispa / mezcla fresca -->
+                <div class="paving-sparkles">
+                    <div class="spark s1"></div>
+                    <div class="spark s2"></div>
+                    <div class="spark s3"></div>
                 </div>
             </div>
         </div>
