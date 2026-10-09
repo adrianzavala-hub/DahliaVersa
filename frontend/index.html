@@ -9,35 +9,32 @@ git
 </head>
 
 <body>
-<div class="page-loader" id="pageLoader"> <!-- Mantenlo 'active' para probarlo -->
+<div class="page-loader active" id="pageLoader">
     <div class="loader-glass-window">
         <div class="loader-pothole-scene">
-            <!-- Contenedor principal de la escena -->
             <div class="cute-worker-scene">
-                
-                <!-- Elementos del suelo -->
+                <!-- Suelo y bache -->
                 <div class="ground-base"></div>
                 <div class="pothole-dig"></div>
                 
-                <!-- El trabajador (dibujo unificado) -->
+                <!-- Trabajador con anatomía correcta (con cuello) y colores originales -->
                 <div class="worker-character-art">
-                    <!-- Cuerpo y cabeza -->
-                    <div class="worker-body-suit">
-                        <div class="worker-head">
-                            <div class="worker-helmet-hard"></div>
-                            <div class="worker-face"></div>
-                        </div>
+                    <div class="worker-head-group">
+                        <div class="worker-helmet-hard"></div>
+                        <div class="worker-neck"></div>
+                        <div class="worker-face"></div>
                     </div>
                     
-                    <!-- Brazos sosteniendo la pala (unidos) -->
-                    <div class="worker-arms-holding">
-                        <div class="worker-shovel-tool">
-                            <div class="shovel-blade"></div>
+                    <div class="worker-body-suit">
+                        <div class="worker-arms-holding">
+                            <div class="worker-shovel-tool">
+                                <div class="shovel-blade"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tierra volando (partículas) -->
+                <!-- Partículas de tierra lanzadas -->
                 <div class="dirt-splat-spray">
                     <div class="dirt-chunk c1"></div>
                     <div class="dirt-chunk c2"></div>
