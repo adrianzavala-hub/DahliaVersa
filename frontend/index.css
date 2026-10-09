@@ -1875,7 +1875,7 @@ body.modal-active .logo-icon .dahlia-center {
 }
 .loader-pothole-scene {
   position: relative;
-  width: 220px;
+  width: 240px;
   height: 140px;
   margin-bottom: 20px;
   display: flex;
@@ -1894,34 +1894,34 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   bottom: 16px;
   left: 10px;
-  width: 200px;
+  width: 220px;
   height: 4px;
   background: rgba(186, 230, 253, 0.4);
   border-radius: 2px;
 }
 
-/* Bache donde está trabajando */
+/* Bache que se va rellenando dinámicamente */
 .pothole-dig {
   position: absolute;
   bottom: 11px;
-  left: 95px;
-  width: 45px;
-  height: 12px;
+  left: 110px;
+  width: 42px;
+  height: 11px;
   background: #090d16;
   border-radius: 50%;
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.9);
   overflow: hidden;
 }
 
-.pothole-fill-layer {
+.pothole-filling-liquid {
   position: absolute;
-  bottom: 2px;
-  left: 5px;
-  width: 35px;
+  bottom: 1px;
+  left: 3px;
+  width: 36px;
   height: 6px;
-  background: linear-gradient(90deg, #38bdf8, #7dd3fc);
+  background: linear-gradient(90deg, #38bdf8, #bae6fd);
   border-radius: 50%;
-  animation: fillingPothole 2s ease-in-out infinite;
+  animation: fillPotholeProgress 2s ease-in-out infinite;
 }
 
 /* Conos de señalamiento */
@@ -1935,8 +1935,8 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-.cone-left { left: 22px; }
-.cone-right { right: 20px; }
+.cone-left { left: 16px; }
+.cone-right { right: 16px; }
 
 .cone-tip {
   width: 0;
@@ -1964,85 +1964,146 @@ body.modal-active .logo-icon .dahlia-center {
   border-radius: 2px;
 }
 
-/* Contenedor del trabajador arrodillado */
-.worker-kneeling-rig {
+/* Camión parado sobre el bache */
+.maintenance-truck {
   position: absolute;
-  bottom: 16px;
-  left: 65px;
-  width: 36px;
-  height: 55px;
-  animation: workerSmoothingMotion 2s ease-in-out infinite;
+  bottom: 18px;
+  left: 90px;
+  width: 75px;
+  height: 38px;
+  animation: truckBounce 2s ease-in-out infinite;
 }
 
-/* Piernas en cuclillas */
-.kneeling-legs {
+.truck-body {
   position: absolute;
-  bottom: 0;
-  left: 4px;
-  width: 28px;
-  height: 16px;
-}
-
-.leg-back {
-  position: absolute;
-  bottom: 0;
-  left: 2px;
-  width: 12px;
-  height: 14px;
-  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 6px 6px 2px 2px;
-  box-shadow: 0 0 6px rgba(125, 211, 252, 0.5);
-}
-
-.leg-front {
-  position: absolute;
-  bottom: 0;
-  right: 2px;
-  width: 12px;
-  height: 16px;
-  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 6px 6px 2px 2px;
-  box-shadow: 0 0 6px rgba(125, 211, 252, 0.5);
-}
-
-/* Torso inclinado hacia adelante */
-.worker-torso-bent {
-  position: absolute;
-  bottom: 14px;
-  left: 6px;
-  width: 22px;
+  bottom: 10px;
+  left: 15px;
+  width: 50px;
   height: 22px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 8px;
+  border-radius: 6px 6px 4px 4px;
+  box-shadow: 0 0 10px rgba(125, 211, 252, 0.7);
+}
+
+.truck-stripe {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 38px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+}
+
+.truck-cabin {
+  position: absolute;
+  bottom: 10px;
+  left: 55px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #ffffff, #bae6fd);
+  border-radius: 6px 8px 2px 2px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.truck-wheels {
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+}
+
+.wheel {
+  position: absolute;
+  bottom: 0;
+  width: 11px;
+  height: 11px;
+  background: #0f172a;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #38bdf8;
+}
+.front-w { left: 56px; }
+.back-w { left: 22px; }
+
+/* Tubo vertedor de asfalto */
+.asphalt-chute {
+  position: absolute;
+  bottom: 8px;
+  left: 45px;
+  width: 12px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 2px;
   transform: rotate(-15deg);
-  box-shadow: 0 0 8px rgba(125, 211, 252, 0.7);
+}
+
+.pouring-stream {
+  position: absolute;
+  bottom: -4px;
+  left: 42px;
+  width: 4px;
+  height: 14px;
+  background: linear-gradient(180deg, #38bdf8, #bae6fd);
+  border-radius: 2px;
+  animation: pourStream 2s ease-in-out infinite;
+}
+
+/* Trabajador de pie con pala a un lado */
+.worker-rigged {
+  position: absolute;
+  bottom: 16px;
+  left: 42px;
+  width: 26px;
+  height: 75px;
+}
+
+.worker-leg {
+  position: absolute;
+  bottom: 0;
+  width: 6.5px;
+  height: 24px;
+  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(125, 211, 252, 0.6);
+}
+.left-leg { left: 4px; }
+.right-leg { right: 4px; }
+
+.worker-torso {
+  position: absolute;
+  bottom: 22px;
+  left: 3px;
+  width: 20px;
+  height: 28px;
+  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(125, 211, 252, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .vest-stripe {
-  width: 14px;
+  width: 12px;
   height: 3px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 2px;
 }
 
-/* Cabeza inclinada con casco compacto */
-.worker-head-bent {
+.worker-head {
   position: absolute;
-  bottom: 33px;
-  left: 12px;
-  width: 18px;
-  height: 18px;
+  bottom: 52px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
 }
 
 .worker-circle-head {
   position: absolute;
   bottom: 0;
-  left: 1px;
-  width: 14px;
-  height: 14px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 50%;
   box-shadow: 0 0 8px rgba(125, 211, 252, 0.8);
@@ -2050,13 +2111,13 @@ body.modal-active .logo-icon .dahlia-center {
 
 .worker-helmet-hard {
   position: absolute;
-  top: -3px;
-  left: -2px;
-  width: 20px;
-  height: 10px;
+  top: -2px;
+  left: -1px;
+  width: 22px;
+  height: 11px;
   background: #ffffff;
-  border-radius: 10px 10px 3px 3px;
-  box-shadow: 0 0 8px #ffffff, inset -1px -1px 2px rgba(125, 211, 252, 0.5);
+  border-radius: 11px 11px 3px 3px;
+  box-shadow: 0 0 10px #ffffff, inset -1px -1px 3px rgba(125, 211, 252, 0.5);
   z-index: 5;
 }
 
@@ -2065,89 +2126,55 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   bottom: 1px;
   left: -2px;
-  width: 24px;
+  width: 26px;
   height: 2px;
   background: #ffffff;
   border-radius: 2px;
 }
 
-/* Brazos y herramienta alisadora */
-.worker-arms-trowel {
+.worker-arms-shovel {
   position: absolute;
-  bottom: 24px;
-  left: 14px;
-  width: 30px;
+  bottom: 34px;
+  left: -8px;
+  width: 36px;
   height: 12px;
-  transform-origin: left center;
-  animation: trowelSmoothingMotion 2s ease-in-out infinite;
-  z-index: 6;
+  transform: rotate(-10deg);
 }
 
-.trowel-tool {
+.worker-shovel-tool {
   position: absolute;
-  top: 4px;
-  right: -8px;
-  width: 26px;
+  top: 2px;
+  right: 0;
+  width: 32px;
   height: 4px;
   background: #ffffff;
   border-radius: 2px;
   box-shadow: 0 0 6px #bae6fd;
 }
 
-.trowel-blade {
+.shovel-blade {
   position: absolute;
-  top: -3px;
-  right: -5px;
+  top: -4px;
+  left: -4px;
   width: 12px;
-  height: 8px;
+  height: 12px;
   background: #ffffff;
-  border-radius: 2px;
+  border-radius: 50% 2px 2px 50%;
   box-shadow: 0 0 8px #7dd3fc;
 }
 
-/* Partículas de destello al alisar */
-.paving-sparkles {
-  position: absolute;
-  bottom: 30px;
-  left: 110px;
-  width: 25px;
-  height: 20px;
-  pointer-events: none;
+/* Animaciones del proceso */
+@keyframes truckBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
 }
 
-.spark {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: #bae6fd;
-  border-radius: 50%;
-  opacity: 0;
-  box-shadow: 0 0 6px #38bdf8;
-}
-
-.s1 { animation: sparkAnim 2s ease-out infinite 0.2s; }
-.s2 { animation: sparkAnim 2s ease-out infinite 0.7s; }
-.s3 { animation: sparkAnim 2s ease-out infinite 1.2s; }
-
-/* Animaciones fluidas para alisado de bache */
-@keyframes workerSmoothingMotion {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(1px) rotate(-2deg); }
-}
-
-@keyframes trowelSmoothingMotion {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  30% { transform: translateX(10px) rotate(-15deg); }
-  70% { transform: translateX(-4px) rotate(10deg); }
-}
-
-@keyframes fillingPothole {
-  0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
+@keyframes fillPotholeProgress {
+  0%, 100% { transform: scaleX(0.5); opacity: 0.5; }
   50% { transform: scaleX(1); opacity: 1; }
 }
 
-@keyframes sparkAnim {
-  0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translate(12px, -15px) scale(1.2); opacity: 0; }
+@keyframes pourStream {
+  0%, 100% { transform: scaleY(0.7); opacity: 0.6; }
+  50% { transform: scaleY(1.1); opacity: 1; }
 }
