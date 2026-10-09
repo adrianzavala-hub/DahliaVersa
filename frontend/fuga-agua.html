@@ -1204,10 +1204,10 @@
             formData.append('tipo_reporte', 'fuga-agua'); 
 
             try {
-                const response = await fetch('http://localhost:5000/api/enviar-reporte', {
-                    method: 'POST',
-                    body: formData
-                });
+    const response = await fetch('https://dahliaversa1.onrender.com/api/enviar-reporte', {
+        method: 'POST',
+        body: formData
+    });
                 const res = await response.json();
 
                 if (response.ok) {
