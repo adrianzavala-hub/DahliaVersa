@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DahliaVersa - Baches</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #120f1a;
+            background-image: url('/frontend/img/bache.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow-x: hidden;
+            padding: 40px 20px 20px 20px;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 30px;
+            right: calc(50% + 40px);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            position: relative;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin 20s linear infinite;
+            overflow: visible;
+        }
+
+        .logo-icon.fast-spin {
+            animation: spin 0.4s linear infinite !important;
+        }
+
+        .dahlia-petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50% 50% 10% 10% / 80% 80% 20% 20%;
+            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .dahlia-petal.outer {
+            width: 10px;
+            height: 18px;
+            background: linear-gradient(135deg, #c78dfb 0%, #ad6fe3 60%, #df9cfc 100%);
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-12px);
+        }
+
+        .dahlia-petal.mid {
+            width: 8px;
+            height: 14px;
+            background: linear-gradient(135deg, #d8b4fe 0%, #c084fc 60%, #f0abfc 100%);
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-8px);
+        }
+
+        .dahlia-petal.inner {
+            width: 6px;
+            height: 10px;
+            background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 100%, #fbcfe8 100%);
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-5px);
+        }
+
+        .dahlia-neon-outline {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 20px;
+            background: transparent;
+            border: 1.5px solid #d8b4fe;
+            border-radius: 50% 50% 10% 10% / 80% 80% 20% 20%;
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-12.5px);
+            box-shadow: 0 0 6px #c084fc, inset 0 0 4px #c084fc;
+            pointer-events: none;
+            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+        }
+
+        .dahlia-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 7px;
+            height: 7px;
+            background-color: #f5d0fe;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
+            box-shadow: 0 0 10px #f5d0fe;
+        }
+
+        .dahlia-petal.dispersing,
+        .dahlia-neon-outline.dispersing {
+            transform: translate(-50%, -50%) rotate(var(--angle)) translate(var(--rand-x, 45px), var(--rand-y, 55px)) scale(0) rotate(540deg) !important;
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.4s ease;
+        }
+
+        .road-scene-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0px;
+            height: 0px;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .road-scene-container.active {
+            opacity: 1;
+            width: 42px;
+            height: 42px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .traffic-cone {
+            position: relative;
+            width: 14px;
+            height: 22px;
+            background: linear-gradient(135deg, #f0abfc 0%, #d946ef 50%, #9333ea 100%);
+            clip-path: polygon(32% 0%, 68% 0%, 100% 100%, 0% 100%);
+            box-shadow: 0 0 10px rgba(216, 180, 254, 0.8), inset -2px 0 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        .traffic-cone::before {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: 1.5px;
+            right: 1.5px;
+            height: 4px;
+            background: linear-gradient(90deg, #ffffff, #f3e8ff, #ffffff);
+            box-shadow: 0 0 6px #ffffff;
+            border-radius: 1px;
+        }
+
+        .traffic-cone::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -4px;
+            right: -4px;
+            height: 4px;
+            background: linear-gradient(90deg, #581c87, #7e22ce, #581c87);
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .realistic-pothole {
+            position: relative;
+            width: 18px;
+            height: 12px;
+            background: 
+                radial-gradient(circle at 40% 40%, rgba(216, 180, 254, 0.25) 0%, transparent 45%),
+                radial-gradient(circle, #090510 0%, #1a1024 60%, #3b2052 100%);
+            border-radius: 40% 60% 48% 52% / 55% 40% 60% 45%;
+            border: 1.5px dashed rgba(216, 180, 254, 0.5);
+            box-shadow: 
+                inset 0 4px 8px rgba(0, 0, 0, 0.95),
+                inset 0 -2px 4px rgba(216, 180, 254, 0.3),
+                0 0 8px rgba(168, 85, 247, 0.5);
+            margin-top: 6px;
+            transition: background 0.8s ease, border-radius 0.8s ease, box-shadow 0.8s ease;
+        }
+
+        .realistic-pothole::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -2px;
+            width: 3px;
+            height: 2px;
+            background: #d8b4fe;
+            border-radius: 50%;
+            box-shadow: -10px 10px 0 #c084fc, -15px 4px 0 #7e22ce;
+        }
+
+        /* --- TRABAJADOR MUNICIPAL ANIMADO --- */
+        .worker-container {
+            position: absolute;
+            top: 50%;
+            left: -30px;
+            width: 22px;
+            height: 26px;
+            transform: translateY(-60%);
+            opacity: 0;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        .worker-body {
+            position: absolute;
+            bottom: 0;
+            left: 6px;
+            width: 10px;
+            height: 16px;
+            background: #d8b4fe;
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 0 6px #c084fc;
+        }
+
+        .worker-head {
+            position: absolute;
+            top: 2px;
+            left: 7px;
+            width: 8px;
+            height: 8px;
+            background: #f5d0fe;
+            border-radius: 50%;
+        }
+
+        .worker-shovel {
+            position: absolute;
+            bottom: 2px;
+            left: 14px;
+            width: 12px;
+            height: 3px;
+            background: #9333ea;
+            border-radius: 2px;
+            transform-origin: left center;
+            transform: rotate(-25deg);
+        }
+
+        .worker-container.working {
+            opacity: 1;
+            animation: workerAction 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes workerAction {
+            0% { left: -30px; opacity: 0; }
+            20% { left: 6px; opacity: 1; }
+            30% { transform: translateY(-60%) rotate(0deg); }
+            40% { transform: translateY(-60%) rotate(-15deg); }
+            50% { transform: translateY(-60%) rotate(5deg); }
+            60% { transform: translateY(-60%) rotate(-15deg); }
+            75% { left: 6px; opacity: 1; }
+            100% { left: 50px; opacity: 0; }
+        }
+
+        .road-scene-container.repairing .traffic-cone {
+            transform: translateY(-15px) scale(0);
+            opacity: 0;
+            transition: transform 0.5s ease 0.4s, opacity 0.4s ease 0.4s;
+        }
+
+        .road-scene-container.repairing .realistic-pothole {
+            background: radial-gradient(circle, #3b2052 0%, #4b2d5f 100%);
+            border-radius: 50%;
+            border: 1px solid rgba(216, 180, 254, 0.6);
+            box-shadow: 0 0 10px rgba(216, 180, 254, 0.5);
+            transition: background 0.8s ease 0.6s, border-radius 0.8s ease 0.6s;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            background: rgba(75, 45, 95, 0.45);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(216, 180, 254, 0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(216, 180, 254, 0.1);
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d8b4fe;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #d8b4fe 0%, #c084fc 100%);
+            color: #120f1a;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(192, 132, 252, 0.3);
+        }
+
+        .btn-nav:hover {
+            background: linear-gradient(135deg, #e879f9 0%, #d8b4fe 100%);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 5px 15px rgba(192, 132, 252, 0.5);
+        }
+
+        .btn-enviar {
+            background: linear-gradient(135deg, #d8b4fe 0%, #c084fc 100%);
+            color: #120f1a;
+            border: none;
+            padding: 7px 16px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(192, 132, 252, 0.3);
+        }
+
+        .btn-enviar:hover {
+            background: linear-gradient(135deg, #e879f9 0%, #d8b4fe 100%);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 5px 16px rgba(192, 132, 252, 0.5);
+        }
+
+        .middle-bottom-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            max-width: 370px;
+            margin-top: auto;
+            padding-bottom: 10px;
+        }
+
+        .footer-brand-effects {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            background-image: url('img/bache.jpeg');
+            background-size: 100vw 100vh;
+            background-position: center bottom;
+            background-attachment: fixed;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: none;
+            text-shadow: none;
+        }
+
+        #mainReportForm {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-left: 20px;
+            padding-right: 20px;
+            gap: 20px;
+        }
+
+        .glass-card {
+            background: rgba(75, 45, 95, 0.45);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(216, 180, 254, 0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            width: 32%;
+            max-width: 370px;
+        }
+
+        .left-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-column-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 32%;
+            max-width: 370px;
+            align-items: flex-end;
+        }
+
+        .right-card {
+            margin-top: -100px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .texto-informativo {
+            direction: rtl;
+            text-align: right;
+            margin-top: 10px;
+            margin-right: 0px;
+            padding-right: 20px;
+            padding-left: 0px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+            width: 100%;
+            border-right: 2px solid rgba(216, 180, 254, 0.4);
+            border-left: none;
+        }
+
+        .card-divider-title {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card-divider-title::before,
+        .card-divider-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(216, 180, 254, 0), rgba(216, 180, 254, 0.4));
+            box-shadow: 0 0 6px rgba(216, 180, 254, 0.2);
+        }
+
+        .card-divider-title::after {
+            background: linear-gradient(90deg, rgba(216, 180, 254, 0.4), rgba(216, 180, 254, 0));
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f3e8ff;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(45, 30, 60, 0.5);
+            border: 1px solid rgba(216, 180, 254, 0.3);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #d8b4fe;
+            box-shadow: 0 0 8px rgba(216, 180, 254, 0.4);
+        }
+
+        .carousel-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .carousel-track-container {
+            overflow: hidden;
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            width: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .carousel-slide h3 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: center;
+            background-image: url('/frontend/img/bache.jpeg');
+            background-size: cover;
+            background-position: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            filter: none;
+            text-shadow: none;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .upload-box {
+            width: 100%;
+            height: 180px;
+            border: 2px dashed rgba(216, 180, 254, 0.4);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(45, 30, 60, 0.5);
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            gap: 8px;
+            color: #d8b4fe;
+            font-size: 0.85rem;
+        }
+
+        .upload-box:hover {
+            border-color: #d8b4fe;
+            background: rgba(45, 30, 60, 0.8);
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(216, 180, 254, 0.15);
+        }
+
+        .carousel-btn {
+            background: rgba(216, 180, 254, 0.2);
+            border: 1px solid rgba(216, 180, 254, 0.4);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(216, 180, 254, 0.4);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 6px;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(216, 180, 254, 0.3);
+            transition: background 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #d8b4fe;
+            box-shadow: 0 0 6px #d8b4fe;
+        }
+
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(75, 45, 95, 0.4);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .page-loader.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loader-glass-window {
+            position: relative;
+            width: 380px;
+            padding: 40px 30px;
+            background: rgba(75, 45, 95, 0.65);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(216, 180, 254, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(216, 180, 254, 0.15);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+        }
+
+        .page-loader.active .loader-glass-window {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .loader-pothole-scene {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-orbit-ring {
+            position: absolute;
+            border-radius: 50%;
+            border-style: solid;
+        }
+
+        .ring-outer {
+            width: 96px;
+            height: 96px;
+            border-width: 1.5px;
+            border-color: rgba(216, 180, 254, 0.08) rgba(216, 180, 254, 0.3) rgba(216, 180, 254, 0.08) #d8b4fe;
+            animation: spinClockwise 3s linear infinite;
+        }
+
+        .ring-mid {
+            width: 70px;
+            height: 70px;
+            border-width: 2px;
+            border-color: #c084fc rgba(192, 132, 252, 0.1) transparent rgba(192, 132, 252, 0.1);
+            animation: spinCounterClockwise 2.2s linear infinite;
+        }
+
+        .ring-inner {
+            width: 44px;
+            height: 44px;
+            border-width: 1.5px;
+            border-color: rgba(216, 180, 254, 0.4) transparent #d8b4fe transparent;
+            animation: spinClockwise 1.5s linear infinite;
+        }
+
+        .loader-orbit-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #d8b4fe;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #d8b4fe, 0 0 20px #c084fc;
+        }
+
+        .node-1 {
+            animation: orbitPath1 3s linear infinite;
+        }
+
+        .node-2 {
+            animation: orbitPath2 2.2s linear infinite;
+        }
+
+        .loader-core-pulse {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #d8b4fe, #c084fc);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(192, 132, 252, 0.8), inset 0 0 6px #ffffff;
+            animation: corePulseAnimation 1.4s ease-in-out infinite alternate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .core-inner-glow {
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff;
+        }
+
+        .loader-brand-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .loader-status-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(216, 180, 254, 0.25);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .loader-status-progress {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #d8b4fe, #c084fc, transparent);
+            animation: progressBarMove 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .loader-subtitle {
+            font-size: 0.88rem;
+            color: #f3e8ff;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+        }
+
+        @keyframes spinClockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spinCounterClockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes corePulseAnimation {
+            0% { transform: scale(0.85); opacity: 0.75; box-shadow: 0 0 10px rgba(192, 132, 252, 0.6); }
+            100% { transform: scale(1.18); opacity: 1; box-shadow: 0 0 25px rgba(216, 180, 254, 1), inset 0 0 8px #ffffff; }
+        }
+
+        @keyframes progressBarMove {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes orbitPath1 {
+            0% { transform: rotate(0deg) translateX(48px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(48px) rotate(-360deg); }
+        }
+
+        @keyframes orbitPath2 {
+            0% { transform: rotate(0deg) translateX(35px) rotate(0deg); }
+            100% { transform: rotate(-360deg) translateX(35px) rotate(360deg); }
+        }
+
+        @media (max-width: 992px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .navbar {
+                position: relative;
+                top: auto;
+                right: auto;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding: 0;
+                text-align: center;
+                margin-bottom: 30px;
+                justify-content: center;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px 18px;
+            }
+
+            #mainReportForm {
+                flex-direction: column;
+                margin-top: 10px;
+                align-items: center;
+                padding-left: 0;
+                padding-right: 0;
+                gap: 25px;
+            }
+
+            .glass-card,
+            .right-column-wrapper,
+            .middle-bottom-container {
+                width: 100%;
+                max-width: 100%;
+                align-items: stretch;
+            }
+
+            .right-card {
+                margin-top: 0;
+            }
+
+            .texto-informativo {
+                margin-right: 0;
+                padding-right: 15px;
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-glass-window">
+            <div class="loader-pothole-scene">
+                <div class="loader-orbit-ring ring-outer"></div>
+                <div class="loader-orbit-ring ring-mid"></div>
+                <div class="loader-orbit-ring ring-inner"></div>
+                <div class="loader-orbit-node node-1"></div>
+                <div class="loader-orbit-node node-2"></div>
+                <div class="loader-core-pulse">
+                    <div class="core-inner-glow"></div>
+                </div>
+            </div>
+            <div class="loader-brand-title">DahliaVersa</div>
+            <div class="loader-status-bar">
+                <div class="loader-status-progress"></div>
+            </div>
+            <div class="loader-subtitle">Cargando sistema...</div>
+        </div>
+    </div>
+
+    <header class="navbar">
+        <div class="logo" id="logoTrigger">
+            <div class="logo-icon" id="logoIcon">
+                <!-- Escena de cono y bache realista -->
+                <div class="road-scene-container" id="roadSceneContainer">
+                    <div class="traffic-cone"></div>
+                    <div class="realistic-pothole"></div>
+                </div>
+                <!-- Trabajador municipal reparando -->
+                <div class="worker-container" id="workerContainer">
+                    <div class="worker-head"></div>
+                    <div class="worker-body"></div>
+                    <div class="worker-shovel"></div>
+                </div>
+
+                <span class="dahlia-neon-outline" style="--angle: 0deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 45deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 90deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 135deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 180deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 225deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 270deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 315deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 0deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 45deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 90deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 135deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 180deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 225deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 270deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 315deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 22.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 67.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 112.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 157.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 202.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 247.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 292.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 337.5deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 0deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 45deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 90deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 135deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 180deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 225deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 270deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 315deg;"></span>
+                <span class="dahlia-center" id="dahliaCenter"></span>
+            </div>
+        </div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#">Seguimiento</a></li>
+                <li><a href="mailto:olguinzavalaadrian099@gmail.com">Contactanos</a></li>
+                <li><a href="#">Mis reportes</a></li>
+            </ul>
+        </nav>
+        <a href="index.html" class="btn-nav" id="backToHomeBtn">Volver al Inicio</a>
+    </header>
+
+    <form id="mainReportForm" enctype="multipart/form-data">
+        <div class="glass-card left-card">
+            <div class="card-divider-title">
+                <div class="footer-brand-effects">DahliaVersa</div>
+            </div>
+            <div class="form-group">
+                <label for="regName">Nombre Completo</label>
+                <input type="text" id="regName" name="nombre" placeholder="Ingresa tu nombre completo" required>
+            </div>
+            <div class="form-group">
+                <label for="regAge">Edad</label>
+                <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" required>
+            </div>
+            <div class="form-group">
+                <label for="regPhone">Número de Teléfono</label>
+                <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" required>
+            </div>
+            <div class="form-group">
+                <label for="regDate">Fecha Automática</label>
+                <input type="text" id="regDate" name="fecha" readonly value="23/09/2026">
+            </div>
+            <div class="form-group">
+                <label for="regReferences">Referencias</label>
+                <textarea id="regReferences" name="referencias"
+                    placeholder="Ej. Entre qué calles está, color de fachada..." rows="2" required></textarea>
+            </div>
+        </div>
+
+        <div class="middle-bottom-container">
+            <button type="submit" class="btn-enviar">Enviar Reporte</button>
+        </div>
+
+        <div class="right-column-wrapper">
+            <div class="glass-card right-card carousel-container">
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="carouselTrack">
+
+                        <div class="carousel-slide">
+                            <h3>Ubicación Exacta</h3>
+                            <div class="upload-box" id="gpsBox">
+                                <span style="font-size: 1.8rem;">📍</span>
+                                <span id="gpsText">Haz clic para fijar ubicación GPS</span>
+                                <input type="hidden" name="lat_long" id="latLongInput" value="">
+                            </div>
+                        </div>
+
+                        <div class="carousel-slide">
+                            <h3>INE de Frente</h3>
+                            <label class="upload-box">
+                                <span style="font-size: 1.8rem;">🪪</span>
+                                <span class="file-label-text">Sube o fotografía el frente de tu INE</span>
+                                <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden"
+                                    style="display: none;">
+                            </label>
+                        </div>
+
+                        <div class="carousel-slide">
+                            <h3>INE Reverso</h3>
+                            <label class="upload-box">
+                                <span style="font-size: 1.8rem;">🔄</span>
+                                <span class="file-label-text">Sube o fotografía el reverso de tu INE</span>
+                                <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden"
+                                    style="display: none;">
+                            </label>
+                        </div>
+
+                        <div class="carousel-slide">
+                            <h3>Reconocimiento Facial</h3>
+                            <label class="upload-box">
+                                <span style="font-size: 1.8rem;">📸</span>
+                                <span class="file-label-text">Tómate una selfie para validación</span>
+                                <input type="file" name="selfie" accept="image/*" class="file-input-hidden"
+                                    style="display: none;">
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                    <button type="button" class="carousel-btn" id="prevBtn">Anterior</button>
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <span class="indicator active"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                    </div>
+                    <button type="button" class="carousel-btn" id="nextBtn">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="texto-informativo" dir="rtl">
+                <strong>Información importante:</strong> Asegúrate de detallar correctamente el estado de las vías, la
+                profundidad y la gravedad del bache para agilizar la atención municipal. Cada reporte validado pasa por
+                un proceso de verificación ciudadana para optimizar los tiempos de respuesta y garantizar intervenciones
+                viales más seguras y duraderas en beneficio de toda la comunidad.
+            </div>
+        </div>
+    </form>
+
+    <script>
+        const track = document.getElementById('carouselTrack');
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById('nextBtn');
+        const prevButton = document.getElementById('prevBtn');
+        const indicators = document.querySelectorAll('.indicator');
+
+        let currentIndex = 0;
+
+        function updateCarousel(index) {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === index);
+            });
+        }
+
+        nextButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel(currentIndex);
+        });
+
+        prevButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel(currentIndex);
+        });
+
+        const gpsBox = document.getElementById('gpsBox');
+        const gpsText = document.getElementById('gpsText');
+        const latLongInput = document.getElementById('latLongInput');
+
+        gpsBox.addEventListener('click', () => {
+            if (navigator.geolocation) {
+                gpsText.textContent = "Obteniendo ubicación GPS...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        latLongInput.value = `${lat}, ${lon}`;
+                        gpsText.textContent = `¡Ubicación fijada! (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
+                        gpsBox.style.borderColor = '#c084fc';
+                    },
+                    (error) => {
+                        gpsText.textContent = "Error al obtener GPS. Intenta de nuevo.";
+                        alert("No se pudo obtener la geolocalización. Verifica los permisos de tu navegador.");
+                    }
+                );
+            } else {
+                alert("La geolocalización no es compatible con este navegador.");
+            }
+        });
+
+        const logoTrigger = document.getElementById('logoTrigger');
+        const logoIcon = document.getElementById('logoIcon');
+        const roadSceneContainer = document.getElementById('roadSceneContainer');
+        const workerContainer = document.getElementById('workerContainer');
+        const dahliaCenter = document.getElementById('dahliaCenter');
+        
+        const innerPetals = document.querySelectorAll('.dahlia-petal.inner');
+        const midPetals = document.querySelectorAll('.dahlia-petal.mid');
+        const outerPetals = document.querySelectorAll('.dahlia-petal.outer');
+        const neonOutlines = document.querySelectorAll('.dahlia-neon-outline');
+        const allPetals = document.querySelectorAll('.dahlia-petal, .dahlia-neon-outline');
+
+        let holdTimer = null;
+        let isDispersed = false;
+        let isAnimatingWorker = false;
+
+        function startHolding(e) {
+            if (isDispersed || isAnimatingWorker) return;
+            e.preventDefault();
+            logoIcon.classList.add('fast-spin');
+
+            holdTimer = setTimeout(() => {
+                triggerDispersal();
+            }, 600);
+        }
+
+        function stopHolding() {
+            if (isDispersed || isAnimatingWorker) return;
+            if (holdTimer) clearTimeout(holdTimer);
+            logoIcon.classList.remove('fast-spin');
+        }
+
+        function triggerDispersal() {
+            isDispersed = true;
+            logoIcon.classList.remove('fast-spin');
+            logoIcon.style.animation = 'none';
+
+            allPetals.forEach(petal => {
+                const randomX = (Math.random() - 0.5) * 85;
+                const randomY = (Math.random() - 0.5) * 85 + 35;
+                petal.style.setProperty('--rand-x', `${randomX}px`);
+                petal.style.setProperty('--rand-y', `${randomY}px`);
+                petal.classList.add('dispersing');
+            });
+
+            dahliaCenter.style.opacity = '0';
+            dahliaCenter.style.transform = 'translate(-50%, -50%) scale(0)';
+
+            setTimeout(() => {
+                roadSceneContainer.classList.add('active');
+            }, 250);
+        }
+
+        logoTrigger.addEventListener('mousedown', startHolding);
+        logoTrigger.addEventListener('mouseup', stopHolding);
+        logoTrigger.addEventListener('mouseleave', stopHolding);
+
+        logoTrigger.addEventListener('touchstart', startHolding, { passive: false });
+        logoTrigger.addEventListener('touchend', stopHolding);
+
+        roadSceneContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!isDispersed || isAnimatingWorker) return;
+
+            isAnimatingWorker = true;
+            workerContainer.classList.add('working');
+            roadSceneContainer.classList.add('repairing');
+
+            setTimeout(() => {
+                roadSceneContainer.classList.remove('active', 'repairing');
+            }, 1800);
+
+            setTimeout(() => {
+                workerContainer.classList.remove('working');
+
+                dahliaCenter.style.opacity = '1';
+                dahliaCenter.style.transform = 'translate(-50%, -50%) scale(1)';
+
+                setTimeout(() => {
+                    innerPetals.forEach(p => p.classList.remove('dispersing'));
+                }, 200);
+
+                setTimeout(() => {
+                    midPetals.forEach(p => p.classList.remove('dispersing'));
+                }, 450);
+
+                setTimeout(() => {
+                    outerPetals.forEach(p => p.classList.remove('dispersing'));
+                    neonOutlines.forEach(n => n.classList.remove('dispersing'));
+                }, 700);
+
+                setTimeout(() => {
+                    logoIcon.style.animation = 'spin 20s linear infinite';
+                    isDispersed = false;
+                    isAnimatingWorker = false;
+                }, 1400);
+
+            }, 2200);
+        });
+
+        const fileInputs = document.querySelectorAll('.file-input-hidden');
+        fileInputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const fileName = e.target.files[0] ? e.target.files[0].name : "Archivo seleccionado";
+                const labelText = input.closest('.upload-box').querySelector('.file-label-text');
+                labelText.textContent = `Archivo: ${fileName}`;
+                input.closest('.upload-box').style.borderColor = '#c084fc';
+            });
+        });
+
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        const pageLoader = document.getElementById('pageLoader');
+
+        backToHomeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            pageLoader.classList.add('active');
+            
+            setTimeout(() => {
+                window.location.href = backToHomeBtn.getAttribute('href');
+            }, 1500);
+        });
+        const mainReportForm = document.getElementById('mainReportForm');
+
+        mainReportForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(mainReportForm);
+            
+            // CAMBIAR SEGÚN LA PÁGINA: 'baches', 'fuga-agua' o 'poste-luz'
+            formData.append('tipo_reporte', 'baches'); 
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enviar-reporte', {
+                    method: 'POST',
+                    body: formData
+                });
+                const res = await response.json();
+
+                if (response.ok) {
+                    // Ventana emergente flotante con el Nombre y el ID (Folio) asignado por la BD
+                    alert(`🎉 ¡Reporte Registrado Exitosamente!\n\nCiudadano: ${res.nombre}\nID de Seguimiento (Folio): #${res.folio}\nEstatus de Validación IA: ${res.status}\n\nNota: Guarda tu ID de Folio para consultar el estatus en tiempo real.`);
+                    window.location.href = 'index.html';
+                } else {
+                    alert(`⚠️ Error al procesar el reporte: ${res.message}`);
+                }
+            } catch (err) {
+                console.error("Error de conexión con el backend:", err);
+                alert("No se pudo conectar con el servidor de validación inteligente.");
+            }
+        });
+    </script>
+</body>
+
+</html>

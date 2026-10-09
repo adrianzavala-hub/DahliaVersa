@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DahliaVersa - Fuga de Agua</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #5c82a5;
+            background-image: url('/frontend/img/agua.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #0e2439;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow-x: hidden;
+            padding: 40px 20px 20px 20px;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 30px;
+            right: 200px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            position: relative;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin 20s linear infinite;
+            overflow: visible;
+        }
+
+        .logo-icon.fast-spin {
+            animation: spin 0.4s linear infinite !important;
+        }
+
+        .dahlia-petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50% 50% 10% 10% / 80% 80% 20% 20%;
+            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+            box-shadow: 0 0 2px rgba(90, 130, 165, 0.3);
+        }
+
+        .dahlia-petal.outer {
+            width: 9px;
+            height: 16px;
+            background: linear-gradient(135deg, #628db3 0%, #4a759b 60%, #a6cef0 100%);
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-10px);
+        }
+
+        .dahlia-petal.mid {
+            width: 7px;
+            height: 13px;
+            background: linear-gradient(135deg, #a6cef0 100%, #7daed8 60%, #d4eafc 0%);
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-7px);
+        }
+
+        .dahlia-petal.inner {
+            width: 5px;
+            height: 9px;
+            background: linear-gradient(135deg, #f0f6ff 0%, #d4eafc 100%, #e5f2ff 100%);
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-4px);
+        }
+
+        .dahlia-neon-outline {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 11px;
+            height: 18px;
+            background: transparent;
+            border: 1.5px solid #c2e0f8;
+            border-radius: 50% 50% 10% 10% / 80% 80% 20% 20%;
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-10.5px);
+            box-shadow: 0 0 6px #7daed8, inset 0 0 3px #7daed8;
+            pointer-events: none;
+            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+        }
+
+        .dahlia-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background-color: #d1e5f8;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 5px #a0c7eb;
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
+        }
+
+        .dahlia-petal.dispersing,
+        .dahlia-neon-outline.dispersing {
+            transform: translate(-50%, -50%) rotate(var(--angle)) translate(var(--rand-x, 35px), var(--rand-y, 45px)) scale(0) rotate(540deg) !important;
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.4s ease;
+        }
+
+        .road-scene-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0px;
+            height: 0px;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .road-scene-container.active {
+            opacity: 1;
+            width: 36px;
+            height: 36px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .broken-pipe {
+            position: relative;
+            width: 26px;
+            height: 10px;
+            background: linear-gradient(90deg, #386185 0%, #254663 50%, #1c3c59 100%);
+            border-radius: 3px;
+            border: 1px solid rgba(186, 230, 253, 0.6);
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        /* Fisura de la tubería */
+        .broken-pipe::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 10px;
+            width: 4px;
+            height: 14px;
+            background: #ffffff;
+            border-radius: 2px;
+            box-shadow: 0 0 6px #ffffff;
+        }
+
+        /* Chorros de agua saliendo de la fisura */
+        .water-jet {
+            position: absolute;
+            top: -16px;
+            left: 11px;
+            width: 3px;
+            height: 14px;
+            background: linear-gradient(180deg, #ffffff 0%, #38bdf8 100%);
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 0 8px #38bdf8;
+            animation: waterSpray 0.6s ease-in-out infinite alternate;
+        }
+
+        .water-jet::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 11px;
+            height: 6px;
+            background: rgba(186, 230, 253, 0.6);
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        @keyframes waterSpray {
+            0% { transform: translateY(0) scaleY(0.8); opacity: 0.7; }
+            100% { transform: translateY(-6px) scaleY(1.3); opacity: 1; }
+        }
+
+        /* --- TRABAJADOR MUNICIPAL REPARANDO LA FUGA --- */
+        .worker-container {
+            position: absolute;
+            top: 50%;
+            left: -35px;
+            width: 22px;
+            height: 26px;
+            transform: translateY(-60%);
+            opacity: 0;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        .worker-body {
+            position: absolute;
+            bottom: 0;
+            left: 6px;
+            width: 10px;
+            height: 16px;
+            background: #7daed8;
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 0 6px #38bdf8;
+        }
+
+        .worker-head {
+            position: absolute;
+            top: 2px;
+            left: 7px;
+            width: 8px;
+            height: 8px;
+            background: #f0f6ff;
+            border-radius: 50%;
+        }
+
+        .worker-wrench {
+            position: absolute;
+            bottom: 6px;
+            left: 14px;
+            width: 10px;
+            height: 4px;
+            background: #254663;
+            border-radius: 2px;
+            transform-origin: left center;
+            transform: rotate(-30deg);
+        }
+
+        .worker-container.working {
+            opacity: 1;
+            animation: workerRepairAction 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes workerRepairAction {
+            0% { left: -35px; opacity: 0; }
+            20% { left: 5px; opacity: 1; }
+            30% { transform: translateY(-60%) rotate(0deg); }
+            45% { transform: translateY(-60%) rotate(-20deg); } /* Girando llave */
+            60% { transform: translateY(-60%) rotate(10deg); }
+            75% { left: 5px; opacity: 1; }
+            100% { left: 50px; opacity: 0; }
+        }
+
+        /* Estado al reparar la tubería */
+        .road-scene-container.repairing .water-jet {
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.4s ease 0.3s, opacity 0.3s ease 0.3s;
+        }
+
+        .road-scene-container.repairing .broken-pipe {
+            background: linear-gradient(90deg, #1c3c59, #254663);
+            box-shadow: inset 0 0 6px rgba(56, 189, 248, 0.8);
+            transition: background 0.6s ease 0.5s;
+        }
+
+        .road-scene-container.repairing .broken-pipe::after {
+            opacity: 0;
+            transition: opacity 0.3s ease 0.4s;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            background: rgba(132, 165, 194, 0.75);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(165, 195, 222, 0.6);
+            box-shadow: 0 10px 25px rgba(28, 60, 89, 0.25), inset 0 0 15px rgba(165, 195, 222, 0.3);
+        }
+
+        .nav-links a {
+            color: #0e2439;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #254663;
+            text-shadow: 0 0 6px rgba(37, 70, 99, 0.3);
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #7daed8 0%, #5e8bb3 100%);
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(94, 139, 179, 0.3);
+        }
+
+        .btn-nav:hover {
+            background: linear-gradient(135deg, #91bce2 0%, #7daed8 100%);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 5px 14px rgba(94, 139, 179, 0.4);
+        }
+
+        .btn-enviar {
+            background: linear-gradient(135deg, #7daed8 0%, #5e8bb3 100%);
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(94, 139, 179, 0.3);
+            display: inline-block;
+            width: auto !important;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-enviar:hover {
+            background: linear-gradient(135deg, #91bce2 0%, #7daed8 100%);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(94, 139, 179, 0.4);
+        }
+
+        .footer-brand-effects {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            background-image: url('img/agua.jpeg');
+            background-size: 100vw 100vh;
+            background-position: center bottom;
+            background-attachment: fixed;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        #mainReportForm {
+            width: 100%;
+            max-width: 1320px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding-left: 80px;
+            padding-right: 0px;
+            margin-top: 0px;
+        }
+
+        .glass-card {
+            background: rgba(132, 165, 194, 0.75);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(165, 195, 222, 0.6);
+            box-shadow: 0 10px 25px rgba(28, 60, 89, 0.25);
+        }
+
+        .left-card {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            width: 100%;
+        }
+
+        .form-group-full {
+            grid-column: span 2;
+        }
+
+        .bottom-row-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .text-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .free-info-text {
+            color: #ffffff;
+            font-size: 0.83rem;
+            line-height: 1.5;
+            padding: 0 4px;
+            text-align: justify;
+        }
+
+        .free-info-text strong {
+            color: #0e2439;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(14, 36, 57, 0.3);
+        }
+
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0));
+            margin: 4px 0;
+        }
+
+        .carousel-outer-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 60px;
+            margin-right: 50px;
+        }
+
+        .carousel-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 15px 25px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .card-divider-title {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card-divider-title::before,
+        .card-divider-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(56, 97, 133, 0), rgba(56, 97, 133, 0.5));
+            box-shadow: 0 0 6px rgba(56, 97, 133, 0.3);
+        }
+
+        .card-divider-title::after {
+            background: linear-gradient(90deg, rgba(56, 97, 133, 0.5), rgba(56, 97, 133, 0));
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(100, 135, 166, 0.65);
+            border: 1px solid rgba(70, 110, 145, 0.8);
+            border-radius: 10px;
+            padding: 11px 15px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            width: 100%;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #254663;
+            box-shadow: 0 0 8px rgba(37, 70, 99, 0.5);
+            background: rgba(115, 150, 182, 0.85);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(230, 242, 255, 0.75);
+        }
+
+        .carousel-track-container {
+            overflow: hidden;
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2px;
+        }
+
+        .carousel-slide h3 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            background-image: url('/frontend/img/agua.jpeg');
+            background-size: cover;
+            background-position: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+            width: 100%;
+        }
+
+        .upload-box {
+            width: 100%;
+            height: 85px;
+            border: 1.5px solid rgba(165, 195, 222, 0.7);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background: rgba(110, 145, 176, 0.35);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 12px;
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: inset 0 2px 6px rgba(28, 60, 89, 0.1);
+            padding: 0 15px;
+        }
+
+        .upload-box:hover {
+            border-color: rgba(255, 255, 255, 0.9);
+            background: rgba(125, 160, 192, 0.55);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(28, 60, 89, 0.2), inset 0 2px 6px rgba(28, 60, 89, 0.15);
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(165, 195, 222, 0.4);
+        }
+
+        .carousel-btn {
+            background: rgba(100, 135, 166, 0.45);
+            border: 1px solid rgba(165, 195, 222, 0.6);
+            color: #0e2439;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(125, 160, 192, 0.8);
+            color: #ffffff;
+            box-shadow: 0 3px 8px rgba(28, 60, 89, 0.2);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 6px;
+            background: rgba(90, 125, 155, 0.25);
+            padding: 5px 10px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background: #ffffff;
+            width: 18px;
+            border-radius: 4px;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        /* ==========================================
+           LOADER INDEPENDIENTE (FUGA DE AGUA)
+           ========================================== */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(92, 130, 165, 0.55);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .page-loader.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .water-leak-loader .loader-glass-window {
+            position: relative;
+            width: 380px;
+            padding: 40px 30px;
+            background: rgba(132, 165, 194, 0.85);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(186, 230, 253, 0.5);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45), inset 0 0 25px rgba(186, 230, 253, 0.2);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+        }
+
+        .page-loader.active .loader-glass-window {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .water-leak-animation-scene {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .water-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(125, 211, 252, 0.45);
+            animation: waterRingPulse 3s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+            pointer-events: none;
+        }
+
+        .r-one { width: 35px; height: 35px; animation-delay: 0s; }
+        .r-two { width: 55px; height: 55px; animation-delay: 1s; }
+
+        @keyframes waterRingPulse {
+            0% { transform: scale(0.6); opacity: 0.85; border-color: rgba(186, 230, 253, 0.9); }
+            100% { transform: scale(1.2); opacity: 0; border-color: rgba(56, 189, 248, 0.1); }
+        }
+
+        .outer-ripple {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(56, 189, 248, 0.7);
+            box-shadow: 0 0 12px rgba(125, 211, 252, 0.35);
+            opacity: 0;
+            animation: outerRippleExpand 2.8s cubic-bezier(0.1, 0.7, 0.3, 1) infinite;
+            pointer-events: none;
+        }
+
+        .or-1 { animation-delay: 0s; }
+        .or-2 { animation-delay: 0.7s; }
+        .or-3 { animation-delay: 1.4s; }
+        .or-4 { animation-delay: 2.1s; }
+
+        @keyframes outerRippleExpand {
+            0% { width: 32px; height: 32px; opacity: 1; transform: scale(1); }
+            100% { width: 96px; height: 96px; opacity: 0; transform: scale(1.18); border-color: rgba(186, 230, 253, 0.03); }
+        }
+
+        .water-core-source {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #bae6fd 40%, rgba(125, 211, 252, 0.4) 80%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 22px rgba(125, 211, 252, 0.8), inset 0 0 10px #ffffff;
+            animation: coreWaveBounce 2s ease-in-out infinite alternate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .core-highlight {
+            position: absolute;
+            top: 7px;
+            left: 8px;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #ffffff 0%, rgba(186, 230, 253, 0.5) 70%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff;
+        }
+
+        @keyframes coreWaveBounce {
+            0% { transform: scale(0.92) translateY(0); box-shadow: 0 0 12px rgba(56, 189, 248, 0.6); }
+            100% { transform: scale(1.08) translateY(-2px); box-shadow: 0 0 28px rgba(125, 211, 252, 0.95), inset 0 0 12px #ffffff; }
+        }
+
+        .water-leak-loader .loader-status-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(186, 230, 253, 0.25);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .water-leak-loader .loader-status-progress {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #bae6fd, #7dd3fc, transparent);
+            animation: progressBarMove 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes progressBarMove {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .water-leak-loader .loader-brand-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .water-leak-loader .loader-subtitle {
+            font-size: 0.88rem;
+            color: #e0f2fe;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+        }
+
+        @media (max-width: 1024px) {
+            body { padding: 20px 15px; align-items: center; }
+            .navbar {
+                position: relative; top: auto; right: auto; width: 100%;
+                flex-direction: column; gap: 12px; padding: 0; text-align: center; margin-bottom: 25px;
+            }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; padding: 10px 18px; }
+            #mainReportForm { padding-left: 0; padding-right: 0; align-items: center; max-width: 100%; }
+            .left-card, .bottom-row-wrapper, .text-column, .carousel-outer-wrapper, .carousel-container {
+                width: 100%; max-width: 100%; margin-right: 0; margin-top: 0;
+            }
+            .carousel-outer-wrapper { margin-top: 60px; }
+            .bottom-row-wrapper { flex-direction: column; gap: 20px; }
+            .form-grid-2cols { grid-template-columns: 1fr; }
+            .form-group-full { grid-column: span 1; }
+            .upload-box { height: 95px; flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-loader water-leak-loader" id="waterLeakLoader">
+        <div class="loader-glass-window">
+            <div class="water-leak-animation-scene">
+                <div class="water-ring r-one"></div>
+                <div class="water-ring r-two"></div>
+                <div class="outer-ripple or-1"></div>
+                <div class="outer-ripple or-2"></div>
+                <div class="outer-ripple or-3"></div>
+                <div class="outer-ripple or-4"></div>
+                <div class="water-core-source">
+                    <div class="core-highlight"></div>
+                </div>
+            </div>
+            <div class="loader-brand-title">DahliaVersa</div>
+            <div class="loader-status-bar">
+                <div class="loader-status-progress"></div>
+            </div>
+            <div class="loader-subtitle">Volviendo al inicio...</div>
+        </div>
+    </div>
+
+    <header class="navbar">
+        <div class="logo" id="logoTrigger">
+            <div class="logo-icon" id="logoIcon">
+                <div class="road-scene-container" id="roadSceneContainer">
+                    <div class="broken-pipe">
+                        <div class="water-jet"></div>
+                    </div>
+                </div>
+
+                <!-- Trabajador municipal reparando la tubería -->
+                <div class="worker-container" id="workerContainer">
+                    <div class="worker-head"></div>
+                    <div class="worker-body"></div>
+                    <div class="worker-wrench"></div>
+                </div>
+
+                <span class="dahlia-neon-outline" style="--angle: 0deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 45deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 90deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 135deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 180deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 225deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 270deg;"></span>
+                <span class="dahlia-neon-outline" style="--angle: 315deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 0deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 45deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 90deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 135deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 180deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 225deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 270deg;"></span>
+                <span class="dahlia-petal outer" style="--angle: 315deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 22.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 67.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 112.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 157.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 202.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 247.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 292.5deg;"></span>
+                <span class="dahlia-petal mid" style="--angle: 337.5deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 0deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 45deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 90deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 135deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 180deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 225deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 270deg;"></span>
+                <span class="dahlia-petal inner" style="--angle: 315deg;"></span>
+                <span class="dahlia-center" id="dahliaCenter"></span>
+            </div>
+        </div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#">Seguimiento</a></li>
+                <li><a href="mailto:olguinzavalaadrian099@gmail.com">Contactanos</a></li>
+                <li><a href="#">Mis reportes</a></li>
+            </ul>
+        </nav>
+        <a href="index.html" class="btn-nav" id="homeLinkBtn">Volver al Inicio</a>
+    </header>
+
+    <form id="mainReportForm" enctype="multipart/form-data">
+        <div class="glass-card left-card">
+            <div class="card-divider-title">
+                <div class="footer-brand-effects">DahliaVersa</div>
+            </div>
+            <div class="form-grid-2cols">
+                <div class="form-group">
+                    <label for="regName">Nombre Completo</label>
+                    <input type="text" id="regName" name="nombre" placeholder="Ingresa tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="regAge">Edad</label>
+                    <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPhone">Número de Teléfono</label>
+                    <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" required>
+                </div>
+                <div class="form-group">
+                    <label for="regDate">Fecha Automática</label>
+                    <input type="text" id="regDate" name="fecha" readonly value="23/09/2026">
+                </div>
+                <div class="form-group form-group-full">
+                    <label for="regReferences">Referencias</label>
+                    <textarea id="regReferences" name="referencias" placeholder="Ej. Entre qué calles está, color de fachada..." rows="2" required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-row-wrapper">
+            <div class="text-column">
+                <div class="free-info-text">
+                    Bienvenido a <strong>DahliaVersa</strong>, una plataforma cívica inteligente diseñada para optimizar el reporte y seguimiento de fugas de agua y problemas en la infraestructura hidráulica municipal. Nuestro objetivo es conectar de forma rápida y transparente a los ciudadanos con las autoridades de atención pública.
+                </div>
+                <div class="free-info-text">
+                    Fija tu ubicación GPS y adjunta tus documentos de validación oficial en el panel derecho para garantizar la autenticidad de cada folio emitido. ¡Juntos cuidamos el agua en <strong>DahliaVersa</strong>!
+                </div>
+                <div class="section-divider"></div>
+                
+                <div style="display: flex; justify-content: flex-end; margin-top: 5px; width: 100%;">
+                    <button type="submit" class="btn-enviar">Enviar Reporte</button>
+                </div>
+            </div>
+
+            <div class="carousel-outer-wrapper">
+                <div class="glass-card carousel-container">
+                    <div class="carousel-track-container">
+                        <div class="carousel-track" id="carouselTrack">
+
+                            <div class="carousel-slide">
+                                <h3>Ubicación Exacta</h3>
+                                <div class="upload-box" id="gpsBox">
+                                    <span style="font-size: 1.3rem;">📍</span>
+                                    <span id="gpsText">Haz clic para fijar ubicación GPS</span>
+                                    <input type="hidden" name="lat_long" id="latLongInput" value="">
+                                </div>
+                            </div>
+
+                            <div class="carousel-slide">
+                                <h3>INE de Frente</h3>
+                                <label class="upload-box">
+                                    <span style="font-size: 1.3rem;">🪪</span>
+                                    <span class="file-label-text">Sube o fotografía el frente de tu INE</span>
+                                    <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden" style="display: none;">
+                                </label>
+                            </div>
+
+                            <div class="carousel-slide">
+                                <h3>INE Reverso</h3>
+                                <label class="upload-box">
+                                    <span style="font-size: 1.3rem;">🔄</span>
+                                    <span class="file-label-text">Sube o fotografía el reverso de tu INE</span>
+                                    <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden" style="display: none;">
+                                </label>
+                            </div>
+
+                            <div class="carousel-slide">
+                                <h3>Reconocimiento Facial</h3>
+                                <label class="upload-box">
+                                    <span style="font-size: 1.3rem;">📸</span>
+                                    <span class="file-label-text">Tómate una selfie para validación</span>
+                                    <input type="file" name="selfie" accept="image/*" class="file-input-hidden" style="display: none;">
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button type="button" class="carousel-btn" id="prevBtn">Anterior</button>
+                        <div class="carousel-indicators" id="carouselIndicators">
+                            <span class="indicator active"></span>
+                            <span class="indicator"></span>
+                            <span class="indicator"></span>
+                            <span class="indicator"></span>
+                        </div>
+                        <button type="button" class="carousel-btn" id="nextBtn">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        const track = document.getElementById('carouselTrack');
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById('nextBtn');
+        const prevButton = document.getElementById('prevBtn');
+        const indicators = document.querySelectorAll('.indicator');
+
+        let currentIndex = 0;
+
+        function updateCarousel(index) {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === index);
+            });
+        }
+
+        nextButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel(currentIndex);
+        });
+
+        prevButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel(currentIndex);
+        });
+
+        const gpsBox = document.getElementById('gpsBox');
+        const gpsText = document.getElementById('gpsText');
+        const latLongInput = document.getElementById('latLongInput');
+
+        gpsBox.addEventListener('click', () => {
+            if (navigator.geolocation) {
+                gpsText.textContent = "Obteniendo ubicación GPS...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        latLongInput.value = `${lat}, ${lon}`;
+                        gpsText.textContent = `¡Ubicación fijada! (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
+                        gpsBox.style.borderColor = 'rgba(255, 255, 255, 0.9)';
+                    },
+                    () => {
+                        gpsText.textContent = "Error al obtener GPS. Intenta de nuevo.";
+                        alert("No se pudo obtener la geolocalización. Verifica los permisos de tu navegador.");
+                    }
+                );
+            } else {
+                alert("La geolocalización no es compatible con este navegador.");
+            }
+        });
+
+        const fileInputs = document.querySelectorAll('.file-input-hidden');
+        fileInputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const fileName = e.target.files[0] ? e.target.files[0].name : "Archivo seleccionado";
+                const labelText = input.closest('.upload-box').querySelector('.file-label-text');
+                labelText.textContent = `Archivo: ${fileName}`;
+                input.closest('.upload-box').style.borderColor = 'rgba(255, 255, 255, 0.9)';
+            });
+        });
+
+        const homeLinkBtn = document.getElementById('homeLinkBtn');
+        const waterLeakLoader = document.getElementById('waterLeakLoader');
+
+        homeLinkBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            waterLeakLoader.classList.add('active');
+            setTimeout(() => {
+                window.location.href = homeLinkBtn.getAttribute('href');
+            }, 2000);
+        });
+
+        const logoTrigger = document.getElementById('logoTrigger');
+        const logoIcon = document.getElementById('logoIcon');
+        const roadSceneContainer = document.getElementById('roadSceneContainer');
+        const workerContainer = document.getElementById('workerContainer');
+        const dahliaCenter = document.getElementById('dahliaCenter');
+        
+        const innerPetals = document.querySelectorAll('.dahlia-petal.inner');
+        const midPetals = document.querySelectorAll('.dahlia-petal.mid');
+        const outerPetals = document.querySelectorAll('.dahlia-petal.outer');
+        const neonOutlines = document.querySelectorAll('.dahlia-neon-outline');
+        const allPetals = document.querySelectorAll('.dahlia-petal, .dahlia-neon-outline');
+
+        let holdTimer = null;
+        let isDispersed = false;
+        let isAnimatingWorker = false;
+
+        function startHolding(e) {
+            if (isDispersed || isAnimatingWorker) return;
+            e.preventDefault();
+            logoIcon.classList.add('fast-spin');
+
+            holdTimer = setTimeout(() => {
+                triggerDispersal();
+            }, 600);
+        }
+
+        function stopHolding() {
+            if (isDispersed || isAnimatingWorker) return;
+            if (holdTimer) clearTimeout(holdTimer);
+            logoIcon.classList.remove('fast-spin');
+        }
+
+        function triggerDispersal() {
+            isDispersed = true;
+            logoIcon.classList.remove('fast-spin');
+            logoIcon.style.animation = 'none';
+
+            allPetals.forEach(petal => {
+                const randomX = (Math.random() - 0.5) * 75;
+                const randomY = (Math.random() - 0.5) * 75 + 30;
+                petal.style.setProperty('--rand-x', `${randomX}px`);
+                petal.style.setProperty('--rand-y', `${randomY}px`);
+                petal.classList.add('dispersing');
+            });
+
+            dahliaCenter.style.opacity = '0';
+            dahliaCenter.style.transform = 'translate(-50%, -50%) scale(0)';
+
+            setTimeout(() => {
+                roadSceneContainer.classList.add('active');
+            }, 250);
+        }
+
+        logoTrigger.addEventListener('mousedown', startHolding);
+        logoTrigger.addEventListener('mouseup', stopHolding);
+        logoTrigger.addEventListener('mouseleave', stopHolding);
+
+        logoTrigger.addEventListener('touchstart', startHolding, { passive: false });
+        logoTrigger.addEventListener('touchend', stopHolding);
+
+        roadSceneContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!isDispersed || isAnimatingWorker) return;
+
+            isAnimatingWorker = true;
+            workerContainer.classList.add('working');
+            roadSceneContainer.classList.add('repairing');
+
+            setTimeout(() => {
+                roadSceneContainer.classList.remove('active', 'repairing');
+            }, 1800);
+
+            setTimeout(() => {
+                workerContainer.classList.remove('working');
+
+                dahliaCenter.style.opacity = '1';
+                dahliaCenter.style.transform = 'translate(-50%, -50%) scale(1)';
+
+                setTimeout(() => {
+                    innerPetals.forEach(p => p.classList.remove('dispersing'));
+                }, 200);
+
+                setTimeout(() => {
+                    midPetals.forEach(p => p.classList.remove('dispersing'));
+                }, 450);
+
+                setTimeout(() => {
+                    outerPetals.forEach(p => p.classList.remove('dispersing'));
+                    neonOutlines.forEach(n => n.classList.remove('dispersing'));
+                }, 700);
+
+                setTimeout(() => {
+                    logoIcon.style.animation = 'spin 20s linear infinite';
+                    isDispersed = false;
+                    isAnimatingWorker = false;
+                }, 1400);
+
+            }, 2200);
+        });
+        const mainReportForm = document.getElementById('mainReportForm');
+
+        mainReportForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(mainReportForm);
+            
+            // CAMBIAR SEGÚN LA PÁGINA: 'baches', 'fuga-agua' o 'poste-luz'
+            formData.append('tipo_reporte', 'fuga-agua'); 
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enviar-reporte', {
+                    method: 'POST',
+                    body: formData
+                });
+                const res = await response.json();
+
+                if (response.ok) {
+                    // Ventana emergente flotante con el Nombre y el ID (Folio) asignado por la BD
+                    alert(`🎉 ¡Reporte Registrado Exitosamente!\n\nCiudadano: ${res.nombre}\nID de Seguimiento (Folio): #${res.folio}\nEstatus de Validación IA: ${res.status}\n\nNota: Guarda tu ID de Folio para consultar el estatus en tiempo real.`);
+                    window.location.href = 'index.html';
+                } else {
+                    alert(`⚠️ Error al procesar el reporte: ${res.message}`);
+                }
+            } catch (err) {
+                console.error("Error de conexión con el backend:", err);
+                alert("No se pudo conectar con el servidor de validación inteligente.");
+            }
+        });
+    </script>
+</body>
+
+</html>

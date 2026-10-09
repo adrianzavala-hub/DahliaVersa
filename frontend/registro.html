@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - DahliaVersa</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        body {
+            /* Imagen de fondo nueva con los tonos magentas exactos */
+            background-image: url('/frontend/img/fondo-rapido.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+        }
+
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .page-main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            z-index: 5;
+        }
+
+        .page-register-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            padding: 35px 40px 30px 40px;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 580px;
+            text-align: left;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.05);
+            position: relative;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            max-height: 82vh;
+            backdrop-filter: blur(12px);
+        }
+
+        /* Título con efecto de corte superior idéntico al de tus modales */
+        .title-register {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            padding: 6px 28px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .title-register h2 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+            margin: 0;
+        }
+
+        .btn-back-home {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .btn-back-home:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Campos del formulario y scroll optimizado */
+        .register-body-scroll {
+            overflow-y: auto;
+            max-height: 62vh;
+            padding-top: 10px;
+            padding-right: 8px;
+            margin-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.05);
+        }
+
+        .register-body-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .register-body-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .register-body-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+        .form-group label { font-size: 0.85rem; margin-bottom: 6px; color: #e5e7eb; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 14px;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+        }
+        .form-group select option { background: #1a1a1a; color: #ffffff; }
+        .form-group-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .location-box { display: flex; gap: 8px; }
+        .location-box input { flex: 1; }
+        .btn-location {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            padding: 0 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .btn-location:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .btn-submit-register {
+            width: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
+            color: #000000;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-submit-register:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="hero-container">
+            <header class="navbar">
+                <div class="logo" id="logoTrigger">
+                    <div class="logo-icon">
+                        <span class="dahlia-neon-outline" style="--angle: 0deg;"></span>
+                        <span class="dahlia-neon-outline" style="--angle: 45deg;"></span>
+                        <span class="dahlia-neon-outline" style="--angle: 90deg;"></span>
+                        <span class="dahlia-neon-outline" style="--angle: 135deg;"></span>
+                        <span class="dahlia-neon-outline" style="--angle: 180deg;"></span>
+                        <span class="dahlia-neon-outline" style="--angle: 225deg;"></span>
+                        <span class="dahlia-neon-outline" style="--angle: 270deg;"></span>
+                        <span class="dahlia-neon-outline" style="--angle: 315deg;"></span>
+                        <span class="dahlia-petal outer" style="--angle: 0deg; --disp-x: 0px; --disp-y: -180px; --rot: 180deg;"></span>
+                        <span class="dahlia-petal outer" style="--angle: 45deg; --disp-x: 130px; --disp-y: -130px; --rot: 225deg;"></span>
+                        <span class="dahlia-petal outer" style="--angle: 90deg; --disp-x: 180px; --disp-y: 0px; --rot: 270deg;"></span>
+                        <span class="dahlia-petal outer" style="--angle: 135deg; --disp-x: 130px; --disp-y: 130px; --rot: 315deg;"></span>
+                        <span class="dahlia-petal outer" style="--angle: 180deg; --disp-x: 0px; --disp-y: 180px; --rot: 360deg;"></span>
+                        <span class="dahlia-petal outer" style="--angle: 225deg; --disp-x: -130px; --disp-y: 130px; --rot: 405deg;"></span>
+                        <span class="dahlia-petal outer" style="--angle: 270deg; --disp-x: -180px; --disp-y: 0px; --rot: 450deg;"></span>
+                        <span class="dahlia-petal outer" style="--angle: 315deg; --disp-x: -130px; --disp-y: -130px; --rot: 495deg;"></span>
+                        <span class="dahlia-petal mid" style="--angle: 22.5deg; --disp-x: 60px; --disp-y: -150px; --rot: 202deg;"></span>
+                        <span class="dahlia-petal mid" style="--angle: 67.5deg; --disp-x: 150px; --disp-y: -60px; --rot: 247deg;"></span>
+                        <span class="dahlia-petal mid" style="--angle: 112.5deg; --disp-x: 150px; --disp-y: 60px; --rot: 292deg;"></span>
+                        <span class="dahlia-petal mid" style="--angle: 157.5deg; --disp-x: 60px; --disp-y: 150px; --rot: 337deg;"></span>
+                        <span class="dahlia-petal mid" style="--angle: 202.5deg; --disp-x: -60px; --disp-y: 150px; --rot: 382deg;"></span>
+                        <span class="dahlia-petal mid" style="--angle: 247.5deg; --disp-x: -150px; --disp-y: 60px; --rot: 427deg;"></span>
+                        <span class="dahlia-petal mid" style="--angle: 292.5deg; --disp-x: -150px; --disp-y: -60px; --rot: 472deg;"></span>
+                        <span class="dahlia-petal mid" style="--angle: 337.5deg; --disp-x: -60px; --disp-y: -150px; --rot: 517deg;"></span>
+                        <span class="dahlia-petal inner" style="--angle: 0deg; --disp-x: 0px; --disp-y: -110px; --rot: 180deg;"></span>
+                        <span class="dahlia-petal inner" style="--angle: 45deg; --disp-x: 80px; --disp-y: -80px; --rot: 225deg;"></span>
+                        <span class="dahlia-petal inner" style="--angle: 90deg; --disp-x: 110px; --disp-y: 0px; --rot: 270deg;"></span>
+                        <span class="dahlia-petal inner" style="--angle: 135deg; --disp-x: 80px; --disp-y: 80px; --rot: 315deg;"></span>
+                        <span class="dahlia-petal inner" style="--angle: 180deg; --disp-x: 0px; --disp-y: 110px; --rot: 360deg;"></span>
+                        <span class="dahlia-petal inner" style="--angle: 225deg; --disp-x: -80px; --disp-y: 80px; --rot: 405deg;"></span>
+                        <span class="dahlia-petal inner" style="--angle: 270deg; --disp-x: -110px; --disp-y: 0px; --rot: 450deg;"></span>
+                        <span class="dahlia-petal inner" style="--angle: 315deg; --disp-x: -80px; --disp-y: -80px; --rot: 495deg;"></span>
+                        <span class="dahlia-center"></span>
+                    </div>
+                    DahliaVersa
+                </div>
+                <nav class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="#">Seguimiento</a></li>
+                        <li><a href="mailto:olguinzavalaadrian099@gmail.com">Contactanos</a></li>
+                        <li><a href="#">Mis reportes</a></li>
+                    </ul>
+                </nav>
+                <a href="index.html" class="btn-nav transition-link" style="text-decoration: none; display: inline-block; text-align: center;">Inicio</a>
+            </header>
+
+            <!-- Contenido principal con la tarjeta del formulario -->
+            <main class="page-main-content">
+                <div class="page-register-card">
+                    <div class="title-register">
+                        <h2>Registro</h2>
+                    </div>
+                    <a href="index.html" class="btn-back-home transition-link" title="Volver al inicio">&times;</a>
+                    
+                    <div class="register-body-scroll">
+                        <form id="quickReportForm">
+                            <div class="form-group">
+                                <label for="regName">Nombre Completo</label>
+                                <input type="text" id="regName" placeholder="Ingresa tu nombre completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regAge">Edad</label>
+                                <input type="number" id="regAge" placeholder="Tu edad" min="1" max="120" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regPhone">Número de Teléfono</label>
+                                <input type="tel" id="regPhone" placeholder="10 dígitos" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regProblem">Tipo de Problema</label>
+                                <select id="regProblem" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="bache">Bache</option>
+                                    <option value="poste">Poste de luz</option>
+                                    <option value="fuga">Fuga de agua</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="regDate">Fecha Automática</label>
+                                <input type="text" id="regDate" readonly>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="regIneFront">Foto INE (Frente)</label>
+                                    <input type="file" id="regIneFront" accept="image/*" capture="environment" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="regIneBack">Foto INE (Atrás)</label>
+                                    <input type="file" id="regIneBack" accept="image/*" capture="environment" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="regFace">Reconocimiento Facial (Selfie)</label>
+                                <input type="file" id="regFace" accept="image/*" capture="user" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ubicación (GPS o manual)</label>
+                                <div class="location-box">
+                                    <input type="text" id="regLocation" placeholder="Obteniendo ubicación..." required>
+                                    <button type="button" id="btnGetLocation" class="btn-location">Actualizar</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="regReferences">Referencias</label>
+                                <textarea id="regReferences" placeholder="Ej. Entre qué calles está, color de fachada..." rows="2" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit-register">Enviar Registro</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Script para loader, fecha y geolocalización -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loader = document.getElementById("page-loader");
+
+            // Ocultar el loader al cargar la página actual
+            setTimeout(() => {
+                if(loader) loader.classList.add("fade-out");
+            }, 200);
+
+            // Activar el loader al hacer clic en enlaces de retorno o navegación hacia atrás
+            const transitionLinks = document.querySelectorAll(".transition-link");
+            transitionLinks.forEach(link => {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    const targetUrl = this.getAttribute("href");
+                    if(loader) loader.classList.remove("fade-out");
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 350); // Coincide con la transición de salida
+                });
+            });
+
+            // Automatizar fecha y geolocalización
+            const regDateInput = document.getElementById("regDate");
+            const regLocationInput = document.getElementById("regLocation");
+            const btnGetLocation = document.getElementById("btnGetLocation");
+            
+            const now = new Date();
+            regDateInput.value = now.toLocaleString();
+
+            if (navigator.geolocation) {
+                regLocationInput.value = "Obteniendo ubicación GPS...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        regLocationInput.value = `Lat: ${position.coords.latitude.toFixed(5)}, Lon: ${position.coords.longitude.toFixed(5)}`;
+                    },
+                    () => {
+                        regLocationInput.value = "";
+                        regLocationInput.placeholder = "Escribe tu ubicación manualmente";
+                    }
+                );
+            }
+
+            if (btnGetLocation) {
+                btnGetLocation.addEventListener("click", () => {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition((pos) => {
+                            regLocationInput.value = `Lat: ${pos.coords.latitude.toFixed(5)}, Lon: ${pos.coords.longitude.toFixed(5)}`;
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
