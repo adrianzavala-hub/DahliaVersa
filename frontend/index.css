@@ -1874,16 +1874,16 @@ body.modal-active .logo-icon .dahlia-center {
   opacity: 1;
 }
 
-/* Escena interior del loader */
+/* Escena interior del loader con más espacio y proporción */
 .loader-pothole-scene {
   position: relative;
-  width: 140px;
+  width: 200px;
   height: 110px;
   margin-bottom: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .cute-worker-scene {
@@ -1895,54 +1895,99 @@ body.modal-active .logo-icon .dahlia-center {
 /* Suelo y hoyo de excavación */
 .ground-base {
   position: absolute;
-  bottom: 20px;
-  left: 10px;
-  width: 120px;
-  height: 5px;
+  bottom: 18px;
+  left: 15px;
+  width: 170px;
+  height: 4px;
   background: rgba(226, 169, 179, 0.4);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .pothole-dig {
   position: absolute;
-  bottom: 16px;
-  left: 70px;
+  bottom: 14px;
+  left: 105px;
   width: 35px;
-  height: 10px;
+  height: 9px;
   background: #0f172a;
   border-radius: 50%;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Personaje unificado */
+/* --- Conos de señalamiento (Azul y Naranja) --- */
+.safety-cone {
+  position: absolute;
+  bottom: 20px;
+  width: 12px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cone-left {
+  left: 28px;
+}
+
+.cone-right {
+  right: 25px;
+}
+
+.cone-tip {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 12px solid #f97316; /* Naranja brillante */
+  filter: drop-shadow(0 0 4px rgba(249, 115, 22, 0.6));
+}
+
+.cone-stripe {
+  position: absolute;
+  top: 6px;
+  width: 10px;
+  height: 3px;
+  background: #38bdf8; /* Azul luminoso */
+  border-radius: 1px;
+  box-shadow: 0 0 4px rgba(56, 189, 248, 0.8);
+}
+
+.cone-base {
+  width: 14px;
+  height: 3px;
+  background: #f97316;
+  border-radius: 2px;
+}
+
+/* --- Trabajador estilizado y mejor proporcionado --- */
 .worker-character-art {
   position: absolute;
-  bottom: 22px;
-  left: 35px;
-  width: 50px;
-  height: 65px;
+  bottom: 20px;
+  left: 65px;
+  width: 45px;
+  height: 70px;
   transform-origin: bottom center;
   animation: workerBodyMotion 1.5s ease-in-out infinite;
 }
 
-/* Grupo de cabeza con casco, cuello y rostro */
+/* Cabeza con proporciones anatómicas correctas */
 .worker-head-group {
   position: absolute;
   top: 0;
-  left: 14px;
+  left: 12px;
   width: 22px;
-  height: 25px;
+  height: 30px;
 }
 
 .worker-helmet-hard {
   position: absolute;
   top: 0;
-  left: -2px;
-  width: 26px;
-  height: 12px;
+  left: -3px;
+  width: 28px;
+  height: 13px;
   background: #ffffff;
-  border-radius: 13px 13px 3px 3px;
-  box-shadow: 0 0 10px #ffffff, inset -2px -2px 3px rgba(125, 211, 252, 0.5);
+  border-radius: 14px 14px 4px 4px;
+  box-shadow: 0 0 10px #ffffff, inset -2px -2px 3px rgba(125, 211, 252, 0.6);
 }
 
 .worker-helmet-hard::after {
@@ -1950,7 +1995,7 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   bottom: 1px;
   left: -3px;
-  width: 32px;
+  width: 34px;
   height: 3px;
   background: #ffffff;
   border-radius: 2px;
@@ -1958,18 +2003,18 @@ body.modal-active .logo-icon .dahlia-center {
 
 .worker-neck {
   position: absolute;
-  top: 11px;
-  left: 7px;
+  top: 12px;
+  left: 8px;
   width: 6px;
-  height: 6px;
-  background: #ffdbac;
+  height: 7px;
+  background: #ffdbac; /* Tono de piel natural */
   border-radius: 1px;
 }
 
 .worker-face {
   position: absolute;
-  top: 15px;
-  left: 5px;
+  top: 16px;
+  left: 6px;
   width: 10px;
   height: 5px;
   background: #ffdbac;
@@ -1979,31 +2024,31 @@ body.modal-active .logo-icon .dahlia-center {
 /* Torso con los tonos azules originales de la plataforma */
 .worker-body-suit {
   position: absolute;
-  top: 18px;
-  left: 8px;
+  top: 20px;
+  left: 7px;
   width: 30px;
-  height: 28px;
+  height: 32px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 8px 8px 4px 4px;
-  box-shadow: 0 0 12px rgba(125, 211, 252, 0.7);
+  border-radius: 10px 10px 6px 6px;
+  box-shadow: 0 0 14px rgba(125, 211, 252, 0.8);
 }
 
-/* Brazos y pala integrados */
+/* Brazos y pala con movimiento fluido */
 .worker-arms-holding {
   position: absolute;
-  top: 6px;
-  left: -2px;
-  width: 42px;
-  height: 12px;
-  transform-origin: 10px center;
+  top: 8px;
+  left: -5px;
+  width: 44px;
+  height: 14px;
+  transform-origin: 12px center;
   animation: shovelDiggingMotion 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .worker-shovel-tool {
   position: absolute;
-  top: 2px;
+  top: 3px;
   right: 0;
-  width: 36px;
+  width: 38px;
   height: 5px;
   background: #ffffff;
   border-radius: 2px;
@@ -2013,19 +2058,19 @@ body.modal-active .logo-icon .dahlia-center {
 .shovel-blade {
   position: absolute;
   top: -4px;
-  right: -8px;
-  width: 13px;
-  height: 13px;
+  right: -9px;
+  width: 14px;
+  height: 14px;
   background: #ffffff;
   border-radius: 2px 50% 50% 2px;
-  box-shadow: 0 0 8px #7dd3fc;
+  box-shadow: 0 0 10px #7dd3fc;
 }
 
-/* Partículas de tierra lanzadas */
+/* Partículas de tierra lanzadas al cavar */
 .dirt-splat-spray {
   position: absolute;
   bottom: 35px;
-  left: 80px;
+  left: 110px;
   width: 25px;
   height: 25px;
   pointer-events: none;
@@ -2045,10 +2090,10 @@ body.modal-active .logo-icon .dahlia-center {
 .c2 { animation: dirtSpray2 1.5s ease-out infinite 0.25s; }
 .c3 { animation: dirtSpray3 1.5s ease-out infinite 0.35s; }
 
-/* Animaciones fluidas */
+/* Animaciones sincronizadas */
 @keyframes workerBodyMotion {
   0%, 100% { transform: rotate(0deg) translateY(0); }
-  30% { transform: rotate(-4deg) translateY(2px); }
+  30% { transform: rotate(-5deg) translateY(2px); }
   70% { transform: rotate(2deg) translateY(-1px); }
 }
 
@@ -2062,17 +2107,17 @@ body.modal-active .logo-icon .dahlia-center {
 @keyframes dirtSpray1 {
   0%, 35% { transform: translate(0, 0) scale(0.4); opacity: 0; }
   42% { opacity: 1; }
-  100% { transform: translate(28px, -32px) scale(1.2); opacity: 0; }
+  100% { transform: translate(25px, -32px) scale(1.2); opacity: 0; }
 }
 
 @keyframes dirtSpray2 {
   0%, 38% { transform: translate(0, 0) scale(0.3); opacity: 0; }
   45% { opacity: 1; }
-  100% { transform: translate(38px, -22px) scale(0.9); opacity: 0; }
+  100% { transform: translate(35px, -22px) scale(0.9); opacity: 0; }
 }
 
 @keyframes dirtSpray3 {
   0%, 40% { transform: translate(0, 0) scale(0.5); opacity: 0; }
   48% { opacity: 1; }
-  100% { transform: translate(18px, -38px) scale(1.1); opacity: 0; }
+  100% { transform: translate(15px, -38px) scale(1.1); opacity: 0; }
 }
