@@ -15,6 +15,13 @@ DATABASE_URL = os.environ.get("DATABASE_URL")
 def obtener_conexion_db():
     return psycopg2.connect(DATABASE_URL)
 
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "status": "online",
+        "message": "Bienvenido a la API de DahliaVersa - Servidor de Validación Inteligente Activo"
+    })
+
 def validar_imagen_con_gemini(image_path, tipo_reporte):
     try:
         descripciones_esperadas = {
