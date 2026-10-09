@@ -1873,11 +1873,10 @@ body.modal-active .logo-icon .dahlia-center {
   transform: translateY(0) scale(1);
   opacity: 1;
 }
-
 .loader-pothole-scene {
   position: relative;
-  width: 200px;
-  height: 130px;
+  width: 220px;
+  height: 140px;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -1891,106 +1890,133 @@ body.modal-active .logo-icon .dahlia-center {
   height: 100%;
 }
 
+/* Suelo y bache con diseño avanzado */
 .ground-base {
   position: absolute;
   bottom: 16px;
-  left: 15px;
-  width: 170px;
+  left: 10px;
+  width: 200px;
   height: 4px;
-  background: rgba(226, 169, 179, 0.4);
+  background: linear-gradient(90deg, rgba(186, 230, 253, 0.1), rgba(186, 230, 253, 0.5), rgba(186, 230, 253, 0.1));
   border-radius: 2px;
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.3);
 }
 
 .pothole-dig {
   position: absolute;
-  bottom: 12px;
-  left: 105px;
-  width: 35px;
-  height: 9px;
-  background: #0f172a;
+  bottom: 11px;
+  left: 115px;
+  width: 42px;
+  height: 11px;
+  background: #090d16;
   border-radius: 50%;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.9), 0 0 6px rgba(56, 189, 248, 0.2);
+  overflow: hidden;
 }
 
-/* Conos */
+.pothole-depth {
+  position: absolute;
+  bottom: 1px;
+  left: 4px;
+  width: 34px;
+  height: 6px;
+  background: #020617;
+  border-radius: 50%;
+}
+
+/* Conos de señalamiento estilizados con resplandor */
 .safety-cone {
   position: absolute;
   bottom: 18px;
-  width: 12px;
-  height: 18px;
+  width: 14px;
+  height: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.cone-left { left: 28px; }
-.cone-right { right: 25px; }
+.cone-left { left: 24px; }
+.cone-right { right: 20px; }
 
 .cone-tip {
   width: 0;
   height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 12px solid #f97316;
-  filter: drop-shadow(0 0 4px rgba(249, 115, 22, 0.6));
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 14px solid #f97316;
+  filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.8));
 }
 
 .cone-stripe {
   position: absolute;
-  top: 6px;
-  width: 10px;
+  top: 7px;
+  width: 11px;
   height: 3px;
   background: #38bdf8;
   border-radius: 1px;
-  box-shadow: 0 0 4px rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.9);
 }
 
 .cone-base {
-  width: 14px;
+  width: 16px;
   height: 3px;
   background: #f97316;
   border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Contenedor general del trabajador con proporciones balanceadas */
+/* Contenedor del trabajador con proporciones estilizadas */
 .worker-rigged {
   position: absolute;
   bottom: 16px;
-  left: 82px;
-  width: 32px;
-  height: 74px;
+  left: 88px;
+  width: 34px;
+  height: 78px;
+  transform-origin: bottom center;
+  animation: workerIdleHover 3s ease-in-out infinite;
 }
 
-/* Piernas independientes bien proporcionadas */
+/* Piernas con degradado sutil y brillo */
 .worker-leg {
   position: absolute;
   bottom: 0;
   width: 7px;
-  height: 24px;
-  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
+  height: 26px;
+  background: linear-gradient(180deg, #bae6fd 0%, #7dd3fc 100%);
   border-radius: 3px;
-  box-shadow: 0 0 6px rgba(125, 211, 252, 0.5);
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.6);
 }
 .left-leg { left: 6px; }
 .right-leg { right: 6px; }
 
-/* Torso estilizado y con ancho natural */
+/* Torso estilizado con reflejo de chaleco */
 .worker-torso {
   position: absolute;
-  bottom: 22px;
+  bottom: 24px;
   left: 4px;
-  width: 24px;
-  height: 30px;
-  background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(125, 211, 252, 0.7);
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #bae6fd 0%, #38bdf8 100%);
+  border-radius: 9px;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.8), inset 0 2px 4px rgba(255, 255, 252, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Cabeza con separación elegante y casco */
+.vest-stripe {
+  width: 18px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+  box-shadow: 0 0 6px #ffffff;
+}
+
+/* Cabeza independiente con casco gráfico complejo */
 .worker-head {
   position: absolute;
-  bottom: 50px;
-  left: 6px;
+  bottom: 53px;
+  left: 7px;
   width: 20px;
   height: 20px;
 }
@@ -2003,72 +2029,73 @@ body.modal-active .logo-icon .dahlia-center {
   height: 16px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(125, 211, 252, 0.8);
+  box-shadow: 0 0 10px rgba(125, 211, 252, 0.9);
 }
 
 .worker-helmet-hard {
   position: absolute;
-  top: -2px;
-  left: -3px;
-  width: 26px;
-  height: 12px;
-  background: #ffffff;
-  border-radius: 13px 13px 3px 3px;
-  box-shadow: 0 0 10px #ffffff, inset -2px -2px 3px rgba(125, 211, 252, 0.5);
+  top: -3px;
+  left: -4px;
+  width: 28px;
+  height: 13px;
+  background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+  border-radius: 14px 14px 4px 4px;
+  box-shadow: 0 0 12px #ffffff, inset -2px -2px 4px rgba(56, 189, 248, 0.5);
+  z-index: 5;
 }
 
-.worker-helmet-hard::after {
-  content: '';
+.helmet-visor {
   position: absolute;
   bottom: 1px;
-  left: -3px;
-  width: 32px;
+  left: -4px;
+  width: 36px;
   height: 3px;
   background: #ffffff;
   border-radius: 2px;
+  box-shadow: 0 0 8px #bae6fd;
 }
 
-/* Brazos y pala con movimiento fluido conectados al torso */
+/* Brazos y pala con animación de alta fluidez */
 .worker-arms-shovel {
   position: absolute;
-  bottom: 32px;
+  bottom: 34px;
   left: -6px;
-  width: 42px;
-  height: 14px;
-  transform-origin: 16px center;
-  animation: shovelDiggingMotion 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  z-index: 4;
+  width: 44px;
+  height: 15px;
+  transform-origin: 17px center;
+  animation: shovelDiggingMotion 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  z-index: 6;
 }
 
 .worker-shovel-tool {
   position: absolute;
   top: 3px;
   right: 0;
-  width: 38px;
+  width: 40px;
   height: 5px;
-  background: #ffffff;
+  background: linear-gradient(90deg, #38bdf8, #ffffff);
   border-radius: 2px;
-  box-shadow: 0 0 8px #bae6fd;
+  box-shadow: 0 0 10px #bae6fd;
 }
 
 .shovel-blade {
   position: absolute;
-  top: -4px;
-  right: -9px;
-  width: 14px;
-  height: 14px;
-  background: #ffffff;
+  top: -5px;
+  right: -10px;
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(135deg, #ffffff, #7dd3fc);
   border-radius: 2px 50% 50% 2px;
-  box-shadow: 0 0 10px #7dd3fc;
+  box-shadow: 0 0 12px #38bdf8;
 }
 
-/* Partículas de tierra */
+/* Partículas de tierra avanzadas con estelas de luz */
 .dirt-splat-spray {
   position: absolute;
   bottom: 35px;
-  left: 115px;
-  width: 25px;
-  height: 25px;
+  left: 125px;
+  width: 30px;
+  height: 30px;
   pointer-events: none;
 }
 
@@ -2079,35 +2106,47 @@ body.modal-active .logo-icon .dahlia-center {
   background: #bae6fd;
   border-radius: 50%;
   opacity: 0;
-  box-shadow: 0 0 6px #7dd3fc;
+  box-shadow: 0 0 8px #38bdf8;
 }
 
-.c1 { animation: dirtSpray1 1.5s ease-out infinite 0.15s; }
-.c2 { animation: dirtSpray2 1.5s ease-out infinite 0.25s; }
-.c3 { animation: dirtSpray3 1.5s ease-out infinite 0.35s; }
+.c1 { animation: dirtSpray1 1.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite 0.1s; }
+.c2 { animation: dirtSpray2 1.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite 0.2s; }
+.c3 { animation: dirtSpray3 1.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite 0.3s; }
+.c4 { animation: dirtSpray4 1.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite 0.4s; }
 
-/* Animaciones */
+/* Animaciones fluidas optimizadas */
+@keyframes workerIdleHover {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
 @keyframes shovelDiggingMotion {
   0%, 100% { transform: rotate(0deg) translateX(0); }
-  20% { transform: rotate(18deg) translateX(6px); }
-  45% { transform: rotate(-42deg) translateX(-4px) translateY(5px); }
-  60% { transform: rotate(25deg) translateX(2px) translateY(-3px); }
+  22% { transform: rotate(15deg) translateX(5px); }
+  45% { transform: rotate(-45deg) translateX(-5px) translateY(6px); }
+  65% { transform: rotate(22deg) translateX(2px) translateY(-3px); }
 }
 
 @keyframes dirtSpray1 {
-  0%, 35% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  0%, 35% { transform: translate(0, 0) scale(0.3); opacity: 0; }
   42% { opacity: 1; }
-  100% { transform: translate(25px, -32px) scale(1.2); opacity: 0; }
+  100% { transform: translate(28px, -36px) scale(1.3); opacity: 0; }
 }
 
 @keyframes dirtSpray2 {
-  0%, 38% { transform: translate(0, 0) scale(0.3); opacity: 0; }
+  0%, 38% { transform: translate(0, 0) scale(0.2); opacity: 0; }
   45% { opacity: 1; }
-  100% { transform: translate(35px, -22px) scale(0.9); opacity: 0; }
+  100% { transform: translate(38px, -24px) scale(1.0); opacity: 0; }
 }
 
 @keyframes dirtSpray3 {
-  0%, 40% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  0%, 40% { transform: translate(0, 0) scale(0.4); opacity: 0; }
   48% { opacity: 1; }
-  100% { transform: translate(15px, -38px) scale(1.1); opacity: 0; }
+  100% { transform: translate(18px, -42px) scale(1.2); opacity: 0; }
+}
+
+@keyframes dirtSpray4 {
+  0%, 42% { transform: translate(0, 0) scale(0.3); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translate(32px, -30px) scale(0.9); opacity: 0; }
 }
