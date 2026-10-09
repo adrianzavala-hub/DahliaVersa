@@ -39,7 +39,7 @@ def validar_imagen_con_gemini(image_path, tipo_reporte):
             '{"valido": true o false, "razon": "Explicación breve y clara del motivo"}'
         )
 
-        response = client.models.generate_content(model='gemini-2.5-flash', contents=[imagen, prompt])
+        response = client.models.generate_content(model='gemini-3.8-flash', contents=[imagen, prompt])
         texto_respuesta = response.text.strip().replace("```json", "").replace("```", "").strip()
         resultado_ia = json.loads(texto_respuesta)
         return resultado_ia.get("valido", False), resultado_ia.get("razon", "Análisis completado.")
