@@ -1955,51 +1955,51 @@ body.modal-active .logo-icon .dahlia-center {
 .worker-rigged {
   position: absolute;
   bottom: 16px;
-  left: 88px;
-  width: 28px;
+  left: 90px;
+  width: 24px;
   height: 84px;
 }
 
-/* Piernas independientes */
+/* Piernas juntas y centradas */
 .worker-leg {
   position: absolute;
   bottom: 0;
-  width: 6px;
+  width: 5px;
   height: 26px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0 0 6px rgba(125, 211, 252, 0.6);
 }
-.left-leg { left: 3px; }
-.right-leg { right: 3px; }
+.left-leg { left: 5px; }
+.right-leg { right: 5px; }
 
-/* Torso más largo y estilizado */
+/* Torso largo y delgado (no grueso) */
 .worker-torso {
   position: absolute;
   bottom: 24px;
-  left: 2px;
-  width: 24px;
+  left: 4px;
+  width: 16px;
   height: 32px;
   background: linear-gradient(135deg, #bae6fd, #7dd3fc);
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(125, 211, 252, 0.7);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(125, 211, 252, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .vest-stripe {
-  width: 16px;
+  width: 10px;
   height: 3px;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 2px;
 }
 
-/* Cabeza con casco de ancho reducido y proporcionado */
+/* Cabeza con casco proporcionado y compacto */
 .worker-head {
   position: absolute;
   bottom: 58px;
-  left: 4px;
+  left: 2px;
   width: 20px;
   height: 20px;
 }
@@ -2042,10 +2042,10 @@ body.modal-active .logo-icon .dahlia-center {
 .worker-arms-shovel {
   position: absolute;
   bottom: 38px;
-  left: -8px;
+  left: -10px;
   width: 42px;
   height: 14px;
-  transform-origin: 16px center;
+  transform-origin: 18px center;
   animation: shovelDiggingMotion 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   z-index: 6;
 }
