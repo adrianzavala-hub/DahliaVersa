@@ -4,9 +4,67 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalOverlay = document.getElementById('modalOverlay');
     const btnClose = document.getElementById('btnClose');
 
+    function createGlitchLamp() {
+        if (!modalOverlay) return;
+        const modalCard = modalOverlay.querySelector('.modal-card');
+        if (modalCard) {
+            modalCard.style.position = 'relative';
+            
+            let lamp = modalCard.querySelector('.glitch-lamp');
+            if (!lamp) {
+                lamp = document.createElement('div');
+                lamp.classList.add('glitch-lamp');
+                lamp.innerHTML = `
+                    <div class="street-bracket"></div>
+                    <div class="street-head">
+                        <div class="lamp-bulb"></div>
+                    </div>
+                `;
+                modalCard.appendChild(lamp);
+            }
+
+            let pipeLeak = modalCard.querySelector('.pipe-leak-container');
+            if (!pipeLeak) {
+                pipeLeak = document.createElement('div');
+                pipeLeak.classList.add('pipe-leak-container');
+                pipeLeak.innerHTML = `
+                    <div class="pipe-structure">
+                        <div class="pipe-crack"></div>
+                    </div>
+                    <div class="water-cascade-container">
+                        <span class="water-stream"></span>
+                        <span class="water-stream"></span>
+                        <span class="water-drop-down"></span>
+                        <span class="water-drop-down"></span>
+                    </div>
+                `;
+                modalCard.appendChild(pipeLeak);
+            }
+
+            let carArea = modalCard.querySelector('.car-container');
+            if (!carArea) {
+                carArea = document.createElement('div');
+                carArea.classList.add('car-container');
+                carArea.innerHTML = `
+                    <div class="street-pothole"></div>
+                    <div class="mini-car">
+                        <div class="car-wheel rear"></div>
+                        <div class="car-wheel front"></div>
+                    </div>
+                    <div class="mini-car pink-truck">
+                        <div class="car-wheel rear"></div>
+                        <div class="car-wheel front"></div>
+                    </div>
+                `;
+                modalCard.appendChild(carArea);
+            }
+        }
+    }
+
     if (logoTrigger) {
         logoTrigger.addEventListener('click', () => {
             document.body.classList.add('modal-active');
+            createGlitchLamp();
             if (modalOverlay) modalOverlay.classList.add('active');
         });
     }
@@ -161,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cierre general al hacer clic fuera del contenido de cualquier modal
+    // Cierre al hacer clic fuera de las ventanas modales
     window.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
             modalOverlay.classList.remove('active');
