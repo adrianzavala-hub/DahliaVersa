@@ -473,97 +473,98 @@
         </div>
     </footer>
 <!-- VENTANA MODAL INDEPENDIENTE: REPORTE COMPLETO CON FOTOS E INCIDENCIAS -->
-    <div class="dv-modal-overlay" id="modalLocationReport">
-        <div class="dv-modal-card mr-wide-card">
+<!-- VENTANA MODAL INDEPENDIENTE: MAPA DE APROXIMACIÓN Y REPORTE COMPLETO -->
+<div class="dv-modal-overlay" id="modalLocationReport">
+    <div class="dv-modal-card mr-wide-card">
+        
+        <h2 class="dv-modal-title">Reporte de Infraestructura</h2>
+        <p class="dv-modal-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
+        
+        <div class="dv-modal-scroll">
             
-            <h2 class="dv-modal-title">Reporte de Infraestructura</h2>
-            <p class="dv-modal-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
-            
-            <div class="dv-modal-scroll">
-                
-                <!-- Mapa de aproximación visual -->
-                <div class="dv-map-preview-box">
-                    <div class="dv-map-pin"></div>
-                    <span class="dv-map-label" id="mrMapLabelText">Ubicación aproximada en zona</span>
+            <!-- Mapa de aproximación visual -->
+            <div class="dv-map-preview-box">
+                <div class="dv-map-pin"></div>
+                <span class="dv-map-label" id="mrMapLabelText">Ubicación aproximada en zona</span>
+            </div>
+
+            <form id="mrReportForm" enctype="multipart/form-data">
+                <div class="dv-modal-group">
+                    <label class="dv-modal-label">Nombre Completo</label>
+                    <input type="text" id="mrInputName" name="nombre" placeholder="Ingresa tu nombre completo" class="dv-modal-field" required>
                 </div>
 
-                <form id="mrReportForm" enctype="multipart/form-data">
+                <div class="dv-row-2cols">
                     <div class="dv-modal-group">
-                        <label class="dv-modal-label">Nombre Completo</label>
-                        <input type="text" id="mrInputName" name="nombre" placeholder="Ingresa tu nombre completo" class="dv-modal-field" required>
+                        <label class="dv-modal-label">Edad</label>
+                        <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" class="dv-modal-field" required>
                     </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div class="dv-modal-group">
-                            <label class="dv-modal-label">Edad</label>
-                            <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" class="dv-modal-field" required>
-                        </div>
-                        <div class="dv-modal-group">
-                            <label class="dv-modal-label">Teléfono</label>
-                            <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" class="dv-modal-field" required>
-                        </div>
-                    </div>
-
                     <div class="dv-modal-group">
-                        <label class="dv-modal-label">Tipo de Incidencia (Selecciona las que apliquen)</label>
-                        <div class="dv-checkbox-grid">
-                            <label class="dv-checkbox-label">
-                                <input type="checkbox" name="tipo_reporte" value="fuga-agua" class="dv-checkbox"> Fuga de Agua
-                            </label>
-                            <label class="dv-checkbox-label">
-                                <input type="checkbox" name="tipo_reporte" value="baches" class="dv-checkbox"> Bache
-                            </label>
-                            <label class="dv-checkbox-label" style="grid-column: span 2;">
-                                <input type="checkbox" name="tipo_reporte" value="poste-luz" class="dv-checkbox"> Poste de Luz
-                            </label>
+                        <label class="dv-modal-label">Teléfono</label>
+                        <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" class="dv-modal-field" required>
+                    </div>
+                </div>
+
+                <div class="dv-modal-group">
+                    <label class="dv-modal-label">Tipo de Incidencia</label>
+                    <div class="dv-checkbox-grid">
+                        <label class="dv-checkbox-label">
+                            <input type="checkbox" name="tipo_reporte" value="fuga-agua" class="dv-checkbox"> Fuga de Agua
+                        </label>
+                        <label class="dv-checkbox-label">
+                            <input type="checkbox" name="tipo_reporte" value="baches" class="dv-checkbox"> Bache
+                        </label>
+                        <label class="dv-checkbox-label dv-checkbox-full">
+                            <input type="checkbox" name="tipo_reporte" value="poste-luz" class="dv-checkbox"> Poste de Luz
+                        </label>
+                    </div>
+                </div>
+
+                <div class="dv-modal-group">
+                    <label class="dv-modal-label">Referencias del Lugar</label>
+                    <textarea id="regReferences" name="referencias" placeholder="Ej. Entre qué calles está, color de fachada..." class="dv-modal-field dv-textarea" rows="2" required></textarea>
+                </div>
+
+                <!-- SECCIÓN DE FOTOS Y VALIDACIÓN OFICIAL -->
+                <div class="dv-modal-group">
+                    <label class="dv-modal-label">Archivos y Evidencia Fotográfica</label>
+                    
+                    <div class="dv-upload-container">
+                        <div class="upload-box dv-upload-item" id="gpsBox">
+                            <span class="dv-upload-icon">📍</span>
+                            <span id="gpsText">Haz clic para fijar ubicación GPS</span>
+                            <input type="hidden" name="lat_long" id="latLongInput" value="">
                         </div>
+
+                        <label class="upload-box dv-upload-item">
+                            <span class="dv-upload-icon">🪪</span>
+                            <span class="file-label-text">Sube el frente de tu INE</span>
+                            <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden">
+                        </label>
+
+                        <label class="upload-box dv-upload-item">
+                            <span class="dv-upload-icon">🔄</span>
+                            <span class="file-label-text">Sube el reverso de tu INE</span>
+                            <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden">
+                        </label>
+
+                        <label class="upload-box dv-upload-item">
+                            <span class="dv-upload-icon">📸</span>
+                            <span class="file-label-text">Foto de la incidencia (Evidencia)</span>
+                            <input type="file" name="selfie" accept="image/*" class="file-input-hidden">
+                        </label>
                     </div>
+                </div>
+            </form>
 
-                    <div class="dv-modal-group">
-                        <label class="dv-modal-label">Referencias del Lugar</label>
-                        <textarea id="regReferences" name="referencias" placeholder="Ej. Entre qué calles está, color de fachada..." class="dv-modal-field dv-textarea" rows="2" required></textarea>
-                    </div>
+        </div>
 
-                    <!-- SECCIÓN DE FOTOS Y VALIDACIÓN OFICIAL -->
-                    <div class="dv-modal-group">
-                        <label class="dv-modal-label">Archivos y Evidencia Fotográfica</label>
-                        
-                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
-                            <div class="upload-box" id="gpsBox" style="padding: 10px; background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.3); border-radius: 10px; text-align: center; cursor: pointer; color: #fff; font-size: 0.85rem;">
-                                <span style="font-size: 1.1rem;">📍</span>
-                                <span id="gpsText">Haz clic para fijar ubicación GPS</span>
-                                <input type="hidden" name="lat_long" id="latLongInput" value="">
-                            </div>
-
-                            <label class="upload-box" style="padding: 10px; background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.3); border-radius: 10px; text-align: center; cursor: pointer; color: #fff; font-size: 0.85rem; display: block;">
-                                <span style="font-size: 1.1rem;">🪪</span>
-                                <span class="file-label-text">Sube el frente de tu INE</span>
-                                <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden" style="display: none;">
-                            </label>
-
-                            <label class="upload-box" style="padding: 10px; background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.3); border-radius: 10px; text-align: center; cursor: pointer; color: #fff; font-size: 0.85rem; display: block;">
-                                <span style="font-size: 1.1rem;">🔄</span>
-                                <span class="file-label-text">Sube el reverso de tu INE</span>
-                                <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden" style="display: none;">
-                            </label>
-
-                            <label class="upload-box" style="padding: 10px; background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.3); border-radius: 10px; text-align: center; cursor: pointer; color: #fff; font-size: 0.85rem; display: block;">
-                                <span style="font-size: 1.1rem;">📸</span>
-                                <span class="file-label-text">Foto de la incidencia (Evidencia)</span>
-                                <input type="file" name="selfie" accept="image/*" class="file-input-hidden" style="display: none;">
-                            </label>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-
-            <div class="dv-modal-actions">
-                <button type="button" class="dv-modal-btn" id="mrBtnSubmitReport">Enviar y Registrar</button>
-                <button type="button" class="dv-modal-btn dv-modal-btn-alt" id="mrBtnCloseModal">Cancelar</button>
-            </div>
+        <div class="dv-modal-actions">
+            <button type="button" class="dv-modal-btn" id="mrBtnSubmitReport">Enviar y Registrar</button>
+            <button type="button" class="dv-modal-btn dv-modal-btn-alt" id="mrBtnCloseModal">Cancelar</button>
         </div>
     </div>
+</div>
     <script src="index.js"></script>
 </body>
 

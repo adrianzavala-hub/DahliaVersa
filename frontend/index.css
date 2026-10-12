@@ -3349,3 +3349,76 @@ body.modal-active .logo-icon .dahlia-center {
   70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
   100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
 }
+
+/* --- DISEÑO EXCLUSIVO PARA EL MODAL DE REPORTE Y MAPA --- */
+.dv-row-2cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.dv-checkbox-full {
+  grid-column: span 2;
+}
+
+.dv-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.dv-upload-item {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 0.85rem;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.dv-upload-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #38bdf8;
+}
+
+.dv-upload-icon {
+  font-size: 1.1rem;
+  margin-right: 6px;
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+/* Sincronización exacta con el estilo global de tus tarjetas modales */
+.dv-modal-card {
+  background: rgba(125, 95, 105, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(226, 169, 179, 0.5) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(226, 169, 179, 0.15) !important;
+  border-radius: 24px !important;
+  padding: 24px 30px !important;
+}
+
+.dv-modal-title {
+  color: #ffffff !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid rgba(226, 169, 179, 0.3) !important;
+  padding-bottom: 10px !important;
+  letter-spacing: 0.4px !important;
+  text-align: center;
+}
+
+.dv-modal-subtitle {
+  color: #bae6fd !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 14px !important;
+  text-align: center;
+}
