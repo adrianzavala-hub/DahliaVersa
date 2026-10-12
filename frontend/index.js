@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnConsultarSeguimiento = document.getElementById('btnConsultarSeguimiento');
     const body = document.body;
 
+    // Asegurar estado inicial oculto
+    if (modalOverlay) modalOverlay.style.display = 'none';
+    if (modalSeguimiento) modalSeguimiento.style.display = 'none';
+
     function createGlitchLamp() {
         if (!modalOverlay) return;
         const modalCard = modalOverlay.querySelector('.modal-card');
@@ -66,37 +70,54 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Abrir Guía Rápida (Asegura cerrar Seguimiento)
-    if (logoTrigger) {
+    // 1. ABRIR GUÍA RÁPIDA (Logo)
+    if (logoTrigger && modalOverlay) {
         logoTrigger.addEventListener('click', () => {
-            if (modalSeguimiento) modalSeguimiento.classList.remove('active');
+            // Forzar cierre total del modal de seguimiento
+            if (modalSeguimiento) {
+                modalSeguimiento.classList.remove('active');
+                modalSeguimiento.style.display = 'none';
+            }
+
             body.classList.add('modal-active');
             createGlitchLamp();
-            if (modalOverlay) modalOverlay.classList.add('active');
+            modalOverlay.style.display = 'flex';
+            setTimeout(() => modalOverlay.classList.add('active'), 10);
         });
     }
 
-    if (btnClose) {
+    // CERRAR GUÍA RÁPIDA
+    if (btnClose && modalOverlay) {
         btnClose.addEventListener('click', () => {
-            if (modalOverlay) modalOverlay.classList.remove('active');
+            modalOverlay.classList.remove('active');
             body.classList.remove('modal-active');
+            setTimeout(() => modalOverlay.style.display = 'none', 400);
         });
     }
 
-    // Abrir Seguimiento (Asegura cerrar Guía Rápida)
+    // 2. ABRIR SEGUIMIENTO (Navbar)
     if (seguimientoNavBtn && modalSeguimiento) {
         seguimientoNavBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            if (modalOverlay) modalOverlay.classList.remove('active');
-            modalSeguimiento.classList.add('active');
+
+            // Forzar cierre total del modal de guía rápida
+            if (modalOverlay) {
+                modalOverlay.classList.remove('active');
+                modalOverlay.style.display = 'none';
+            }
+
+            modalSeguimiento.style.display = 'flex';
+            setTimeout(() => modalSeguimiento.classList.add('active'), 10);
             body.classList.add('modal-active');
         });
     }
 
+    // CERRAR SEGUIMIENTO
     if (btnCloseSeguimiento && modalSeguimiento) {
         btnCloseSeguimiento.addEventListener('click', () => {
             modalSeguimiento.classList.remove('active');
             body.classList.remove('modal-active');
+            setTimeout(() => modalSeguimiento.style.display = 'none', 400);
         });
     }
 
@@ -227,10 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target === modalOverlay) {
             modalOverlay.classList.remove('active');
             body.classList.remove('modal-active');
+            setTimeout(() => modalOverlay.style.display = 'none', 400);
         }
         if (e.target === modalSeguimiento) {
             modalSeguimiento.classList.remove('active');
             body.classList.remove('modal-active');
+            setTimeout(() => modalSeguimiento.style.display = 'none', 400);
         }
     });
 });
