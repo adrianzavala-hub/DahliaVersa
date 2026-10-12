@@ -2782,104 +2782,98 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO SÓLIDO Y ANCLADO (Sin elementos flotantes) --- */
+/* --- DISEÑO DE PLACA BASE Y MANÓMETRO INTEGRADO --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -42px; /* Anclado justo en la línea superior del modal */
-  right: 25px; /* Posicionado firmemente hacia la derecha */
-  width: 45px;
-  height: 75px;
+  top: -38px;
+  right: 24px;
+  width: 44px;
+  height: 65px;
   pointer-events: none;
   z-index: 35;
 }
 
-/* 1. Raíz de la tubería firmemente unida al borde */
-.solid-pipe-root {
+/* 1. Placa base sólida de anclaje (Elimina cualquier efecto flotante) */
+.plate-mount-base {
   position: absolute;
   top: 0;
   right: 0;
-  width: 18px;
-  height: 70px;
+  width: 32px;
+  height: 60px;
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), inset 0 0 6px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* 2. Grupo de medidores soldados directamente al cuerpo del tubo */
-.solid-gauge-cluster {
+/* 2. Círculo medidor de presión incrustado en la placa */
+.plate-gauge {
   position: absolute;
   top: 6px;
-  left: -22px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.solid-gauge {
-  width: 16px;
-  height: 16px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
   background: rgba(125, 95, 105, 0.95);
   backdrop-filter: blur(4px);
   border: 1.5px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
-.solid-needle {
+.plate-needle {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 6px;
+  width: 8px;
   height: 1.5px;
   background: #38bdf8;
   border-radius: 1px;
   transform-origin: left center;
   transform: translateY(-50%);
-  animation: solidNeedleMove 2s infinite ease-in-out alternate;
+  animation: plateNeedleMove 2s infinite ease-in-out alternate;
 }
 
-/* 3. Ramales laterales izquierdo y derecho (brotan del tubo central) */
-.solid-branch {
+/* 3. Ramales laterales izquierdo y derecho conectados a la placa */
+.plate-branch {
   position: absolute;
-  top: 24px;
-  width: 14px;
+  top: 34px;
+  width: 12px;
   height: 6px;
 }
 
-.solid-branch.left {
-  left: -12px;
+.plate-branch.left {
+  left: -10px;
 }
 
-.solid-branch.right {
-  right: -12px;
+.plate-branch.right {
+  right: -10px;
 }
 
-.solid-jet-l, .solid-jet-r {
+.plate-jet-l, .plate-jet-r {
   position: absolute;
   top: 1px;
-  width: 12px;
+  width: 10px;
   height: 3px;
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.1));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
-  animation: solidJetPulse 0.8s infinite ease-in-out;
+  animation: plateJetPulse 0.8s infinite ease-in-out;
 }
 
-.solid-branch.left .solid-jet-l {
+.plate-branch.left .plate-jet-l {
   right: 0;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.1));
 }
 
-.solid-branch.right .solid-jet-r {
+.plate-branch.right .plate-jet-r {
   left: 0;
 }
 
-.solid-drop-l, .solid-drop-r {
+.plate-drop-l, .plate-drop-r {
   position: absolute;
   top: -1px;
   width: 5px;
@@ -2889,82 +2883,82 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.solid-branch.left .solid-drop-l {
-  left: -6px;
-  animation: solidDropLeft 1.2s infinite ease-in-out;
+.plate-branch.left .plate-drop-l {
+  left: -5px;
+  animation: plateDropLeft 1.2s infinite ease-in-out;
 }
 
-.solid-branch.right .solid-drop-r {
-  right: -6px;
-  animation: solidDropRight 1.2s infinite ease-in-out;
+.plate-branch.right .plate-drop-r {
+  right: -5px;
+  animation: plateDropRight 1.2s infinite ease-in-out;
 }
 
-/* 4. Goteo inferior conectado a la base del tubo */
-.solid-down-stream {
+/* 4. Goteo inferior saliendo desde la base de la placa */
+.plate-down-stream {
   position: absolute;
-  bottom: 0;
-  left: 7px;
+  bottom: -14px;
+  left: 14px;
   width: 4px;
-  height: 16px;
+  height: 14px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.1));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.solid-down-drop {
+.plate-down-drop {
   position: absolute;
-  bottom: -4px;
-  left: 6px;
+  bottom: -18px;
+  left: 13px;
   width: 6px;
-  height: 9px;
+  height: 8px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: solidDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: plateDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.solid-down-ripple {
+.plate-down-ripple {
   position: absolute;
-  bottom: -12px;
-  left: 3px;
+  bottom: -24px;
+  left: 10px;
   width: 12px;
   height: 4px;
   border: 1.5px solid rgba(56, 189, 248, 0.8);
   border-radius: 50%;
-  animation: solidRippleExpand 1.3s infinite ease-out;
+  animation: plateRippleExpand 1.3s infinite ease-out;
 }
 
 /* --- ANIMACIONES --- */
-@keyframes solidNeedleMove {
-  0% { transform: translateY(-50%) rotate(-30deg); }
-  100% { transform: translateY(-50%) rotate(90deg); }
+@keyframes plateNeedleMove {
+  0% { transform: translateY(-50%) rotate(-35deg); }
+  100% { transform: translateY(-50%) rotate(85deg); }
 }
 
-@keyframes solidJetPulse {
+@keyframes plateJetPulse {
   0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
   50% { transform: scaleX(1.2); opacity: 1; }
 }
 
-@keyframes solidDropLeft {
+@keyframes plateDropLeft {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(-12px) scale(1.2); opacity: 0; }
 }
 
-@keyframes solidDropRight {
+@keyframes plateDropRight {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(14px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(12px) scale(1.2); opacity: 0; }
 }
 
-@keyframes solidDropFall {
+@keyframes plateDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
-  20% { opacity: 1; transform: translateY(4px) scale(1); }
-  85% { opacity: 1; transform: translateY(14px) scale(0.9); }
-  100% { transform: translateY(18px) scale(1.4, 0.35); opacity: 0; }
+  20% { opacity: 1; transform: translateY(3px) scale(1); }
+  85% { opacity: 1; transform: translateY(10px) scale(0.9); }
+  100% { transform: translateY(14px) scale(1.4, 0.35); opacity: 0; }
 }
 
-@keyframes solidRippleExpand {
+@keyframes plateRippleExpand {
   0%, 70% { transform: scale(0.2); opacity: 0; }
   80% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.2); opacity: 0; }
