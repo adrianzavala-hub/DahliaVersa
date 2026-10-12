@@ -2782,60 +2782,60 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO MONUMENTAL, GRANDE Y COMPLEJO (DAHLIA HIDRÁULICA) --- */
+/* --- ANCLAJE PERFECTO Y ALINEACIÓN MILIMÉTRICA --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -75px;
-  right: 18px;
-  width: 90px;
-  height: 110px;
+  /* Colocado exactamente para que el pétalo inferior repose sobre el borde superior de la tarjeta */
+  top: -46px; 
+  right: 28px;
+  width: 80px;
+  height: 80px;
   pointer-events: none;
   z-index: 35;
 }
 
-/* 1. Base anclada firmemente al borde superior derecho */
 .grand-flora-anchor {
   position: absolute;
   top: 0;
   right: 0;
   width: 60px;
-  height: 90px;
+  height: 80px;
 }
 
-/* 2. Sistema Complejo de Pétalos de Cristal Translúcido */
+/* 1. Sistema Complejo de Pétalos de Cristal Translúcido */
 .grand-petal {
   position: absolute;
   background: linear-gradient(135deg, rgba(226, 169, 179, 0.85) 0%, rgba(125, 95, 105, 0.95) 100%);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
 
 /* Pétalos principales en cruz */
-.gp-top { top: 4px; right: 20px; width: 20px; height: 26px; border-radius: 10px 10px 4px 4px; }
-.gp-right { top: 22px; right: 2px; width: 26px; height: 20px; border-radius: 4px 10px 10px 4px; }
-.gp-bottom { top: 38px; right: 20px; width: 20px; height: 26px; border-radius: 4px 4px 10px 10px; }
-.gp-left { top: 22px; right: 32px; width: 26px; height: 20px; border-radius: 10px 4px 4px 10px; }
+.gp-top { top: 0px; right: 18px; width: 18px; height: 24px; border-radius: 9px 9px 3px 3px; }
+.gp-right { top: 16px; right: 0px; width: 24px; height: 18px; border-radius: 3px 9px 9px 3px; }
+.gp-bottom { top: 32px; right: 18px; width: 18px; height: 24px; border-radius: 3px 3px 9px 9px; }
+.gp-left { top: 16px; right: 32px; width: 24px; height: 18px; border-radius: 9px 3px 3px 9px; }
 
-/* Pétalos diagonales de fondo (mayor complejidad geométrica) */
-.gp-north-west { top: 8px; right: 34px; width: 16px; height: 16px; border-radius: 10px 4px 4px 4px; opacity: 0.85; }
-.gp-north-east { top: 8px; right: 10px; width: 16px; height: 16px; border-radius: 4px 10px 4px 4px; opacity: 0.85; }
-.gp-south-west { top: 36px; right: 34px; width: 16px; height: 16px; border-radius: 4px 4px 4px 10px; opacity: 0.85; }
-.gp-south-east { top: 36px; right: 10px; width: 16px; height: 16px; border-radius: 4px 4px 10px 4px; opacity: 0.85; }
+/* Pétalos diagonales de fondo */
+.gp-north-west { top: 4px; right: 30px; width: 14px; height: 14px; border-radius: 8px 3px 3px 3px; opacity: 0.85; }
+.gp-north-east { top: 4px; right: 8px; width: 14px; height: 14px; border-radius: 3px 8px 3px 3px; opacity: 0.85; }
+.gp-south-west { top: 32px; right: 30px; width: 14px; height: 14px; border-radius: 3px 3px 3px 8px; opacity: 0.85; }
+.gp-south-east { top: 32px; right: 8px; width: 14px; height: 14px; border-radius: 3px 3px 8px 3px; opacity: 0.85; }
 
-/* 3. Núcleo Avanzado con Doble Medidor Cóncavo */
+/* 2. Núcleo Avanzado con Doble Medidor */
 .grand-core-hub {
   position: absolute;
-  top: 20px;
-  right: 18px;
-  width: 24px;
-  height: 24px;
+  top: 15px;
+  right: 15px;
+  width: 22px;
+  height: 22px;
   background: rgba(125, 95, 105, 0.98);
   border: 2px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.7), inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7), inset 0 2px 4px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2844,8 +2844,8 @@ body.modal-active .logo-icon .dahlia-center {
 
 .grand-gauge-outer {
   position: relative;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border: 1px dashed #7dd3fc;
   border-radius: 50%;
   display: flex;
@@ -2854,8 +2854,8 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .grand-gauge-inner {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background: #7d5f69;
   border-radius: 50%;
   position: relative;
@@ -2865,7 +2865,7 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 8px;
+  width: 7px;
   height: 1.5px;
   background: #38bdf8;
   border-radius: 1px;
@@ -2878,7 +2878,7 @@ body.modal-active .logo-icon .dahlia-center {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 6px;
+  width: 5px;
   height: 1px;
   background: #ffffff;
   transform-origin: left center;
@@ -2886,117 +2886,111 @@ body.modal-active .logo-icon .dahlia-center {
   animation: grandNeedleSpinAlt 1.5s infinite ease-in-out alternate;
 }
 
-/* 4. Sistema de Fugas Laterales Dobles */
+/* 3. Fugas Laterales Conectadas Directamente al Centro de la Flor */
 .grand-side-spray {
   position: absolute;
-  top: 30px;
-  width: 22px;
-  height: 5px;
+  top: 24px;
+  width: 18px;
+  height: 4px;
   z-index: 4;
 }
 
-.grand-side-spray.left-primary {
-  left: -16px;
+.grand-side-spray.left-side {
+  left: 2px; /* Conectado al borde izquierdo del núcleo */
 }
 
-.grand-side-spray.right-primary {
-  right: -2px;
+.grand-side-spray.right-side {
+  right: -2px; /* Conectado al borde derecho del núcleo */
 }
 
 .grand-spray-beam {
   position: absolute;
-  top: 1px;
-  width: 20px;
+  top: 0;
+  width: 16px;
   height: 3px;
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
-  box-shadow: 0 0 10px #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
   animation: grandBeamPulse 0.75s infinite ease-in-out;
 }
 
-.grand-side-spray.left-primary .grand-spray-beam {
+.grand-side-spray.left-side .grand-spray-beam {
   right: 0;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.15));
 }
 
-.grand-side-spray.right-primary .grand-spray-beam {
+.grand-side-spray.right-side .grand-spray-beam {
   left: 0;
 }
 
 .grand-spray-sparkle {
   position: absolute;
   top: -1px;
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   background: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 10px #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
 }
 
-.grand-side-spray.left-primary .grand-spray-sparkle {
-  left: -8px;
+.grand-side-spray.left-side .grand-spray-sparkle {
+  left: -6px;
   animation: grandSparkleLeft 1.2s infinite ease-in-out;
 }
 
-.grand-side-spray.right-primary .grand-spray-sparkle {
-  right: -8px;
+.grand-side-spray.right-side .grand-spray-sparkle {
+  right: -6px;
   animation: grandSparkleRight 1.2s infinite ease-in-out;
 }
 
-/* 5. Cascada Central, Gota Pesada y Doble Onda de Choque */
+/* 4. Cascada Central y Goteo hacia el interior de la tarjeta */
 .grand-cascade-channel {
   position: absolute;
-  bottom: -22px;
-  right: 26px;
-  width: 8px;
-  height: 25px;
+  bottom: 6px; /* Nace justo desde el pétalo inferior hacia abajo */
+  right: 23px;
+  width: 6px;
+  height: 22px;
   z-index: 4;
 }
 
 .grand-stream-line {
   position: absolute;
   top: 0;
-  left: 2px;
+  left: 1px;
   width: 4px;
-  height: 20px;
+  height: 16px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
-  box-shadow: 0 0 10px #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
 }
 
 .grand-heavy-drop {
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
-  width: 8px;
-  height: 11px;
+  width: 6px;
+  height: 9px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
-  box-shadow: 0 0 12px #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
   animation: grandDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
 .grand-ripple-wave {
   position: absolute;
-  bottom: -14px;
-  left: -4px;
+  bottom: -10px;
+  left: -3px;
   border: 1.5px solid rgba(56, 189, 248, 0.85);
   border-radius: 50%;
   animation: grandRippleExpand 1.3s infinite ease-out;
 }
 
 .r-one {
-  width: 16px;
-  height: 6px;
+  width: 12px;
+  height: 4px;
 }
 
-.r-two {
-  width: 8px;
-  height: 3px;
-  animation-delay: 0.65s;
-}
-
-/* --- ANIMACIONES DE ALTA FIDELIDAD --- */
+/* --- ANIMACIONES --- */
 @keyframes grandNeedleSpin {
   0% { transform: translateY(-50%) rotate(-45deg); }
   100% { transform: translateY(-50%) rotate(110deg); }
@@ -3015,24 +3009,24 @@ body.modal-active .logo-icon .dahlia-center {
 @keyframes grandSparkleLeft {
   0% { transform: translateX(0) scale(0.4); opacity: 0; }
   40% { opacity: 1; }
-  100% { transform: translateX(-18px) scale(1.3); opacity: 0; }
+  100% { transform: translateX(-14px) scale(1.3); opacity: 0; }
 }
 
 @keyframes grandSparkleRight {
   0% { transform: translateX(0) scale(0.4); opacity: 0; }
   40% { opacity: 1; }
-  100% { transform: translateX(18px) scale(1.3); opacity: 0; }
+  100% { transform: translateX(14px) scale(1.3); opacity: 0; }
 }
 
 @keyframes grandDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
-  20% { opacity: 1; transform: translateY(6px) scale(1); }
-  85% { opacity: 1; transform: translateY(22px) scale(0.9); }
-  100% { transform: translateY(28px) scale(1.5, 0.35); opacity: 0; }
+  20% { opacity: 1; transform: translateY(4px) scale(1); }
+  85% { opacity: 1; transform: translateY(14px) scale(0.9); }
+  100% { transform: translateY(18px) scale(1.4, 0.35); opacity: 0; }
 }
 
 @keyframes grandRippleExpand {
   0%, 60% { transform: scale(0.2); opacity: 0; }
   75% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
