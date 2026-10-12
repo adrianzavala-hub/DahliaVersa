@@ -1,14 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Referencias de modales
+    // 1. Lógica del modal de Guía Rápida (Activado al hacer clic en el logo)
     const logoTrigger = document.getElementById('logoTrigger');
     const modalOverlay = document.getElementById('modalOverlay');
     const btnClose = document.getElementById('btnClose');
-
-    const seguimientoNavBtn = document.getElementById('seguimientoNavBtn');
-    const modalSeguimiento = document.getElementById('modalSeguimiento');
-    const btnCloseSeguimiento = document.getElementById('btnCloseSeguimiento');
-    const btnConsultarSeguimiento = document.getElementById('btnConsultarSeguimiento');
-    const body = document.body;
 
     function createGlitchLamp() {
         if (!modalOverlay) return;
@@ -67,39 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ABRIR GUÍA RÁPIDA (Logo)
     if (logoTrigger) {
         logoTrigger.addEventListener('click', () => {
-            if (modalSeguimiento) modalSeguimiento.classList.remove('active'); // Asegura cerrar el otro
-            body.classList.add('modal-active');
+            document.body.classList.add('modal-active');
             createGlitchLamp();
             if (modalOverlay) modalOverlay.classList.add('active');
         });
     }
 
-    // CERRAR GUÍA RÁPIDA
     if (btnClose) {
         btnClose.addEventListener('click', () => {
-            body.classList.remove('modal-active');
+            document.body.classList.remove('modal-active');
             if (modalOverlay) modalOverlay.classList.remove('active');
-        });
-    }
-
-    // ABRIR SEGUIMIENTO (Navbar)
-    if (seguimientoNavBtn && modalSeguimiento) {
-        seguimientoNavBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (modalOverlay) modalOverlay.classList.remove('active'); // Asegura cerrar la guía rápida
-            modalSeguimiento.classList.add('active');
-            body.classList.add('modal-active');
-        });
-    }
-
-    // CERRAR SEGUIMIENTO
-    if (btnCloseSeguimiento && modalSeguimiento) {
-        btnCloseSeguimiento.addEventListener('click', () => {
-            modalSeguimiento.classList.remove('active');
-            body.classList.remove('modal-active');
         });
     }
 
@@ -186,7 +159,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. Consulta de API de Seguimiento
+    // 5. Lógica del Modal Independiente de Seguimiento
+    const seguimientoNavBtn = document.getElementById('seguimientoNavBtn');
+    const modalSeguimiento = document.getElementById('modalSeguimiento');
+    const btnCloseSeguimiento = document.getElementById('btnCloseSeguimiento');
+    const btnConsultarSeguimiento = document.getElementById('btnConsultarSeguimiento');
+    const body = document.body;
+
+    if (seguimientoNavBtn && modalSeguimiento) {
+        seguimientoNavBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalSeguimiento.classList.add('active');
+            body.classList.add('modal-active');
+        });
+    }
+
+    if (btnCloseSeguimiento && modalSeguimiento) {
+        btnCloseSeguimiento.addEventListener('click', () => {
+            modalSeguimiento.classList.remove('active');
+            body.classList.remove('modal-active');
+        });
+    }
+
     if (btnConsultarSeguimiento) {
         btnConsultarSeguimiento.addEventListener('click', async () => {
             const tipo = document.getElementById('segTipo').value;
