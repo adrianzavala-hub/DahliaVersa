@@ -2782,47 +2782,55 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO ARQUITECTÓNICO DE LUJO (Cascada Moderna) --- */
+/* --- DISEÑO SÓLIDO Y ANCLADO (Sin elementos flotantes) --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -55px;
-  right: 15px;
-  width: 65px;
-  height: 80px;
+  top: -42px; /* Anclado justo en la línea superior del modal */
+  right: 25px; /* Posicionado firmemente hacia la derecha */
+  width: 45px;
+  height: 75px;
   pointer-events: none;
   z-index: 35;
 }
 
-/* 1. Montaje superior y Manómetro incrustado */
-.arch-top-mount {
+/* 1. Raíz de la tubería firmemente unida al borde */
+.solid-pipe-root {
   position: absolute;
   top: 0;
-  right: 15px;
-  width: 28px;
-  height: 22px;
+  right: 0;
+  width: 18px;
+  height: 70px;
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 6px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.arch-gauge-ring {
+/* 2. Grupo de medidores soldados directamente al cuerpo del tubo */
+.solid-gauge-cluster {
+  position: absolute;
+  top: 6px;
+  left: -22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.solid-gauge {
   width: 16px;
   height: 16px;
-  background: rgba(125, 95, 105, 0.9);
+  background: rgba(125, 95, 105, 0.95);
+  backdrop-filter: blur(4px);
   border: 1.5px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 8px #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
-.arch-gauge-needle {
+.solid-needle {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2832,43 +2840,46 @@ body.modal-active .logo-icon .dahlia-center {
   border-radius: 1px;
   transform-origin: left center;
   transform: translateY(-50%);
-  animation: archNeedleSway 2.2s infinite ease-in-out alternate;
+  animation: solidNeedleMove 2s infinite ease-in-out alternate;
 }
 
-/* 2. Cuerpo del caño / Llave horizontal tipo cascada */
-.arch-spout-body {
+/* 3. Ramales laterales izquierdo y derecho (brotan del tubo central) */
+.solid-branch {
   position: absolute;
-  top: 20px;
-  right: 8px;
-  width: 42px;
-  height: 12px;
-  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 6px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  top: 24px;
+  width: 14px;
+  height: 6px;
 }
 
-/* 3. Chorros laterales izquierdo y derecho */
-.arch-jet {
+.solid-branch.left {
+  left: -12px;
+}
+
+.solid-branch.right {
+  right: -12px;
+}
+
+.solid-jet-l, .solid-jet-r {
   position: absolute;
-  top: 3px;
-  width: 15px;
-  height: 4px;
+  top: 1px;
+  width: 12px;
+  height: 3px;
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.1));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
-  animation: archJetPulse 0.8s infinite ease-in-out;
+  animation: solidJetPulse 0.8s infinite ease-in-out;
 }
 
-.arch-jet.left {
-  left: -14px;
+.solid-branch.left .solid-jet-l {
+  right: 0;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.1));
 }
 
-.arch-jet.right {
-  right: -14px;
+.solid-branch.right .solid-jet-r {
+  left: 0;
 }
 
-.arch-spray-drop {
+.solid-drop-l, .solid-drop-r {
   position: absolute;
   top: -1px;
   width: 5px;
@@ -2878,82 +2889,82 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.arch-spray-drop.left {
-  left: -8px;
-  animation: archDropLeft 1.3s infinite ease-in-out;
+.solid-branch.left .solid-drop-l {
+  left: -6px;
+  animation: solidDropLeft 1.2s infinite ease-in-out;
 }
 
-.arch-spray-drop.right {
-  right: -8px;
-  animation: archDropRight 1.3s infinite ease-in-out;
+.solid-branch.right .solid-drop-r {
+  right: -6px;
+  animation: solidDropRight 1.2s infinite ease-in-out;
 }
 
-/* 4. Cascada y goteo inferior central */
-.arch-cascade-stream {
+/* 4. Goteo inferior conectado a la base del tubo */
+.solid-down-stream {
   position: absolute;
-  top: 10px;
-  right: 19px;
+  bottom: 0;
+  left: 7px;
   width: 4px;
-  height: 25px;
+  height: 16px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.1));
   border-radius: 2px;
-  box-shadow: 0 0 10px #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
 }
 
-.arch-cascade-drop {
+.solid-down-drop {
   position: absolute;
-  top: 8px;
-  right: 18px;
+  bottom: -4px;
+  left: 6px;
   width: 6px;
-  height: 10px;
+  height: 9px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: archDropFall 1.4s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: solidDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.arch-cascade-ripple {
+.solid-down-ripple {
   position: absolute;
-  top: 38px;
-  right: 15px;
+  bottom: -12px;
+  left: 3px;
   width: 12px;
   height: 4px;
   border: 1.5px solid rgba(56, 189, 248, 0.8);
   border-radius: 50%;
-  animation: archRippleExpand 1.4s infinite ease-out;
+  animation: solidRippleExpand 1.3s infinite ease-out;
 }
 
-/* --- ANIMACIONES DE LUJO --- */
-@keyframes archNeedleSway {
-  0% { transform: translateY(-50%) rotate(-45deg); }
-  100% { transform: translateY(-50%) rotate(100deg); }
+/* --- ANIMACIONES --- */
+@keyframes solidNeedleMove {
+  0% { transform: translateY(-50%) rotate(-30deg); }
+  100% { transform: translateY(-50%) rotate(90deg); }
 }
 
-@keyframes archJetPulse {
-  0%, 100% { transform: scaleX(0.85); opacity: 0.6; }
-  50% { transform: scaleX(1.15); opacity: 1; }
+@keyframes solidJetPulse {
+  0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
+  50% { transform: scaleX(1.2); opacity: 1; }
 }
 
-@keyframes archDropLeft {
-  0% { transform: translateX(0) scale(0.4); opacity: 0; }
+@keyframes solidDropLeft {
+  0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(-16px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes archDropRight {
-  0% { transform: translateX(0) scale(0.4); opacity: 0; }
+@keyframes solidDropRight {
+  0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(16px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes archDropFall {
+@keyframes solidDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
-  20% { opacity: 1; transform: translateY(6px) scale(1); }
-  85% { opacity: 1; transform: translateY(22px) scale(0.9); }
-  100% { transform: translateY(28px) scale(1.4, 0.35); opacity: 0; }
+  20% { opacity: 1; transform: translateY(4px) scale(1); }
+  85% { opacity: 1; transform: translateY(14px) scale(0.9); }
+  100% { transform: translateY(18px) scale(1.4, 0.35); opacity: 0; }
 }
 
-@keyframes archRippleExpand {
+@keyframes solidRippleExpand {
   0%, 70% { transform: scale(0.2); opacity: 0; }
   80% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.2); opacity: 0; }
