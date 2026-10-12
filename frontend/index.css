@@ -2782,13 +2782,13 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- FUGA ORNAMENTAL INDUSTRIAL (Estilo pulido a juego con la lámpara) --- */
+/* --- NUEVO DISEÑO: FUGA CIBERNÉTICA DE NEÓN (Estilo Moderno / Neón) --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
   top: -55px;
   right: -24px;
-  width: 50px;
+  width: 52px;
   height: 85px;
   pointer-events: none;
   z-index: 35;
@@ -2797,158 +2797,152 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-/* 1. Brida de soporte amurada al muro */
-.ind-wall-flange {
+/* 1. Soporte de anclaje geométrico */
+.cyber-mount-bracket {
   position: absolute;
   top: 0;
-  right: 12px;
-  width: 18px;
+  right: 10px;
+  width: 20px;
   height: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 4px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
-}
-
-/* 2. Cuello de la tubería con degradado metálico */
-.ind-pipe-neck {
-  position: absolute;
-  top: 6px;
-  right: 15px;
-  width: 12px;
-  height: 20px;
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
   border-radius: 3px;
+  box-shadow: 0 0 8px rgba(226, 169, 179, 0.6);
+}
+
+/* 2. Cuerpo de la tubería central con relieve */
+.cyber-pipe-hub {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  width: 12px;
+  height: 18px;
+  background: linear-gradient(180deg, #7d5f69 0%, #e2a9b3 100%);
+  border-radius: 2px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* 3. Volante de apertura con cruceta metálica ornamental */
-.ind-valve-wheel {
+/* 3. Medidor / Válvula circular de presión */
+.cyber-gauge-dial {
   position: absolute;
-  top: 8px;
-  right: 23px;
-  width: 22px;
-  height: 8px;
-  background: #7d5f69;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  top: 4px;
+  right: 24px;
+  width: 16px;
+  height: 16px;
+  background: rgba(125, 95, 105, 0.9);
+  border: 2px solid #bae6fd;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.ind-wheel-center {
-  position: absolute;
-  top: -3px;
-  left: 7px;
-  width: 8px;
-  height: 14px;
-  background: #e2a9b3;
-  border-radius: 3px;
-}
-.ind-spoke {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.7);
-}
-.spoke-1 { top: 3px; left: 2px; width: 18px; height: 1.5px; }
-.spoke-2 { top: 3px; left: 10px; width: 1.5px; height: 8px; }
 
-/* 4. Boquilla de salida texturizada */
-.ind-pipe-nozzle {
+.cyber-gauge-needle {
+  width: 8px;
+  height: 2px;
+  background: #38bdf8;
+  border-radius: 1px;
+  transform-origin: right center;
+  animation: cyberGaugeSpin 2s infinite ease-in-out alternate;
+}
+
+/* 4. Boquilla de emisión de plasma/agua */
+.cyber-nozzle-core {
   position: absolute;
-  top: 24px;
-  right: 14px;
+  top: 22px;
+  right: 13px;
   width: 14px;
   height: 10px;
-  background: rgba(226, 169, 179, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 0 0 6px 6px;
-  position: relative;
-  box-shadow: inset 0 0 5px rgba(125, 211, 252, 0.3);
-}
-.ind-nozzle-ribbon {
-  position: absolute;
-  bottom: 2px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #7d5f69;
-}
-
-/* 5. Núcleo de luz y fuga de agua brillante */
-.ind-water-glow {
-  position: absolute;
-  top: 33px;
-  right: 18px;
-  width: 6px;
-  height: 8px;
   background: #bae6fd;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #38bdf8, 0 0 20px #7dd3fc;
-  animation: indGlowPulse 1.5s infinite ease-in-out;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 0 12px #38bdf8, inset 0 0 6px #ffffff;
 }
 
-/* 6. Gota pesada con caída fluida y realista */
-.ind-water-drop {
+/* 5. Chorro continuo de neón celeste */
+.cyber-energy-stream {
   position: absolute;
-  top: 32px;
+  top: 30px;
   right: 18px;
+  width: 4px;
+  height: 32px;
+  background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.1));
+  border-radius: 2px;
+  box-shadow: 0 0 12px #38bdf8;
+  animation: cyberStreamFlicker 0.6s infinite alternate;
+}
+
+/* 6. Gotas de agua luminosas con caída fluida */
+.cyber-plasma-drop {
+  position: absolute;
+  top: 29px;
+  right: 17px;
   width: 6px;
   height: 11px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
-  box-shadow: 0 0 12px #38bdf8;
-  animation: indDropFall 1.4s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  box-shadow: 0 0 14px #38bdf8;
+  animation: cyberDropFall 1.3s infinite cubic-bezier(0.2, 0, 0.8, 1);
 }
 
-.drop-secondary {
-  animation-delay: 0.7s;
+.drop-beta {
+  animation-delay: 0.65s;
   opacity: 0;
 }
 
-/* 7. Anillo de impacto / salpicadura inferior */
-.ind-impact-ripple {
+/* 7. Anillo expansivo de impacto inferior */
+.cyber-shockwave {
   position: absolute;
-  top: 72px;
-  right: 15px;
-  width: 12px;
+  top: 70px;
+  right: 14px;
+  width: 14px;
   height: 4px;
-  border: 1.5px solid rgba(56, 189, 248, 0.8);
+  border: 1.5px solid #38bdf8;
   border-radius: 50%;
-  animation: indRippleExpand 1.4s infinite ease-out;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: cyberShockwaveExpand 1.3s infinite ease-out;
 }
 
-/* --- ANIMACIONES PULIDAS --- */
-@keyframes indGlowPulse {
-  0%, 100% { opacity: 0.6; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 16px #38bdf8, 0 0 25px #7dd3fc; }
+/* --- ANIMACIONES DE ESTILO CIBERNÉTICO --- */
+@keyframes cyberGaugeSpin {
+  0% { transform: rotate(-45deg); }
+  100% { transform: rotate(135deg); }
 }
 
-@keyframes indDropFall {
+@keyframes cyberStreamFlicker {
+  0% { opacity: 0.7; transform: scaleX(0.9); }
+  100% { opacity: 1; transform: scaleX(1.1); box-shadow: 0 0 18px #38bdf8; }
+}
+
+@keyframes cyberDropFall {
   0% {
     transform: translateY(0) scale(0.4);
     opacity: 0;
   }
-  15% {
+  20% {
     opacity: 1;
-    transform: translateY(6px) scale(1);
+    transform: translateY(6px) scale(1.1);
   }
   85% {
     opacity: 1;
-    transform: translateY(34px) scale(0.95);
+    transform: translateY(32px) scale(0.9);
   }
   100% {
-    transform: translateY(40px) scale(1.5, 0.3);
+    transform: translateY(38px) scale(1.6, 0.3);
     opacity: 0;
   }
 }
 
-@keyframes indRippleExpand {
-  0%, 70% {
+@keyframes cyberShockwaveExpand {
+  0%, 65% {
     transform: scale(0.2);
     opacity: 0;
   }
-  80% {
+  75% {
     transform: scale(1);
     opacity: 1;
   }
   100% {
-    transform: scale(2.2);
+    transform: scale(2.4);
     opacity: 0;
   }
 }
