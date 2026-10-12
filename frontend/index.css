@@ -2782,14 +2782,14 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- NUEVO DISEÑO GRANDE Y VANGUARDISTA (Fuga Ascendente con Medidor) --- */
+/* --- DISEÑO HIDRÁULICO DE LUJO (Minimalista, Estilizado y con Manómetro) --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -65px;
-  right: -30px;
-  width: 75px;
-  height: 90px;
+  top: -52px;
+  right: -24px;
+  width: 65px;
+  height: 80px;
   pointer-events: none;
   z-index: 35;
   display: flex;
@@ -2797,127 +2797,140 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-/* 1. Brida de soporte industrial de gran tamaño amurada al fondo */
-.lg-wall-flange {
+/* 1. Base y tubo estilizado amurado de forma limpia */
+.lux-pipe-mount {
   position: absolute;
-  top: 45px;
-  right: 0;
-  width: 32px;
-  height: 14px;
-  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-/* 2. Codo hidráulico robusto saliendo por fuera del modal */
-.lg-pipe-elbow {
-  position: absolute;
-  top: 24px;
-  right: 14px;
-  width: 22px;
+  top: 14px;
+  right: 6px;
+  width: 18px;
   height: 24px;
-  border: 7px solid #7d5f69;
-  border-top: none;
-  border-right: none;
-  border-radius: 0 0 0 16px;
-  box-shadow: -3px 4px 8px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
-/* 3. Círculo medidor de presión grande y estilizado */
-.lg-gauge-dial {
+/* 2. Manómetro / Círculo medidor de presión de alta gama */
+.lux-pressure-gauge {
   position: absolute;
-  top: 20px;
-  right: 36px;
-  width: 22px;
-  height: 22px;
-  background: rgba(125, 95, 105, 0.95);
-  border: 2.5px solid #bae6fd;
+  top: 8px;
+  right: 22px;
+  width: 24px;
+  height: 24px;
+  background: rgba(125, 95, 105, 0.85);
+  backdrop-filter: blur(4px);
+  border: 2px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 14px #38bdf8, 0 4px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 4px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.lg-gauge-needle {
+.lux-gauge-needle {
   width: 10px;
-  height: 2.5px;
+  height: 2px;
   background: #38bdf8;
-  border-radius: 2px;
+  border-radius: 1px;
   transform-origin: right center;
-  animation: lgGaugePulse 2.2s infinite ease-in-out alternate;
+  animation: luxGaugeSway 2.5s infinite ease-in-out alternate;
 }
 
-/* 4. Boquilla / válvula de ruptura superior */
-.lg-nozzle-valve {
+/* 3. Cabezal de salida de agua fluido */
+.lux-nozzle-head {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 18px;
-  height: 12px;
-  background: linear-gradient(135deg, #bae6fd, #38bdf8);
-  border-radius: 6px 6px 2px 2px;
-  box-shadow: 0 0 15px #38bdf8;
+  top: 36px;
+  right: 9px;
+  width: 12px;
+  height: 10px;
+  background: #bae6fd;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 0 10px #38bdf8;
 }
 
-/* 5. Chorro principal de agua ascendente (Alta presión) */
-.lg-main-upstream {
+/* 4. Chorro de agua cristalino continuo */
+.lux-water-stream {
   position: absolute;
-  top: -15px;
-  right: 22px;
+  top: 45px;
+  right: 13px;
+  width: 4px;
+  height: 25px;
+  background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.15));
+  border-radius: 2px;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: luxStreamPulse 0.9s infinite ease-in-out;
+}
+
+/* 5. Gota de agua cristalina y elegante con caída suave */
+.lux-crystal-drop {
+  position: absolute;
+  top: 43px;
+  right: 12px;
   width: 6px;
-  height: 35px;
-  background: linear-gradient(to top, #7dd3fc, rgba(56, 189, 248, 0.05));
-  border-radius: 3px;
-  box-shadow: 0 0 16px #38bdf8, 0 0 25px #7dd3fc;
-  animation: lgStreamPower 0.6s infinite ease-in-out;
-}
-
-/* 6. Gotas y partículas de spray salpicando hacia arriba y a los lados */
-.lg-spray-drop {
-  position: absolute;
-  top: 14px;
-  right: 21px;
-  width: 7px;
-  height: 12px;
-  background: linear-gradient(135deg, #ffffff, #38bdf8);
+  height: 11px;
+  background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 12px #38bdf8;
-  animation: lgSprayBurst 1.2s infinite cubic-bezier(0.1, 0.7, 0.3, 1);
+  animation: luxDropFall 1.5s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.spray-2 {
-  animation-delay: 0.4s;
+.drop-two {
+  animation-delay: 0.75s;
   opacity: 0;
 }
 
-.spray-3 {
-  animation-delay: 0.8s;
-  opacity: 0;
+/* 6. Onda de impacto fluida en la base inferior */
+.lux-ripple-ring {
+  position: absolute;
+  top: 72px;
+  right: 9px;
+  width: 14px;
+  height: 5px;
+  border: 1.5px solid rgba(56, 189, 248, 0.8);
+  border-radius: 50%;
+  animation: luxRippleExpand 1.5s infinite ease-out;
 }
 
-/* --- ANIMACIONES DE ALTA ESCALA --- */
-@keyframes lgGaugePulse {
+/* --- ANIMACIONES DE ALTA CALIDAD --- */
+@keyframes luxGaugeSway {
   0% { transform: rotate(-50deg); }
-  100% { transform: rotate(120deg); }
+  100% { transform: rotate(100deg); }
 }
 
-@keyframes lgStreamPower {
-  0%, 100% { transform: scaleY(0.95); opacity: 0.8; }
-  50% { transform: scaleY(1.2); opacity: 1; box-shadow: 0 0 22px #38bdf8; }
+@keyframes luxStreamPulse {
+  0%, 100% { transform: scaleY(0.92); opacity: 0.7; }
+  50% { transform: scaleY(1.12); opacity: 1; }
 }
 
-@keyframes lgSprayBurst {
+@keyframes luxDropFall {
   0% {
-    transform: translate(0, 0) scale(0.4);
+    transform: translateY(0) scale(0.4);
     opacity: 0;
   }
-  20% {
+  15% {
     opacity: 1;
-    transform: translate(2px, -10px) scale(1.1);
+    transform: translateY(6px) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(26px) scale(0.9);
   }
   100% {
-    transform: translate(10px, -45px) scale(0.3);
+    transform: translateY(32px) scale(1.5, 0.35);
+    opacity: 0;
+  }
+}
+
+@keyframes luxRippleExpand {
+  0%, 70% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
     opacity: 0;
   }
 }
