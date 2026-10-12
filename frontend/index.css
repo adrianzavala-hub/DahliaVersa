@@ -2782,217 +2782,257 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO FLORA HIDRÁULICA DE CRISTAL (ESTILO DAHLIA MODERNA) --- */
+/* --- DISEÑO MONUMENTAL, GRANDE Y COMPLEJO (DAHLIA HIDRÁULICA) --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -45px;
-  right: 22px;
-  width: 50px;
-  height: 75px;
+  top: -75px;
+  right: 18px;
+  width: 90px;
+  height: 110px;
   pointer-events: none;
   z-index: 35;
 }
 
-/* 1. Base anclada firmemente en la esquina */
-.flora-core-anchor {
+/* 1. Base anclada firmemente al borde superior derecho */
+.grand-flora-anchor {
   position: absolute;
   top: 0;
   right: 0;
-  width: 36px;
-  height: 60px;
+  width: 60px;
+  height: 90px;
 }
 
-/* 2. Núcleo central / Medidor de presión estético */
-.flora-center-hub {
+/* 2. Sistema Complejo de Pétalos de Cristal Translúcido */
+.grand-petal {
   position: absolute;
-  top: 18px;
-  right: 10px;
-  width: 16px;
-  height: 16px;
-  background: rgba(125, 95, 105, 0.95);
-  border: 1.5px solid #bae6fd;
+  background: linear-gradient(135deg, rgba(226, 169, 179, 0.85) 0%, rgba(125, 95, 105, 0.95) 100%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+/* Pétalos principales en cruz */
+.gp-top { top: 4px; right: 20px; width: 20px; height: 26px; border-radius: 10px 10px 4px 4px; }
+.gp-right { top: 22px; right: 2px; width: 26px; height: 20px; border-radius: 4px 10px 10px 4px; }
+.gp-bottom { top: 38px; right: 20px; width: 20px; height: 26px; border-radius: 4px 4px 10px 10px; }
+.gp-left { top: 22px; right: 32px; width: 26px; height: 20px; border-radius: 10px 4px 4px 10px; }
+
+/* Pétalos diagonales de fondo (mayor complejidad geométrica) */
+.gp-north-west { top: 8px; right: 34px; width: 16px; height: 16px; border-radius: 10px 4px 4px 4px; opacity: 0.85; }
+.gp-north-east { top: 8px; right: 10px; width: 16px; height: 16px; border-radius: 4px 10px 4px 4px; opacity: 0.85; }
+.gp-south-west { top: 36px; right: 34px; width: 16px; height: 16px; border-radius: 4px 4px 4px 10px; opacity: 0.85; }
+.gp-south-east { top: 36px; right: 10px; width: 16px; height: 16px; border-radius: 4px 4px 10px 4px; opacity: 0.85; }
+
+/* 3. Núcleo Avanzado con Doble Medidor Cóncavo */
+.grand-core-hub {
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  width: 24px;
+  height: 24px;
+  background: rgba(125, 95, 105, 0.98);
+  border: 2px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.7), inset 0 2px 4px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 4;
+  z-index: 5;
 }
 
-.flora-gauge-needle {
+.grand-gauge-outer {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 1px dashed #7dd3fc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grand-gauge-inner {
+  width: 10px;
+  height: 10px;
+  background: #7d5f69;
+  border-radius: 50%;
+  position: relative;
+}
+
+.grand-needle-primary {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 5px;
+  width: 8px;
   height: 1.5px;
   background: #38bdf8;
   border-radius: 1px;
   transform-origin: left center;
   transform: translateY(-50%);
-  animation: floraNeedleMove 2.2s infinite ease-in-out alternate;
+  animation: grandNeedleSpin 2s infinite ease-in-out alternate;
 }
 
-/* 3. Pétalos translúcidos envolventes (Efecto cristal) */
-.flora-petal {
+.grand-needle-secondary {
   position: absolute;
-  background: linear-gradient(135deg, rgba(226, 169, 179, 0.85) 0%, rgba(125, 95, 105, 0.9) 100%);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 1px;
+  background: #ffffff;
+  transform-origin: left center;
+  transform: translateY(-50%);
+  animation: grandNeedleSpinAlt 1.5s infinite ease-in-out alternate;
 }
 
-.p-top {
-  top: 8px;
-  right: 13px;
-  width: 10px;
-  height: 14px;
-  border-radius: 6px 6px 2px 2px;
-}
-
-.p-right {
-  top: 21px;
-  right: 2px;
-  width: 14px;
-  height: 10px;
-  border-radius: 2px 6px 6px 2px;
-}
-
-.p-bottom {
-  top: 27px;
-  right: 13px;
-  width: 10px;
-  height: 14px;
-  border-radius: 2px 2px 6px 6px;
-}
-
-.p-left {
-  top: 21px;
-  right: 22px;
-  width: 14px;
-  height: 10px;
-  border-radius: 6px 2px 2px 6px;
-}
-
-/* 4. Rocío y fugas laterales estilizadas */
-.flora-spray {
+/* 4. Sistema de Fugas Laterales Dobles */
+.grand-side-spray {
   position: absolute;
-  top: 24px;
-  width: 12px;
+  top: 30px;
+  width: 22px;
+  height: 5px;
+  z-index: 4;
+}
+
+.grand-side-spray.left-primary {
+  left: -16px;
+}
+
+.grand-side-spray.right-primary {
+  right: -2px;
+}
+
+.grand-spray-beam {
+  position: absolute;
+  top: 1px;
+  width: 20px;
   height: 3px;
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
-  box-shadow: 0 0 8px #38bdf8;
-  z-index: 3;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: grandBeamPulse 0.75s infinite ease-in-out;
 }
 
-.flora-spray.left {
-  left: -8px;
+.grand-side-spray.left-primary .grand-spray-beam {
+  right: 0;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.15));
-  animation: floraSprayLeft 0.8s infinite ease-in-out;
 }
 
-.flora-spray.right {
-  right: 18px;
-  animation: floraSprayRight 0.8s infinite ease-in-out;
+.grand-side-spray.right-primary .grand-spray-beam {
+  left: 0;
 }
 
-.flora-dew-drop {
+.grand-spray-sparkle {
   position: absolute;
   top: -1px;
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   background: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 8px #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
 }
 
-.flora-spray.left .flora-dew-drop {
-  left: -4px;
-  animation: floraDropLeft 1.3s infinite ease-in-out;
+.grand-side-spray.left-primary .grand-spray-sparkle {
+  left: -8px;
+  animation: grandSparkleLeft 1.2s infinite ease-in-out;
 }
 
-.flora-spray.right .flora-dew-drop {
-  right: -4px;
-  animation: floraDropRight 1.3s infinite ease-in-out;
+.grand-side-spray.right-primary .grand-spray-sparkle {
+  right: -8px;
+  animation: grandSparkleRight 1.2s infinite ease-in-out;
 }
 
-/* 5. Columna de agua, gota perlada y ondas inferiores */
-.flora-water-column {
+/* 5. Cascada Central, Gota Pesada y Doble Onda de Choque */
+.grand-cascade-channel {
   position: absolute;
-  bottom: -14px;
-  right: 16px;
+  bottom: -22px;
+  right: 26px;
+  width: 8px;
+  height: 25px;
+  z-index: 4;
+}
+
+.grand-stream-line {
+  position: absolute;
+  top: 0;
+  left: 2px;
   width: 4px;
-  height: 14px;
+  height: 20px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
-  box-shadow: 0 0 8px #38bdf8;
-  z-index: 3;
+  box-shadow: 0 0 10px #38bdf8;
 }
 
-.flora-pearl-drop {
+.grand-heavy-drop {
   position: absolute;
-  bottom: -18px;
-  right: 15px;
-  width: 6px;
-  height: 8px;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 11px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
-  box-shadow: 0 0 10px #38bdf8;
-  animation: floraDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
-  z-index: 3;
+  box-shadow: 0 0 12px #38bdf8;
+  animation: grandDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.flora-water-ripple {
+.grand-ripple-wave {
   position: absolute;
-  bottom: -24px;
-  right: 12px;
-  width: 12px;
-  height: 4px;
-  border: 1.5px solid rgba(56, 189, 248, 0.8);
+  bottom: -14px;
+  left: -4px;
+  border: 1.5px solid rgba(56, 189, 248, 0.85);
   border-radius: 50%;
-  animation: floraRippleExpand 1.3s infinite ease-out;
-  z-index: 3;
+  animation: grandRippleExpand 1.3s infinite ease-out;
 }
 
-/* --- ANIMACIONES --- */
-@keyframes floraNeedleMove {
-  0% { transform: translateY(-50%) rotate(-35deg); }
-  100% { transform: translateY(-50%) rotate(85deg); }
+.r-one {
+  width: 16px;
+  height: 6px;
 }
 
-@keyframes floraSprayLeft {
-  0%, 100% { transform: scaleX(0.85); opacity: 0.6; }
-  50% { transform: scaleX(1.15); opacity: 1; }
+.r-two {
+  width: 8px;
+  height: 3px;
+  animation-delay: 0.65s;
 }
 
-@keyframes floraSprayRight {
-  0%, 100% { transform: scaleX(0.85); opacity: 0.6; }
-  50% { transform: scaleX(1.15); opacity: 1; }
+/* --- ANIMACIONES DE ALTA FIDELIDAD --- */
+@keyframes grandNeedleSpin {
+  0% { transform: translateY(-50%) rotate(-45deg); }
+  100% { transform: translateY(-50%) rotate(110deg); }
 }
 
-@keyframes floraDropLeft {
-  0% { transform: translateX(0) scale(0.5); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateX(-10px) scale(1.1); opacity: 0; }
+@keyframes grandNeedleSpinAlt {
+  0% { transform: translateY(-50%) rotate(90deg); }
+  100% { transform: translateY(-50%) rotate(-60deg); }
 }
 
-@keyframes floraDropRight {
-  0% { transform: translateX(0) scale(0.5); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateX(10px) scale(1.1); opacity: 0; }
+@keyframes grandBeamPulse {
+  0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
+  50% { transform: scaleX(1.25); opacity: 1; }
 }
 
-@keyframes floraDropFall {
+@keyframes grandSparkleLeft {
+  0% { transform: translateX(0) scale(0.4); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateX(-18px) scale(1.3); opacity: 0; }
+}
+
+@keyframes grandSparkleRight {
+  0% { transform: translateX(0) scale(0.4); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateX(18px) scale(1.3); opacity: 0; }
+}
+
+@keyframes grandDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
-  25% { opacity: 1; transform: translateY(3px) scale(1); }
-  85% { opacity: 1; transform: translateY(10px) scale(0.9); }
-  100% { transform: translateY(14px) scale(1.3, 0.35); opacity: 0; }
+  20% { opacity: 1; transform: translateY(6px) scale(1); }
+  85% { opacity: 1; transform: translateY(22px) scale(0.9); }
+  100% { transform: translateY(28px) scale(1.5, 0.35); opacity: 0; }
 }
 
-@keyframes floraRippleExpand {
-  0%, 70% { transform: scale(0.2); opacity: 0; }
-  80% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(2.2); opacity: 0; }
+@keyframes grandRippleExpand {
+  0%, 60% { transform: scale(0.2); opacity: 0; }
+  75% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
