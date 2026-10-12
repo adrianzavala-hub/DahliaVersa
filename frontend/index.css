@@ -2462,101 +2462,67 @@ body.modal-active .logo-icon .dahlia-center {
 }
 .seg-modal-lamp-external {
   position: absolute;
-  top: -35px;   /* Distancia hacia arriba por fuera del borde */
-  left: -20px;  /* Distancia hacia la izquierda por fuera del borde */
-  width: 50px;
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 25;
-  pointer-events: none; /* No interfiere con clics en el formulario */
-}
-
-/* Base de montaje (el círculo en la esquina del modal) */
-.ext-lamp-arm-base {
-  width: 12px;
-  height: 12px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  position: absolute;
-  top: 0;
-  left: 12px;
-}
-
-/* Brazo curvo ornamental: Alineado y proporcionado */
-.ext-lamp-arm-curve {
-  width: 26px;
-  height: 22px;
-  border: 4px solid rgba(255, 255, 255, 0.85);
-  border-top: none;
-  border-right: none;
-  border-radius: 0 0 0 16px; /* Curva suave hacia abajo e izquierda */
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Cabezal de la lámpara: Posicionado al final del brazo */
-.ext-lamp-head {
-  width: 32px;
-  height: 20px;
-  /* Gradiente armónico con tu paleta rosado/marrón */
-  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 14px 14px 4px 4px;
-  position: absolute;
-  top: 24px;
-  left: 2px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end; /* Alinea la bombilla a la parte inferior del cabezal */
-  padding-bottom: 3px;
-}
-
-/* Bombilla central parpadeante en azul */
-.ext-lamp-bulb {
-  width: 14px;
-  height: 14px;
-  background: #ffffff;
-  border-radius: 50%;
-  /* Animación de parpadeo (glitch) azul */
-  animation: lampGlitchExternalBlue 3.5s infinite;
-  box-shadow: 0 0 12px 3px #7dd3fc, 0 0 25px 6px #38bdf8;
-}
-
-/* Resplandor ambiental exterior azul */
-.ext-lamp-glow {
-  position: absolute;
-  top: 15px;
-  left: -15px;
-  width: 44px;
-  height: 44px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(125, 211, 252, 0.1) 60%, transparent 100%);
-  border-radius: 50%;
-  /* Animación de pulso del resplandor */
-  animation: lampGlowPulse 3.5s infinite;
+  top: -20px; /* Posicionamiento exacto por fuera */
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  z-index: 30;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* --- DEFINICIÓN DE ANIMACIONES --- */
+/* La esfera de luz con parpadeo azul */
+.ext-lamp-bulb {
+  width: 30px;
+  height: 30px;
+  background: #ffffff; /* Núcleo blanco brillante */
+  border-radius: 50%; /* Esfera perfecta */
+  
+  /* Borde sutil del color rosado claro de la paleta */
+  border: 2px solid #e2a9b3; 
+  
+  /* Sombra base y resplandor azul claro */
+  box-shadow: 0 0 10px 3px #7dd3fc, 0 0 20px 6px #38bdf8;
+  
+  /* Animación de parpadeo (glitch) e intensidad azul */
+  animation: cleanLampGlitch 3.5s infinite ease-in-out;
+}
 
-@keyframes lampGlitchExternalBlue {
+/* Soporte superior mínimo (del color rosado oscuro de la paleta) */
+.ext-lamp-head {
+  position: absolute;
+  top: 0px;
+  width: 12px;
+  height: 6px;
+  background: #7d5f69; 
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Se eliminan el brazo curvo y el resplandor antiguo para mayor limpieza */
+.ext-lamp-arm-curve,
+.ext-lamp-glow,
+.ext-lamp-arm-base {
+  display: none !important;
+}
+
+/* --- ANIMACIÓN DE PARPADEO LIMPIA --- */
+@keyframes cleanLampGlitch {
   0%, 100% {
     opacity: 1;
     background: #ffffff;
     box-shadow: 0 0 15px 4px #7dd3fc, 0 0 30px 8px #38bdf8;
   }
   3%, 9%, 15%, 25%, 78%, 85% {
-    opacity: 0.15;
-    box-shadow: 0 0 2px #7dd3fc;
-    background: #bae6fd;
+    opacity: 0.2; /* Apagado breve */
+    background: #bae6fd; /* Azul muy claro */
+    box-shadow: 0 0 3px #7dd3fc;
   }
   6%, 12%, 20%, 28%, 82%, 88% {
-    opacity: 1;
-    background: #e0f2fe;
+    opacity: 1; /* Encendido intenso */
+    background: #e0f2fe; /* Blanco azulado */
     box-shadow: 0 0 18px 5px #7dd3fc, 0 0 35px 10px #38bdf8;
   }
   92% {
@@ -2568,11 +2534,4 @@ body.modal-active .logo-icon .dahlia-center {
     background: #ffffff;
     box-shadow: 0 0 20px 6px #7dd3fc, 0 0 40px 12px #38bdf8;
   }
-}
-
-@keyframes lampGlowPulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  6%, 15%, 25% { transform: scale(0.6); opacity: 0.2; }
-  12%, 20%, 28% { transform: scale(1.2); opacity: 1; }
-  82% { transform: scale(0.9); opacity: 0.5; }
 }
