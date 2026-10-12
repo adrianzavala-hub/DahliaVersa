@@ -399,6 +399,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Al cerrar el modal:
+    if (btnCloseModal && modalLocationReport) {
+        btnCloseModal.addEventListener("click", () => {
+            modalLocationReport.classList.remove('active');
+            body.classList.remove('modal-active');
+            setTimeout(() => modalLocationReport.style.display = 'none', 400);
+        });
+    }
+
     // 1. Evento al escribir en tiempo real (Generar coincidencias de autocompletado)
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {

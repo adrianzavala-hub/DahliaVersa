@@ -534,6 +534,7 @@ body.modal-active .logo-icon .dahlia-center {
   max-width: 480px;
   margin-top: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(226, 169, 179, 0.1);
+  z-index: 50;
 }
 
 .hero-search-input {
@@ -3086,35 +3087,29 @@ body.modal-active .logo-icon .dahlia-center {
   70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
   100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
 }
-
-/* --- ESTILOS PARA EL AUTOCOMPLETADO DEL BUSCADOR --- */
-.hero-search-container {
-  position: relative; /* Necesario para posicionar las sugerencias flotantes */
-}
-
 .mr-suggestions-box {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 8px);
   left: 0;
   width: 100%;
-  background: rgba(125, 95, 105, 0.92);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  z-index: 100;
-  max-height: 200px;
+  background: rgba(125, 95, 105, 0.95);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  z-index: 9999; /* Máxima prioridad para que flote sobre todo */
+  max-height: 220px;
   overflow-y: auto;
-  display: none; /* Oculto por defecto */
+  box-sizing: border-box;
 }
 
 .mr-suggestion-item {
-  padding: 10px 14px;
+  padding: 12px 18px;
   font-size: 0.9rem;
   color: #ffffff;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  transition: background 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .mr-suggestion-item:last-child {
@@ -3122,6 +3117,156 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .mr-suggestion-item:hover {
-  background: rgba(56, 189, 248, 0.3);
+  background: rgba(56, 189, 248, 0.35);
   color: #bae6fd;
+}
+
+/* --- CORRECCIÓN DE LA VENTANA MODAL DE UBICACIÓN Y REPORTE --- */
+.mr-nico-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(40, 25, 35, 0.65);
+  backdrop-filter: blur(10px);
+  display: none; /* Controlado por JS */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Clase que activa la animación de aparición */
+.mr-nico-overlay.active {
+  opacity: 1;
+}
+
+/* Tarjeta principal del modal con centrado perfecto y scroll interno */
+.mr-nico-card {
+  position: relative;
+  background: rgba(125, 95, 105, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 24px;
+  padding: 30px;
+  width: 480px;
+  max-width: 90vw;
+  max-height: 85vh;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mr-nico-overlay.active .mr-nico-card {
+  transform: scale(1);
+}
+
+/* Contenedor con scroll interno para que los campos y checkboxes no desborden */
+.mr-nico-scroll {
+  overflow-y: auto;
+  max-height: 55vh;
+  padding-right: 4px;
+  margin-bottom: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+.mr-nico-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mr-nico-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+}
+
+/* Estructura interna de los campos del formulario modal */
+.mr-nico-title {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.mr-nico-subtitle {
+  color: #bae6fd;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.mr-nico-group {
+  margin-bottom: 14px;
+}
+
+.mr-nico-label {
+  display: block;
+  font-size: 0.82rem;
+  color: #ffffff;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.mr-nico-field {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.mr-nico-field:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.mr-nico-field::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Botones de acción del modal */
+.mr-nico-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.mr-nico-btn {
+  flex: 1;
+  padding: 10px;
+  background: linear-gradient(135deg, #38bdf8, #0284c7);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+  transition: all 0.2s ease;
+}
+
+.mr-nico-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.mr-nico-btn-alt {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+.mr-nico-btn-alt:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
