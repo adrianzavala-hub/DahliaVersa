@@ -2223,7 +2223,8 @@ body.modal-active .logo-icon .dahlia-center {
   }
 }
 
-/* Modal Seguimiento Independiente - Más pequeño y luminoso */
+/* --- MODAL DE SEGUIMIENTO (Diseño Compacto, Luminoso y Estilizado) --- */
+
 .modal-overlay-seguimiento {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -2235,47 +2236,68 @@ body.modal-active .logo-icon .dahlia-center {
   transition: opacity 0.35s ease, visibility 0.35s ease;
   z-index: 2000;
 }
+
 .modal-overlay-seguimiento.active {
   opacity: 1; visibility: visible; pointer-events: auto;
 }
+
 .modal-card-seguimiento {
   background: rgba(125, 95, 105, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(226, 169, 179, 0.5);
-  padding: 24px 30px; border-radius: 24px;
-  width: 85%; max-width: 400px; text-align: left; /* Más compacto y pequeño */
+  padding: 24px 30px; 
+  border-radius: 24px;
+  width: 85%; max-width: 400px; 
+  text-align: left;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(226, 169, 179, 0.15);
   transform: translateY(15px) scale(0.95);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2003;
-  display: flex; flex-direction: column; max-height: 80vh;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); 
+  z-index: 2003;
+  display: flex; flex-direction: column; 
+  max-height: 80vh;
   position: relative;
 }
+
 .modal-overlay-seguimiento.active .modal-card-seguimiento {
   transform: translateY(0) scale(1);
 }
+
 .modal-card-seguimiento h2 {
-  text-align: center; color: #ffffff; margin-bottom: 14px;
-  font-size: 1.25rem; font-weight: 700;
+  text-align: center; 
+  color: #ffffff; 
+  margin-bottom: 14px;
+  font-size: 1.25rem; 
+  font-weight: 700;
   border-bottom: 1px solid rgba(226, 169, 179, 0.3);
   padding-bottom: 10px;
   letter-spacing: 0.4px;
 }
+
 .modal-body-scroll-seg {
-  overflow-y: auto; max-height: 45vh; padding-right: 4px; margin-bottom: 15px;
-}
-.seg-step {
-  margin-bottom: 12px; padding-bottom: 10px; 
-  border-bottom: 1px solid rgba(226, 169, 179, 0.2);
-}
-.seg-step h3 {
-  font-size: 0.85rem; color: #ffffff; margin-bottom: 4px; font-weight: 600;
+  overflow-y: auto; 
+  max-height: 45vh; 
+  padding-right: 4px; 
+  margin-bottom: 15px;
 }
 
-/* Campos de texto y Selector con diseño claro y elegante */
+.seg-step {
+  margin-bottom: 12px; 
+  padding-bottom: 10px; 
+  border-bottom: 1px solid rgba(226, 169, 179, 0.2);
+}
+
+.seg-step h3 {
+  font-size: 0.85rem; 
+  color: #ffffff; 
+  margin-bottom: 6px; 
+  font-weight: 600;
+}
+
+/* Campos de texto (Folio y Nombre) */
 .seg-input-field {
   width: 100%; 
-  background: rgba(255, 255, 255, 0.2); /* Fondo claro translúcido */
+  background: rgba(255, 255, 255, 0.25); 
   border: 1px solid rgba(226, 169, 179, 0.4); 
   padding: 10px 12px;
   border-radius: 10px; 
@@ -2285,63 +2307,24 @@ body.modal-active .logo-icon .dahlia-center {
   outline: none; 
   margin-top: 4px;
   transition: all 0.3s ease;
-  appearance: none; /* Mejora la apariencia del select en varios navegadores */
 }
-.seg-input-field option {
-  background: #d8a4b0; /* Color armónico con el tema para las opciones desplegables */
-  color: #ffffff;
-  padding: 8px;
-}
+
 .seg-input-field::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
+
 .seg-input-field:focus {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   border-color: #38bdf8; 
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
-.seg-result-box {
-  display: none; margin-top: 14px; padding: 12px;
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 12px;
-}
-.seg-result-text { margin: 0 0 6px 0; font-size: 0.85rem; color: #ffffff; }
-.seg-result-text span { color: #bae6fd; font-weight: 700; }
-.seg-result-obs { margin: 0; font-size: 0.8rem; color: #fbe8ec; line-height: 1.3; }
-.seg-actions-container { display: flex; gap: 10px; margin-top: 10px; }
-
-/* Botones claros, estilizados y con acentos azules */
-.btn-seg-action {
-  align-self: center; width: 100%; max-width: 180px;
-  background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
-  color: #0f172a; border: 1px solid rgba(255, 255, 255, 0.6);
-  padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 0.85rem;
-  cursor: pointer; box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin: 0;
-}
-.btn-seg-alt {
-  background: rgba(255, 255, 255, 0.25); /* Botón claro no obscuro */
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-.btn-seg-action:hover {
-  transform: translateY(-2px) scale(1.02);
-  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-  box-shadow: 0 6px 20px rgba(125, 211, 252, 0.5);
-}
-.btn-seg-alt:hover {
-  background: rgba(255, 255, 255, 0.4);
-  color: #0f172a;
-}
-/* Grupo de opciones tipo Checkbox estilizadas */
+/* Grupo de Checkboxes Estilizados */
 .seg-checkbox-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .seg-checkbox-card {
@@ -2349,8 +2332,8 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(226, 169, 179, 0.4);
-  padding: 10px 14px;
-  border-radius: 12px;
+  padding: 9px 12px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   user-select: none;
@@ -2361,17 +2344,15 @@ body.modal-active .logo-icon .dahlia-center {
   border-color: #38bdf8;
 }
 
-/* Ocultar el input checkbox real */
 .seg-hidden-check {
   display: none;
 }
 
-/* Casilla visual personalizada */
 .seg-checkbox-box {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border: 2px solid rgba(255, 255, 255, 0.8);
-  border-radius: 6px;
+  border-radius: 5px;
   margin-right: 10px;
   display: flex;
   align-items: center;
@@ -2381,12 +2362,11 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .seg-checkbox-label {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: #ffffff;
   font-weight: 500;
 }
 
-/* Estado cuando el checkbox está seleccionado (activo) */
 .seg-hidden-check:checked + .seg-checkbox-box {
   background: #38bdf8;
   border-color: #38bdf8;
@@ -2396,7 +2376,7 @@ body.modal-active .logo-icon .dahlia-center {
 .seg-hidden-check:checked + .seg-checkbox-box::after {
   content: '✓';
   color: #0f172a;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
 }
 
@@ -2408,4 +2388,74 @@ body.modal-active .logo-icon .dahlia-center {
 .seg-checkbox-card:has(.seg-hidden-check:checked) {
   background: rgba(56, 189, 248, 0.15);
   border-color: #38bdf8;
+}
+
+/* Caja de Resultados */
+.seg-result-box {
+  display: none; 
+  margin-top: 14px; 
+  padding: 12px;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4); 
+  border-radius: 12px;
+}
+
+.seg-result-text { 
+  margin: 0 0 6px 0; 
+  font-size: 0.85rem; 
+  color: #ffffff; 
+}
+
+.seg-result-text span { 
+  color: #bae6fd; 
+  font-weight: 700; 
+}
+
+.seg-result-obs { 
+  margin: 0; 
+  font-size: 0.8rem; 
+  color: #fbe8ec; 
+  line-height: 1.3; 
+}
+
+.seg-actions-container { 
+  display: flex; 
+  gap: 10px; 
+  margin-top: 10px; 
+}
+
+/* Botones Claros y Estilizados */
+.btn-seg-action {
+  align-self: center; 
+  width: 100%; 
+  max-width: 180px;
+  background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
+  color: #0f172a; 
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 10px 20px; 
+  border-radius: 12px; 
+  font-weight: 700; 
+  font-size: 0.85rem;
+  cursor: pointer; 
+  box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0;
+}
+
+.btn-seg-alt {
+  background: rgba(255, 255, 255, 0.25); 
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-seg-action:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  box-shadow: 0 6px 20px rgba(125, 211, 252, 0.5);
+}
+
+.btn-seg-alt:hover {
+  background: rgba(255, 255, 255, 0.4);
+  color: #0f172a;
 }
