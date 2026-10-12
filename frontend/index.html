@@ -232,60 +232,57 @@
                     </div>
                 </div>
             </div>
-
-    <!-- VENTANA MODAL: MAPA DE APROXIMACIÓN Y REPORTE CON FILTROS -->
-    <div class="mr-nico-overlay" id="modalLocationReport" style="display: none;">
-        <div class="mr-nico-card mr-wide-card">
+<!-- VENTANA MODAL INDEPENDIENTE: MAPA DE APROXIMACIÓN Y REPORTE -->
+    <div class="dv-modal-overlay" id="modalLocationReport">
+        <div class="dv-modal-card">
             
-            <!-- Aquí puedes mantener tu elemento decorativo superior derecho (ej. la Dahlia o Llave) -->
-            <h2 class="mr-nico-title">Reporte de Infraestructura</h2>
-            <p class="mr-nico-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
+            <h2 class="dv-modal-title">Reporte de Infraestructura</h2>
+            <p class="dv-modal-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
             
-            <div class="mr-nico-scroll">
+            <div class="dv-modal-scroll">
                 
                 <!-- Mapa de aproximación visual -->
-                <div class="mr-map-preview-box">
-                    <div class="mr-map-pin"></div>
-                    <span class="mr-map-label" id="mrMapLabelText">Ubicación aproximada en zona</span>
+                <div class="dv-map-preview-box">
+                    <div class="dv-map-pin"></div>
+                    <span class="dv-map-label" id="mrMapLabelText">Ubicación aproximada en zona</span>
                 </div>
 
                 <form id="mrReportForm">
-                    <div class="mr-nico-group">
-                        <label class="mr-nico-label">Nombre del Ciudadano</label>
-                        <input type="text" id="mrInputName" placeholder="Tu nombre completo" class="mr-nico-field" required>
+                    <div class="dv-modal-group">
+                        <label class="dv-modal-label">Nombre del Ciudadano</label>
+                        <input type="text" id="mrInputName" placeholder="Tu nombre completo" class="dv-modal-field" required>
                     </div>
 
-                    <div class="mr-nico-group">
-                        <label class="mr-nico-label">Tipo de Problema (Filtro para Base de Datos)</label>
+                    <div class="dv-modal-group">
+                        <label class="dv-modal-label">Tipo de Problema (Filtro para Base de Datos)</label>
                         
-                        <!-- Checkboxes para clasificar y filtrar en la BD -->
-                        <div class="mr-checkbox-grid">
-                            <label class="mr-checkbox-label">
-                                <input type="checkbox" name="tipo_fuga" value="Fuga de Agua Potable" class="mr-checkbox"> Fuga de Agua Potable
+                        <div class="dv-checkbox-grid">
+                            <label class="dv-checkbox-label">
+                                <input type="checkbox" name="tipo_fuga" value="Fuga de Agua Potable" class="dv-checkbox"> Fuga de Agua Potable
                             </label>
-                            <label class="mr-checkbox-label">
-                                <input type="checkbox" name="tipo_fuga" value="Fuga de Drenaje" class="mr-checkbox"> Fuga de Drenaje / Aguas Negras
+                            <label class="dv-checkbox-label">
+                                <input type="checkbox" name="tipo_fuga" value="Fuga de Drenaje" class="dv-checkbox"> Fuga de Drenaje / Aguas Negras
                             </label>
-                            <label class="mr-checkbox-label">
-                                <input type="checkbox" name="tipo_fuga" value="Bache o Hundimiento" class="mr-checkbox"> Bache / Hundimiento por Fuga
+                            <label class="dv-checkbox-label">
+                                <input type="checkbox" name="tipo_fuga" value="Bache o Hundimiento" class="dv-checkbox"> Bache / Hundimiento por Fuga
                             </label>
-                            <label class="mr-checkbox-label">
-                                <input type="checkbox" name="tipo_fuga" value="Sin Presion" class="mr-checkbox"> Falta de Suministro / Baja Presión
+                            <label class="dv-checkbox-label">
+                                <input type="checkbox" name="tipo_fuga" value="Sin Presion" class="dv-checkbox"> Falta de Suministro / Baja Presión
                             </label>
                         </div>
                     </div>
 
-                    <div class="mr-nico-group">
-                        <label class="mr-nico-label">Descripción del Incidente</label>
-                        <textarea id="mrInputDesc" placeholder="Detalles adicionales de la afectación..." class="mr-nico-field mr-textarea" rows="3"></textarea>
+                    <div class="dv-modal-group">
+                        <label class="dv-modal-label">Descripción del Incidente</label>
+                        <textarea id="mrInputDesc" placeholder="Detalles adicionales de la afectación..." class="dv-modal-field dv-textarea" rows="3"></textarea>
                     </div>
                 </form>
 
             </div>
 
-            <div class="mr-nico-actions">
-                <button class="mr-nico-btn" id="mrBtnSubmitReport">Enviar y Registrar</button>
-                <button class="mr-nico-btn mr-nico-btn-alt" id="mrBtnCloseModal">Cancelar</button>
+            <div class="dv-modal-actions">
+                <button type="button" class="dv-modal-btn" id="mrBtnSubmitReport">Enviar y Registrar</button>
+                <button type="button" class="dv-modal-btn dv-modal-btn-alt" id="mrBtnCloseModal">Cancelar</button>
             </div>
         </div>
     </div>

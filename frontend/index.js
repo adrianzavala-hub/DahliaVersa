@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cierre al hacer clic fuera de los modales
+    // Cierre global al hacer clic fuera de los modales
     window.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
             modalOverlay.classList.remove('active');
@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================================
-    // LÓGICA AVANZADA DEL BUSCADOR CON AUTOCOMPLETADO Y FILTROS
+    // LÓGICA AVANZADA DEL BUSCADOR CON AUTOCOMPLETADO Y MODAL INDEPENDIENTE
     // ==========================================================
     const searchInput = document.querySelector(".hero-search-input");
     const searchBtn = document.querySelector(".hero-search-btn");
@@ -362,6 +362,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const mapLabelText = document.getElementById("mrMapLabelText");
     const btnCloseModal = document.getElementById("mrBtnCloseModal");
     const btnSubmitReport = document.getElementById("mrBtnSubmitReport");
+
+    // Asegurar estado inicial oculto del modal independiente
+    if (modalLocationReport) modalLocationReport.style.display = 'none';
 
     // Base de datos simulada de calles/colonias para generar coincidencias
     const baseUbicaciones = [
@@ -385,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
         searchContainer.appendChild(suggestionsBox);
     }
 
-    // Función para abrir el modal de ubicación con la zona seleccionada
+    // Función para abrir el modal independiente con animación suave
     function abrirModalUbicacion(ubicacion) {
         if (ubicacion.trim() !== "") {
             if (locationText) locationText.textContent = `Ubicación aproximada: "${ubicacion}"`;
@@ -397,15 +400,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             if (suggestionsBox) suggestionsBox.style.display = "none";
         }
-    }
-
-    // Al cerrar el modal:
-    if (btnCloseModal && modalLocationReport) {
-        btnCloseModal.addEventListener("click", () => {
-            modalLocationReport.classList.remove('active');
-            body.classList.remove('modal-active');
-            setTimeout(() => modalLocationReport.style.display = 'none', 400);
-        });
     }
 
     // 1. Evento al escribir en tiempo real (Generar coincidencias de autocompletado)
@@ -471,9 +465,18 @@ document.addEventListener("DOMContentLoaded", () => {
         btnCloseModal.addEventListener("click", () => {
             modalLocationReport.classList.remove('active');
             body.classList.remove('modal-active');
-            setTimeout(() => modalLocationReport.style.display = 'none', 400);
+            setTimeout(() => modalLocationReport.style.display = 'none', 350);
         });
     }
+
+    // Permitir cierre al hacer clic fuera de la tarjeta del modal independiente
+    window.addEventListener('click', (e) => {
+        if (e.target === modalLocationReport) {
+            modalLocationReport.classList.remove('active');
+            body.classList.remove('modal-active');
+            setTimeout(() => modalLocationReport.style.display = 'none', 350);
+        }
+    });
 
     // 5. Enviar datos y checkboxes filtrados a la base de datos
     if (btnSubmitReport) {
@@ -510,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (modalLocationReport) {
                 modalLocationReport.classList.remove('active');
                 body.classList.remove('modal-active');
-                setTimeout(() => modalLocationReport.style.display = 'none', 400);
+                setTimeout(() => modalLocationReport.style.display = 'none', 350);
             }
             if (searchInput) searchInput.value = "";
             const formReport = document.getElementById("mrReportForm");
