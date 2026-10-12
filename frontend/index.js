@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Animación de aparición de estadísticas (CORREGIDO)
+    // Animación de aparición de estadísticas
     const statCards = document.querySelectorAll(".stat-card");
     statCards.forEach((card, index) => {
         setTimeout(() => {
@@ -352,21 +352,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================================
-    // LÓGICA AVANZADA DEL BUSCADOR CON AUTOCOMPLETADO Y MODAL INDEPENDIENTE
+    // LÓGICA AVANZADA DEL BUSCADOR, MAPA EN TIEMPO REAL Y MODAL
     // ==========================================================
     const searchInput = document.querySelector(".hero-search-input");
     const searchBtn = document.querySelector(".hero-search-btn");
     const searchContainer = document.querySelector(".hero-search-container");
     const modalLocationReport = document.getElementById("modalLocationReport");
     const locationText = document.getElementById("mrSelectedLocationText");
-    const mapLabelText = document.getElementById("mrMapLabelText");
     const btnCloseModal = document.getElementById("mrBtnCloseModal");
     const btnSubmitReport = document.getElementById("mrBtnSubmitReport");
 
-    // Asegurar estado inicial oculto del modal independiente
+    // Variables globales para el mapa de Leaflet
+    let modalMap = null;
+    let modalMarker = null;
+
     if (modalLocationReport) modalLocationReport.style.display = 'none';
 
-    // Base de datos simulada de calles/colonias para generar coincidencias
     const baseUbicaciones = [
         "Centro, Zumpango",
         "Barrio de San Pedro",
@@ -380,7 +381,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "San Bartolo Cuautlalpan"
     ];
 
-    // Crear dinámicamente el contenedor de sugerencias flotantes si no existe
     let suggestionsBox = document.querySelector(".mr-suggestions-box");
     if (!suggestionsBox && searchContainer) {
         suggestionsBox = document.createElement("div");
@@ -388,21 +388,78 @@ document.addEventListener("DOMContentLoaded", () => {
         searchContainer.appendChild(suggestionsBox);
     }
 
-    // Función para abrir el modal independiente con animación suave
+    // Inicializar o actualizar el mapa interactivo en tiempo real
+    function initModalMap(lat = 19.7942, lon = -99.1024) {
+        const mapContainer = document.getElementById('mapModal');
+        if (!mapContainer || typeof L === 'undefined') return;
+
+        if (modalMap) {
+            modalMap.setView([lat, lon], 15);
+            if (modalMarker) {
+                modalMarker.setLatLng([lat, lon]);
+            } else {
+                modalMarker = L.marker([lat, lon], { draggable: true }).addTo(modalMap);
+            }
+            setTimeout(() => modalMap.invalidateSize(), 200);
+            return;
+        }
+
+        modalMap = L.map('mapModal', {
+            zoomControl: false
+        }).setView([lat, lon], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(modalMap);
+
+        modalMarker = L.marker([lat, lon], { draggable: true }).addTo(modalMap);
+
+        modalMarker.on('dragend', function (event) {
+            const position = modalMarker.getLatLng();
+            const latLongInput = document.getElementById('latLongInput');
+            if (latLongInput) {
+                latLongInput.value = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
+            }
+        });
+
+        setTimeout(() => modalMap.invalidateSize(), 200);
+    }
+
     function abrirModalUbicacion(ubicacion) {
         if (ubicacion.trim() !== "") {
-            if (locationText) locationText.textContent = `Ubicación aproximada: "${ubicacion}"`;
-            if (mapLabelText) mapLabelText.textContent = `Zona aproximada: ${ubicacion}`;
+            if (locationText) locationText.textContent = `Ubicación: "${ubicacion}"`;
+            
             if (modalLocationReport) {
                 modalLocationReport.style.display = "flex";
-                setTimeout(() => modalLocationReport.classList.add('active'), 10);
+                setTimeout(() => {
+                    modalLocationReport.classList.add('active');
+                    
+                    // Renderizar el mapa por defecto en Zumpango
+                    initModalMap();
+
+                    // Obtener geolocalización GPS real en tiempo real del usuario
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            (position) => {
+                                const lat = position.coords.latitude;
+                                const lon = position.coords.longitude;
+                                initModalMap(lat, lon);
+                                const latLongInput = document.getElementById('latLongInput');
+                                if (latLongInput) latLongInput.value = `${lat}, ${lon}`;
+                            },
+                            () => {
+                                console.warn("Usando ubicación predeterminada por permisos del navegador.");
+                            }
+                        );
+                    }
+                }, 50);
                 body.classList.add('modal-active');
             }
             if (suggestionsBox) suggestionsBox.style.display = "none";
         }
     }
 
-    // 1. Evento al escribir en tiempo real (Generar coincidencias de autocompletado)
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {
             const query = e.target.value.toLowerCase().trim();
@@ -435,7 +492,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // 2. Abrir al presionar Enter en el input
         searchInput.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
                 e.preventDefault();
@@ -445,7 +501,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Abrir al hacer clic en el botón "Buscar"
     if (searchBtn) {
         searchBtn.addEventListener("click", () => {
             if (suggestionsBox) suggestionsBox.style.display = "none";
@@ -453,14 +508,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Ocultar sugerencias si se hace clic fuera del buscador
     document.addEventListener("click", (e) => {
         if (searchContainer && !searchContainer.contains(e.target)) {
             if (suggestionsBox) suggestionsBox.style.display = "none";
         }
     });
 
-    // 4. Cerrar modal de reporte por ubicación
     if (btnCloseModal && modalLocationReport) {
         btnCloseModal.addEventListener("click", () => {
             modalLocationReport.classList.remove('active');
@@ -469,7 +522,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Permitir cierre al hacer clic fuera de la tarjeta del modal independiente
     window.addEventListener('click', (e) => {
         if (e.target === modalLocationReport) {
             modalLocationReport.classList.remove('active');
@@ -478,14 +530,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 5. Enviar datos y checkboxes filtrados a la base de datos
     if (btnSubmitReport) {
         btnSubmitReport.addEventListener("click", () => {
             const citizenName = document.getElementById("mrInputName").value.trim();
-            const description = document.getElementById("mrInputDesc").value.trim();
+            const description = document.getElementById("regReferences").value.trim();
             const locationQuery = searchInput.value.trim();
 
-            const selectedCheckboxes = document.querySelectorAll('input[name="tipo_fuga"]:checked');
+            const selectedCheckboxes = document.querySelectorAll('input[name="tipo_reporte"]:checked');
             const filtersArray = Array.from(selectedCheckboxes).map(cb => cb.value);
 
             if (!citizenName) {
@@ -494,7 +545,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (filtersArray.length === 0) {
-                alert("Selecciona al menos un tipo de problema para clasificar el reporte.");
+                alert("Selecciona al menos un tipo de incidencia.");
                 return;
             }
 
@@ -506,9 +557,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 fecha: new Date().toISOString()
             };
 
-            console.log("Enviando reporte filtrado a la BD:", reportPayload);
+            console.log("Enviando reporte a la BD:", reportPayload);
 
-            alert(`¡Reporte registrado con éxito!\n\nUbicación: ${locationQuery}\nFiltros aplicados en BD: ${filtersArray.join(", ")}`);
+            alert(`¡Reporte registrado con éxito!\n\nUbicación: ${locationQuery}\nTipos seleccionados: ${filtersArray.join(", ")}`);
             
             if (modalLocationReport) {
                 modalLocationReport.classList.remove('active');
