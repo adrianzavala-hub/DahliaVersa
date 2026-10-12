@@ -2782,14 +2782,14 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO HIDRÁULICO DE LUJO (Minimalista, Estilizado y con Manómetro) --- */
+/* --- DISEÑO INDUSTRIAL COMPLEJO Y DETALLADO (Fuga con Manómetro) --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -52px;
-  right: -24px;
-  width: 65px;
-  height: 80px;
+  top: -62px;
+  right: -28px;
+  width: 70px;
+  height: 95px;
   pointer-events: none;
   z-index: 35;
   display: flex;
@@ -2797,111 +2797,167 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-/* 1. Base y tubo estilizado amurado de forma limpia */
-.lux-pipe-mount {
+/* 1. Brida de anclaje mural con relieve metálico */
+.complex-wall-flange {
   position: absolute;
-  top: 14px;
-  right: 6px;
-  width: 18px;
-  height: 24px;
-  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  top: 0;
+  right: 10px;
+  width: 24px;
+  height: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #e2a9b3 50%, #7d5f69 100%);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* 2. Manómetro / Círculo medidor de presión de alta gama */
-.lux-pressure-gauge {
+/* 2. Codo hidráulico estructural principal */
+.complex-pipe-elbow {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 20px;
+  height: 22px;
+  border: 6px solid #7d5f69;
+  border-top: none;
+  border-right: none;
+  border-radius: 0 0 0 14px;
+  box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(135deg, rgba(226, 169, 179, 0.3), rgba(125, 95, 105, 0.6));
+}
+
+/* 3. Manómetro circular de precisión (Círculo medidor) */
+.complex-gauge-dial {
   position: absolute;
   top: 8px;
-  right: 22px;
+  right: 32px;
   width: 24px;
   height: 24px;
-  background: rgba(125, 95, 105, 0.85);
-  backdrop-filter: blur(4px);
-  border: 2px solid #bae6fd;
+  background: rgba(125, 95, 105, 0.95);
+  backdrop-filter: blur(6px);
+  border: 2.5px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 14px #38bdf8, 0 4px 10px rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.lux-gauge-needle {
-  width: 10px;
+.complex-gauge-center {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #bae6fd;
+  border-radius: 50%;
+}
+
+.complex-gauge-needle {
+  width: 9px;
   height: 2px;
   background: #38bdf8;
   border-radius: 1px;
   transform-origin: right center;
-  animation: luxGaugeSway 2.5s infinite ease-in-out alternate;
+  animation: complexGaugeFluctuation 2.2s infinite ease-in-out alternate;
 }
 
-/* 3. Cabezal de salida de agua fluido */
-.lux-nozzle-head {
+/* 4. Volante de control lateral secundario */
+.complex-valve-wheel {
   position: absolute;
-  top: 36px;
-  right: 9px;
-  width: 12px;
+  top: 26px;
+  right: 24px;
+  width: 14px;
+  height: 6px;
+  background: #7d5f69;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.complex-valve-nut {
+  position: absolute;
+  top: -2px;
+  left: 4px;
+  width: 6px;
   height: 10px;
+  background: #e2a9b3;
+  border-radius: 2px;
+}
+
+/* 5. Zona de fisura con resplandor de alta presión */
+.complex-rupture-crack {
+  position: absolute;
+  top: 30px;
+  right: 16px;
+  width: 12px;
+  height: 9px;
   background: #bae6fd;
   border-radius: 0 0 6px 6px;
-  box-shadow: 0 0 10px #38bdf8;
+  box-shadow: 0 0 12px #38bdf8, 0 0 22px #7dd3fc;
 }
 
-/* 4. Chorro de agua cristalino continuo */
-.lux-water-stream {
+/* 6. Chorro de agua principal continuo */
+.complex-water-jet {
   position: absolute;
-  top: 45px;
-  right: 13px;
-  width: 4px;
-  height: 25px;
+  top: 38px;
+  right: 20px;
+  width: 5px;
+  height: 28px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.15));
-  border-radius: 2px;
-  box-shadow: 0 0 10px #38bdf8;
-  animation: luxStreamPulse 0.9s infinite ease-in-out;
+  border-radius: 3px;
+  box-shadow: 0 0 12px #38bdf8;
+  animation: complexJetPulse 0.75s infinite ease-in-out;
 }
 
-/* 5. Gota de agua cristalina y elegante con caída suave */
-.lux-crystal-drop {
+/* 7. Sistema dual de gotas pesadas en cascada */
+.complex-drop-heavy {
   position: absolute;
-  top: 43px;
-  right: 12px;
-  width: 6px;
-  height: 11px;
+  top: 37px;
+  right: 19px;
+  width: 7px;
+  height: 12px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
-  box-shadow: 0 0 12px #38bdf8;
-  animation: luxDropFall 1.5s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  box-shadow: 0 0 14px #38bdf8;
+  animation: complexDropFall 1.4s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.drop-two {
-  animation-delay: 0.75s;
+.drop-beta {
+  animation-delay: 0.7s;
   opacity: 0;
 }
 
-/* 6. Onda de impacto fluida en la base inferior */
-.lux-ripple-ring {
+/* 8. Doble anillo de ondas de impacto / salpicadura inferior */
+.complex-ripple-primary,
+.complex-ripple-secondary {
   position: absolute;
-  top: 72px;
-  right: 9px;
+  top: 76px;
+  right: 16px;
+  border: 1.5px solid rgba(56, 189, 248, 0.85);
+  border-radius: 50%;
+  animation: complexRippleExpand 1.4s infinite ease-out;
+}
+
+.complex-ripple-primary {
   width: 14px;
   height: 5px;
-  border: 1.5px solid rgba(56, 189, 248, 0.8);
-  border-radius: 50%;
-  animation: luxRippleExpand 1.5s infinite ease-out;
 }
 
-/* --- ANIMACIONES DE ALTA CALIDAD --- */
-@keyframes luxGaugeSway {
-  0% { transform: rotate(-50deg); }
-  100% { transform: rotate(100deg); }
+.complex-ripple-secondary {
+  width: 8px;
+  height: 3px;
+  animation-delay: 0.7s;
 }
 
-@keyframes luxStreamPulse {
-  0%, 100% { transform: scaleY(0.92); opacity: 0.7; }
-  50% { transform: scaleY(1.12); opacity: 1; }
+/* --- ANIMACIONES DE ALTA FIDELIDAD --- */
+@keyframes complexGaugeFluctuation {
+  0% { transform: rotate(-55deg); }
+  50% { transform: rotate(70deg); }
+  100% { transform: rotate(115deg); }
 }
 
-@keyframes luxDropFall {
+@keyframes complexJetPulse {
+  0%, 100% { transform: scaleY(0.9); opacity: 0.75; }
+  50% { transform: scaleY(1.15); opacity: 1; }
+}
+
+@keyframes complexDropFall {
   0% {
     transform: translateY(0) scale(0.4);
     opacity: 0;
@@ -2912,25 +2968,25 @@ body.modal-active .logo-icon .dahlia-center {
   }
   85% {
     opacity: 1;
-    transform: translateY(26px) scale(0.9);
+    transform: translateY(30px) scale(0.92);
   }
   100% {
-    transform: translateY(32px) scale(1.5, 0.35);
+    transform: translateY(38px) scale(1.6, 0.35);
     opacity: 0;
   }
 }
 
-@keyframes luxRippleExpand {
-  0%, 70% {
+@keyframes complexRippleExpand {
+  0%, 60% {
     transform: scale(0.2);
     opacity: 0;
   }
-  80% {
+  75% {
     transform: scale(1);
     opacity: 1;
   }
   100% {
-    transform: scale(2.2);
+    transform: scale(2.4);
     opacity: 0;
   }
 }
