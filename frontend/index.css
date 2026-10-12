@@ -2782,11 +2782,11 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO: CASCADA DE CRISTAL ARQUITECTÓNICA --- */
+/* --- DISEÑO: GEMA HIDRÁULICA ORBITAL --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  /* Anclaje exacto sobre el borde superior derecho de la tarjeta */
+  /* Anclaje milimétrico sobre el borde superior derecho de la tarjeta */
   top: -46px;
   right: 26px;
   width: 76px;
@@ -2795,7 +2795,7 @@ body.modal-active .logo-icon .dahlia-center {
   z-index: 35;
 }
 
-.arch-cascade-structure {
+.gem-orbital-anchor {
   position: absolute;
   top: 0;
   right: 0;
@@ -2803,80 +2803,75 @@ body.modal-active .logo-icon .dahlia-center {
   height: 80px;
 }
 
-/* 1. Placas arquitectónicas escalonadas de cristal */
-.arch-layer {
+/* 1. Cápsula / Gema de Cristal Ovoidal */
+.gem-crystal-capsule {
   position: absolute;
+  top: 4px;
+  right: 16px;
+  width: 28px;
+  height: 40px;
   background: linear-gradient(135deg, rgba(226, 169, 179, 0.9) 0%, rgba(125, 95, 105, 0.95) 100%);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  z-index: 2;
-}
-
-.top-plate {
-  top: 4px;
-  right: 15px;
-  width: 26px;
-  height: 14px;
-  border-radius: 7px 7px 3px 3px;
-}
-
-.mid-plate {
-  top: 17px;
-  right: 10px;
-  width: 36px;
-  height: 14px;
-  border-radius: 6px;
-}
-
-.base-plate {
-  top: 30px;
-  right: 5px;
-  width: 46px;
-  height: 18px;
-  border-radius: 4px 4px 8px 8px;
-}
-
-/* 2. Indicador de presión superior minimalista */
-.arch-precision-gauge {
-  position: absolute;
-  top: 7px;
-  right: 22px;
-  width: 12px;
-  height: 8px;
-  background: rgba(125, 95, 105, 0.98);
-  border: 1.5px solid #bae6fd;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), inset 0 0 10px rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5;
+  z-index: 2;
 }
 
-.arch-gauge-core {
-  width: 3px;
-  height: 3px;
+/* Anillos de sujeción metálicos decorativos */
+.gem-mount-ring {
+  position: absolute;
+  right: 14px;
+  width: 32px;
+  height: 4px;
+  background: linear-gradient(90deg, #e2a9b3, #7d5f69);
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+.gem-mount-ring.top { top: 2px; }
+.gem-mount-ring.bottom { top: 42px; }
+
+/* 2. Núcleo Interno con Órbitas Luminosas */
+.gem-inner-orbit {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 1px dashed #7dd3fc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+  animation: gemOrbitSpin 10s linear infinite;
+}
+
+.gem-core-dot {
+  width: 4px;
+  height: 4px;
   background: #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 4px #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
 }
 
-.arch-gauge-needle {
+.gem-orbit-needle {
   position: absolute;
   top: 50%;
-  left: 2px;
-  width: 6px;
-  height: 1.2px;
+  left: 50%;
+  width: 7px;
+  height: 1.5px;
   background: #38bdf8;
   border-radius: 1px;
   transform-origin: left center;
   transform: translateY(-50%);
-  animation: archNeedleSway 2s infinite ease-in-out alternate;
+  animation: gemNeedleSway 2.2s infinite ease-in-out alternate;
 }
 
-/* 3. Emisiones laterales de precisión */
-.arch-lateral-stream {
+/* 3. Fugas Laterales Simétricas */
+.gem-lateral-spray {
   position: absolute;
   top: 22px;
   width: 16px;
@@ -2884,15 +2879,15 @@ body.modal-active .logo-icon .dahlia-center {
   z-index: 4;
 }
 
-.arch-lateral-stream.left {
+.gem-lateral-spray.left {
   left: 2px;
 }
 
-.arch-lateral-stream.right {
+.gem-lateral-spray.right {
   right: -2px;
 }
 
-.arch-stream-beam {
+.gem-spray-beam {
   position: absolute;
   top: 0;
   width: 14px;
@@ -2900,19 +2895,19 @@ body.modal-active .logo-icon .dahlia-center {
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
-  animation: archBeamPulse 0.8s infinite ease-in-out;
+  animation: gemBeamPulse 0.8s infinite ease-in-out;
 }
 
-.arch-lateral-stream.left .arch-stream-beam {
+.gem-lateral-spray.left .gem-spray-beam {
   right: 0;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.15));
 }
 
-.arch-lateral-stream.right .arch-stream-beam {
+.gem-lateral-spray.right .gem-spray-beam {
   left: 0;
 }
 
-.arch-stream-drop {
+.gem-spray-sparkle {
   position: absolute;
   top: -1px;
   width: 4px;
@@ -2922,18 +2917,18 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.arch-lateral-stream.left .arch-stream-drop {
+.gem-lateral-spray.left .gem-spray-sparkle {
   left: -5px;
-  animation: archParticleLeft 1.3s infinite ease-in-out;
+  animation: gemParticleLeft 1.3s infinite ease-in-out;
 }
 
-.arch-lateral-stream.right .arch-stream-drop {
+.gem-lateral-spray.right .gem-spray-sparkle {
   right: -5px;
-  animation: archParticleRight 1.3s infinite ease-in-out;
+  animation: gemParticleRight 1.3s infinite ease-in-out;
 }
 
-/* 4. Canal de drenaje y ondas de choque inferiores */
-.arch-main-drain {
+/* 4. Cascada y Ondas de Choque inferiores */
+.gem-cascade-stream {
   position: absolute;
   bottom: 2px;
   right: 25px;
@@ -2942,7 +2937,7 @@ body.modal-active .logo-icon .dahlia-center {
   z-index: 4;
 }
 
-.arch-drain-flow {
+.gem-flow-line {
   position: absolute;
   top: 0;
   left: 1px;
@@ -2953,7 +2948,7 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.arch-drain-drop {
+.gem-heavy-drop {
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -2962,60 +2957,65 @@ body.modal-active .logo-icon .dahlia-center {
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: archDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: gemDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.arch-drain-ripple {
+.gem-ripple-ring {
   position: absolute;
   bottom: -10px;
   left: -3px;
   border: 1.5px solid rgba(56, 189, 248, 0.85);
   border-radius: 50%;
-  animation: archRippleExpand 1.3s infinite ease-out;
+  animation: gemRippleExpand 1.3s infinite ease-out;
 }
 
-.arch-drain-ripple.r1 {
+.gem-ripple-ring.r1 {
   width: 12px;
   height: 4px;
 }
 
-.arch-drain-ripple.r2 {
+.gem-ripple-ring.r2 {
   width: 6px;
   height: 2px;
   animation-delay: 0.65s;
 }
 
 /* --- ANIMACIONES --- */
-@keyframes archNeedleSway {
-  0% { transform: translateY(-50%) rotate(-30deg); }
-  100% { transform: translateY(-50%) rotate(70deg); }
+@keyframes gemOrbitSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-@keyframes archBeamPulse {
+@keyframes gemNeedleSway {
+  0% { transform: translateY(-50%) rotate(-35deg); }
+  100% { transform: translateY(-50%) rotate(85deg); }
+}
+
+@keyframes gemBeamPulse {
   0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
   50% { transform: scaleX(1.2); opacity: 1; }
 }
 
-@keyframes archParticleLeft {
+@keyframes gemParticleLeft {
   0% { transform: translateX(0) scale(0.4); opacity: 0; }
   40% { opacity: 1; }
   100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes archParticleRight {
+@keyframes gemParticleRight {
   0% { transform: translateX(0) scale(0.4); opacity: 0; }
   40% { opacity: 1; }
   100% { transform: translateX(14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes archDropFall {
+@keyframes gemDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
   20% { opacity: 1; transform: translateY(4px) scale(1); }
   85% { opacity: 1; transform: translateY(14px) scale(0.9); }
   100% { transform: translateY(18px) scale(1.4, 0.35); opacity: 0; }
 }
 
-@keyframes archRippleExpand {
+@keyframes gemRippleExpand {
   0%, 60% { transform: scale(0.2); opacity: 0; }
   75% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.4); opacity: 0; }
