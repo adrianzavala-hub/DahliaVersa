@@ -2782,7 +2782,7 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO: LOTO LÍQUIDO & GOTA SUSPENDIDA --- */
+/* --- DISEÑO: ABANICO DE PÉTALOS CRISTALINOS & FUENTE LUMÍNICA --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
@@ -2795,7 +2795,7 @@ body.modal-active .logo-icon .dahlia-center {
   z-index: 35;
 }
 
-.organic-lotus-anchor {
+.artisan-fluid-anchor {
   position: absolute;
   top: 0;
   right: 0;
@@ -2803,56 +2803,59 @@ body.modal-active .logo-icon .dahlia-center {
   height: 80px;
 }
 
-/* 1. Pétalos orgánicos fluidos (Efecto Loto Translúcido) */
-.lotus-petal {
+/* 1. Pétalos orgánicos en abanico asimétrico (Efecto Escultura de Cristal) */
+.artisan-petal {
   position: absolute;
-  background: linear-gradient(135deg, rgba(226, 169, 179, 0.88) 0%, rgba(125, 95, 105, 0.92) 100%);
+  background: linear-gradient(135deg, rgba(226, 169, 179, 0.9) 0%, rgba(125, 95, 105, 0.95) 100%);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
 
-.petal-top {
+.ap-one {
   top: 2px;
-  right: 18px;
-  width: 18px;
-  height: 24px;
-  border-radius: 50% 50% 20% 20%;
+  right: 22px;
+  width: 16px;
+  height: 26px;
+  border-radius: 50% 50% 10% 10%;
+  transform: rotate(-10deg);
 }
 
-.petal-right {
-  top: 17px;
-  right: 2px;
-  width: 24px;
+.ap-two {
+  top: 10px;
+  right: 6px;
+  width: 26px;
   height: 18px;
-  border-radius: 20% 50% 50% 20%;
+  border-radius: 10% 50% 50% 10%;
+  transform: rotate(15deg);
 }
 
-.petal-bottom {
-  top: 32px;
-  right: 18px;
-  width: 18px;
-  height: 24px;
-  border-radius: 20% 20% 50% 50%;
+.ap-three {
+  top: 24px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 30% 30% 50% 50%;
 }
 
-.petal-left {
-  top: 17px;
-  right: 32px;
-  width: 24px;
+.ap-four {
+  top: 14px;
+  right: 28px;
+  width: 22px;
   height: 18px;
-  border-radius: 50% 20% 20% 50%;
+  border-radius: 50% 10% 10% 50%;
+  transform: rotate(-15deg);
 }
 
-/* 2. Núcleo central de luz fluida */
-.lotus-liquid-core {
+/* 2. Gema Central Lumínica */
+.artisan-jewel-core {
   position: absolute;
-  top: 17px;
-  right: 17px;
-  width: 20px;
-  height: 20px;
-  background: rgba(125, 95, 105, 0.95);
+  top: 18px;
+  right: 18px;
+  width: 18px;
+  height: 18px;
+  background: rgba(125, 95, 105, 0.98);
   border: 2px solid #bae6fd;
   border-radius: 50%;
   box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
@@ -2862,17 +2865,17 @@ body.modal-active .logo-icon .dahlia-center {
   z-index: 5;
 }
 
-.lotus-core-pulse {
-  width: 8px;
-  height: 8px;
+.artisan-core-pulse {
+  width: 6px;
+  height: 6px;
   background: #bae6fd;
   border-radius: 50%;
   box-shadow: 0 0 8px #38bdf8;
-  animation: lotusCorePulse 2s infinite ease-in-out alternate;
+  animation: artisanPulse 2s infinite ease-in-out alternate;
 }
 
-/* 3. Emisiones laterales de rocío orgánico */
-.lotus-spray {
+/* 3. Emisiones laterales sutiles */
+.artisan-spray {
   position: absolute;
   top: 25px;
   width: 16px;
@@ -2880,15 +2883,15 @@ body.modal-active .logo-icon .dahlia-center {
   z-index: 4;
 }
 
-.lotus-spray.left {
+.artisan-spray.left {
   left: 2px;
 }
 
-.lotus-spray.right {
+.artisan-spray.right {
   right: -2px;
 }
 
-.lotus-spray-beam {
+.artisan-beam {
   position: absolute;
   top: 0;
   width: 14px;
@@ -2896,19 +2899,19 @@ body.modal-active .logo-icon .dahlia-center {
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
-  animation: lotusBeamPulse 0.8s infinite ease-in-out;
+  animation: artisanBeamPulse 0.8s infinite ease-in-out;
 }
 
-.lotus-spray.left .lotus-spray-beam {
+.artisan-spray.left .artisan-beam {
   right: 0;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.15));
 }
 
-.lotus-spray.right .lotus-spray-beam {
+.artisan-spray.right .artisan-beam {
   left: 0;
 }
 
-.lotus-spray-drop {
+.artisan-drop-particle {
   position: absolute;
   top: -1px;
   width: 4px;
@@ -2918,18 +2921,18 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.lotus-spray.left .lotus-spray-drop {
+.artisan-spray.left .artisan-drop-particle {
   left: -5px;
-  animation: lotusParticleLeft 1.3s infinite ease-in-out;
+  animation: artisanPartLeft 1.3s infinite ease-in-out;
 }
 
-.lotus-spray.right .lotus-spray-drop {
+.artisan-spray.right .artisan-drop-particle {
   right: -5px;
-  animation: lotusParticleRight 1.3s infinite ease-in-out;
+  animation: artisanPartRight 1.3s infinite ease-in-out;
 }
 
-/* 4. Cascada y ondas de agua inferiores */
-.lotus-cascade {
+/* 4. Cascada central y ondas */
+.artisan-cascade {
   position: absolute;
   bottom: 2px;
   right: 25px;
@@ -2938,7 +2941,7 @@ body.modal-active .logo-icon .dahlia-center {
   z-index: 4;
 }
 
-.lotus-flow-line {
+.artisan-stream-line {
   position: absolute;
   top: 0;
   left: 1px;
@@ -2949,7 +2952,7 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.lotus-crystal-drop {
+.artisan-pearl-drop {
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -2958,60 +2961,60 @@ body.modal-active .logo-icon .dahlia-center {
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: lotusDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: artisanDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.lotus-ripple-ring {
+.artisan-ripple {
   position: absolute;
   bottom: -10px;
   left: -3px;
   border: 1.5px solid rgba(56, 189, 248, 0.85);
   border-radius: 50%;
-  animation: lotusRippleExpand 1.3s infinite ease-out;
+  animation: artisanRippleExpand 1.3s infinite ease-out;
 }
 
-.lotus-ripple-ring.r1 {
+.artisan-ripple.r1 {
   width: 12px;
   height: 4px;
 }
 
-.lotus-ripple-ring.r2 {
+.artisan-ripple.r2 {
   width: 6px;
   height: 2px;
   animation-delay: 0.65s;
 }
 
 /* --- ANIMACIONES --- */
-@keyframes lotusCorePulse {
-  0% { transform: scale(0.8); opacity: 0.6; box-shadow: 0 0 4px #38bdf8; }
+@keyframes artisanPulse {
+  0% { transform: scale(0.8); opacity: 0.6; }
   100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px #7dd3fc; }
 }
 
-@keyframes lotusBeamPulse {
+@keyframes artisanBeamPulse {
   0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
   50% { transform: scaleX(1.2); opacity: 1; }
 }
 
-@keyframes lotusParticleLeft {
+@keyframes artisanPartLeft {
   0% { transform: translateX(0) scale(0.4); opacity: 0; }
   40% { opacity: 1; }
   100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes lotusParticleRight {
+@keyframes artisanPartRight {
   0% { transform: translateX(0) scale(0.4); opacity: 0; }
   40% { opacity: 1; }
   100% { transform: translateX(14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes lotusDropFall {
+@keyframes artisanDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
   20% { opacity: 1; transform: translateY(4px) scale(1); }
   85% { opacity: 1; transform: translateY(14px) scale(0.9); }
   100% { transform: translateY(18px) scale(1.4, 0.35); opacity: 0; }
 }
 
-@keyframes lotusRippleExpand {
+@keyframes artisanRippleExpand {
   0%, 60% { transform: scale(0.2); opacity: 0; }
   75% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.4); opacity: 0; }
