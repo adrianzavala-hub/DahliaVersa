@@ -388,7 +388,6 @@ document.addEventListener("DOMContentLoaded", () => {
         searchContainer.appendChild(suggestionsBox);
     }
 
-    // Inicializar o actualizar el mapa interactivo en tiempo real
     function initModalMap(lat = 19.7942, lon = -99.1024) {
         const mapContainer = document.getElementById('mapModal');
         if (!mapContainer || typeof L === 'undefined') return;
@@ -400,7 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 modalMarker = L.marker([lat, lon], { draggable: true }).addTo(modalMap);
             }
-            setTimeout(() => modalMap.invalidateSize(), 200);
+            setTimeout(() => modalMap.invalidateSize(), 250);
             return;
         }
 
@@ -423,7 +422,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        setTimeout(() => modalMap.invalidateSize(), 200);
+        setTimeout(() => modalMap.invalidateSize(), 250);
     }
 
     function abrirModalUbicacion(ubicacion) {
@@ -434,26 +433,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 modalLocationReport.style.display = "flex";
                 setTimeout(() => {
                     modalLocationReport.classList.add('active');
-                    
-                    // Renderizar el mapa por defecto en Zumpango
+                    // Carga directa del mapa sin diálogos de GPS del navegador
                     initModalMap();
-
-                    // Obtener geolocalización GPS real en tiempo real del usuario
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(
-                            (position) => {
-                                const lat = position.coords.latitude;
-                                const lon = position.coords.longitude;
-                                initModalMap(lat, lon);
-                                const latLongInput = document.getElementById('latLongInput');
-                                if (latLongInput) latLongInput.value = `${lat}, ${lon}`;
-                            },
-                            () => {
-                                console.warn("Usando ubicación predeterminada por permisos del navegador.");
-                            }
-                        );
-                    }
-                }, 50);
+                }, 100);
                 body.classList.add('modal-active');
             }
             if (suggestionsBox) suggestionsBox.style.display = "none";
