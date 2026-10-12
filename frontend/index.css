@@ -2782,81 +2782,84 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO VANGUARDISTA Y ESCULTURAL DE LUJO --- */
+/* --- DISEÑO DE LLAVE DE LAVADERO / PILA TRADICIONAL --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -45px;
-  right: 22px;
-  width: 50px;
+  top: -50px;
+  right: 20px;
+  width: 55px;
   height: 75px;
   pointer-events: none;
   z-index: 35;
 }
 
-/* 1. Base escultórica curva y firmemente anclada */
-.avant-sculpture-base {
+/* 1. Cuerpo curvado principal de la llave */
+.faucet-body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 28px;
-  height: 65px;
-  background: linear-gradient(135deg, rgba(226, 169, 179, 0.9) 0%, rgba(125, 95, 105, 0.95) 100%);
-  backdrop-filter: blur(8px);
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), inset 0 0 10px rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 32px;
+  height: 60px;
+  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
+  border-radius: 12px 12px 6px 6px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* 2. Anillo de Monitoreo / Medidor Vanguardista */
-.avant-halo-gauge {
+/* 2. Medidor circular de presión incrustado en la llave */
+.faucet-gauge {
   position: absolute;
   top: 6px;
-  left: 3px;
-  width: 20px;
-  height: 20px;
-  background: rgba(125, 95, 105, 0.85);
+  left: 6px;
+  width: 18px;
+  height: 18px;
+  background: rgba(125, 95, 105, 0.95);
   border: 1.5px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.avant-gauge-core {
-  width: 4px;
-  height: 4px;
-  background: #bae6fd;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #38bdf8;
-}
-
-.avant-gauge-needle {
+.faucet-needle {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 7px;
+  width: 6px;
   height: 1.5px;
   background: #38bdf8;
   border-radius: 1px;
   transform-origin: left center;
   transform: translateY(-50%);
-  animation: avantNeedleMove 2.5s infinite ease-in-out alternate;
+  animation: faucetNeedleMove 2s infinite ease-in-out alternate;
 }
 
-/* 3. Emisiones laterales fluidas (Izquierda y Derecha) */
-.avant-emission {
+/* 3. Maneral o palanca de la llave */
+.faucet-handle {
   position: absolute;
-  top: 36px;
+  top: 10px;
+  right: -8px;
+  width: 12px;
+  height: 6px;
+  background: #e2a9b3;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 4. Chorros laterales izquierdo y derecho */
+.faucet-side-emission {
+  position: absolute;
+  top: 32px;
   width: 14px;
   height: 4px;
 }
 
-.avant-emission.left { left: -12px; }
-.avant-emission.right { right: -12px; }
+.faucet-side-emission.left { left: -12px; }
+.faucet-side-emission.right { right: -12px; }
 
-.avant-beam {
+.faucet-side-stream {
   position: absolute;
   top: 0;
   width: 12px;
@@ -2864,19 +2867,19 @@ body.modal-active .logo-icon .dahlia-center {
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
-  animation: avantBeamPulse 0.9s infinite ease-in-out;
+  animation: faucetJetPulse 0.8s infinite ease-in-out;
 }
 
-.avant-emission.left .avant-beam {
+.faucet-side-emission.left .faucet-side-stream {
   right: 0;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.15));
 }
 
-.avant-emission.right .avant-beam {
+.faucet-side-emission.right .faucet-side-stream {
   left: 0;
 }
 
-.avant-droplet {
+.faucet-side-drop {
   position: absolute;
   top: -1px;
   width: 4px;
@@ -2886,82 +2889,90 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.avant-emission.left .avant-droplet {
+.faucet-side-emission.left .faucet-side-drop {
   left: -5px;
-  animation: avantDropLeft 1.4s infinite ease-in-out;
+  animation: faucetDropLeft 1.3s infinite ease-in-out;
 }
 
-.avant-emission.right .avant-droplet {
+.faucet-side-emission.right .faucet-side-drop {
   right: -5px;
-  animation: avantDropRight 1.4s infinite ease-in-out;
+  animation: faucetDropRight 1.3s infinite ease-in-out;
 }
 
-/* 4. Columna de fluido central y goteo armónico */
-.avant-fluid-column {
+/* 5. Pico de la llave y goteo principal inferior */
+.faucet-spout {
   position: absolute;
-  bottom: -14px;
-  left: 12px;
+  bottom: -16px;
+  left: 14px;
   width: 4px;
-  height: 14px;
+  height: 16px;
+}
+
+.faucet-down-stream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 12px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.avant-fall-drop {
+.faucet-down-drop {
   position: absolute;
-  bottom: -4px;
+  bottom: -2px;
   left: -1px;
   width: 6px;
   height: 8px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: avantDropFall 1.4s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: faucetDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.avant-soft-ripple {
+.faucet-down-ripple {
   position: absolute;
-  bottom: -12px;
+  bottom: -10px;
   left: -4px;
   width: 12px;
   height: 4px;
   border: 1.5px solid rgba(56, 189, 248, 0.8);
   border-radius: 50%;
-  animation: avantRippleExpand 1.4s infinite ease-out;
+  animation: faucetRippleExpand 1.3s infinite ease-out;
 }
 
-/* --- ANIMACIONES FLUIDAS Y ORGÁNICAS --- */
-@keyframes avantNeedleMove {
+/* --- ANIMACIONES --- */
+@keyframes faucetNeedleMove {
   0% { transform: translateY(-50%) rotate(-30deg); }
   100% { transform: translateY(-50%) rotate(90deg); }
 }
 
-@keyframes avantBeamPulse {
+@keyframes faucetJetPulse {
   0%, 100% { transform: scaleX(0.85); opacity: 0.6; }
   50% { transform: scaleX(1.15); opacity: 1; }
 }
 
-@keyframes avantDropLeft {
+@keyframes faucetDropLeft {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
   100% { transform: translateX(-12px) scale(1.1); opacity: 0; }
 }
 
-@keyframes avantDropRight {
+@keyframes faucetDropRight {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
   100% { transform: translateX(12px) scale(1.1); opacity: 0; }
 }
 
-@keyframes avantDropFall {
+@keyframes faucetDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
   25% { opacity: 1; transform: translateY(3px) scale(1); }
   85% { opacity: 1; transform: translateY(10px) scale(0.9); }
   100% { transform: translateY(14px) scale(1.3, 0.35); opacity: 0; }
 }
 
-@keyframes avantRippleExpand {
+@keyframes faucetRippleExpand {
   0%, 70% { transform: scale(0.2); opacity: 0; }
   80% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.2); opacity: 0; }
