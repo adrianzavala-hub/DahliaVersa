@@ -2782,14 +2782,14 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- FUGA DE AGUA CON CHORRO ASCENDENTE Y MEDIDOR --- */
+/* --- NUEVO DISEÑO GRANDE Y VANGUARDISTA (Fuga Ascendente con Medidor) --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -45px;
-  right: -25px;
-  width: 55px;
-  height: 65px;
+  top: -65px;
+  right: -30px;
+  width: 75px;
+  height: 90px;
   pointer-events: none;
   z-index: 35;
   display: flex;
@@ -2797,122 +2797,127 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-/* 1. Soporte del tubo saliendo por fuera en la esquina superior derecha */
-.up-pipe-bracket {
+/* 1. Brida de soporte industrial de gran tamaño amurada al fondo */
+.lg-wall-flange {
   position: absolute;
-  top: 35px;
+  top: 45px;
   right: 0;
-  width: 25px;
-  height: 10px;
+  width: 32px;
+  height: 14px;
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 4px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-/* 2. Codo curvado de la tubería */
-.up-pipe-curve {
+/* 2. Codo hidráulico robusto saliendo por fuera del modal */
+.lg-pipe-elbow {
   position: absolute;
-  top: 20px;
-  right: 12px;
-  width: 16px;
-  height: 18px;
-  border: 5px solid #7d5f69;
+  top: 24px;
+  right: 14px;
+  width: 22px;
+  height: 24px;
+  border: 7px solid #7d5f69;
   border-top: none;
   border-right: none;
-  border-radius: 0 0 0 12px;
-  box-shadow: -2px 3px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 0 16px;
+  box-shadow: -3px 4px 8px rgba(0, 0, 0, 0.35);
 }
 
-/* 3. Medidor redondo de presión acoplado con elegancia */
-.up-gauge-dial {
+/* 3. Círculo medidor de presión grande y estilizado */
+.lg-gauge-dial {
   position: absolute;
-  top: 18px;
-  right: 28px;
-  width: 16px;
-  height: 16px;
+  top: 20px;
+  right: 36px;
+  width: 22px;
+  height: 22px;
   background: rgba(125, 95, 105, 0.95);
-  border: 2px solid #bae6fd;
+  border: 2.5px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 10px #38bdf8, 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 14px #38bdf8, 0 4px 8px rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.up-gauge-needle {
-  width: 7px;
-  height: 2px;
+.lg-gauge-needle {
+  width: 10px;
+  height: 2.5px;
   background: #38bdf8;
-  border-radius: 1px;
-  transform-origin: right center;
-  animation: upGaugeMove 2s infinite ease-in-out alternate;
-}
-
-/* 4. Boquilla de la fisura orientada hacia arriba */
-.up-rupture-nozzle {
-  position: absolute;
-  top: 15px;
-  right: 13px;
-  width: 12px;
-  height: 8px;
-  background: #bae6fd;
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 0 10px #38bdf8;
-}
-
-/* 5. Chorro de agua principal brotando hacia arriba */
-.up-water-jet {
-  position: absolute;
-  top: -8px;
-  right: 17px;
-  width: 4px;
-  height: 25px;
-  background: linear-gradient(to top, #7dd3fc, rgba(56, 189, 248, 0.1));
   border-radius: 2px;
-  box-shadow: 0 0 10px #38bdf8;
-  animation: upJetShoot 0.7s infinite ease-in-out;
+  transform-origin: right center;
+  animation: lgGaugePulse 2.2s infinite ease-in-out alternate;
 }
 
-/* 6. Burbujas / gotas ascendentes */
-.up-water-bubble {
+/* 4. Boquilla / válvula de ruptura superior */
+.lg-nozzle-valve {
   position: absolute;
-  top: 12px;
+  top: 16px;
   right: 16px;
+  width: 18px;
+  height: 12px;
+  background: linear-gradient(135deg, #bae6fd, #38bdf8);
+  border-radius: 6px 6px 2px 2px;
+  box-shadow: 0 0 15px #38bdf8;
+}
+
+/* 5. Chorro principal de agua ascendente (Alta presión) */
+.lg-main-upstream {
+  position: absolute;
+  top: -15px;
+  right: 22px;
   width: 6px;
-  height: 6px;
+  height: 35px;
+  background: linear-gradient(to top, #7dd3fc, rgba(56, 189, 248, 0.05));
+  border-radius: 3px;
+  box-shadow: 0 0 16px #38bdf8, 0 0 25px #7dd3fc;
+  animation: lgStreamPower 0.6s infinite ease-in-out;
+}
+
+/* 6. Gotas y partículas de spray salpicando hacia arriba y a los lados */
+.lg-spray-drop {
+  position: absolute;
+  top: 14px;
+  right: 21px;
+  width: 7px;
+  height: 12px;
   background: linear-gradient(135deg, #ffffff, #38bdf8);
   border-radius: 50%;
-  box-shadow: 0 0 10px #38bdf8;
-  animation: upBubbleRise 1.2s infinite cubic-bezier(0.1, 0.8, 0.3, 1);
+  box-shadow: 0 0 12px #38bdf8;
+  animation: lgSprayBurst 1.2s infinite cubic-bezier(0.1, 0.7, 0.3, 1);
 }
 
-.bubble-two {
-  animation-delay: 0.6s;
+.spray-2 {
+  animation-delay: 0.4s;
   opacity: 0;
 }
 
-/* --- ANIMACIONES ASCENDENTES --- */
-@keyframes upGaugeMove {
-  0% { transform: rotate(-40deg); }
-  100% { transform: rotate(100deg); }
+.spray-3 {
+  animation-delay: 0.8s;
+  opacity: 0;
 }
 
-@keyframes upJetShoot {
-  0%, 100% { transform: scaleY(0.8); opacity: 0.7; }
-  50% { transform: scaleY(1.2); opacity: 1; }
+/* --- ANIMACIONES DE ALTA ESCALA --- */
+@keyframes lgGaugePulse {
+  0% { transform: rotate(-50deg); }
+  100% { transform: rotate(120deg); }
 }
 
-@keyframes upBubbleRise {
+@keyframes lgStreamPower {
+  0%, 100% { transform: scaleY(0.95); opacity: 0.8; }
+  50% { transform: scaleY(1.2); opacity: 1; box-shadow: 0 0 22px #38bdf8; }
+}
+
+@keyframes lgSprayBurst {
   0% {
-    transform: translateY(0) scale(0.4);
+    transform: translate(0, 0) scale(0.4);
     opacity: 0;
   }
   20% {
     opacity: 1;
-    transform: translateY(-8px) scale(1);
+    transform: translate(2px, -10px) scale(1.1);
   }
   100% {
-    transform: translateY(-32px) scale(0.3);
+    transform: translate(10px, -45px) scale(0.3);
     opacity: 0;
   }
 }
