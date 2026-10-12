@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 1. Lógica del modal de Guía Rápida (Activado al hacer clic en el logo)
     const logoTrigger = document.getElementById('logoTrigger');
     const modalOverlay = document.getElementById('modalOverlay');
     const btnClose = document.getElementById('btnClose');
@@ -64,12 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
         logoTrigger.addEventListener('click', () => {
             document.body.classList.add('modal-active');
             createGlitchLamp();
+            if (modalOverlay) modalOverlay.classList.add('active');
         });
     }
 
     if (btnClose) {
         btnClose.addEventListener('click', () => {
             document.body.classList.remove('modal-active');
+            if (modalOverlay) modalOverlay.classList.remove('active');
         });
     }
 
@@ -77,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) {
                 document.body.classList.remove('modal-active');
+                modalOverlay.classList.remove('active');
             }
         });
     }
@@ -84,13 +88,15 @@ document.addEventListener("DOMContentLoaded", () => {
     window.showLoader = function() {};
     window.hideLoader = function() {};
 
+    // 2. Animación de aparición de tarjetas estadísticas
     const statCards = document.querySelectorAll(".stat-card");
     statCards.forEach((card, index) => {
         setTimeout(() => {
             card.classList.add("visible");
-        }, 300 + (index * 250)); // <--- Corregido el asterisco de multiplicación (*)
+        }, 300 + (index * 250));
     });
 
+    // 3. Contadores dinámicos de las estadísticas
     const statNumbers = document.querySelectorAll(".stat-card h3");
     statNumbers.forEach(h3 => {
         const text = h3.textContent;
@@ -116,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 1. Loader general para baches y otras secciones
+    // 4. Loaders de navegación (Baches, Fugas de Agua, Postes de Luz)
     const loadTriggers = document.querySelectorAll('.load-trigger');
     const pageLoader = document.getElementById('pageLoader');
 
@@ -125,9 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
             trigger.addEventListener('click', function(e) {
                 e.preventDefault(); 
                 const targetUrl = this.getAttribute('href');
-
                 pageLoader.classList.add('active');
-
                 setTimeout(() => {
                     window.location.href = targetUrl;
                 }, 2000);
@@ -135,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2. Loader para fugas de agua
     const waterTriggers = document.querySelectorAll('.water-loader-trigger, a[href="fuga-agua.html"]');
     const waterLeakLoader = document.getElementById('waterLeakLoader');
 
@@ -144,9 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
             trigger.addEventListener('click', function(e) {
                 e.preventDefault(); 
                 const targetUrl = this.getAttribute('href');
-
                 waterLeakLoader.classList.add('active');
-
                 setTimeout(() => {
                     window.location.href = targetUrl;
                 }, 2000);
@@ -162,18 +163,15 @@ document.addEventListener("DOMContentLoaded", () => {
             trigger.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetUrl = this.getAttribute('href');
-
                 lightPostLoader.classList.add('active');
-
                 setTimeout(() => {
                     window.location.href = targetUrl;
                 }, 2000);
             });
         });
     }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+    // 5. Lógica del Modal de Seguimiento con Flask API
     const seguimientoNavBtn = document.getElementById('seguimientoNavBtn');
     const modalSeguimiento = document.getElementById('modalSeguimiento');
     const btnCloseSeguimiento = document.getElementById('btnCloseSeguimiento');
@@ -233,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Cierre general de modales al hacer clic fuera del contenido
     window.addEventListener('click', (e) => {
         if (e.target.classList.contains('modal-overlay')) {
             e.target.classList.remove('active');
