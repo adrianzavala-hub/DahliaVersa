@@ -2781,15 +2781,14 @@ body.modal-active .logo-icon .dahlia-center {
   background: rgba(255, 255, 255, 0.4);
   color: #0f172a;
 }
-
-/* --- NUEVO DISEÑO: FUGA CIBERNÉTICA DE NEÓN (Estilo Moderno / Neón) --- */
+/* --- CORRECCIÓN DE LA FUGA DE AGUA SUPERIOR DERECHA --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -55px;
-  right: -24px;
-  width: 52px;
-  height: 85px;
+  top: -48px;
+  right: -18px;
+  width: 45px;
+  height: 75px;
   pointer-events: none;
   z-index: 35;
   display: flex;
@@ -2797,152 +2796,144 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-/* 1. Soporte de anclaje geométrico */
-.cyber-mount-bracket {
+/* 1. Brida de montaje pegada al borde superior derecho */
+.fix-pipe-flange {
   position: absolute;
   top: 0;
-  right: 10px;
-  width: 20px;
+  right: 12px;
+  width: 16px;
   height: 8px;
-  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 3px;
-  box-shadow: 0 0 8px rgba(226, 169, 179, 0.6);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* 2. Cuerpo de la tubería central con relieve */
-.cyber-pipe-hub {
+/* 2. Tubo vertical principal con degradado metálico */
+.fix-pipe-vertical {
   position: absolute;
   top: 6px;
   right: 14px;
   width: 12px;
-  height: 18px;
-  background: linear-gradient(180deg, #7d5f69 0%, #e2a9b3 100%);
-  border-radius: 2px;
+  height: 20px;
+  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
+  border-radius: 3px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* 3. Medidor / Válvula circular de presión */
-.cyber-gauge-dial {
+/* 3. Volante / Llave de control lateral integrada correctamente */
+.fix-valve-wheel {
   position: absolute;
-  top: 4px;
-  right: 24px;
-  width: 16px;
-  height: 16px;
-  background: rgba(125, 95, 105, 0.9);
-  border: 2px solid #bae6fd;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #38bdf8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 8px;
+  right: 22px;
+  width: 18px;
+  height: 6px;
+  background: #7d5f69;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.cyber-gauge-needle {
+.fix-wheel-hub {
+  position: absolute;
+  top: -2px;
+  left: 5px;
   width: 8px;
-  height: 2px;
-  background: #38bdf8;
-  border-radius: 1px;
-  transform-origin: right center;
-  animation: cyberGaugeSpin 2s infinite ease-in-out alternate;
+  height: 10px;
+  background: #e2a9b3;
+  border-radius: 2px;
 }
 
-/* 4. Boquilla de emisión de plasma/agua */
-.cyber-nozzle-core {
+/* 4. Boquilla de salida de agua */
+.fix-nozzle-tip {
   position: absolute;
-  top: 22px;
+  top: 24px;
   right: 13px;
   width: 14px;
-  height: 10px;
+  height: 8px;
   background: #bae6fd;
-  border-radius: 0 0 6px 6px;
-  box-shadow: 0 0 12px #38bdf8, inset 0 0 6px #ffffff;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 0 8px #38bdf8;
 }
 
-/* 5. Chorro continuo de neón celeste */
-.cyber-energy-stream {
+/* 5. Chorro de agua continuo en tonos celestes */
+.fix-water-stream {
+  position: absolute;
+  top: 31px;
+  right: 17px;
+  width: 4px;
+  height: 22px;
+  background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.2));
+  border-radius: 2px;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: fixStreamFlow 0.8s infinite linear;
+}
+
+/* 6. Gotas de agua fluidas con animación realista */
+.fix-water-drop {
   position: absolute;
   top: 30px;
-  right: 18px;
-  width: 4px;
-  height: 32px;
-  background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.1));
-  border-radius: 2px;
-  box-shadow: 0 0 12px #38bdf8;
-  animation: cyberStreamFlicker 0.6s infinite alternate;
-}
-
-/* 6. Gotas de agua luminosas con caída fluida */
-.cyber-plasma-drop {
-  position: absolute;
-  top: 29px;
-  right: 17px;
+  right: 16px;
   width: 6px;
-  height: 11px;
+  height: 10px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
-  box-shadow: 0 0 14px #38bdf8;
-  animation: cyberDropFall 1.3s infinite cubic-bezier(0.2, 0, 0.8, 1);
+  box-shadow: 0 0 10px #38bdf8;
+  animation: fixDropFall 1.4s infinite cubic-bezier(0.4, 0, 0.7, 1);
 }
 
-.drop-beta {
-  animation-delay: 0.65s;
+.drop-two {
+  animation-delay: 0.7s;
   opacity: 0;
 }
 
-/* 7. Anillo expansivo de impacto inferior */
-.cyber-shockwave {
+/* 7. Ondas de impacto inferiores */
+.fix-splash-ripple {
   position: absolute;
-  top: 70px;
-  right: 14px;
-  width: 14px;
+  top: 58px;
+  right: 13px;
+  width: 12px;
   height: 4px;
-  border: 1.5px solid #38bdf8;
+  border: 1.5px solid rgba(56, 189, 248, 0.8);
   border-radius: 50%;
-  box-shadow: 0 0 8px #38bdf8;
-  animation: cyberShockwaveExpand 1.3s infinite ease-out;
+  animation: fixRippleExpand 1.4s infinite ease-out;
 }
 
-/* --- ANIMACIONES DE ESTILO CIBERNÉTICO --- */
-@keyframes cyberGaugeSpin {
-  0% { transform: rotate(-45deg); }
-  100% { transform: rotate(135deg); }
+/* --- ANIMACIONES DE LA FUGA CORREGIDA --- */
+@keyframes fixStreamFlow {
+  0% { transform: scaleY(0.9); opacity: 0.7; }
+  50% { transform: scaleY(1.1); opacity: 1; }
+  100% { transform: scaleY(0.9); opacity: 0.7; }
 }
 
-@keyframes cyberStreamFlicker {
-  0% { opacity: 0.7; transform: scaleX(0.9); }
-  100% { opacity: 1; transform: scaleX(1.1); box-shadow: 0 0 18px #38bdf8; }
-}
-
-@keyframes cyberDropFall {
+@keyframes fixDropFall {
   0% {
-    transform: translateY(0) scale(0.4);
+    transform: translateY(0) scale(0.5);
     opacity: 0;
   }
   20% {
     opacity: 1;
-    transform: translateY(6px) scale(1.1);
+    transform: translateY(6px) scale(1);
   }
   85% {
     opacity: 1;
-    transform: translateY(32px) scale(0.9);
+    transform: translateY(24px) scale(0.9);
   }
   100% {
-    transform: translateY(38px) scale(1.6, 0.3);
+    transform: translateY(30px) scale(1.4, 0.4);
     opacity: 0;
   }
 }
 
-@keyframes cyberShockwaveExpand {
-  0%, 65% {
+@keyframes fixRippleExpand {
+  0%, 75% {
     transform: scale(0.2);
     opacity: 0;
   }
-  75% {
+  82% {
     transform: scale(1);
     opacity: 1;
   }
   100% {
-    transform: scale(2.4);
+    transform: scale(2.2);
     opacity: 0;
   }
 }
