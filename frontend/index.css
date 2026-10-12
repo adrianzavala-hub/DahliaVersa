@@ -2782,230 +2782,186 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- ESTACIÓN HIDRÁULICA INDUSTRIAL COMPLEJA --- */
+/* --- DISEÑO VANGUARDISTA Y ESCULTURAL DE LUJO --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -48px;
-  right: 20px;
-  width: 60px;
-  height: 80px;
+  top: -45px;
+  right: 22px;
+  width: 50px;
+  height: 75px;
   pointer-events: none;
   z-index: 35;
 }
 
-/* 1. Chasis / Placa de Montaje Principal (Sólida y Anclada) */
-.complex-station-chassis {
+/* 1. Base escultórica curva y firmemente anclada */
+.avant-sculpture-base {
   position: absolute;
   top: 0;
   right: 0;
-  width: 44px;
-  height: 75px;
-  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
-  border-radius: 6px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.45), inset 0 0 8px rgba(255, 255, 255, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  width: 28px;
+  height: 65px;
+  background: linear-gradient(135deg, rgba(226, 169, 179, 0.9) 0%, rgba(125, 95, 105, 0.95) 100%);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), inset 0 0 10px rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-/* 2. Panel Superior con Doble Medidor de Presión Gemelo */
-.complex-gauge-panel {
+/* 2. Anillo de Monitoreo / Medidor Vanguardista */
+.avant-halo-gauge {
   position: absolute;
-  top: 5px;
-  left: 4px;
-  right: 4px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.complex-gauge {
-  width: 16px;
-  height: 16px;
-  background: rgba(125, 95, 105, 0.95);
-  backdrop-filter: blur(4px);
+  top: 6px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: rgba(125, 95, 105, 0.85);
   border: 1.5px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
-.complex-needle {
+.avant-gauge-core {
+  width: 4px;
+  height: 4px;
+  background: #bae6fd;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+.avant-gauge-needle {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 6px;
+  width: 7px;
   height: 1.5px;
   background: #38bdf8;
   border-radius: 1px;
   transform-origin: left center;
   transform: translateY(-50%);
-  animation: complexNeedleFluctuation 2s infinite ease-in-out alternate;
+  animation: avantNeedleMove 2.5s infinite ease-in-out alternate;
 }
 
-/* 3. Manifold Central y Volantes Laterales */
-.complex-manifold-core {
+/* 3. Emisiones laterales fluidas (Izquierda y Derecha) */
+.avant-emission {
   position: absolute;
-  top: 26px;
-  left: 8px;
-  right: 8px;
-  height: 16px;
-  background: #7d5f69;
-  border-radius: 3px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.complex-valve-wheel-left,
-.complex-valve-wheel-right {
-  position: absolute;
-  top: -3px;
-  width: 6px;
-  height: 22px;
-  background: #e2a9b3;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.complex-valve-wheel-left { left: -4px; }
-.complex-valve-wheel-right { right: -4px; }
-
-/* 4. Ramales Laterales de Escape (Izquierda / Derecha) */
-.complex-branch-side {
-  position: absolute;
-  top: 48px;
-  width: 16px;
-  height: 8px;
-}
-
-.complex-branch-side.left { left: -14px; }
-.complex-branch-side.right { right: -14px; }
-
-.complex-pipe-stub {
-  position: absolute;
-  top: 2px;
-  width: 16px;
+  top: 36px;
+  width: 14px;
   height: 4px;
-  background: #7d5f69;
-  border-radius: 2px;
 }
 
-.complex-pressure-jet-l,
-.complex-pressure-jet-r {
-  position: absolute;
-  top: 2px;
-  width: 12px;
-  height: 3px;
-  background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.1));
-  border-radius: 2px;
-  box-shadow: 0 0 8px #38bdf8;
-  animation: complexJetPulse 0.75s infinite ease-in-out;
-}
+.avant-emission.left { left: -12px; }
+.avant-emission.right { right: -12px; }
 
-.complex-branch-side.left .complex-pressure-jet-l {
-  right: 2px;
-  background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.1));
-}
-
-.complex-branch-side.right .complex-pressure-jet-r {
-  left: 2px;
-}
-
-.complex-spray-drop-l,
-.complex-spray-drop-r {
+.avant-beam {
   position: absolute;
   top: 0;
-  width: 5px;
-  height: 5px;
+  width: 12px;
+  height: 3px;
+  background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.15));
+  border-radius: 2px;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: avantBeamPulse 0.9s infinite ease-in-out;
+}
+
+.avant-emission.left .avant-beam {
+  right: 0;
+  background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.15));
+}
+
+.avant-emission.right .avant-beam {
+  left: 0;
+}
+
+.avant-droplet {
+  position: absolute;
+  top: -1px;
+  width: 4px;
+  height: 4px;
   background: #ffffff;
   border-radius: 50%;
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.complex-branch-side.left .complex-spray-drop-l {
-  left: -6px;
-  animation: complexDropLeft 1.2s infinite ease-in-out;
+.avant-emission.left .avant-droplet {
+  left: -5px;
+  animation: avantDropLeft 1.4s infinite ease-in-out;
 }
 
-.complex-branch-side.right .complex-spray-drop-r {
-  right: -6px;
-  animation: complexDropRight 1.2s infinite ease-in-out;
+.avant-emission.right .avant-droplet {
+  right: -5px;
+  animation: avantDropRight 1.4s infinite ease-in-out;
 }
 
-/* 5. Tubería de Descarga Inferior y Goteo Sincronizado */
-.complex-drain-pipe {
+/* 4. Columna de fluido central y goteo armónico */
+.avant-fluid-column {
   position: absolute;
-  bottom: -16px;
-  left: 18px;
-  width: 8px;
-  height: 18px;
-}
-
-.complex-down-stream {
-  position: absolute;
-  top: 0;
-  left: 2px;
+  bottom: -14px;
+  left: 12px;
   width: 4px;
   height: 14px;
-  background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.1));
+  background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.complex-down-drop {
+.avant-fall-drop {
   position: absolute;
-  bottom: -2px;
-  left: 1px;
+  bottom: -4px;
+  left: -1px;
   width: 6px;
   height: 8px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: complexDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: avantDropFall 1.4s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.complex-down-ripple {
+.avant-soft-ripple {
   position: absolute;
-  bottom: -10px;
-  left: -2px;
+  bottom: -12px;
+  left: -4px;
   width: 12px;
   height: 4px;
   border: 1.5px solid rgba(56, 189, 248, 0.8);
   border-radius: 50%;
-  animation: complexRippleExpand 1.3s infinite ease-out;
+  animation: avantRippleExpand 1.4s infinite ease-out;
 }
 
-/* --- ANIMACIONES DE ALTA PRECISIÓN --- */
-@keyframes complexNeedleFluctuation {
-  0% { transform: translateY(-50%) rotate(-40deg); }
-  100% { transform: translateY(-50%) rotate(95deg); }
+/* --- ANIMACIONES FLUIDAS Y ORGÁNICAS --- */
+@keyframes avantNeedleMove {
+  0% { transform: translateY(-50%) rotate(-30deg); }
+  100% { transform: translateY(-50%) rotate(90deg); }
 }
 
-@keyframes complexJetPulse {
-  0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
-  50% { transform: scaleX(1.25); opacity: 1; }
+@keyframes avantBeamPulse {
+  0%, 100% { transform: scaleX(0.85); opacity: 0.6; }
+  50% { transform: scaleX(1.15); opacity: 1; }
 }
 
-@keyframes complexDropLeft {
+@keyframes avantDropLeft {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(-12px) scale(1.1); opacity: 0; }
 }
 
-@keyframes complexDropRight {
+@keyframes avantDropRight {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(14px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(12px) scale(1.1); opacity: 0; }
 }
 
-@keyframes complexDropFall {
+@keyframes avantDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
-  20% { opacity: 1; transform: translateY(4px) scale(1); }
-  85% { opacity: 1; transform: translateY(12px) scale(0.9); }
-  100% { transform: translateY(16px) scale(1.4, 0.35); opacity: 0; }
+  25% { opacity: 1; transform: translateY(3px) scale(1); }
+  85% { opacity: 1; transform: translateY(10px) scale(0.9); }
+  100% { transform: translateY(14px) scale(1.3, 0.35); opacity: 0; }
 }
 
-@keyframes complexRippleExpand {
+@keyframes avantRippleExpand {
   0%, 70% { transform: scale(0.2); opacity: 0; }
   80% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.2); opacity: 0; }
