@@ -172,3 +172,71 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const seguimientoNavBtn = document.getElementById('seguimientoNavBtn');
+    const modalSeguimiento = document.getElementById('modalSeguimiento');
+    const btnCloseSeguimiento = document.getElementById('btnCloseSeguimiento');
+    const btnConsultarSeguimiento = document.getElementById('btnConsultarSeguimiento');
+    const body = document.body;
+
+    if (seguimientoNavBtn && modalSeguimiento) {
+        seguimientoNavBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalSeguimiento.classList.add('active');
+            body.classList.add('modal-active');
+        });
+    }
+
+    if (btnCloseSeguimiento && modalSeguimiento) {
+        btnCloseSeguimiento.addEventListener('click', () => {
+            modalSeguimiento.classList.remove('active');
+            body.classList.remove('modal-active');
+        });
+    }
+
+    if (btnConsultarSeguimiento) {
+        btnConsultarSeguimiento.addEventListener('click', async () => {
+            const tipo = document.getElementById('segTipo').value;
+            const id = document.getElementById('segId').value.trim();
+            const nombreIngresado = document.getElementById('segNombre').value.trim();
+            const resultadoDiv = document.getElementById('segResultado');
+
+            if (!id || !nombreIngresado) {
+                alert("Por favor, ingresa el ID del reporte y tu nombre.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://dahliaversa1.onrender.com/api/seguimiento/${tipo}/${id}`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (data.nombre.toLowerCase() === nombreIngresado.toLowerCase()) {
+                        document.getElementById('resEstado').textContent = data.estado.toUpperCase();
+                        document.getElementById('resNombre').textContent = data.nombre;
+                        document.getElementById('resFecha').textContent = data.fecha;
+                        document.getElementById('resObs').textContent = data.observacion_ia || 'Sin observaciones';
+                        resultadoDiv.style.display = 'block';
+                    } else {
+                        alert("El nombre ingresado no coincide con el registro de este ID.");
+                        resultadoDiv.style.display = 'none';
+                    }
+                } else {
+                    alert("No se encontró ningún reporte con ese ID y tipo.");
+                    resultadoDiv.style.display = 'none';
+                }
+            } catch (err) {
+                console.error("Error al consultar seguimiento:", err);
+                alert("Error de conexión con el servidor de la API.");
+            }
+        });
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+            e.target.classList.remove('active');
+            body.classList.remove('modal-active');
+        }
+    });
+});

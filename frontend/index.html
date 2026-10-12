@@ -284,6 +284,42 @@ git
             <button class="btn-close" id="btnClose">Cerrar</button>
         </div>
     </div>
+    <div class="modal-overlay" id="modalSeguimiento">
+        <div class="petal-container" id="petalContainerSeguimiento"></div>
+        <div class="modal-card">
+            <h2>Seguimiento de Reporte</h2>
+            <div class="modal-body-scroll">
+                <div class="guide-step">
+                    <h3>Tipo de Incidencia</h3>
+                    <select id="segTipo" class="modal-input-field">
+                        <option value="baches">Bache</option>
+                        <option value="fuga-agua">Fuga de Agua</option>
+                        <option value="poste-luz">Poste de Luz</option>
+                    </select>
+                </div>
+                <div class="guide-step">
+                    <h3>ID de Reporte (Folio)</h3>
+                    <input type="number" id="segId" placeholder="Ej. 1" class="modal-input-field">
+                </div>
+                <div class="guide-step">
+                    <h3>Nombre Registrado</h3>
+                    <input type="text" id="segNombre" placeholder="Tu nombre completo" class="modal-input-field">
+                </div>
+
+                <div id="segResultado" class="modal-result-box">
+                    <p class="result-text"><strong>Estado:</strong> <span id="resEstado">-</span></p>
+                    <p class="result-text"><strong>Ciudadano:</strong> <span id="resNombre">-</span></p>
+                    <p class="result-text"><strong>Fecha:</strong> <span id="resFecha">-</span></p>
+                    <p class="result-obs"><strong>Observación IA:</strong> <span id="resObs">-</span></p>
+                </div>
+            </div>
+
+            <div class="modal-actions-container">
+                <button class="btn-close" id="btnConsultarSeguimiento">Consultar Estatus</button>
+                <button class="btn-close btn-close-alt" id="btnCloseSeguimiento">Cerrar</button>
+            </div>
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="footer-content">
