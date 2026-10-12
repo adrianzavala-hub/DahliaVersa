@@ -474,6 +474,7 @@
     </footer>
 <!-- VENTANA MODAL INDEPENDIENTE: REPORTE COMPLETO CON FOTOS E INCIDENCIAS -->
 <!-- VENTANA MODAL INDEPENDIENTE: MAPA DE APROXIMACIÓN Y REPORTE COMPLETO -->
+<!-- VENTANA MODAL INDEPENDIENTE: REPORTE COMPLETO Y MAPA -->
 <div class="dv-modal-overlay" id="modalLocationReport">
     <div class="dv-modal-card mr-wide-card">
         
@@ -490,68 +491,69 @@
 
             <form id="mrReportForm" enctype="multipart/form-data">
                 <div class="dv-modal-group">
-                    <label class="dv-modal-label">Nombre Completo</label>
-                    <input type="text" id="mrInputName" name="nombre" placeholder="Ingresa tu nombre completo" class="dv-modal-field" required>
+                    <label class="mr-nico-label">Nombre Completo</label>
+                    <input type="text" id="mrInputName" name="nombre" placeholder="Ingresa tu nombre completo" class="seg-input-field" required>
                 </div>
 
                 <div class="dv-row-2cols">
                     <div class="dv-modal-group">
-                        <label class="dv-modal-label">Edad</label>
-                        <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" class="dv-modal-field" required>
+                        <label class="mr-nico-label">Edad</label>
+                        <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" class="seg-input-field" required>
                     </div>
                     <div class="dv-modal-group">
-                        <label class="dv-modal-label">Teléfono</label>
-                        <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" class="dv-modal-field" required>
+                        <label class="mr-nico-label">Teléfono</label>
+                        <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" class="seg-input-field" required>
+                    </div>
+                </div>
+
+                <!-- Tipo de Incidencia con los checkboxes estilizados idénticos -->
+                <div class="dv-modal-group">
+                    <label class="mr-nico-label">Tipo de Incidencia</label>
+                    <div class="seg-checkbox-group">
+                        <label class="seg-checkbox-card">
+                            <input type="checkbox" name="tipo_reporte" value="fuga-agua" class="seg-hidden-check">
+                            <span class="seg-checkbox-box"></span>
+                            <span class="seg-checkbox-label">Fuga de Agua</span>
+                        </label>
+                        <label class="seg-checkbox-card">
+                            <input type="checkbox" name="tipo_reporte" value="baches" class="seg-hidden-check">
+                            <span class="seg-checkbox-box"></span>
+                            <span class="seg-checkbox-label">Bache</span>
+                        </label>
+                        <label class="seg-checkbox-card">
+                            <input type="checkbox" name="tipo_reporte" value="poste-luz" class="seg-hidden-check">
+                            <span class="seg-checkbox-box"></span>
+                            <span class="seg-checkbox-label">Poste de Luz</span>
+                        </label>
                     </div>
                 </div>
 
                 <div class="dv-modal-group">
-                    <label class="dv-modal-label">Tipo de Incidencia</label>
-                    <div class="dv-checkbox-grid">
-                        <label class="dv-checkbox-label">
-                            <input type="checkbox" name="tipo_reporte" value="fuga-agua" class="dv-checkbox"> Fuga de Agua
-                        </label>
-                        <label class="dv-checkbox-label">
-                            <input type="checkbox" name="tipo_reporte" value="baches" class="dv-checkbox"> Bache
-                        </label>
-                        <label class="dv-checkbox-label dv-checkbox-full">
-                            <input type="checkbox" name="tipo_reporte" value="poste-luz" class="dv-checkbox"> Poste de Luz
-                        </label>
-                    </div>
-                </div>
-
-                <div class="dv-modal-group">
-                    <label class="dv-modal-label">Referencias del Lugar</label>
-                    <textarea id="regReferences" name="referencias" placeholder="Ej. Entre qué calles está, color de fachada..." class="dv-modal-field dv-textarea" rows="2" required></textarea>
+                    <label class="mr-nico-label">Referencias del Lugar</label>
+                    <textarea id="regReferences" name="referencias" placeholder="Ej. Entre qué calles está, color de fachada..." class="seg-input-field dv-textarea" rows="2" required></textarea>
                 </div>
 
                 <!-- SECCIÓN DE FOTOS Y VALIDACIÓN OFICIAL -->
                 <div class="dv-modal-group">
-                    <label class="dv-modal-label">Archivos y Evidencia Fotográfica</label>
+                    <label class="mr-nico-label">Archivos y Evidencia Fotográfica</label>
                     
                     <div class="dv-upload-container">
-                        <div class="upload-box dv-upload-item" id="gpsBox">
-                            <span class="dv-upload-icon">📍</span>
-                            <span id="gpsText">Haz clic para fijar ubicación GPS</span>
-                            <input type="hidden" name="lat_long" id="latLongInput" value="">
-                        </div>
-
-                        <label class="upload-box dv-upload-item">
-                            <span class="dv-upload-icon">🪪</span>
-                            <span class="file-label-text">Sube el frente de tu INE</span>
-                            <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden">
+                        <label class="seg-checkbox-card" style="cursor: pointer; justify-content: center; text-align: center;">
+                            <span style="font-size: 1.1rem; margin-right: 6px;">🪪</span>
+                            <span class="seg-checkbox-label file-label-text">Sube el frente de tu INE</span>
+                            <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden" style="display: none;">
                         </label>
 
-                        <label class="upload-box dv-upload-item">
-                            <span class="dv-upload-icon">🔄</span>
-                            <span class="file-label-text">Sube el reverso de tu INE</span>
-                            <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden">
+                        <label class="seg-checkbox-card" style="cursor: pointer; justify-content: center; text-align: center;">
+                            <span style="font-size: 1.1rem; margin-right: 6px;">🔄</span>
+                            <span class="seg-checkbox-label file-label-text">Sube el reverso de tu INE</span>
+                            <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden" style="display: none;">
                         </label>
 
-                        <label class="upload-box dv-upload-item">
-                            <span class="dv-upload-icon">📸</span>
-                            <span class="file-label-text">Foto de la incidencia (Evidencia)</span>
-                            <input type="file" name="selfie" accept="image/*" class="file-input-hidden">
+                        <label class="seg-checkbox-card" style="cursor: pointer; justify-content: center; text-align: center;">
+                            <span style="font-size: 1.1rem; margin-right: 6px;">📸</span>
+                            <span class="seg-checkbox-label file-label-text">Foto de la incidencia (Evidencia)</span>
+                            <input type="file" name="selfie" accept="image/*" class="file-input-hidden" style="display: none;">
                         </label>
                     </div>
                 </div>
@@ -559,9 +561,9 @@
 
         </div>
 
-        <div class="dv-modal-actions">
-            <button type="button" class="dv-modal-btn" id="mrBtnSubmitReport">Enviar y Registrar</button>
-            <button type="button" class="dv-modal-btn dv-modal-btn-alt" id="mrBtnCloseModal">Cancelar</button>
+        <div class="dv-modal-actions" style="display: flex; gap: 10px; margin-top: 15px;">
+            <button type="button" class="btn-seg-action" id="mrBtnSubmitReport">Enviar y Registrar</button>
+            <button type="button" class="btn-seg-action btn-seg-alt" id="mrBtnCloseModal">Cancelar</button>
         </div>
     </div>
 </div>
