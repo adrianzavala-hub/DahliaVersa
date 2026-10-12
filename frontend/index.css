@@ -2460,78 +2460,117 @@ body.modal-active .logo-icon .dahlia-center {
   background: rgba(255, 255, 255, 0.4);
   color: #0f172a;
 }
-.seg-modal-lamp-external {
+
+/* Contenedor principal anclado en la esquina superior izquierda */
+.seg-modal-lamp-complex {
   position: absolute;
-  top: -20px; /* Posicionamiento exacto por fuera */
-  left: -20px;
-  width: 40px;
-  height: 40px;
-  z-index: 30;
+  top: -45px;
+  left: -22px;
+  width: 44px;
+  height: 75px;
+  z-index: 35;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 1. Soporte de fijación superior */
+.lamp-mount {
+  width: 14px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 2. Cadena o cable colgante */
+.lamp-chain {
+  width: 3px;
+  height: 10px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(226,169,179,0.8));
+}
+
+/* 3. Tapa superior de la linterna */
+.lamp-cap {
+  width: 26px;
+  height: 10px;
+  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 4. Cuerpo central de la linterna (cristal translúcido) */
+.lamp-body {
+  width: 32px;
+  height: 36px;
+  background: rgba(226, 169, 179, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 0 8px rgba(125, 211, 252, 0.3);
 }
 
-/* La esfera de luz con parpadeo azul */
-.ext-lamp-bulb {
-  width: 30px;
-  height: 30px;
-  background: #ffffff; /* Núcleo blanco brillante */
-  border-radius: 50%; /* Esfera perfecta */
-  
-  /* Borde sutil del color rosado claro de la paleta */
-  border: 2px solid #e2a9b3; 
-  
-  /* Sombra base y resplandor azul claro */
-  box-shadow: 0 0 10px 3px #7dd3fc, 0 0 20px 6px #38bdf8;
-  
-  /* Animación de parpadeo (glitch) e intensidad azul */
-  animation: cleanLampGlitch 3.5s infinite ease-in-out;
-}
-
-/* Soporte superior mínimo (del color rosado oscuro de la paleta) */
-.ext-lamp-head {
+/* Costillas metálicas decorativas del cuerpo */
+.lamp-ribbon-left,
+.lamp-ribbon-right {
   position: absolute;
-  top: 0px;
-  width: 12px;
-  height: 6px;
-  background: #7d5f69; 
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+}
+.lamp-ribbon-left { left: 9px; }
+.lamp-ribbon-right { right: 9px; }
+
+/* 5. Núcleo de luz interior (El foco/cristal que parpadea en azul) */
+.lamp-core-glow {
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px 4px #7dd3fc, 0 0 25px 8px #38bdf8;
+  animation: complexLampGlitch 3.5s infinite ease-in-out;
 }
 
-/* Se eliminan el brazo curvo y el resplandor antiguo para mayor limpieza */
-.ext-lamp-arm-curve,
-.ext-lamp-glow,
-.ext-lamp-arm-base {
-  display: none !important;
+/* 6. Remate inferior de la linterna */
+.lamp-base-finial {
+  width: 10px;
+  height: 8px;
+  background: linear-gradient(135deg, #7d5f69 0%, #e2a9b3 100%);
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* --- ANIMACIÓN DE PARPADEO LIMPIA --- */
-@keyframes cleanLampGlitch {
+/* --- ANIMACIÓN DE PARPADEO E INTENSIDAD AZUL --- */
+@keyframes complexLampGlitch {
   0%, 100% {
     opacity: 1;
     background: #ffffff;
-    box-shadow: 0 0 15px 4px #7dd3fc, 0 0 30px 8px #38bdf8;
+    box-shadow: 0 0 15px 4px #7dd3fc, 0 0 30px 10px #38bdf8;
   }
   3%, 9%, 15%, 25%, 78%, 85% {
-    opacity: 0.2; /* Apagado breve */
-    background: #bae6fd; /* Azul muy claro */
-    box-shadow: 0 0 3px #7dd3fc;
+    opacity: 0.15;
+    background: #bae6fd;
+    box-shadow: 0 0 4px #7dd3fc;
   }
   6%, 12%, 20%, 28%, 82%, 88% {
-    opacity: 1; /* Encendido intenso */
-    background: #e0f2fe; /* Blanco azulado */
-    box-shadow: 0 0 18px 5px #7dd3fc, 0 0 35px 10px #38bdf8;
+    opacity: 1;
+    background: #e0f2fe;
+    box-shadow: 0 0 20px 6px #7dd3fc, 0 0 40px 12px #38bdf8;
   }
   92% {
     opacity: 0.4;
-    box-shadow: 0 0 5px #7dd3fc;
+    box-shadow: 0 0 8px #7dd3fc;
   }
   95% {
     opacity: 1;
     background: #ffffff;
-    box-shadow: 0 0 20px 6px #7dd3fc, 0 0 40px 12px #38bdf8;
+    box-shadow: 0 0 22px 7px #7dd3fc, 0 0 45px 14px #38bdf8;
   }
 }
