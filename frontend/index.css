@@ -2782,34 +2782,43 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO MULTI-MEDIDOR Y DOBLE CHORRO (IZQ / DER) --- */
+/* --- ESTILO INDUSTRIAL SIMÉTRICO Y ALINEADO --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -65px;
-  right: 10px;
-  width: 75px;
-  height: 90px;
+  top: -55px;
+  right: 18px;
+  width: 70px;
+  height: 85px;
   pointer-events: none;
   z-index: 35;
 }
 
-/* --- PANEL DE MEDIDORES (4 Círculos de presión distribuidos) --- */
-.multi-gauge {
+/* 1. Panel de Medidores (Cuadrícula 2x2 ordenada) */
+.sys-gauge-panel {
   position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 16px);
+  gap: 4px;
+}
+
+.sys-gauge {
   width: 16px;
   height: 16px;
   background: rgba(125, 95, 105, 0.95);
   backdrop-filter: blur(4px);
   border: 1.5px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-.multi-needle {
+.sys-needle {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2819,172 +2828,162 @@ body.modal-active .logo-icon .dahlia-center {
   border-radius: 1px;
   transform-origin: left center;
   transform: translateY(-50%);
-  animation: multiNeedleMove 2s infinite ease-in-out alternate;
+  animation: sysNeedleMove 2s infinite ease-in-out alternate;
 }
 
-/* Posiciones de los 4 medidores en la estructura */
-.gauge-main { top: 2px; left: 2px; width: 20px; height: 20px; }
-.gauge-1 { top: 2px; left: 26px; }
-.gauge-2 { top: 20px; left: 2px; }
-.gauge-3 { top: 22px; left: 22px; width: 14px; height: 14px; }
-
-/* --- TUBERÍA CENTRAL --- */
-.multi-pipe-hub {
-  position: absolute;
-  top: 14px;
-  right: 12px;
-  width: 22px;
-  height: 65px;
-}
-
-.hub-flange {
+/* 2. Tubería Central y Estructura */
+.sys-pipe-assembly {
   position: absolute;
   top: 0;
-  right: 1px;
+  right: 12px;
+  width: 16px;
+  height: 75px;
+}
+
+.sys-flange {
+  position: absolute;
+  top: 0;
+  right: -2px;
   width: 20px;
-  height: 9px;
+  height: 8px;
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
   border-radius: 3px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* --- FUGA LADO IZQUIERDO --- */
-.leak-side-left {
+.sys-main-hub {
   position: absolute;
-  top: 22px;
-  left: -14px;
-  width: 16px;
-  height: 14px;
-}
-
-.side-jet-l {
-  position: absolute;
-  top: 4px;
-  left: 0;
-  width: 14px;
-  height: 3px;
-  background: linear-gradient(to left, #7dd3fc, rgba(56, 189, 248, 0.1));
-  border-radius: 2px;
-  box-shadow: 0 0 8px #38bdf8;
-  animation: sideJetLeft 0.7s infinite ease-in-out;
-}
-
-.side-drop-l {
-  position: absolute;
-  top: 2px;
-  left: -6px;
-  width: 5px;
-  height: 5px;
-  background: #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #38bdf8;
-  animation: sideDropLeft 1.2s infinite ease-in-out;
-}
-
-/* --- FUGA LADO DERECHO --- */
-.leak-side-right {
-  position: absolute;
-  top: 22px;
-  right: -14px;
-  width: 16px;
-  height: 14px;
-}
-
-.side-jet-r {
-  position: absolute;
-  top: 4px;
+  top: 6px;
   right: 0;
-  width: 14px;
-  height: 3px;
-  background: linear-gradient(to right, #7dd3fc, rgba(56, 189, 248, 0.1));
-  border-radius: 2px;
-  box-shadow: 0 0 8px #38bdf8;
-  animation: sideJetRight 0.7s infinite ease-in-out;
+  width: 16px;
+  height: 50px;
+  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.side-drop-r {
+/* 3. Fugas Laterales (Izquierda y Derecha conectadas al tubo) */
+.sys-side-leak {
+  position: absolute;
+  top: 22px;
+  width: 16px;
+  height: 12px;
+}
+
+.sys-side-leak.left {
+  left: -14px;
+}
+
+.sys-side-leak.right {
+  right: -14px;
+}
+
+.sys-side-jet {
+  position: absolute;
+  top: 4px;
+  width: 14px;
+  height: 3px;
+  background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.1));
+  border-radius: 2px;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: sysJetPulse 0.7s infinite ease-in-out;
+}
+
+.sys-side-leak.left .sys-side-jet {
+  right: 0;
+  background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.1));
+}
+
+.sys-side-leak.right .sys-side-jet {
+  left: 0;
+}
+
+.sys-side-drop {
   position: absolute;
   top: 2px;
-  right: -6px;
   width: 5px;
   height: 5px;
   background: #ffffff;
   border-radius: 50%;
   box-shadow: 0 0 8px #38bdf8;
-  animation: sideDropRight 1.2s infinite ease-in-out;
 }
 
-/* --- CHORRO Y GOTEO INFERIOR --- */
-.multi-down-stream {
+.sys-side-leak.left .sys-side-drop {
+  left: -6px;
+  animation: sysDropLeft 1.2s infinite ease-in-out;
+}
+
+.sys-side-leak.right .sys-side-drop {
+  right: -6px;
+  animation: sysDropRight 1.2s infinite ease-in-out;
+}
+
+/* 4. Goteo Inferior y Ondas */
+.sys-down-stream {
   position: absolute;
-  top: 32px;
-  right: 9px;
+  top: 54px;
+  right: 6px;
   width: 4px;
-  height: 22px;
+  height: 18px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.1));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.multi-down-drop {
+.sys-down-drop {
   position: absolute;
-  top: 30px;
-  right: 8px;
+  top: 52px;
+  right: 5px;
   width: 6px;
-  height: 10px;
+  height: 9px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: multiDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: sysDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.multi-down-ripple {
+.sys-down-ripple {
   position: absolute;
-  top: 58px;
-  right: 5px;
+  top: 74px;
+  right: 2px;
   width: 12px;
   height: 4px;
   border: 1.5px solid rgba(56, 189, 248, 0.8);
   border-radius: 50%;
-  animation: multiRippleExpand 1.3s infinite ease-out;
+  animation: sysRippleExpand 1.3s infinite ease-out;
 }
 
 /* --- ANIMACIONES --- */
-@keyframes multiNeedleMove {
+@keyframes sysNeedleMove {
   0% { transform: translateY(-50%) rotate(-30deg); }
   100% { transform: translateY(-50%) rotate(90deg); }
 }
 
-@keyframes sideJetLeft {
+@keyframes sysJetPulse {
   0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
   50% { transform: scaleX(1.2); opacity: 1; }
 }
 
-@keyframes sideDropLeft {
+@keyframes sysDropLeft {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(-16px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes sideJetRight {
-  0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
-  50% { transform: scaleX(1.2); opacity: 1; }
-}
-
-@keyframes sideDropRight {
+@keyframes sysDropRight {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(16px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes multiDropFall {
+@keyframes sysDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
-  20% { opacity: 1; transform: translateY(6px) scale(1); }
-  85% { opacity: 1; transform: translateY(20px) scale(0.9); }
-  100% { transform: translateY(26px) scale(1.4, 0.35); opacity: 0; }
+  20% { opacity: 1; transform: translateY(5px) scale(1); }
+  85% { opacity: 1; transform: translateY(16px) scale(0.9); }
+  100% { transform: translateY(22px) scale(1.4, 0.35); opacity: 0; }
 }
 
-@keyframes multiRippleExpand {
+@keyframes sysRippleExpand {
   0%, 70% { transform: scale(0.2); opacity: 0; }
   80% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.2); opacity: 0; }
