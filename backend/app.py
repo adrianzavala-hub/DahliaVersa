@@ -203,26 +203,25 @@ def obtener_reportes_por_nombre():
     nombre_buscado = request.args.get('nombre', '').strip().lower()
     if not nombre_buscado:
         return jsonify([]), 200
-        
+
     conn = obtener_conexion_db()
     cursor = conn.cursor()
     reportes = []
-    
+
     tablas_info = [
         ("baches", "baches"),
         ("fuga-agua", "fugas_agua"),
         ("poste-luz", "postes_luz")
     ]
-    
+
     for tipo, tabla in tablas_info:
-        # Buscamos coincidencias parciales o exactas ignorando mayúsculas
         cursor.execute(f"SELECT id, nombre, telefono, fecha, referencias, estado, observacion_ia, '{tipo}' as tipo FROM {tabla} WHERE LOWER(nombre) LIKE %s", (f"%{nombre_buscado}%",))
         for r in cursor.fetchall():
             reportes.append({
                 "id": r[0], "nombre": r[1], "telefono": r[2], "fecha": r[3],
                 "referencias": r[4], "estado": r[5], "observacion_ia": r[6], "tipo": r[7]
             })
-            
+
     cursor.close()
     conn.close()
     return jsonify(reportes)
