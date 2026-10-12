@@ -2460,21 +2460,20 @@ body.modal-active .logo-icon .dahlia-center {
   background: rgba(255, 255, 255, 0.4);
   color: #0f172a;
 }
-
 .seg-modal-lamp-external {
   position: absolute;
-  top: -35px;   /* Sobresale por la parte superior */
-  left: -20px;  /* Sobresale por la esquina izquierda */
+  top: -35px;   /* Distancia hacia arriba por fuera del borde */
+  left: -20px;  /* Distancia hacia la izquierda por fuera del borde */
   width: 50px;
   height: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 25;
-  pointer-events: none;
+  pointer-events: none; /* No interfiere con clics en el formulario */
 }
 
-/* Base de montaje en la esquina */
+/* Base de montaje (el círculo en la esquina del modal) */
 .ext-lamp-arm-base {
   width: 12px;
   height: 12px;
@@ -2486,24 +2485,25 @@ body.modal-active .logo-icon .dahlia-center {
   left: 12px;
 }
 
-/* Brazo curvo ornamental de la lámpara */
+/* Brazo curvo ornamental: Alineado y proporcionado */
 .ext-lamp-arm-curve {
   width: 26px;
   height: 22px;
   border: 4px solid rgba(255, 255, 255, 0.85);
   border-top: none;
   border-right: none;
-  border-radius: 0 0 0 16px;
+  border-radius: 0 0 0 16px; /* Curva suave hacia abajo e izquierda */
   position: absolute;
   top: 6px;
   left: 6px;
   box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Cabezal de la lámpara más grande y elegante */
+/* Cabezal de la lámpara: Posicionado al final del brazo */
 .ext-lamp-head {
   width: 32px;
   height: 20px;
+  /* Gradiente armónico con tu paleta rosado/marrón */
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
   border-radius: 14px 14px 4px 4px;
   position: absolute;
@@ -2512,21 +2512,22 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-end; /* Alinea la bombilla a la parte inferior del cabezal */
   padding-bottom: 3px;
 }
 
-/* Foco central con luz brillante */
+/* Bombilla central parpadeante en azul */
 .ext-lamp-bulb {
   width: 14px;
   height: 14px;
   background: #ffffff;
   border-radius: 50%;
+  /* Animación de parpadeo (glitch) azul */
   animation: lampGlitchExternalBlue 3.5s infinite;
   box-shadow: 0 0 12px 3px #7dd3fc, 0 0 25px 6px #38bdf8;
 }
 
-/* Resplandor ambiental exterior en tonos azules */
+/* Resplandor ambiental exterior azul */
 .ext-lamp-glow {
   position: absolute;
   top: 15px;
@@ -2535,11 +2536,13 @@ body.modal-active .logo-icon .dahlia-center {
   height: 44px;
   background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(125, 211, 252, 0.1) 60%, transparent 100%);
   border-radius: 50%;
+  /* Animación de pulso del resplandor */
   animation: lampGlowPulse 3.5s infinite;
   pointer-events: none;
 }
 
-/* Animación de parpadeo (glitch) e intensidad azul */
+/* --- DEFINICIÓN DE ANIMACIONES --- */
+
 @keyframes lampGlitchExternalBlue {
   0%, 100% {
     opacity: 1;
