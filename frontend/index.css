@@ -2575,110 +2575,150 @@ body.modal-active .logo-icon .dahlia-center {
   }
 }
 
-/* --- FUGA DE AGUA COMPLEJA EN LA ESQUINA SUPERIOR DERECHA (CSS PURO) --- */
+/* --- FUGA DE AGUA SUPERIOR DERECHA (DISEÑO ORNAMENTAL AVANZADO) --- */
 
-.seg-modal-leak-complex {
+.seg-modal-leak-advanced {
   position: absolute;
-  top: -35px;
-  right: -20px;
-  width: 40px;
-  height: 60px;
+  top: -42px;
+  right: -22px;
+  width: 50px;
+  height: 70px;
   z-index: 35;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Tubería empotrada saliendo del muro */
-.leak-pipe-wall {
+/* 1. Brida de montaje al muro */
+.adv-pipe-flange {
   position: absolute;
   top: 0;
-  right: 6px;
-  width: 14px;
-  height: 12px;
+  right: 8px;
+  width: 18px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 2. Cuerpo principal de la tubería */
+.adv-pipe-body {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  width: 10px;
+  height: 18px;
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
+  border-radius: 2px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* 3. Volante / Llave decorativa superior */
+.adv-valve-wheel {
+  position: absolute;
+  top: 2px;
+  right: 20px;
+  width: 16px;
+  height: 6px;
+  background: #7d5f69;
   border-radius: 3px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-
-/* Codo de la tubería */
-.leak-pipe-elbow {
+.valve-hub {
   position: absolute;
-  top: 8px;
-  right: 6px;
-  width: 16px;
-  height: 16px;
-  border: 4px solid #7d5f69;
-  border-top: none;
-  border-left: none;
-  border-radius: 0 0 10px 0;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  top: -2px;
+  left: 5px;
+  width: 6px;
+  height: 10px;
+  background: #e2a9b3;
+  border-radius: 2px;
 }
 
-/* Boquilla de la fuga */
-.leak-nozzle {
+/* 4. Boquilla de salida */
+.adv-nozzle-tip {
   position: absolute;
-  top: 20px;
-  right: 4px;
-  width: 10px;
-  height: 6px;
+  top: 22px;
+  right: 11px;
+  width: 12px;
+  height: 8px;
   background: #bae6fd;
-  border-radius: 2px;
+  border-radius: 0 0 5px 5px;
   box-shadow: 0 0 6px #38bdf8;
 }
 
-/* Gota de agua 1 (caída principal) */
-.leak-drop {
+/* 5. Chorro de agua principal continuo */
+.adv-water-stream {
   position: absolute;
-  top: 26px;
-  right: 7px;
-  width: 6px;
-  height: 9px;
-  background: linear-gradient(to bottom, #7dd3fc, #38bdf8);
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  top: 29px;
+  right: 15px;
+  width: 4px;
+  height: 22px;
+  background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.3));
+  border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
-  animation: waterDropFall 2s infinite cubic-bezier(0.5, 0, 0.8, 1);
+  animation: waterStreamFlow 0.8s infinite linear;
 }
 
-/* Gota de agua 2 (secundaria con retardo) */
-.leak-drop-2 {
-  animation-delay: 1s;
+/* 6. Gota pesada con caída fluida */
+.adv-water-drop {
+  position: absolute;
+  top: 28px;
+  right: 14px;
+  width: 6px;
+  height: 10px;
+  background: linear-gradient(to bottom, #ffffff, #38bdf8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: advancedDropFall 1.6s infinite cubic-bezier(0.4, 0, 0.7, 1);
+}
+
+.drop-two {
+  animation-delay: 0.8s;
   opacity: 0;
 }
 
-/* Pequeño destello o salpicadura al caer */
-.leak-splash {
+/* 7. Anillo de salpicadura inferior */
+.adv-splash-ring {
   position: absolute;
-  top: 52px;
-  right: 5px;
-  width: 10px;
-  height: 3px;
-  background: rgba(56, 189, 248, 0.6);
+  top: 56px;
+  right: 12px;
+  width: 12px;
+  height: 4px;
+  border: 1.5px solid rgba(56, 189, 248, 0.8);
   border-radius: 50%;
-  animation: waterSplashAnim 2s infinite;
+  animation: splashRingExpand 1.6s infinite ease-out;
 }
 
-/* --- ANIMACIONES DE LAS GOTAS --- */
-@keyframes waterDropFall {
+/* --- ANIMACIONES DETALLADAS DEL AGUA --- */
+@keyframes waterStreamFlow {
+  0% { transform: scaleY(0.9); opacity: 0.7; }
+  50% { transform: scaleY(1.1); opacity: 1; }
+  100% { transform: scaleY(0.9); opacity: 0.7; }
+}
+
+@keyframes advancedDropFall {
   0% {
-    transform: translateY(0) scaleX(0.8);
+    transform: translateY(0) scale(0.6);
     opacity: 0;
   }
   20% {
     opacity: 1;
-    transform: translateY(4px) scaleX(1);
+    transform: translateY(6px) scale(1);
   }
-  80% {
+  85% {
     opacity: 1;
-    transform: translateY(24px) scaleX(0.9);
+    transform: translateY(26px) scale(0.9);
   }
   100% {
-    transform: translateY(28px) scaleX(1.2) scaleY(0.4);
+    transform: translateY(30px) scale(1.4, 0.4);
     opacity: 0;
   }
 }
 
-@keyframes waterSplashAnim {
+@keyframes splashRingExpand {
   0%, 75% {
-    transform: scale(0);
+    transform: scale(0.2);
     opacity: 0;
   }
   82% {
@@ -2686,7 +2726,7 @@ body.modal-active .logo-icon .dahlia-center {
     opacity: 1;
   }
   100% {
-    transform: scale(1.8);
+    transform: scale(2.2);
     opacity: 0;
   }
 }
