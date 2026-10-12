@@ -76,15 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (modalOverlay) {
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                document.body.classList.remove('modal-active');
-                modalOverlay.classList.remove('active');
-            }
-        });
-    }
-
     window.showLoader = function() {};
     window.hideLoader = function() {};
 
