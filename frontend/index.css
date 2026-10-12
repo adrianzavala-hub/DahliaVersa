@@ -2782,100 +2782,139 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO DE PLACA BASE Y MANÓMETRO INTEGRADO --- */
+/* --- ESTACIÓN HIDRÁULICA INDUSTRIAL COMPLEJA --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -38px;
-  right: 24px;
-  width: 44px;
-  height: 65px;
+  top: -48px;
+  right: 20px;
+  width: 60px;
+  height: 80px;
   pointer-events: none;
   z-index: 35;
 }
 
-/* 1. Placa base sólida de anclaje (Elimina cualquier efecto flotante) */
-.plate-mount-base {
+/* 1. Chasis / Placa de Montaje Principal (Sólida y Anclada) */
+.complex-station-chassis {
   position: absolute;
   top: 0;
   right: 0;
-  width: 32px;
-  height: 60px;
+  width: 44px;
+  height: 75px;
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
   border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), inset 0 0 6px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.45), inset 0 0 8px rgba(255, 255, 255, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* 2. Círculo medidor de presión incrustado en la placa */
-.plate-gauge {
+/* 2. Panel Superior con Doble Medidor de Presión Gemelo */
+.complex-gauge-panel {
   position: absolute;
-  top: 6px;
+  top: 5px;
   left: 4px;
-  width: 22px;
-  height: 22px;
+  right: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.complex-gauge {
+  width: 16px;
+  height: 16px;
   background: rgba(125, 95, 105, 0.95);
   backdrop-filter: blur(4px);
   border: 1.5px solid #bae6fd;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-.plate-needle {
+.complex-needle {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 8px;
+  width: 6px;
   height: 1.5px;
   background: #38bdf8;
   border-radius: 1px;
   transform-origin: left center;
   transform: translateY(-50%);
-  animation: plateNeedleMove 2s infinite ease-in-out alternate;
+  animation: complexNeedleFluctuation 2s infinite ease-in-out alternate;
 }
 
-/* 3. Ramales laterales izquierdo y derecho conectados a la placa */
-.plate-branch {
+/* 3. Manifold Central y Volantes Laterales */
+.complex-manifold-core {
   position: absolute;
-  top: 34px;
+  top: 26px;
+  left: 8px;
+  right: 8px;
+  height: 16px;
+  background: #7d5f69;
+  border-radius: 3px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.complex-valve-wheel-left,
+.complex-valve-wheel-right {
+  position: absolute;
+  top: -3px;
+  width: 6px;
+  height: 22px;
+  background: #e2a9b3;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.complex-valve-wheel-left { left: -4px; }
+.complex-valve-wheel-right { right: -4px; }
+
+/* 4. Ramales Laterales de Escape (Izquierda / Derecha) */
+.complex-branch-side {
+  position: absolute;
+  top: 48px;
+  width: 16px;
+  height: 8px;
+}
+
+.complex-branch-side.left { left: -14px; }
+.complex-branch-side.right { right: -14px; }
+
+.complex-pipe-stub {
+  position: absolute;
+  top: 2px;
+  width: 16px;
+  height: 4px;
+  background: #7d5f69;
+  border-radius: 2px;
+}
+
+.complex-pressure-jet-l,
+.complex-pressure-jet-r {
+  position: absolute;
+  top: 2px;
   width: 12px;
-  height: 6px;
-}
-
-.plate-branch.left {
-  left: -10px;
-}
-
-.plate-branch.right {
-  right: -10px;
-}
-
-.plate-jet-l, .plate-jet-r {
-  position: absolute;
-  top: 1px;
-  width: 10px;
   height: 3px;
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.1));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
-  animation: plateJetPulse 0.8s infinite ease-in-out;
+  animation: complexJetPulse 0.75s infinite ease-in-out;
 }
 
-.plate-branch.left .plate-jet-l {
-  right: 0;
+.complex-branch-side.left .complex-pressure-jet-l {
+  right: 2px;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.1));
 }
 
-.plate-branch.right .plate-jet-r {
-  left: 0;
+.complex-branch-side.right .complex-pressure-jet-r {
+  left: 2px;
 }
 
-.plate-drop-l, .plate-drop-r {
+.complex-spray-drop-l,
+.complex-spray-drop-r {
   position: absolute;
-  top: -1px;
+  top: 0;
   width: 5px;
   height: 5px;
   background: #ffffff;
@@ -2883,21 +2922,29 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.plate-branch.left .plate-drop-l {
-  left: -5px;
-  animation: plateDropLeft 1.2s infinite ease-in-out;
+.complex-branch-side.left .complex-spray-drop-l {
+  left: -6px;
+  animation: complexDropLeft 1.2s infinite ease-in-out;
 }
 
-.plate-branch.right .plate-drop-r {
-  right: -5px;
-  animation: plateDropRight 1.2s infinite ease-in-out;
+.complex-branch-side.right .complex-spray-drop-r {
+  right: -6px;
+  animation: complexDropRight 1.2s infinite ease-in-out;
 }
 
-/* 4. Goteo inferior saliendo desde la base de la placa */
-.plate-down-stream {
+/* 5. Tubería de Descarga Inferior y Goteo Sincronizado */
+.complex-drain-pipe {
   position: absolute;
-  bottom: -14px;
-  left: 14px;
+  bottom: -16px;
+  left: 18px;
+  width: 8px;
+  height: 18px;
+}
+
+.complex-down-stream {
+  position: absolute;
+  top: 0;
+  left: 2px;
   width: 4px;
   height: 14px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.1));
@@ -2905,60 +2952,60 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.plate-down-drop {
+.complex-down-drop {
   position: absolute;
-  bottom: -18px;
-  left: 13px;
+  bottom: -2px;
+  left: 1px;
   width: 6px;
   height: 8px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: plateDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: complexDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.plate-down-ripple {
+.complex-down-ripple {
   position: absolute;
-  bottom: -24px;
-  left: 10px;
+  bottom: -10px;
+  left: -2px;
   width: 12px;
   height: 4px;
   border: 1.5px solid rgba(56, 189, 248, 0.8);
   border-radius: 50%;
-  animation: plateRippleExpand 1.3s infinite ease-out;
+  animation: complexRippleExpand 1.3s infinite ease-out;
 }
 
-/* --- ANIMACIONES --- */
-@keyframes plateNeedleMove {
-  0% { transform: translateY(-50%) rotate(-35deg); }
-  100% { transform: translateY(-50%) rotate(85deg); }
+/* --- ANIMACIONES DE ALTA PRECISIÓN --- */
+@keyframes complexNeedleFluctuation {
+  0% { transform: translateY(-50%) rotate(-40deg); }
+  100% { transform: translateY(-50%) rotate(95deg); }
 }
 
-@keyframes plateJetPulse {
+@keyframes complexJetPulse {
   0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
-  50% { transform: scaleX(1.2); opacity: 1; }
+  50% { transform: scaleX(1.25); opacity: 1; }
 }
 
-@keyframes plateDropLeft {
+@keyframes complexDropLeft {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(-12px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes plateDropRight {
+@keyframes complexDropRight {
   0% { transform: translateX(0) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateX(12px) scale(1.2); opacity: 0; }
+  100% { transform: translateX(14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes plateDropFall {
+@keyframes complexDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
-  20% { opacity: 1; transform: translateY(3px) scale(1); }
-  85% { opacity: 1; transform: translateY(10px) scale(0.9); }
-  100% { transform: translateY(14px) scale(1.4, 0.35); opacity: 0; }
+  20% { opacity: 1; transform: translateY(4px) scale(1); }
+  85% { opacity: 1; transform: translateY(12px) scale(0.9); }
+  100% { transform: translateY(16px) scale(1.4, 0.35); opacity: 0; }
 }
 
-@keyframes plateRippleExpand {
+@keyframes complexRippleExpand {
   0%, 70% { transform: scale(0.2); opacity: 0; }
   80% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.2); opacity: 0; }
