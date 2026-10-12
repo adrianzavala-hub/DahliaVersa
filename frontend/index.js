@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Abrir Guía Rápida
+    // Abrir Guía Rápida (Asegura cerrar Seguimiento)
     if (logoTrigger) {
         logoTrigger.addEventListener('click', () => {
             if (modalSeguimiento) modalSeguimiento.classList.remove('active');
@@ -78,12 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnClose) {
         btnClose.addEventListener('click', () => {
-            body.classList.remove('modal-active');
             if (modalOverlay) modalOverlay.classList.remove('active');
+            body.classList.remove('modal-active');
         });
     }
 
-    // Abrir Seguimiento (Asegurando que el modal de Guía Rápida se cierre por completo)
+    // Abrir Seguimiento (Asegura cerrar Guía Rápida)
     if (seguimientoNavBtn && modalSeguimiento) {
         seguimientoNavBtn.addEventListener('click', (e) => {
             e.preventDefault();
