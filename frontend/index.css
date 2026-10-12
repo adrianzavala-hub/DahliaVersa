@@ -2222,6 +2222,7 @@ body.modal-active .logo-icon .dahlia-center {
     opacity: 0;
   }
 }
+
 .modal-overlay-seguimiento {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -2231,10 +2232,10 @@ body.modal-active .logo-icon .dahlia-center {
   display: flex; justify-content: center; align-items: center;
   opacity: 0; visibility: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
-  z-index: 1000; pointer-events: auto;
+  z-index: 2000; pointer-events: none;
 }
 .modal-overlay-seguimiento.active {
-  opacity: 1; visibility: visible;
+  opacity: 1; visibility: visible; pointer-events: auto;
 }
 .modal-card-seguimiento {
   background: rgba(125, 95, 105, 0.85);
@@ -2243,8 +2244,9 @@ body.modal-active .logo-icon .dahlia-center {
   width: 90%; max-width: 480px; text-align: left;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   transform: translateY(20px) scale(0.95);
-  transition: transform 0.4s ease; z-index: 1003;
+  transition: transform 0.4s ease; z-index: 2003;
   display: flex; flex-direction: column; max-height: 85vh;
+  position: relative;
 }
 .modal-overlay-seguimiento.active .modal-card-seguimiento {
   transform: translateY(0) scale(1);
@@ -2282,7 +2284,7 @@ body.modal-active .logo-icon .dahlia-center {
 .seg-result-obs { margin: 0; font-size: 0.85rem; color: #fbe8ec; }
 .seg-actions-container { display: flex; gap: 10px; margin-top: 15px; }
 
-/* Botones azules estéticos */
+/* Botones */
 .btn-close, .btn-seg-action {
   align-self: center; width: 100%; max-width: 200px;
   background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
@@ -2326,7 +2328,8 @@ body.modal-active .logo-icon .dahlia-center {
 .hero-search-btn { background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%); color: #0f172a; border: none; padding: 10px 22px; border-radius: 20px; font-weight: 600; cursor: pointer; }
 .hero-right-bottom { position: absolute; bottom: 30px; right: 40px; z-index: 5; }
 .stats-track { display: flex; gap: 15px; }
-.stat-card { background: rgba(125, 95, 105, 0.55); border: 1px solid rgba(226, 169, 179, 0.35); padding: 16px 18px; border-radius: 20px; }
+.stat-card { background: rgba(125, 95, 105, 0.55); border: 1px solid rgba(226, 169, 179, 0.35); padding: 16px 18px; border-radius: 20px; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.stat-card.visible { opacity: 1; transform: translateY(0); }
 .stat-card h3 { font-size: 1.3rem; color: #fff; margin-bottom: 4px; }
 .stat-card p { font-size: 0.65rem; color: #fbe8ec; }
 
@@ -2337,7 +2340,9 @@ body.modal-active .logo-icon .dahlia-center {
 .footer-brand-effect { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; color: #fff; }
 .footer-links a { color: #fff; font-size: 0.85rem; }
 
+/* Loaders */
 .page-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.page-loader.active { opacity: 1; pointer-events: auto; }
 .loader-glass-window { background: rgba(186, 230, 253, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(186, 230, 253, 0.2); padding: 30px; border-radius: 20px; text-align: center; }
 .loader-brand-title { font-size: 1.5rem; font-weight: bold; color: #ffffff; margin-top: 15px; }
 .loader-subtitle { font-size: 0.9rem; color: #7dd3fc; margin-top: 5px; }
