@@ -2235,6 +2235,7 @@ body.modal-active .logo-icon .dahlia-center {
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity 0.35s ease, visibility 0.35s ease;
   z-index: 2000;
+  overflow: visible;
 }
 
 .modal-overlay-seguimiento.active {
@@ -2460,93 +2461,115 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- LÁMPARA PARPADEANTE DEL MODAL --- */
-
-.seg-modal-lamp {
+.seg-modal-lamp-external {
   position: absolute;
-  top: 15px; /* Ajuste para que quepa en la esquina */
-  left: 15px;
-  width: 25px;
-  height: 35px;
+  top: -35px;   /* Sobresale por la parte superior */
+  left: -20px;  /* Sobresale por la esquina izquierda */
+  width: 50px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 10;
-  pointer-events: none; /* No interfiere con clics */
+  z-index: 25;
+  pointer-events: none;
 }
 
-/* Soporte físico (brazo) */
-.lamp-support {
-  width: 14px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 2px;
+/* Base de montaje en la esquina */
+.ext-lamp-arm-base {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   position: absolute;
-  top: 8px;
-  left: -2px;
+  top: 0;
+  left: 12px;
 }
 
-/* Cabeza de la lámpara (estructura) */
-.lamp-head {
-  width: 16px;
-  height: 10px;
-  background: rgba(226, 169, 179, 0.7); /* Color rosado oscuro a juego */
-  border-radius: 8px 8px 2px 2px;
-  position: relative;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+/* Brazo curvo ornamental de la lámpara */
+.ext-lamp-arm-curve {
+  width: 26px;
+  height: 22px;
+  border: 4px solid rgba(255, 255, 255, 0.85);
+  border-top: none;
+  border-right: none;
+  border-radius: 0 0 0 16px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Núcleo de luz (el bombillo que parpadea) */
-.lamp-light-core {
-  width: 8px;
-  height: 8px;
+/* Cabezal de la lámpara más grande y elegante */
+.ext-lamp-head {
+  width: 32px;
+  height: 20px;
+  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
+  border-radius: 14px 14px 4px 4px;
+  position: absolute;
+  top: 24px;
+  left: 2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 3px;
+}
+
+/* Foco central con luz brillante */
+.ext-lamp-bulb {
+  width: 14px;
+  height: 14px;
   background: #ffffff;
   border-radius: 50%;
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  
-  /* Animación de parpadeo (glitch) azul */
-  animation: lampGlitchBlue 4s infinite;
-  
-  /* Sombra base suave */
-  box-shadow: 0 0 5px #7dd3fc;
+  animation: lampGlitchExternalBlue 3.5s infinite;
+  box-shadow: 0 0 12px 3px #7dd3fc, 0 0 25px 6px #38bdf8;
 }
 
-/* Definición de la animación de parpadeo con colores azules */
-@keyframes lampGlitchBlue {
+/* Resplandor ambiental exterior en tonos azules */
+.ext-lamp-glow {
+  position: absolute;
+  top: 15px;
+  left: -15px;
+  width: 44px;
+  height: 44px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(125, 211, 252, 0.1) 60%, transparent 100%);
+  border-radius: 50%;
+  animation: lampGlowPulse 3.5s infinite;
+  pointer-events: none;
+}
+
+/* Animación de parpadeo (glitch) e intensidad azul */
+@keyframes lampGlitchExternalBlue {
   0%, 100% {
     opacity: 1;
     background: #ffffff;
-    box-shadow: 0 0 8px 2px #7dd3fc, 0 0 15px 4px #38bdf8;
+    box-shadow: 0 0 15px 4px #7dd3fc, 0 0 30px 8px #38bdf8;
   }
-  
-  /* Momentos de apagado rápido */
-  2%, 6%, 12%, 18%, 26%, 80%, 86% {
-    opacity: 0.1;
-    box-shadow: none;
+  3%, 9%, 15%, 25%, 78%, 85% {
+    opacity: 0.15;
+    box-shadow: 0 0 2px #7dd3fc;
+    background: #bae6fd;
   }
-  
-  /* Momentos de encendido (colores azules claros) */
-  4%, 10%, 16%, 22%, 30%, 84%, 90% {
+  6%, 12%, 20%, 28%, 82%, 88% {
     opacity: 1;
-    background: #bae6fd; /* Azul muy claro */
-    box-shadow: 0 0 10px 3px #7dd3fc, 0 0 20px 6px #38bdf8;
+    background: #e0f2fe;
+    box-shadow: 0 0 18px 5px #7dd3fc, 0 0 35px 10px #38bdf8;
   }
-  
-  /* Parpadeo errático corto al final */
   92% {
-    opacity: 0.3;
-    box-shadow: 0 0 4px #7dd3fc;
+    opacity: 0.4;
+    box-shadow: 0 0 5px #7dd3fc;
   }
-  94% {
+  95% {
     opacity: 1;
     background: #ffffff;
-    box-shadow: 0 0 12px 4px #7dd3fc, 0 0 25px 8px #38bdf8;
+    box-shadow: 0 0 20px 6px #7dd3fc, 0 0 40px 12px #38bdf8;
   }
-  96% {
-    opacity: 0.2;
-    box-shadow: none;
-  }
+}
+
+@keyframes lampGlowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  6%, 15%, 25% { transform: scale(0.6); opacity: 0.2; }
+  12%, 20%, 28% { transform: scale(1.2); opacity: 1; }
+  82% { transform: scale(0.9); opacity: 0.5; }
 }
