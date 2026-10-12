@@ -858,6 +858,117 @@
                 text-align: right;
             }
         }
+
+.site-footer {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto 30px auto;
+  padding: 15px 30px;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  background: rgba(125, 95, 105, 0.55);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 30px;
+  border: 1px solid rgba(226, 169, 179, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(226, 169, 179, 0.1);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-socials a {
+  color: #fbe8ec;
+  background: rgba(125, 95, 105, 0.4);
+  border: 1px solid rgba(226, 169, 179, 0.3);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+  color: #ffffff;
+  background: rgba(226, 169, 179, 0.35);
+  border-color: #e2a9b3;
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(226, 169, 179, 0.5);
+}
+
+.footer-brand-effect {
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  background-image: url('img/fondo.jpeg');
+  background-size: 100vw 100vh;
+  background-position: center bottom;
+  background-attachment: fixed;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: none;
+  text-shadow: none;
+  flex: 1;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.footer-links a {
+  color: #000;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #e2a9b3;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-socials,
+  .footer-links,
+  .footer-brand-effect {
+    text-align: center;
+    justify-content: center;
+    flex: none;
+    width: 100%;
+  }
+}
     </style>
 </head>
 
