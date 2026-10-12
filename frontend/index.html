@@ -283,19 +283,34 @@
             <button class="btn-close" id="btnClose">Cerrar</button>
         </div>
     </div>
-    <div class="modal-overlay-seguimiento" id="modalSeguimiento">
+<div class="modal-overlay-seguimiento" id="modalSeguimiento">
         <div class="petal-container" id="petalContainerSeguimiento"></div>
         <div class="modal-card-seguimiento">
             <h2>Seguimiento de Reporte</h2>
             <div class="modal-body-scroll-seg">
+                
+                <!-- Tipo de Incidencia con Botones de Selección (Checkboxes visuales) -->
                 <div class="seg-step">
                     <h3>Tipo de Incidencia</h3>
-                    <select id="segTipo" class="seg-input-field">
-                        <option value="baches">Bache</option>
-                        <option value="fuga-agua">Fuga de Agua</option>
-                        <option value="poste-luz">Poste de Luz</option>
-                    </select>
+                    <div class="seg-checkbox-group">
+                        <label class="seg-checkbox-card">
+                            <input type="checkbox" name="segTipoCheck" value="baches" class="seg-hidden-check">
+                            <span class="seg-checkbox-box"></span>
+                            <span class="seg-checkbox-label">Bache</span>
+                        </label>
+                        <label class="seg-checkbox-card">
+                            <input type="checkbox" name="segTipoCheck" value="fuga-agua" class="seg-hidden-check">
+                            <span class="seg-checkbox-box"></span>
+                            <span class="seg-checkbox-label">Fuga de Agua</span>
+                        </label>
+                        <label class="seg-checkbox-card">
+                            <input type="checkbox" name="segTipoCheck" value="poste-luz" class="seg-hidden-check">
+                            <span class="seg-checkbox-box"></span>
+                            <span class="seg-checkbox-label">Poste de Luz</span>
+                        </label>
+                    </div>
                 </div>
+
                 <div class="seg-step">
                     <h3>ID de Reporte (Folio)</h3>
                     <input type="number" id="segId" placeholder="Ej. 1" class="seg-input-field">

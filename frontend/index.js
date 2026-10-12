@@ -205,36 +205,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Consulta API de Seguimiento
+    // Consulta API de Seguimiento
     if (btnConsultarSeguimiento) {
         btnConsultarSeguimiento.addEventListener('click', async () => {
-            const tipo = document.getElementById('segTipo').value;
+            // Obtener el valor del checkbox seleccionado
+            const selectedCheck = document.querySelector('input[name="segTipoCheck"]:checked');
+            const tipo = selectedCheck ? selectedCheck.value : null;
+            
             const id = document.getElementById('segId').value.trim();
             const nombreIngresado = document.getElementById('segNombre').value.trim();
             const resultadoDiv = document.getElementById('segResultado');
 
-            if (!id || !nombreIngresado) {
-                alert("Por favor, ingresa el ID del reporte y tu nombre.");
+            resultadoDiv.style.display = 'none';
+
+            if (!tipo || !id || !nombreIngresado) {
+                alert("Por favor, selecciona una incidencia, ingresa el ID y tu nombre.");
                 return;
             }
 
             try {
-                const response = await fetch(`https://dahliaversa1.onrender.com/api/seguimiento/${tipo}/${id}`);
+                const url = `https://dahliaversa1.onrender.com/api/seguimiento/${tipo}/${id}`;
+                const response = await fetch(url);
                 const data = await response.json();
 
-                if (response.ok) {
-                    if (data.nombre.toLowerCase() === nombreIngresado.toLowerCase()) {
-                        document.getElementById('resEstado').textContent = data.estado.toUpperCase();
+                if (response.ok && data) {
+                    const nombreBD = (data.nombre || "").trim().toLowerCase();
+                    const nombreUser = nombreIngresado.toLowerCase();
+
+                    if (nombreBD === nombreUser) {
+                        document.getElementById('resEstado').textContent = (data.estado || "Desconocido").toUpperCase();
                         document.getElementById('resNombre').textContent = data.nombre;
-                        document.getElementById('resFecha').textContent = data.fecha;
-                        document.getElementById('resObs').textContent = data.observacion_ia || 'Sin observaciones';
+                        document.getElementById('resFecha').textContent = data.fecha || "No especificada";
+                        document.getElementById('resObs').textContent = data.observacion_ia || 'Sin observaciones registradas';
+                        
                         resultadoDiv.style.display = 'block';
                     } else {
-                        alert("El nombre ingresado no coincide con el registro de este ID.");
-                        resultadoDiv.style.display = 'none';
+                        alert("El nombre ingresado no coincide exactamente con el registro de este ID.");
                     }
                 } else {
-                    alert("No se encontró ningún reporte con ese ID y tipo.");
-                    resultadoDiv.style.display = 'none';
+                    alert("No se encontró ningún reporte con ese ID y tipo de incidencia.");
                 }
             } catch (err) {
                 console.error("Error al consultar seguimiento:", err);
