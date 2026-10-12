@@ -2574,3 +2574,232 @@ body.modal-active .logo-icon .dahlia-center {
     box-shadow: 0 0 22px 7px #7dd3fc, 0 0 45px 14px #38bdf8;
   }
 }
+
+/* --- ESTILOS 100% EXCLUSIVOS PARA MIS REPORTES (SIN DUPLICAR CLASES) --- */
+
+.mr-nico-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.mr-nico-card {
+  position: relative;
+  background: rgba(125, 95, 105, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  width: 90%;
+  max-width: 420px;
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: visible !important;
+}
+
+/* Fuga Izquierda Exclusiva */
+.mr-nico-leak-left {
+  position: absolute;
+  top: -35px;
+  left: -18px;
+  width: 35px;
+  height: 50px;
+  pointer-events: none;
+}
+.mn-pipe-l {
+  width: 12px;
+  height: 14px;
+  background: linear-gradient(135deg, #e2a9b3, #7d5f69);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.mn-drop-l {
+  position: absolute;
+  top: 12px;
+  left: 3px;
+  width: 5px;
+  height: 8px;
+  background: #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #38bdf8;
+  animation: mnDropAnimL 1.5s infinite ease-in;
+}
+
+/* Fuga Derecha Exclusiva */
+.mr-nico-leak-right {
+  position: absolute;
+  top: -35px;
+  right: -18px;
+  width: 35px;
+  height: 50px;
+  pointer-events: none;
+}
+.mn-pipe-r {
+  position: absolute;
+  right: 0;
+  width: 12px;
+  height: 14px;
+  background: linear-gradient(135deg, #e2a9b3, #7d5f69);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.mn-drop-r {
+  position: absolute;
+  top: 12px;
+  right: 3px;
+  width: 5px;
+  height: 8px;
+  background: #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #38bdf8;
+  animation: mnDropAnimR 1.5s infinite ease-in 0.7s;
+}
+
+.mr-nico-title {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.mr-nico-scroll {
+  max-height: 40vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-right: 4px;
+}
+
+.mr-nico-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mr-nico-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.mr-nico-field {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.mr-nico-field::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mr-nico-field:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+.mr-nico-results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.mr-nico-subtitle {
+  color: #bae6fd;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.mr-nico-item {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(226, 169, 179, 0.3);
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.mr-nico-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.mr-nico-type {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.mr-nico-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.mr-badge-process {
+  background: rgba(56, 189, 248, 0.25);
+  color: #bae6fd;
+}
+
+.mr-badge-done {
+  background: rgba(74, 222, 128, 0.25);
+  color: #bbf7d0;
+}
+
+.mr-nico-date {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+}
+
+.mr-nico-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.mr-nico-btn {
+  flex: 1;
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.mr-nico-btn:hover {
+  opacity: 0.9;
+}
+
+.mr-nico-btn-alt {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Animaciones únicas para las gotas de este modal */
+@keyframes mnDropAnimL {
+  0% { transform: translateY(0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(22px); opacity: 0; }
+}
+
+@keyframes mnDropAnimR {
+  0% { transform: translateY(0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(22px); opacity: 0; }
+}

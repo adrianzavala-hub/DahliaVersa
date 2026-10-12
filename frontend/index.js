@@ -9,9 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnConsultarSeguimiento = document.getElementById('btnConsultarSeguimiento');
     const body = document.body;
 
+    // Elementos para el nuevo modal de Mis Reportes
+    const misReportesNavBtn = document.getElementById('misReportesNavBtn'); // Ajusta este ID si tu botón del navbar tiene otro nombre
+    const modalMisReportes = document.getElementById('modalMisReportes');
+    const mrNicoBtnClose = document.getElementById('mrNicoBtnClose');
+    const mrNicoBtnSearch = document.getElementById('mrNicoBtnSearch');
+
     // Asegurar estado inicial oculto
     if (modalOverlay) modalOverlay.style.display = 'none';
     if (modalSeguimiento) modalSeguimiento.style.display = 'none';
+    if (modalMisReportes) modalMisReportes.style.display = 'none';
 
     function createGlitchLamp() {
         if (!modalOverlay) return;
@@ -73,10 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. ABRIR GUÍA RÁPIDA (Logo)
     if (logoTrigger && modalOverlay) {
         logoTrigger.addEventListener('click', () => {
-            // Forzar cierre total del modal de seguimiento
             if (modalSeguimiento) {
                 modalSeguimiento.classList.remove('active');
                 modalSeguimiento.style.display = 'none';
+            }
+            if (modalMisReportes) {
+                modalMisReportes.classList.remove('active');
+                modalMisReportes.style.display = 'none';
             }
 
             body.classList.add('modal-active');
@@ -100,10 +110,13 @@ document.addEventListener("DOMContentLoaded", () => {
         seguimientoNavBtn.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // Forzar cierre total del modal de guía rápida
             if (modalOverlay) {
                 modalOverlay.classList.remove('active');
                 modalOverlay.style.display = 'none';
+            }
+            if (modalMisReportes) {
+                modalMisReportes.classList.remove('active');
+                modalMisReportes.style.display = 'none';
             }
 
             modalSeguimiento.style.display = 'flex';
@@ -118,6 +131,27 @@ document.addEventListener("DOMContentLoaded", () => {
             modalSeguimiento.classList.remove('active');
             body.classList.remove('modal-active');
             setTimeout(() => modalSeguimiento.style.display = 'none', 400);
+        });
+    }
+
+    // 3. ABRIR / CERRAR MODAL MIS REPORTES
+    if (misReportesNavBtn && modalMisReportes) {
+        misReportesNavBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (modalOverlay) { modalOverlay.classList.remove('active'); modalOverlay.style.display = 'none'; }
+            if (modalSeguimiento) { modalSeguimiento.classList.remove('active'); modalSeguimiento.style.display = 'none'; }
+
+            modalMisReportes.style.display = 'flex';
+            setTimeout(() => modalMisReportes.classList.add('active'), 10);
+            body.classList.add('modal-active');
+        });
+    }
+
+    if (mrNicoBtnClose && modalMisReportes) {
+        mrNicoBtnClose.addEventListener('click', () => {
+            modalMisReportes.classList.remove('active');
+            body.classList.remove('modal-active');
+            setTimeout(() => modalMisReportes.style.display = 'none', 400);
         });
     }
 
@@ -205,10 +239,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Consulta API de Seguimiento
-    // Consulta API de Seguimiento
     if (btnConsultarSeguimiento) {
         btnConsultarSeguimiento.addEventListener('click', async () => {
-            // Obtener el valor del checkbox seleccionado
             const selectedCheck = document.querySelector('input[name="segTipoCheck"]:checked');
             const tipo = selectedCheck ? selectedCheck.value : null;
             
@@ -252,6 +284,56 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Lógica API para Buscar Mis Reportes por Nombre
+    if (mrNicoBtnSearch) {
+        mrNicoBtnSearch.addEventListener('click', async () => {
+            const nombreIngresado = document.getElementById('mrNicoInputName').value.trim();
+            const resultsBox = document.getElementById('mrNicoResultsBox');
+
+            if (!nombreIngresado) {
+                alert("Por favor, ingresa tu nombre registrado.");
+                return;
+            }
+
+            try {
+                // Endpoint general o iterativo para filtrar por nombre (Ajusta la URL según la ruta de tu API)
+                const url = `https://dahliaversa1.onrender.com/api/reportes?nombre=${encodeURIComponent(nombreIngresado)}`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (response.ok && data && data.length > 0) {
+                    // Limpiar resultados anteriores si los hubiera (dejando el título)
+                    const subtitle = resultsBox.querySelector('.mr-nico-subtitle');
+                    resultsBox.innerHTML = '';
+                    resultsBox.appendChild(subtitle);
+
+                    data.forEach(rep => {
+                        const estadoClase = (rep.estado || "").toLowerCase().includes("resuelto") ? "mr-badge-done" : "mr-badge-process";
+                        
+                        const itemCard = document.createElement('div');
+                        itemCard.className = 'mr-nico-item';
+                        itemCard.innerHTML = `
+                            <div class="mr-nico-row">
+                                <span class="mr-nico-type">${rep.tipo || 'Incidencia'}</span>
+                                <span class="mr-nico-badge ${estadoClase}">${(rep.estado || "En Proceso").toUpperCase()}</span>
+                            </div>
+                            <span class="mr-nico-date">Fecha: ${rep.fecha || "No especificada"}</span>
+                        `;
+                        resultsBox.appendChild(itemCard);
+                    });
+
+                    resultsBox.style.display = 'flex';
+                } else {
+                    alert("No se encontraron reportes asociados a este nombre.");
+                    resultsBox.style.display = 'none';
+                }
+            } catch (err) {
+                console.error("Error al buscar reportes del usuario:", err);
+                alert("Error de conexión al consultar los reportes.");
+            }
+        });
+    }
+
     // Cierre al hacer clic fuera de los modales
     window.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
@@ -263,6 +345,11 @@ document.addEventListener("DOMContentLoaded", () => {
             modalSeguimiento.classList.remove('active');
             body.classList.remove('modal-active');
             setTimeout(() => modalSeguimiento.style.display = 'none', 400);
+        }
+        if (e.target === modalMisReportes) {
+            modalMisReportes.classList.remove('active');
+            body.classList.remove('modal-active');
+            setTimeout(() => modalMisReportes.style.display = 'none', 400);
         }
     });
 });

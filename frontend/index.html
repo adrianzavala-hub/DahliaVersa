@@ -346,6 +346,57 @@
         </div>
     </div>
 
+    <div class="mr-nico-overlay" id="modalMisReportes">
+        <div class="mr-nico-card">
+            
+            <!-- Fuga Izquierda Única -->
+            <div class="mr-nico-leak-left">
+                <div class="mn-pipe-l"></div>
+                <div class="mn-drop-l"></div>
+            </div>
+
+            <!-- Fuga Derecha Única -->
+            <div class="mr-nico-leak-right">
+                <div class="mn-pipe-r"></div>
+                <div class="mn-drop-r"></div>
+            </div>
+
+            <h2 class="mr-nico-title">Mis Reportes Ciudadanos</h2>
+            
+            <div class="mr-nico-scroll">
+                <div class="mr-nico-group">
+                    <label class="mr-nico-label">Nombre Registrado</label>
+                    <input type="text" id="mrNicoInputName" placeholder="Tu nombre completo" class="mr-nico-field">
+                </div>
+
+                <div id="mrNicoResultsBox" class="mr-nico-results" style="display: none;">
+                    <span class="mr-nico-subtitle">Historial de Reportes:</span>
+                    
+                    <div class="mr-nico-item">
+                        <div class="mr-nico-row">
+                            <span class="mr-nico-type">Fuga de Agua</span>
+                            <span class="mr-nico-badge mr-badge-process">En Proceso</span>
+                        </div>
+                        <span class="mr-nico-date">Fecha: 10/10/2026</span>
+                    </div>
+
+                    <div class="mr-nico-item">
+                        <div class="mr-nico-row">
+                            <span class="mr-nico-type">Bache</span>
+                            <span class="mr-nico-badge mr-badge-done">Resuelto</span>
+                        </div>
+                        <span class="mr-nico-date">Fecha: 05/09/2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mr-nico-actions">
+                <button class="mr-nico-btn" id="mrNicoBtnSearch">Buscar Reportes</button>
+                <button class="mr-nico-btn mr-nico-btn-alt" id="mrNicoBtnClose">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-socials">
