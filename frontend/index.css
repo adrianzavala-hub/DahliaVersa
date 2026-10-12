@@ -3003,3 +3003,86 @@ body.modal-active .logo-icon .dahlia-center {
   75% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.4); opacity: 0; }
 }
+
+/* --- ESTILOS PARA EL MODAL Y FILTROS DE UBICACIÓN --- */
+.mr-wide-card {
+  width: 480px !important;
+  max-width: 90vw;
+}
+
+.mr-map-preview-box {
+  position: relative;
+  width: 100%;
+  height: 110px;
+  background: linear-gradient(135deg, rgba(125, 95, 105, 0.4), rgba(56, 189, 248, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+.mr-map-pin {
+  width: 14px;
+  height: 14px;
+  background: #38bdf8;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #38bdf8;
+  animation: mapPinPulse 1.5s infinite ease-in-out;
+}
+
+.mr-map-label {
+  position: absolute;
+  bottom: 8px;
+  font-size: 0.75rem;
+  color: #bae6fd;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Rejilla de Checkboxes */
+.mr-checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.mr-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #ffffff;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 0.2s;
+}
+
+.mr-checkbox-label:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mr-checkbox {
+  accent-color: #38bdf8;
+  cursor: pointer;
+}
+
+.mr-textarea {
+  resize: none;
+  font-family: inherit;
+}
+
+@keyframes mapPinPulse {
+  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}

@@ -227,11 +227,73 @@
 
                     <div class="hero-search-container">
                         <input type="text" class="hero-search-input"
-                            placeholder="Buscar reporte por folio o ubicación...">
+                            placeholder="Busca la calle o colonia para reportar...">
                         <button class="hero-search-btn">Buscar</button>
                     </div>
                 </div>
             </div>
+            <!-- TU BUSCADOR ACTUAL -->
+    <div class="hero-search-container">
+        <input type="text" id="heroSearchInput" class="hero-search-input" placeholder="Busca la calle o colonia para reportar...">
+        <button type="button" id="heroSearchBtn" class="hero-search-btn">Buscar</button>
+    </div>
+
+    <!-- VENTANA MODAL: MAPA DE APROXIMACIÓN Y REPORTE CON FILTROS -->
+    <div class="mr-nico-overlay" id="modalLocationReport" style="display: none;">
+        <div class="mr-nico-card mr-wide-card">
+            
+            <!-- Aquí puedes mantener tu elemento decorativo superior derecho (ej. la Dahlia o Llave) -->
+            <h2 class="mr-nico-title">Reporte de Infraestructura</h2>
+            <p class="mr-nico-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
+            
+            <div class="mr-nico-scroll">
+                
+                <!-- Mapa de aproximación visual -->
+                <div class="mr-map-preview-box">
+                    <div class="mr-map-pin"></div>
+                    <span class="mr-map-label" id="mrMapLabelText">Ubicación aproximada en zona</span>
+                </div>
+
+                <form id="mrReportForm">
+                    <div class="mr-nico-group">
+                        <label class="mr-nico-label">Nombre del Ciudadano</label>
+                        <input type="text" id="mrInputName" placeholder="Tu nombre completo" class="mr-nico-field" required>
+                    </div>
+
+                    <div class="mr-nico-group">
+                        <label class="mr-nico-label">Tipo de Problema (Filtro para Base de Datos)</label>
+                        
+                        <!-- Checkboxes para clasificar y filtrar en la BD -->
+                        <div class="mr-checkbox-grid">
+                            <label class="mr-checkbox-label">
+                                <input type="checkbox" name="tipo_fuga" value="Fuga de Agua Potable" class="mr-checkbox"> Fuga de Agua Potable
+                            </label>
+                            <label class="mr-checkbox-label">
+                                <input type="checkbox" name="tipo_fuga" value="Fuga de Drenaje" class="mr-checkbox"> Fuga de Drenaje / Aguas Negras
+                            </label>
+                            <label class="mr-checkbox-label">
+                                <input type="checkbox" name="tipo_fuga" value="Bache o Hundimiento" class="mr-checkbox"> Bache / Hundimiento por Fuga
+                            </label>
+                            <label class="mr-checkbox-label">
+                                <input type="checkbox" name="tipo_fuga" value="Sin Presion" class="mr-checkbox"> Falta de Suministro / Baja Presión
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mr-nico-group">
+                        <label class="mr-nico-label">Descripción del Incidente</label>
+                        <textarea id="mrInputDesc" placeholder="Detalles adicionales de la afectación..." class="mr-nico-field mr-textarea" rows="3"></textarea>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="mr-nico-actions">
+                <button class="mr-nico-btn" id="mrBtnSubmitReport">Enviar y Registrar</button>
+                <button class="mr-nico-btn mr-nico-btn-alt" id="mrBtnCloseModal">Cancelar</button>
+            </div>
+        </div>
+    </div>
 
             <div class="hero-right-bottom">
                 <div class="stats-carousel-container">
