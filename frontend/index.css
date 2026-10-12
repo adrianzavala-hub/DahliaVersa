@@ -2781,14 +2781,15 @@ body.modal-active .logo-icon .dahlia-center {
   background: rgba(255, 255, 255, 0.4);
   color: #0f172a;
 }
-/* --- CORRECCIÓN DE LA FUGA DE AGUA SUPERIOR DERECHA --- */
+
+/* --- FUGA CON MEDIDOR REDONDO DE PRESIÓN INTEGRADO --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
-  top: -48px;
-  right: -18px;
-  width: 45px;
-  height: 75px;
+  top: -50px;
+  right: -20px;
+  width: 50px;
+  height: 78px;
   pointer-events: none;
   z-index: 35;
   display: flex;
@@ -2796,11 +2797,11 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-/* 1. Brida de montaje pegada al borde superior derecho */
+/* 1. Brida de montaje superior */
 .fix-pipe-flange {
   position: absolute;
   top: 0;
-  right: 12px;
+  right: 14px;
   width: 16px;
   height: 8px;
   background: rgba(255, 255, 255, 0.9);
@@ -2808,11 +2809,11 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* 2. Tubo vertical principal con degradado metálico */
+/* 2. Tubo vertical principal */
 .fix-pipe-vertical {
   position: absolute;
   top: 6px;
-  right: 14px;
+  right: 16px;
   width: 12px;
   height: 20px;
   background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
@@ -2820,33 +2821,36 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* 3. Volante / Llave de control lateral integrada correctamente */
-.fix-valve-wheel {
+/* 3. Medidor redondo de presión acoplado con elegancia */
+.fix-gauge-dial {
   position: absolute;
-  top: 8px;
-  right: 22px;
-  width: 18px;
-  height: 6px;
-  background: #7d5f69;
-  border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  top: 7px;
+  right: 25px;
+  width: 15px;
+  height: 15px;
+  background: rgba(125, 95, 105, 0.95);
+  border: 2px solid #bae6fd;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #38bdf8, 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.fix-wheel-hub {
-  position: absolute;
-  top: -2px;
-  left: 5px;
-  width: 8px;
-  height: 10px;
-  background: #e2a9b3;
-  border-radius: 2px;
+.fix-gauge-needle {
+  width: 7px;
+  height: 2px;
+  background: #38bdf8;
+  border-radius: 1px;
+  transform-origin: right center;
+  animation: fixGaugeMove 2s infinite ease-in-out alternate;
 }
 
-/* 4. Boquilla de salida de agua */
+/* 4. Boquilla de salida */
 .fix-nozzle-tip {
   position: absolute;
   top: 24px;
-  right: 13px;
+  right: 15px;
   width: 14px;
   height: 8px;
   background: #bae6fd;
@@ -2854,11 +2858,11 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-/* 5. Chorro de agua continuo en tonos celestes */
+/* 5. Chorro de agua continuo */
 .fix-water-stream {
   position: absolute;
   top: 31px;
-  right: 17px;
+  right: 19px;
   width: 4px;
   height: 22px;
   background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.2));
@@ -2867,11 +2871,11 @@ body.modal-active .logo-icon .dahlia-center {
   animation: fixStreamFlow 0.8s infinite linear;
 }
 
-/* 6. Gotas de agua fluidas con animación realista */
+/* 6. Gotas de agua */
 .fix-water-drop {
   position: absolute;
   top: 30px;
-  right: 16px;
+  right: 18px;
   width: 6px;
   height: 10px;
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
@@ -2885,11 +2889,11 @@ body.modal-active .logo-icon .dahlia-center {
   opacity: 0;
 }
 
-/* 7. Ondas de impacto inferiores */
+/* 7. Ondas de impacto */
 .fix-splash-ripple {
   position: absolute;
   top: 58px;
-  right: 13px;
+  right: 15px;
   width: 12px;
   height: 4px;
   border: 1.5px solid rgba(56, 189, 248, 0.8);
@@ -2897,7 +2901,12 @@ body.modal-active .logo-icon .dahlia-center {
   animation: fixRippleExpand 1.4s infinite ease-out;
 }
 
-/* --- ANIMACIONES DE LA FUGA CORREGIDA --- */
+/* --- ANIMACIONES --- */
+@keyframes fixGaugeMove {
+  0% { transform: rotate(-30deg); }
+  100% { transform: rotate(110deg); }
+}
+
 @keyframes fixStreamFlow {
   0% { transform: scaleY(0.9); opacity: 0.7; }
   50% { transform: scaleY(1.1); opacity: 1; }
