@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DahliaVersa</title>
     <link rel="stylesheet" href="index.css">
+    <!-- Leaflet CSS y JS para mapas en tiempo real -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""></script>
 </head>
 
 <body>
@@ -472,22 +475,16 @@
             </div>
         </div>
     </footer>
-<!-- VENTANA MODAL INDEPENDIENTE: REPORTE COMPLETO CON FOTOS E INCIDENCIAS -->
-<!-- VENTANA MODAL INDEPENDIENTE: MAPA DE APROXIMACIÓN Y REPORTE COMPLETO -->
-<!-- VENTANA MODAL INDEPENDIENTE: REPORTE COMPLETO Y MAPA -->
 <div class="dv-modal-overlay" id="modalLocationReport">
     <div class="dv-modal-card mr-wide-card">
         
-        <h2 class="dv-modal-title">Reporte de Infraestructura</h2>
+        <h2 class="dv-modal-title">Reporte Rapido</h2>
         <p class="dv-modal-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
         
         <div class="dv-modal-scroll">
             
-            <!-- Mapa de aproximación visual -->
-            <div class="dv-map-preview-box">
-                <div class="dv-map-pin"></div>
-                <span class="dv-map-label" id="mrMapLabelText">Ubicación aproximada en zona</span>
-            </div>
+            <!-- Mapa interactivo en tiempo real -->
+            <div id="mapModal" class="dv-real-map-box"></div>
 
             <form id="mrReportForm" enctype="multipart/form-data">
                 <div class="dv-modal-group">
@@ -506,7 +503,7 @@
                     </div>
                 </div>
 
-                <!-- Tipo de Incidencia con los checkboxes estilizados idénticos -->
+                <!-- Tipo de Incidencia con checkboxes estilizados -->
                 <div class="dv-modal-group">
                     <label class="mr-nico-label">Tipo de Incidencia</label>
                     <div class="seg-checkbox-group">
@@ -538,22 +535,22 @@
                     <label class="mr-nico-label">Archivos y Evidencia Fotográfica</label>
                     
                     <div class="dv-upload-container">
-                        <label class="seg-checkbox-card" style="cursor: pointer; justify-content: center; text-align: center;">
-                            <span style="font-size: 1.1rem; margin-right: 6px;">🪪</span>
+                        <label class="seg-checkbox-card dv-upload-file-card">
+                            <span class="dv-upload-emoji">🪪</span>
                             <span class="seg-checkbox-label file-label-text">Sube el frente de tu INE</span>
-                            <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden" style="display: none;">
+                            <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden">
                         </label>
 
-                        <label class="seg-checkbox-card" style="cursor: pointer; justify-content: center; text-align: center;">
-                            <span style="font-size: 1.1rem; margin-right: 6px;">🔄</span>
+                        <label class="seg-checkbox-card dv-upload-file-card">
+                            <span class="dv-upload-emoji">🔄</span>
                             <span class="seg-checkbox-label file-label-text">Sube el reverso de tu INE</span>
-                            <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden" style="display: none;">
+                            <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden">
                         </label>
 
-                        <label class="seg-checkbox-card" style="cursor: pointer; justify-content: center; text-align: center;">
-                            <span style="font-size: 1.1rem; margin-right: 6px;">📸</span>
+                        <label class="seg-checkbox-card dv-upload-file-card">
+                            <span class="dv-upload-emoji">📸</span>
                             <span class="seg-checkbox-label file-label-text">Foto de la incidencia (Evidencia)</span>
-                            <input type="file" name="selfie" accept="image/*" class="file-input-hidden" style="display: none;">
+                            <input type="file" name="selfie" accept="image/*" class="file-input-hidden">
                         </label>
                     </div>
                 </div>
@@ -561,7 +558,7 @@
 
         </div>
 
-        <div class="dv-modal-actions" style="display: flex; gap: 10px; margin-top: 15px;">
+        <div class="dv-modal-actions dv-modal-buttons-box">
             <button type="button" class="btn-seg-action" id="mrBtnSubmitReport">Enviar y Registrar</button>
             <button type="button" class="btn-seg-action btn-seg-alt" id="mrBtnCloseModal">Cancelar</button>
         </div>
