@@ -2782,7 +2782,7 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* --- DISEÑO: ABANICO DE PÉTALOS CRISTALINOS & FUENTE LUMÍNICA --- */
+/* --- DISEÑO: TUBERÍAS DAÑADAS DE ALTA GAMA --- */
 
 .mr-nico-leak-right-complex {
   position: absolute;
@@ -2795,7 +2795,7 @@ body.modal-active .logo-icon .dahlia-center {
   z-index: 35;
 }
 
-.artisan-fluid-anchor {
+.pipe-system-anchor {
   position: absolute;
   top: 0;
   right: 0;
@@ -2803,95 +2803,79 @@ body.modal-active .logo-icon .dahlia-center {
   height: 80px;
 }
 
-/* 1. Pétalos orgánicos en abanico asimétrico (Efecto Escultura de Cristal) */
-.artisan-petal {
+/* 1. Tubería Horizontal Principal */
+.pipe-horizontal {
   position: absolute;
-  background: linear-gradient(135deg, rgba(226, 169, 179, 0.9) 0%, rgba(125, 95, 105, 0.95) 100%);
+  top: 8px;
+  right: 6px;
+  width: 44px;
+  height: 14px;
+  background: linear-gradient(135deg, rgba(226, 169, 179, 0.95) 0%, rgba(125, 95, 105, 0.98) 100%);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 7px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   z-index: 2;
 }
 
-.ap-one {
-  top: 2px;
-  right: 22px;
-  width: 16px;
-  height: 26px;
-  border-radius: 50% 50% 10% 10%;
-  transform: rotate(-10deg);
-}
-
-.ap-two {
-  top: 10px;
-  right: 6px;
-  width: 26px;
-  height: 18px;
-  border-radius: 10% 50% 50% 10%;
-  transform: rotate(15deg);
-}
-
-.ap-three {
-  top: 24px;
-  right: 12px;
-  width: 22px;
-  height: 22px;
-  border-radius: 30% 30% 50% 50%;
-}
-
-.ap-four {
-  top: 14px;
-  right: 28px;
-  width: 22px;
-  height: 18px;
-  border-radius: 50% 10% 10% 50%;
-  transform: rotate(-15deg);
-}
-
-/* 2. Gema Central Lumínica */
-.artisan-jewel-core {
+/* Fisura iluminada en la tubería horizontal */
+.pipe-crack-glow {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 18px;
-  height: 18px;
-  background: rgba(125, 95, 105, 0.98);
-  border: 2px solid #bae6fd;
-  border-radius: 50%;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-}
-
-.artisan-core-pulse {
-  width: 6px;
+  top: 4px;
+  left: 20px;
+  width: 4px;
   height: 6px;
   background: #bae6fd;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #38bdf8;
-  animation: artisanPulse 2s infinite ease-in-out alternate;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: pipeCrackPulse 1.2s infinite ease-in-out alternate;
 }
 
-/* 3. Emisiones laterales sutiles */
-.artisan-spray {
+/* 2. Tubería Vertical de Derivación */
+.pipe-vertical {
   position: absolute;
-  top: 25px;
+  top: 14px;
+  right: 22px;
+  width: 14px;
+  height: 32px;
+  background: linear-gradient(135deg, rgba(226, 169, 179, 0.95) 0%, rgba(125, 95, 105, 0.98) 100%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 0 0 7px 7px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+/* Anillo / Unión de la tubería */
+.pipe-joint-collar {
+  position: absolute;
+  top: 6px;
+  left: -2px;
+  width: 18px;
+  height: 6px;
+  background: linear-gradient(90deg, #bae6fd, #7d5f69);
+  border-radius: 3px;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+/* 3. Fugas Laterales de Presión */
+.pipe-spray {
+  position: absolute;
+  top: 12px;
   width: 16px;
   height: 4px;
   z-index: 4;
 }
 
-.artisan-spray.left {
+.pipe-spray.left {
   left: 2px;
 }
 
-.artisan-spray.right {
+.pipe-spray.right {
   right: -2px;
 }
 
-.artisan-beam {
+.pipe-beam {
   position: absolute;
   top: 0;
   width: 14px;
@@ -2899,19 +2883,19 @@ body.modal-active .logo-icon .dahlia-center {
   background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.15));
   border-radius: 2px;
   box-shadow: 0 0 8px #38bdf8;
-  animation: artisanBeamPulse 0.8s infinite ease-in-out;
+  animation: pipeBeamPulse 0.8s infinite ease-in-out;
 }
 
-.artisan-spray.left .artisan-beam {
+.pipe-spray.left .pipe-beam {
   right: 0;
   background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.15));
 }
 
-.artisan-spray.right .artisan-beam {
+.pipe-spray.right .pipe-beam {
   left: 0;
 }
 
-.artisan-drop-particle {
+.pipe-sparkle {
   position: absolute;
   top: -1px;
   width: 4px;
@@ -2921,27 +2905,27 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.artisan-spray.left .artisan-drop-particle {
+.pipe-spray.left .pipe-sparkle {
   left: -5px;
-  animation: artisanPartLeft 1.3s infinite ease-in-out;
+  animation: pipePartLeft 1.3s infinite ease-in-out;
 }
 
-.artisan-spray.right .artisan-drop-particle {
+.pipe-spray.right .pipe-sparkle {
   right: -5px;
-  animation: artisanPartRight 1.3s infinite ease-in-out;
+  animation: pipePartRight 1.3s infinite ease-in-out;
 }
 
-/* 4. Cascada central y ondas */
-.artisan-cascade {
+/* 4. Cascada Principal de Fuga y Ondas */
+.pipe-main-leak {
   position: absolute;
   bottom: 2px;
-  right: 25px;
+  right: 26px;
   width: 6px;
   height: 26px;
   z-index: 4;
 }
 
-.artisan-stream-line {
+.leak-stream {
   position: absolute;
   top: 0;
   left: 1px;
@@ -2952,7 +2936,7 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px #38bdf8;
 }
 
-.artisan-pearl-drop {
+.leak-drop {
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -2961,60 +2945,60 @@ body.modal-active .logo-icon .dahlia-center {
   background: linear-gradient(to bottom, #ffffff, #38bdf8);
   border-radius: 50%;
   box-shadow: 0 0 10px #38bdf8;
-  animation: artisanDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
+  animation: pipeDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
 }
 
-.artisan-ripple {
+.leak-ripple {
   position: absolute;
   bottom: -10px;
   left: -3px;
   border: 1.5px solid rgba(56, 189, 248, 0.85);
   border-radius: 50%;
-  animation: artisanRippleExpand 1.3s infinite ease-out;
+  animation: pipeRippleExpand 1.3s infinite ease-out;
 }
 
-.artisan-ripple.r1 {
+.leak-ripple.r1 {
   width: 12px;
   height: 4px;
 }
 
-.artisan-ripple.r2 {
+.leak-ripple.r2 {
   width: 6px;
   height: 2px;
   animation-delay: 0.65s;
 }
 
 /* --- ANIMACIONES --- */
-@keyframes artisanPulse {
-  0% { transform: scale(0.8); opacity: 0.6; }
-  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px #7dd3fc; }
+@keyframes pipeCrackPulse {
+  0% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 4px #38bdf8; }
+  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 14px #7dd3fc; }
 }
 
-@keyframes artisanBeamPulse {
+@keyframes pipeBeamPulse {
   0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
   50% { transform: scaleX(1.2); opacity: 1; }
 }
 
-@keyframes artisanPartLeft {
+@keyframes pipePartLeft {
   0% { transform: translateX(0) scale(0.4); opacity: 0; }
   40% { opacity: 1; }
   100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes artisanPartRight {
+@keyframes pipePartRight {
   0% { transform: translateX(0) scale(0.4); opacity: 0; }
   40% { opacity: 1; }
   100% { transform: translateX(14px) scale(1.2); opacity: 0; }
 }
 
-@keyframes artisanDropFall {
+@keyframes pipeDropFall {
   0% { transform: translateY(0) scale(0.4); opacity: 0; }
   20% { opacity: 1; transform: translateY(4px) scale(1); }
   85% { opacity: 1; transform: translateY(14px) scale(0.9); }
   100% { transform: translateY(18px) scale(1.4, 0.35); opacity: 0; }
 }
 
-@keyframes artisanRippleExpand {
+@keyframes pipeRippleExpand {
   0%, 60% { transform: scale(0.2); opacity: 0; }
   75% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.4); opacity: 0; }
