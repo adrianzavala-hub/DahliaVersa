@@ -2459,3 +2459,94 @@ body.modal-active .logo-icon .dahlia-center {
   background: rgba(255, 255, 255, 0.4);
   color: #0f172a;
 }
+
+/* --- LÁMPARA PARPADEANTE DEL MODAL --- */
+
+.seg-modal-lamp {
+  position: absolute;
+  top: 15px; /* Ajuste para que quepa en la esquina */
+  left: 15px;
+  width: 25px;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none; /* No interfiere con clics */
+}
+
+/* Soporte físico (brazo) */
+.lamp-support {
+  width: 14px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+  position: absolute;
+  top: 8px;
+  left: -2px;
+}
+
+/* Cabeza de la lámpara (estructura) */
+.lamp-head {
+  width: 16px;
+  height: 10px;
+  background: rgba(226, 169, 179, 0.7); /* Color rosado oscuro a juego */
+  border-radius: 8px 8px 2px 2px;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Núcleo de luz (el bombillo que parpadea) */
+.lamp-light-core {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* Animación de parpadeo (glitch) azul */
+  animation: lampGlitchBlue 4s infinite;
+  
+  /* Sombra base suave */
+  box-shadow: 0 0 5px #7dd3fc;
+}
+
+/* Definición de la animación de parpadeo con colores azules */
+@keyframes lampGlitchBlue {
+  0%, 100% {
+    opacity: 1;
+    background: #ffffff;
+    box-shadow: 0 0 8px 2px #7dd3fc, 0 0 15px 4px #38bdf8;
+  }
+  
+  /* Momentos de apagado rápido */
+  2%, 6%, 12%, 18%, 26%, 80%, 86% {
+    opacity: 0.1;
+    box-shadow: none;
+  }
+  
+  /* Momentos de encendido (colores azules claros) */
+  4%, 10%, 16%, 22%, 30%, 84%, 90% {
+    opacity: 1;
+    background: #bae6fd; /* Azul muy claro */
+    box-shadow: 0 0 10px 3px #7dd3fc, 0 0 20px 6px #38bdf8;
+  }
+  
+  /* Parpadeo errático corto al final */
+  92% {
+    opacity: 0.3;
+    box-shadow: 0 0 4px #7dd3fc;
+  }
+  94% {
+    opacity: 1;
+    background: #ffffff;
+    box-shadow: 0 0 12px 4px #7dd3fc, 0 0 25px 8px #38bdf8;
+  }
+  96% {
+    opacity: 0.2;
+    box-shadow: none;
+  }
+}
