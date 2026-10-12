@@ -18,9 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    window.showLoader = function() {};
-    window.hideLoader = function() {};
-
     // 2. Animación de aparición de tarjetas estadísticas
     const statCards = document.querySelectorAll(".stat-card");
     statCards.forEach((card, index) => {
@@ -55,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 4. Loaders de navegación (Baches, Fugas de Agua, Postes de Luz)
+    // 4. Loaders de navegación
     const loadTriggers = document.querySelectorAll('.load-trigger');
     const pageLoader = document.getElementById('pageLoader');
 
@@ -104,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. Lógica del NUEVO Modal Independiente de Seguimiento con Flask API
+    // 5. Lógica del Modal Independiente de Seguimiento
     const seguimientoNavBtn = document.getElementById('seguimientoNavBtn');
     const modalSeguimiento = document.getElementById('modalSeguimiento');
     const btnCloseSeguimiento = document.getElementById('btnCloseSeguimiento');
@@ -164,14 +161,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cierre general de modales al hacer clic fuera del contenido
+    // Cierre general al hacer clic fuera del contenido de cualquier modal
     window.addEventListener('click', (e) => {
-        if (e.target.classList.contains('modal-overlay')) {
-            e.target.classList.remove('active');
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.remove('active');
             body.classList.remove('modal-active');
         }
-        if (e.target.classList.contains('modal-overlay-seguimiento')) {
-            e.target.classList.remove('active');
+        if (e.target === modalSeguimiento) {
+            modalSeguimiento.classList.remove('active');
             body.classList.remove('modal-active');
         }
     });
