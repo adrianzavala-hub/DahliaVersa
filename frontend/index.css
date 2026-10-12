@@ -2574,3 +2574,119 @@ body.modal-active .logo-icon .dahlia-center {
     box-shadow: 0 0 22px 7px #7dd3fc, 0 0 45px 14px #38bdf8;
   }
 }
+
+/* --- FUGA DE AGUA COMPLEJA EN LA ESQUINA SUPERIOR DERECHA (CSS PURO) --- */
+
+.seg-modal-leak-complex {
+  position: absolute;
+  top: -35px;
+  right: -20px;
+  width: 40px;
+  height: 60px;
+  z-index: 35;
+  pointer-events: none;
+}
+
+/* Tubería empotrada saliendo del muro */
+.leak-pipe-wall {
+  position: absolute;
+  top: 0;
+  right: 6px;
+  width: 14px;
+  height: 12px;
+  background: linear-gradient(135deg, #e2a9b3 0%, #7d5f69 100%);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Codo de la tubería */
+.leak-pipe-elbow {
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  border: 4px solid #7d5f69;
+  border-top: none;
+  border-left: none;
+  border-radius: 0 0 10px 0;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Boquilla de la fuga */
+.leak-nozzle {
+  position: absolute;
+  top: 20px;
+  right: 4px;
+  width: 10px;
+  height: 6px;
+  background: #bae6fd;
+  border-radius: 2px;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+/* Gota de agua 1 (caída principal) */
+.leak-drop {
+  position: absolute;
+  top: 26px;
+  right: 7px;
+  width: 6px;
+  height: 9px;
+  background: linear-gradient(to bottom, #7dd3fc, #38bdf8);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: waterDropFall 2s infinite cubic-bezier(0.5, 0, 0.8, 1);
+}
+
+/* Gota de agua 2 (secundaria con retardo) */
+.leak-drop-2 {
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+/* Pequeño destello o salpicadura al caer */
+.leak-splash {
+  position: absolute;
+  top: 52px;
+  right: 5px;
+  width: 10px;
+  height: 3px;
+  background: rgba(56, 189, 248, 0.6);
+  border-radius: 50%;
+  animation: waterSplashAnim 2s infinite;
+}
+
+/* --- ANIMACIONES DE LAS GOTAS --- */
+@keyframes waterDropFall {
+  0% {
+    transform: translateY(0) scaleX(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(4px) scaleX(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(24px) scaleX(0.9);
+  }
+  100% {
+    transform: translateY(28px) scaleX(1.2) scaleY(0.4);
+    opacity: 0;
+  }
+}
+
+@keyframes waterSplashAnim {
+  0%, 75% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  82% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
