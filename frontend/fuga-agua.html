@@ -1078,12 +1078,7 @@
         let mainMap = null;
         let mainMarker = null;
 
-        function initMainMap() {
-            if (mapLoaded) {
-                if (mainMap) mainMap.invalidateSize();
-                return;
-            }
-
+        function initMainMap(lat = 19.7942, lon = -99.1024) {
             const pulsingIcon = L.divIcon({
                 className: 'custom-div-icon',
                 html: '<div class="dv-pulsing-marker"></div>',
@@ -1091,20 +1086,58 @@
                 iconAnchor: [11, 11]
             });
 
-            mainMap = L.map('mapModal', { zoomControl: false }).setView([19.7942, -99.1024], 15);
+            if (mapLoaded && mainMap) {
+                mainMap.setView([lat, lon], 15);
+                if (mainMarker) {
+                    mainMarker.setLatLng([lat, lon]);
+                } else {
+                    mainMarker = L.marker([lat, lon], { draggable: true, icon: pulsingIcon }).addTo(mainMap);
+                }
+                mainMap.invalidateSize();
+                return;
+            }
+
+            mainMap = L.map('mapModal', { zoomControl: false }).setView([lat, lon], 15);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19
             }).addTo(mainMap);
 
-            mainMarker = L.marker([19.7942, -99.1024], { draggable: true, icon: pulsingIcon }).addTo(mainMap);
+            mainMarker = L.marker([lat, lon], { draggable: true, icon: pulsingIcon }).addTo(mainMap);
 
             mainMarker.on('dragend', function (event) {
                 const position = mainMarker.getLatLng();
                 document.getElementById('latLongInput').value = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
             });
 
+            mainMap.on('click', function(e) {
+                const clickLat = e.latlng.lat;
+                const clickLon = e.latlng.lng;
+                mainMarker.setLatLng([clickLat, clickLon]);
+                document.getElementById('latLongInput').value = `${clickLat.toFixed(6)}, ${clickLon.toFixed(6)}`;
+            });
+
             mapLoaded = true;
+        }
+
+        function solicitarUbicacionGPS() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        document.getElementById('latLongInput').value = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+                        if (mainMap && mainMarker) {
+                            mainMap.setView([lat, lon], 16);
+                            mainMarker.setLatLng([lat, lon]);
+                        }
+                    },
+                    (error) => {
+                        console.warn("No se pudo obtener la ubicación GPS automática:", error);
+                    },
+                    { enableHighAccuracy: true }
+                );
+            }
         }
 
         function updateCarousel(index) {
@@ -1114,7 +1147,10 @@
             });
 
             if (index === 0) {
-                setTimeout(initMainMap, 150);
+                setTimeout(() => {
+                    initMainMap();
+                    solicitarUbicacionGPS();
+                }, 150);
             }
         }
 
@@ -1130,9 +1166,14 @@
             updateCarousel(currentIndex);
         });
 
-        // Inicializar mapa al cargar la página si el slide 1 está activo
         window.addEventListener('DOMContentLoaded', () => {
             initMainMap();
+            const mapContainer = document.getElementById('mapModal');
+            if (mapContainer) {
+                mapContainer.addEventListener('click', () => {
+                    solicitarUbicacionGPS();
+                });
+            }
         });
 
         const fileInputs = document.querySelectorAll('.file-input-hidden');
