@@ -225,7 +225,6 @@ def obtener_reportes_por_nombre():
     cursor.close()
     conn.close()
     return jsonify(reportes)
-
 @app.route('/api/login-empresa', methods=['POST'])
 def login_empresa():
     data = request.get_json()
@@ -233,8 +232,8 @@ def login_empresa():
     password = data.get('password')
 
     try:
-        # Ajusta esto según cómo tengas configurada tu conexión a la base de datos en Python
-        cursor = conexion.cursor()
+        # Asegúrate de usar el objeto de conexión correcto que ya usas en las otras rutas de tu app
+        cursor = conexion.cursor() 
         query = "SELECT * FROM empresa_usuarios WHERE usuario = %s AND password = %s"
         cursor.execute(query, (usuario, password))
         resultado = cursor.fetchone()
@@ -246,5 +245,6 @@ def login_empresa():
             return jsonify({"success": False, "message": "Usuario o contraseña incorrectos."}), 401
 
     except Exception as err:
-        print("Error en el servidor:", err)
-        return jsonify({"success": False, "message": "Error interno del servidor."}), 500
+        # Esto imprimirá el error real en los logs de tu consola o Render
+        print("EXCEPCIÓN DETALLADA EN LOGIN:", str(err))
+        return jsonify({"success": False, "message": f"Error interno: {str(err)}"}), 500
