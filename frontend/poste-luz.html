@@ -649,15 +649,15 @@
             margin: 4px 0;
         }
 
+        /* --- AJUSTE DE TAMAÑO Y ALTURA DEL CARRUSEL --- */
         .carousel-container {
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow: hidden;
-            padding: 30px;
-            height: 100%;
-            max-height: 290px;
+            padding: 24px 20px 20px 20px;
+            height: auto;
+            max-height: none;
             margin-top: 320px;
         }
 
@@ -749,7 +749,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             width: 100%;
         }
 
@@ -833,13 +833,13 @@
             box-shadow: 0 0 6px rgba(47, 130, 120, 0.4);
         }
 
-        /* --- NUEVO DISEÑO DE MARCADOR DE POSTE CON COLORES DE LA PÁGINA --- */
+        /* --- AJUSTE DE ALTURA DEL MAPA --- */
         #mapModal {
             width: 100% !important;
-            height: 120px !important;
-            min-height: 120px !important;
-            border-radius: 10px !important;
-            margin-bottom: 4px !important;
+            height: 160px !important;
+            min-height: 160px !important;
+            border-radius: 12px !important;
+            margin-bottom: 8px !important;
             border: 1.5px solid rgba(77, 166, 157, 0.6) !important;
             z-index: 1 !important;
             position: relative !important;
@@ -1025,11 +1025,11 @@
             <div class="carousel-track-container">
                 <div class="carousel-track" id="carouselTrack">
 
-                    <!-- SLIDE 1: MAPA INTERACTIVO CON NUEVO MARCADOR -->
+                    <!-- SLIDE 1: MAPA CON TAMAÑO CORREGIDO -->
                     <div class="carousel-slide">
                         <h3>Ubicación Exacta</h3>
                         <div id="mapModal"></div>
-                        <button type="button" id="btnGetGPS" class="carousel-btn" style="width: 100%; margin-top: 4px; padding: 5px; font-size: 0.75rem; background: rgba(157, 214, 206, 0.5); color: #1a4d46; border: 1px solid rgba(77, 166, 157, 0.6);">
+                        <button type="button" id="btnGetGPS" class="carousel-btn" style="width: 100%; margin-top: 4px; padding: 7px; font-size: 0.78rem; background: rgba(157, 214, 206, 0.5); color: #1a4d46; border: 1px solid rgba(77, 166, 157, 0.6);">
                             📍 Activar Mi Ubicación GPS en Tiempo Real
                         </button>
                         <input type="hidden" name="lat_long" id="latLongInput" value="19.7942, -99.1024">
