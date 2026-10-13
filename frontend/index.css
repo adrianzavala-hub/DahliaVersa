@@ -3517,90 +3517,153 @@ body.modal-active .logo-icon .dahlia-center {
   text-align: center !important;
 }
 
-/* Overlay de Fondo Exclusivo */
+/* --- MODAL DE EMPRESA CON LA PALETA DE COLORES EXACTA DEL SISTEMA --- */
+
 .dv-comp-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(26, 77, 70, 0.45);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(125, 95, 105, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999999 !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease !important, visibility 0.35s ease !important;
 }
 
 .dv-comp-modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-/* Tarjeta Glassmorphism Exclusiva */
 .dv-comp-modal-card {
-    position: relative;
-    width: 90%;
-    max-width: 420px;
-    background: rgba(115, 185, 175, 0.85);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(196, 232, 227, 0.75);
-    border-radius: 24px;
-    padding: 30px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45), inset 0 0 25px rgba(196, 232, 227, 0.35);
-    transform: translateY(20px) scale(0.95);
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  position: relative !important;
+  background: rgba(125, 95, 105, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(226, 169, 179, 0.5) !important;
+  border-radius: 24px !important;
+  padding: 24px 30px !important;
+  width: 440px !important;
+  max-width: 92vw !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(226, 169, 179, 0.15) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+  transform: scale(0.88) !important;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  z-index: 10000000 !important;
 }
 
 .dv-comp-modal-overlay.active .dv-comp-modal-card {
-    transform: translateY(0) scale(1);
+  transform: scale(1) !important;
 }
 
-/* Botón de Cierre Exclusivo */
 .dv-comp-modal-close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-size: 1.6rem;
-    cursor: pointer;
-    transition: color 0.2s ease;
+  position: absolute !important;
+  top: 16px !important;
+  right: 20px !important;
+  background: transparent !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 1.6rem !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+  line-height: 1 !important;
 }
 
 .dv-comp-modal-close-btn:hover {
-    color: #1a4d46;
+  color: #38bdf8 !important;
+  transform: scale(1.1) !important;
 }
 
-/* Encabezado Exclusivo */
 .dv-comp-modal-header {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center !important;
+  margin-bottom: 18px !important;
+  border-bottom: 1px solid rgba(226, 169, 179, 0.3) !important;
+  padding-bottom: 10px !important;
 }
 
 .dv-comp-modal-header h3 {
-    font-size: 1.1rem;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 8px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.4px !important;
+  margin-top: 6px !important;
+}
+
+.dv-comp-modal-subtitle {
+  color: #bae6fd !important;
+  font-size: 0.85rem !important;
+  margin-top: 4px !important;
+  text-align: center !important;
 }
 
 .dv-comp-modal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.dv-comp-modal-form .form-group {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  margin-bottom: 0 !important;
+}
+
+.dv-comp-modal-form .form-group label {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
 }
 
 .dv-comp-modal-form .form-group input {
-    background: rgba(196, 232, 227, 0.55);
-    border: 1px solid rgba(77, 166, 157, 0.6);
-    color: #1a4d46;
+  width: 100 !important;
+  padding: 10px 14px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 12px !important;
+  color: #ffffff !important;
+  font-size: 0.9rem !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+}
+
+.dv-comp-modal-form .form-group input:focus {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4) !important;
+}
+
+.dv-comp-modal-form .form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.dv-comp-modal-btn {
+  width: 100% !important;
+  margin-top: 8px !important;
+  padding: 11px !important;
+  background: linear-gradient(135deg, #38bdf8, #0284c7) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4) !important;
+  transition: all 0.2s ease !important;
+}
+
+.dv-comp-modal-btn:hover {
+  filter: brightness(1.1) !important;
+  transform: translateY(-1px) !important;
 }
