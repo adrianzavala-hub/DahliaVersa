@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DahliaVersa - Baches</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
     <style>
         * {
             margin: 0;
@@ -35,7 +34,7 @@
         .navbar {
             position: absolute;
             top: 30px;
-            right: 200px;
+            right: calc(50% + 40px);
             display: flex;
             align-items: center;
             gap: 20px;
@@ -221,6 +220,7 @@
             box-shadow: -10px 10px 0 #c084fc, -15px 4px 0 #7e22ce;
         }
 
+        /* --- TRABAJADOR MUNICIPAL ANIMADO --- */
         .worker-container {
             position: absolute;
             top: 50%;
@@ -348,22 +348,30 @@
             color: #120f1a;
             border: none;
             padding: 7px 16px;
-            border-radius: 12px;
+            border-radius: 16px;
             font-weight: 700;
             font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 4px 12px rgba(192, 132, 252, 0.3);
-            display: inline-block;
-            width: auto;
-            letter-spacing: 0.5px;
         }
 
         .btn-enviar:hover {
             background: linear-gradient(135deg, #e879f9 0%, #d8b4fe 100%);
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 5px 16px rgba(192, 132, 252, 0.5);
+        }
+
+        .middle-bottom-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            max-width: 370px;
+            margin-top: auto;
+            padding-bottom: 10px;
         }
 
         .footer-brand-effects {
@@ -379,17 +387,20 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            filter: none;
+            text-shadow: none;
         }
 
         #mainReportForm {
             width: 100%;
-            max-width: 1320px;
+            max-width: 1200px;
+            margin-top: 100px;
             display: flex;
-            flex-direction: column;
-            gap: 25px;
-            padding-left: 80px;
-            padding-right: 0px;
-            margin-top: 0px;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-left: 20px;
+            padding-right: 20px;
+            gap: 20px;
         }
 
         .glass-card {
@@ -400,78 +411,43 @@
             border-radius: 20px;
             border: 1px solid rgba(216, 180, 254, 0.25);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            width: 32%;
+            max-width: 370px;
         }
 
         .left-card {
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .form-grid-2cols {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            width: 100%;
-        }
-
-        .form-group-full {
-            grid-column: span 2;
-        }
-
-        .bottom-row-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .text-column {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            max-width: 500px;
         }
 
-        .free-info-text {
-            color: #ffffff;
-            font-size: 0.83rem;
+        .right-column-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 32%;
+            max-width: 370px;
+            align-items: flex-end;
+        }
+
+        .right-card {
+            margin-top: -100px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .texto-informativo {
+            direction: rtl;
+            text-align: right;
+            margin-top: 10px;
+            margin-right: 0px;
+            padding-right: 20px;
+            padding-left: 0px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.5;
-            padding: 0 4px;
-            text-align: justify;
-        }
-
-        .free-info-text strong {
-            color: #d8b4fe;
-            font-weight: 700;
-        }
-
-        .section-divider {
             width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(216, 180, 254, 0), rgba(216, 180, 254, 0.4) 50%, rgba(216, 180, 254, 0));
-            margin: 4px 0;
-        }
-
-        .carousel-outer-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-top: 60px;
-            margin-right: 50px;
-        }
-
-        .carousel-container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-            padding: 15px 25px;
-            width: 100%;
-            max-width: 600px;
+            border-right: 2px solid rgba(216, 180, 254, 0.4);
+            border-left: none;
         }
 
         .card-divider-title {
@@ -496,15 +472,15 @@
         }
 
         .form-group {
-            margin-bottom: 5px;
+            margin-bottom: 15px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .form-group label {
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 600;
             color: #f3e8ff;
         }
 
@@ -513,11 +489,11 @@
             background: rgba(45, 30, 60, 0.5);
             border: 1px solid rgba(216, 180, 254, 0.3);
             border-radius: 10px;
-            padding: 11px 15px;
+            padding: 10px 14px;
             color: #fff;
             font-size: 0.95rem;
             outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: border-color 0.3s ease;
             width: 100%;
         }
 
@@ -525,6 +501,14 @@
         .form-group textarea:focus {
             border-color: #d8b4fe;
             box-shadow: 0 0 8px rgba(216, 180, 254, 0.4);
+        }
+
+        .carousel-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
         }
 
         .carousel-track-container {
@@ -537,7 +521,7 @@
 
         .carousel-track {
             display: flex;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.4s ease-in-out;
             width: 100%;
         }
 
@@ -548,14 +532,14 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2px;
+            padding: 10px;
         }
 
         .carousel-slide h3 {
-            font-size: 1.05rem;
-            font-weight: 800;
+            font-size: 1.4rem;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-align: center;
             background-image: url('img/bache.jpeg');
             background-size: cover;
@@ -564,39 +548,40 @@
             background-clip: text;
             color: transparent;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
+            filter: none;
+            text-shadow: none;
+            margin-bottom: 25px;
             width: 100%;
         }
 
         .upload-box {
             width: 100%;
-            height: 85px;
-            border: 1.5px dashed rgba(216, 180, 254, 0.4);
-            border-radius: 14px;
+            height: 180px;
+            border: 2px dashed rgba(216, 180, 254, 0.4);
+            border-radius: 12px;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(45, 30, 60, 0.4);
+            background: rgba(45, 30, 60, 0.5);
             cursor: pointer;
-            transition: all 0.3s ease;
-            gap: 12px;
+            transition: border-color 0.3s ease;
+            gap: 8px;
             color: #d8b4fe;
             font-size: 0.85rem;
-            padding: 0 15px;
         }
 
         .upload-box:hover {
             border-color: #d8b4fe;
-            background: rgba(45, 30, 60, 0.7);
+            background: rgba(45, 30, 60, 0.8);
         }
 
         .carousel-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 8px;
-            padding-top: 8px;
+            margin-top: 20px;
+            padding-top: 15px;
             border-top: 1px solid rgba(216, 180, 254, 0.15);
         }
 
@@ -604,13 +589,11 @@
             background: rgba(216, 180, 254, 0.2);
             border: 1px solid rgba(216, 180, 254, 0.4);
             color: #fff;
-            padding: 5px 12px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 700;
-            font-size: 0.75rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(4px);
+            font-weight: 600;
+            transition: background 0.3s ease;
         }
 
         .carousel-btn:hover {
@@ -620,25 +603,18 @@
         .carousel-indicators {
             display: flex;
             gap: 6px;
-            background: rgba(75, 45, 95, 0.3);
-            padding: 5px 10px;
-            border-radius: 20px;
-            backdrop-filter: blur(4px);
         }
 
         .indicator {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(216, 180, 254, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            transition: background 0.3s ease;
         }
 
         .indicator.active {
             background: #d8b4fe;
-            width: 18px;
-            border-radius: 4px;
             box-shadow: 0 0 6px #d8b4fe;
         }
 
@@ -738,8 +714,13 @@
             box-shadow: 0 0 10px #d8b4fe, 0 0 20px #c084fc;
         }
 
-        .node-1 { animation: orbitPath1 3s linear infinite; }
-        .node-2 { animation: orbitPath2 2.2s linear infinite; }
+        .node-1 {
+            animation: orbitPath1 3s linear infinite;
+        }
+
+        .node-2 {
+            animation: orbitPath2 2.2s linear infinite;
+        }
 
         .loader-core-pulse {
             position: relative;
@@ -825,87 +806,57 @@
             100% { transform: rotate(-360deg) translateX(35px) rotate(360deg); }
         }
 
-        #mapModal {
-            width: 100% !important;
-            height: 115px !important;
-            min-height: 115px !important;
-            border-radius: 10px !important;
-            margin-bottom: 4px !important;
-            border: 1px solid rgba(216, 180, 254, 0.3) !important;
-            z-index: 1 !important;
-            position: relative !important;
-            background: rgba(45, 30, 60, 0.4) !important;
-        }
+        @media (max-width: 992px) {
+            body {
+                padding: 20px 15px;
+            }
 
-        .leaflet-control-attribution {
-            display: none !important;
-        }
-
-        /* --- MARCADOR EXCLUSIVO: SOLO CONO --- */
-        .dv-cone-marker-only {
-            position: relative;
-            width: 24px;
-            height: 28px;
-            transform: translate(-50%, -80%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .dv-cone-shape {
-            position: absolute;
-            width: 16px;
-            height: 24px;
-            background: linear-gradient(135deg, #f0abfc 0%, #d946ef 50%, #9333ea 100%);
-            clip-path: polygon(32% 0%, 68% 0%, 100% 100%, 0% 100%);
-            box-shadow: 0 0 12px rgba(216, 180, 254, 0.9), inset -2px 0 4px rgba(0, 0, 0, 0.3);
-            animation: coneBounceOnly 1.2s infinite ease-in-out alternate;
-        }
-
-        .dv-cone-shape::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 2px;
-            right: 2px;
-            height: 4px;
-            background: #ffffff;
-            box-shadow: 0 0 6px #ffffff;
-            border-radius: 1px;
-        }
-
-        .dv-cone-shape::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: -3px;
-            right: -3px;
-            height: 4px;
-            background: #581c87;
-            border-radius: 2px;
-        }
-
-        @keyframes coneBounceOnly {
-            0% { transform: translateY(0) scale(0.95); }
-            100% { transform: translateY(-4px) scale(1.08); }
-        }
-
-        @media (max-width: 1024px) {
-            body { padding: 20px 15px; align-items: center; }
             .navbar {
-                position: relative; top: auto; right: auto; width: 100%;
-                flex-direction: column; gap: 12px; padding: 0; text-align: center; margin-bottom: 25px;
+                position: relative;
+                top: auto;
+                right: auto;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding: 0;
+                text-align: center;
+                margin-bottom: 30px;
+                justify-content: center;
             }
-            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; padding: 10px 18px; }
-            #mainReportForm { padding-left: 0; padding-right: 0; align-items: center; max-width: 100%; }
-            .left-card, .bottom-row-wrapper, .text-column, .carousel-outer-wrapper, .carousel-container {
-                width: 100%; max-width: 100%; margin-right: 0; margin-top: 0;
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px 18px;
             }
-            .carousel-outer-wrapper { margin-top: 60px; }
-            .bottom-row-wrapper { flex-direction: column; gap: 20px; }
-            .form-grid-2cols { grid-template-columns: 1fr; }
-            .form-group-full { grid-column: span 1; }
-            .upload-box { height: 95px; flex-direction: column; text-align: center; }
+
+            #mainReportForm {
+                flex-direction: column;
+                margin-top: 10px;
+                align-items: center;
+                padding-left: 0;
+                padding-right: 0;
+                gap: 25px;
+            }
+
+            .glass-card,
+            .right-column-wrapper,
+            .middle-bottom-container {
+                width: 100%;
+                max-width: 100%;
+                align-items: stretch;
+            }
+
+            .right-card {
+                margin-top: 0;
+            }
+
+            .texto-informativo {
+                margin-right: 0;
+                padding-right: 15px;
+                text-align: right;
+            }
         }
     </style>
 </head>
@@ -994,105 +945,99 @@
             <div class="card-divider-title">
                 <div class="footer-brand-effects">DahliaVersa</div>
             </div>
-            <div class="form-grid-2cols">
-                <div class="form-group">
-                    <label for="regName">Nombre Completo</label>
-                    <input type="text" id="regName" name="nombre" placeholder="Ingresa tu nombre completo" required>
-                </div>
-                <div class="form-group">
-                    <label for="regAge">Edad</label>
-                    <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" required>
-                </div>
-                <div class="form-group">
-                    <label for="regPhone">Número de Teléfono</label>
-                    <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" required>
-                </div>
-                <div class="form-group">
-                    <label for="regDate">Fecha Automática</label>
-                    <input type="text" id="regDate" name="fecha" readonly value="23/09/2026">
-                </div>
-                <div class="form-group form-group-full">
-                    <label for="regReferences">Referencias</label>
-                    <textarea id="regReferences" name="referencias" placeholder="Ej. Entre qué calles está, color de fachada..." rows="2" required></textarea>
-                </div>
+            <div class="form-group">
+                <label for="regName">Nombre Completo</label>
+                <input type="text" id="regName" name="nombre" placeholder="Ingresa tu nombre completo" required>
+            </div>
+            <div class="form-group">
+                <label for="regAge">Edad</label>
+                <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" required>
+            </div>
+            <div class="form-group">
+                <label for="regPhone">Número de Teléfono</label>
+                <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" required>
+            </div>
+            <div class="form-group">
+                <label for="regDate">Fecha Automática</label>
+                <input type="text" id="regDate" name="fecha" readonly value="23/09/2026">
+            </div>
+            <div class="form-group">
+                <label for="regReferences">Referencias</label>
+                <textarea id="regReferences" name="referencias"
+                    placeholder="Ej. Entre qué calles está, color de fachada..." rows="2" required></textarea>
             </div>
         </div>
 
-        <div class="bottom-row-wrapper">
-            <div class="text-column">
-                <div class="free-info-text">
-                    Bienvenido a <strong>DahliaVersa</strong>, una plataforma cívica inteligente diseñada para optimizar el reporte y seguimiento de baches y daños en la carpeta asfáltica municipal. Conectamos directamente a los ciudadanos con los servicios viales.
+        <div class="middle-bottom-container">
+            <button type="submit" class="btn-enviar">Enviar Reporte</button>
+        </div>
+
+        <div class="right-column-wrapper">
+            <div class="glass-card right-card carousel-container">
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="carouselTrack">
+
+                        <div class="carousel-slide">
+                            <h3>Ubicación Exacta</h3>
+                            <div class="upload-box" id="gpsBox">
+                                <span style="font-size: 1.8rem;">📍</span>
+                                <span id="gpsText">Haz clic para fijar ubicación GPS</span>
+                                <input type="hidden" name="lat_long" id="latLongInput" value="">
+                            </div>
+                        </div>
+
+                        <div class="carousel-slide">
+                            <h3>INE de Frente</h3>
+                            <label class="upload-box">
+                                <span style="font-size: 1.8rem;">🪪</span>
+                                <span class="file-label-text">Sube o fotografía el frente de tu INE</span>
+                                <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden"
+                                    style="display: none;">
+                            </label>
+                        </div>
+
+                        <div class="carousel-slide">
+                            <h3>INE Reverso</h3>
+                            <label class="upload-box">
+                                <span style="font-size: 1.8rem;">🔄</span>
+                                <span class="file-label-text">Sube o fotografía el reverso de tu INE</span>
+                                <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden"
+                                    style="display: none;">
+                            </label>
+                        </div>
+
+                        <div class="carousel-slide">
+                            <h3>Incidencia</h3>
+                            <label class="upload-box">
+                                <span style="font-size: 1.8rem;">📸</span>
+                                <span class="file-label-text">Toma una foto del problema</span>
+                                <input type="file" name="selfie" accept="image/*" class="file-input-hidden"
+                                    style="display: none;">
+                            </label>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="free-info-text">
-                    Fija tu ubicación GPS exacta en el mapa interactivo y adjunta la documentación requerida para generar tu folio oficial en <strong>DahliaVersa</strong>.
-                </div>
-                <div class="section-divider"></div>
-                
-                <div style="display: flex; justify-content: flex-end; margin-top: 5px; width: 100%;">
-                    <button type="submit" class="btn-enviar">Enviar Reporte</button>
+                <div class="carousel-nav">
+                    <button type="button" class="carousel-btn" id="prevBtn">Anterior</button>
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <span class="indicator active"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                    </div>
+                    <button type="button" class="carousel-btn" id="nextBtn">Siguiente</button>
                 </div>
             </div>
 
-            <div class="carousel-outer-wrapper">
-                <div class="glass-card carousel-container">
-                    <div class="carousel-track-container">
-                        <div class="carousel-track" id="carouselTrack">
-
-                            <!-- SLIDE 1: MAPA CON CONO COMO MARCADOR -->
-                            <div class="carousel-slide">
-                                <h3>Ubicación Exacta</h3>
-                                <div id="mapModal"></div>
-                                <button type="button" id="btnGetGPS" class="carousel-btn" style="width: 100%; margin-top: 4px; padding: 5px; font-size: 0.75rem; background: rgba(216, 180, 254, 0.25); color: #fff; border: 1px solid rgba(216, 180, 254, 0.5);">
-                                    📍 Activar Mi Ubicación GPS en Tiempo Real
-                                </button>
-                                <input type="hidden" name="lat_long" id="latLongInput" value="19.7942, -99.1024">
-                            </div>
-
-                            <div class="carousel-slide">
-                                <h3>INE de Frente</h3>
-                                <label class="upload-box">
-                                    <span style="font-size: 1.3rem;">🪪</span>
-                                    <span class="file-label-text">Sube o fotografía el frente de tu INE</span>
-                                    <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden" style="display: none;">
-                                </label>
-                            </div>
-
-                            <div class="carousel-slide">
-                                <h3>INE Reverso</h3>
-                                <label class="upload-box">
-                                    <span style="font-size: 1.3rem;">🔄</span>
-                                    <span class="file-label-text">Sube o fotografía el reverso de tu INE</span>
-                                    <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden" style="display: none;">
-                                </label>
-                            </div>
-
-                            <div class="carousel-slide">
-                                <h3>Incidencia</h3>
-                                <label class="upload-box">
-                                    <span style="font-size: 1.3rem;">📸</span>
-                                    <span class="file-label-text">Toma una foto del bache</span>
-                                    <input type="file" name="selfie" accept="image/*" class="file-input-hidden" style="display: none;">
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="carousel-nav">
-                        <button type="button" class="carousel-btn" id="prevBtn">Anterior</button>
-                        <div class="carousel-indicators" id="carouselIndicators">
-                            <span class="indicator active"></span>
-                            <span class="indicator"></span>
-                            <span class="indicator"></span>
-                            <span class="indicator"></span>
-                        </div>
-                        <button type="button" class="carousel-btn" id="nextBtn">Siguiente</button>
-                    </div>
-                </div>
+            <div class="texto-informativo" dir="rtl">
+                <strong>Información importante:</strong> Asegúrate de detallar correctamente el estado de las vías, la
+                profundidad y la gravedad del bache para agilizar la atención municipal. Cada reporte validado pasa por
+                un proceso de verificación ciudadana para optimizar los tiempos de respuesta y garantizar intervenciones
+                viales más seguras y duraderas en beneficio de toda la comunidad.
             </div>
         </div>
     </form>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
         const track = document.getElementById('carouselTrack');
         const slides = Array.from(track.children);
@@ -1101,98 +1046,12 @@
         const indicators = document.querySelectorAll('.indicator');
 
         let currentIndex = 0;
-        let mapLoaded = false;
-        let mainMap = null;
-        let mainMarker = null;
-
-        function initMainMap(lat = 19.7942, lon = -99.1024) {
-            const coneOnlyIcon = L.divIcon({
-                className: 'custom-cone-icon',
-                html: `
-                    <div class="dv-cone-marker-only">
-                        <div class="dv-cone-shape"></div>
-                    </div>
-                `,
-                iconSize: [24, 28],
-                iconAnchor: [12, 24]
-            });
-
-            if (mapLoaded && mainMap) {
-                mainMap.setView([lat, lon], 15);
-                if (mainMarker) {
-                    mainMarker.setLatLng([lat, lon]);
-                } else {
-                    mainMarker = L.marker([lat, lon], { draggable: true, icon: coneOnlyIcon }).addTo(mainMap);
-                }
-                mainMap.invalidateSize();
-                return;
-            }
-
-            mainMap = L.map('mapModal', { zoomControl: false }).setView([lat, lon], 15);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19
-            }).addTo(mainMap);
-
-            mainMarker = L.marker([lat, lon], { draggable: true, icon: coneOnlyIcon }).addTo(mainMap);
-
-            mainMarker.on('dragend', function (event) {
-                const position = mainMarker.getLatLng();
-                document.getElementById('latLongInput').value = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
-            });
-
-            mainMap.on('click', function(e) {
-                const clickLat = e.latlng.lat;
-                const clickLon = e.latlng.lng;
-                mainMarker.setLatLng([clickLat, clickLon]);
-                document.getElementById('latLongInput').value = `${clickLat.toFixed(6)}, ${clickLon.toFixed(6)}`;
-            });
-
-            mapLoaded = true;
-        }
-
-        function solicitarUbicacionGPS() {
-            if (!navigator.geolocation) {
-                alert("Tu navegador no soporta geolocalización.");
-                return;
-            }
-
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    document.getElementById('latLongInput').value = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
-                    if (mainMap && mainMarker) {
-                        mainMap.setView([lat, lon], 16);
-                        mainMarker.setLatLng([lat, lon]);
-                        mainMap.invalidateSize();
-                    }
-                    alert(`¡Ubicación GPS obtenida con éxito!\nLat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`);
-                },
-                (error) => {
-                    console.error("Error de geolocalización:", error.code, error.message);
-                    if (error.code === 1) {
-                        alert("Permiso de ubicación denegado. Habilítalo en la configuración de tu navegador.");
-                    } else {
-                        alert("No se pudo determinar tu posición actual automáticamente. Puedes arrastrar el pin o hacer clic en el mapa.");
-                    }
-                },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-            );
-        }
 
         function updateCarousel(index) {
             track.style.transform = `translateX(-${index * 100}%)`;
             indicators.forEach((ind, i) => {
                 ind.classList.toggle('active', i === index);
             });
-
-            if (index === 0) {
-                setTimeout(() => {
-                    initMainMap();
-                    if (mainMap) mainMap.invalidateSize();
-                }, 150);
-            }
         }
 
         nextButton.addEventListener('click', (e) => {
@@ -1207,46 +1066,29 @@
             updateCarousel(currentIndex);
         });
 
-        window.addEventListener('DOMContentLoaded', () => {
-            initMainMap();
-            
-            const btnGetGPS = document.getElementById('btnGetGPS');
-            if (btnGetGPS) {
-                btnGetGPS.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    solicitarUbicacionGPS();
-                });
+        const gpsBox = document.getElementById('gpsBox');
+        const gpsText = document.getElementById('gpsText');
+        const latLongInput = document.getElementById('latLongInput');
+
+        gpsBox.addEventListener('click', () => {
+            if (navigator.geolocation) {
+                gpsText.textContent = "Obteniendo ubicación GPS...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        latLongInput.value = `${lat}, ${lon}`;
+                        gpsText.textContent = `¡Ubicación fijada! (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
+                        gpsBox.style.borderColor = '#c084fc';
+                    },
+                    (error) => {
+                        gpsText.textContent = "Error al obtener GPS. Intenta de nuevo.";
+                        alert("No se pudo obtener la geolocalización. Verifica los permisos de tu navegador.");
+                    }
+                );
+            } else {
+                alert("La geolocalización no es compatible con este navegador.");
             }
-
-            const mapContainer = document.getElementById('mapModal');
-            if (mapContainer) {
-                mapContainer.addEventListener('click', () => {
-                    solicitarUbicacionGPS();
-                });
-            }
-        });
-
-        const fileInputs = document.querySelectorAll('.file-input-hidden');
-        fileInputs.forEach(input => {
-            input.addEventListener('change', (e) => {
-                const fileName = e.target.files[0] ? e.target.files[0].name : "Archivo seleccionado";
-                const labelText = input.closest('.upload-box').querySelector('.file-label-text');
-                if (labelText) {
-                    labelText.textContent = `Archivo: ${fileName}`;
-                }
-                input.closest('.upload-box').style.borderColor = '#d8b4fe';
-            });
-        });
-
-        const backToHomeBtn = document.getElementById('backToHomeBtn');
-        const pageLoader = document.getElementById('pageLoader');
-
-        backToHomeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            pageLoader.classList.add('active');
-            setTimeout(() => {
-                window.location.href = backToHomeBtn.getAttribute('href');
-            }, 1500);
         });
 
         const logoTrigger = document.getElementById('logoTrigger');
@@ -1287,8 +1129,8 @@
             logoIcon.style.animation = 'none';
 
             allPetals.forEach(petal => {
-                const randomX = (Math.random() - 0.5) * 75;
-                const randomY = (Math.random() - 0.5) * 75 + 30;
+                const randomX = (Math.random() - 0.5) * 85;
+                const randomY = (Math.random() - 0.5) * 85 + 35;
                 petal.style.setProperty('--rand-x', `${randomX}px`);
                 petal.style.setProperty('--rand-y', `${randomY}px`);
                 petal.classList.add('dispersing');
@@ -1349,6 +1191,27 @@
             }, 2200);
         });
 
+        const fileInputs = document.querySelectorAll('.file-input-hidden');
+        fileInputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const fileName = e.target.files[0] ? e.target.files[0].name : "Archivo seleccionado";
+                const labelText = input.closest('.upload-box').querySelector('.file-label-text');
+                labelText.textContent = `Archivo: ${fileName}`;
+                input.closest('.upload-box').style.borderColor = '#c084fc';
+            });
+        });
+
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        const pageLoader = document.getElementById('pageLoader');
+
+        backToHomeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            pageLoader.classList.add('active');
+            
+            setTimeout(() => {
+                window.location.href = backToHomeBtn.getAttribute('href');
+            }, 1500);
+        });
         const mainReportForm = document.getElementById('mainReportForm');
 
         mainReportForm.addEventListener('submit', async (e) => {
@@ -1357,14 +1220,14 @@
             formData.append('tipo_reporte', 'baches'); 
 
             try {
-                const response = await fetch('https://dahliaversa1.onrender.com/api/enviar-reporte', {
-                    method: 'POST',
-                    body: formData
-                });
+    const response = await fetch('https://dahliaversa1.onrender.com/api/enviar-reporte', {
+        method: 'POST',
+        body: formData
+    });
                 const res = await response.json();
 
                 if (response.ok) {
-                    alert(`🎉 ¡Reporte Registrado Exitosamente!\n\nCiudadano: ${res.nombre}\nID de Seguimiento (Folio): #${res.folio}\nEstatus de Validación IA: ${res.status}`);
+                    alert(`🎉 ¡Reporte Registrado Exitosamente!\n\nCiudadano: ${res.nombre}\nID de Seguimiento (Folio): #${res.folio}\nEstatus de Validación IA: ${res.status}\n\nNota: Guarda tu ID de Folio para consultar el estatus en tiempo real.`);
                     window.location.href = 'index.html';
                 } else {
                     alert(`⚠️ Error al procesar el reporte: ${res.message}`);
