@@ -7,8 +7,8 @@
     <title>DahliaVersa</title>
     <link rel="stylesheet" href="index.css">
     <!-- Leaflet CSS y JS para mapas en tiempo real -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
 
 <body>
@@ -176,7 +176,7 @@
                             </ul>
                         </li>
                         <li><a href="#" id="seguimientoNavBtn">Seguimiento</a></li>
-                        <li><a href="#">Acceder</a></li>
+                        <li><a href="#" onclick="openCompanyRegisterModal()">Acceder</a></li>
                         <li><a href="mailto:olguinzavalaadrian099@gmail.com">Contactanos</a></li>
                         <li><a href="#" id="misReportesNavBtn">Mis Reportes</a></li>
                     </ul>
@@ -348,13 +348,13 @@
         </div>
     </div>
 
-<div class="mr-nico-overlay" id="modalMisReportes">
+    <div class="mr-nico-overlay" id="modalMisReportes">
         <div class="mr-nico-card">
-            
+
             <!-- NUEVO DISEÑO: TUBERÍAS DAÑADAS DE ALTA GAMA -->
             <div class="mr-nico-leak-right-complex">
                 <div class="pipe-system-anchor">
-                    
+
                     <!-- Tubería Horizontal Principal -->
                     <div class="pipe-horizontal">
                         <div class="pipe-crack-glow"></div>
@@ -387,7 +387,7 @@
             </div>
 
             <h2 class="mr-nico-title">Mis Reportes Ciudadanos</h2>
-            
+
             <div class="mr-nico-scroll">
                 <div class="mr-nico-group">
                     <label class="mr-nico-label">Nombre Registrado</label>
@@ -396,7 +396,7 @@
 
                 <div id="mrNicoResultsBox" class="mr-nico-results" style="display: none;">
                     <span class="mr-nico-subtitle">Historial de Reportes:</span>
-                    
+
                     <div class="mr-nico-item">
                         <div class="mr-nico-row">
                             <span class="mr-nico-type">Fuga de Agua</span>
@@ -475,120 +475,127 @@
             </div>
         </div>
     </footer>
-<div class="dv-modal-overlay" id="modalLocationReport">
-    <div class="dv-modal-card mr-wide-card">
-        
-        <h2 class="dv-modal-title">Reporte Rapido</h2>
-        <p class="dv-modal-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
-        
-        <div class="dv-modal-scroll">
-            
-            <!-- Mapa interactivo en tiempo real -->
-            <div id="mapModal" class="dv-real-map-box"></div>
+    <div class="dv-modal-overlay" id="modalLocationReport">
+        <div class="dv-modal-card mr-wide-card">
 
-            <form id="mrReportForm" enctype="multipart/form-data">
-                <div class="dv-modal-group">
-                    <label class="mr-nico-label">Nombre Completo</label>
-                    <input type="text" id="mrInputName" name="nombre" placeholder="Ingresa tu nombre completo" class="seg-input-field" required>
-                </div>
+            <h2 class="dv-modal-title">Reporte Rapido</h2>
+            <p class="dv-modal-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
 
-                <div class="dv-row-2cols">
+            <div class="dv-modal-scroll">
+
+                <!-- Mapa interactivo en tiempo real -->
+                <div id="mapModal" class="dv-real-map-box"></div>
+
+                <form id="mrReportForm" enctype="multipart/form-data">
                     <div class="dv-modal-group">
-                        <label class="mr-nico-label">Edad</label>
-                        <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120" class="seg-input-field" required>
+                        <label class="mr-nico-label">Nombre Completo</label>
+                        <input type="text" id="mrInputName" name="nombre" placeholder="Ingresa tu nombre completo"
+                            class="seg-input-field" required>
                     </div>
+
+                    <div class="dv-row-2cols">
+                        <div class="dv-modal-group">
+                            <label class="mr-nico-label">Edad</label>
+                            <input type="number" id="regAge" name="edad" placeholder="Tu edad" min="1" max="120"
+                                class="seg-input-field" required>
+                        </div>
+                        <div class="dv-modal-group">
+                            <label class="mr-nico-label">Teléfono</label>
+                            <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos"
+                                class="seg-input-field" required>
+                        </div>
+                    </div>
+
+                    <!-- Tipo de Incidencia con checkboxes estilizados -->
                     <div class="dv-modal-group">
-                        <label class="mr-nico-label">Teléfono</label>
-                        <input type="tel" id="regPhone" name="telefono" placeholder="10 dígitos" class="seg-input-field" required>
+                        <label class="mr-nico-label">Tipo de Incidencia</label>
+                        <div class="seg-checkbox-group">
+                            <label class="seg-checkbox-card">
+                                <input type="checkbox" name="tipo_reporte" value="fuga-agua" class="seg-hidden-check">
+                                <span class="seg-checkbox-box"></span>
+                                <span class="seg-checkbox-label">Fuga de Agua</span>
+                            </label>
+                            <label class="seg-checkbox-card">
+                                <input type="checkbox" name="tipo_reporte" value="baches" class="seg-hidden-check">
+                                <span class="seg-checkbox-box"></span>
+                                <span class="seg-checkbox-label">Bache</span>
+                            </label>
+                            <label class="seg-checkbox-card">
+                                <input type="checkbox" name="tipo_reporte" value="poste-luz" class="seg-hidden-check">
+                                <span class="seg-checkbox-box"></span>
+                                <span class="seg-checkbox-label">Poste de Luz</span>
+                            </label>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Tipo de Incidencia con checkboxes estilizados -->
-                <div class="dv-modal-group">
-                    <label class="mr-nico-label">Tipo de Incidencia</label>
-                    <div class="seg-checkbox-group">
-                        <label class="seg-checkbox-card">
-                            <input type="checkbox" name="tipo_reporte" value="fuga-agua" class="seg-hidden-check">
-                            <span class="seg-checkbox-box"></span>
-                            <span class="seg-checkbox-label">Fuga de Agua</span>
-                        </label>
-                        <label class="seg-checkbox-card">
-                            <input type="checkbox" name="tipo_reporte" value="baches" class="seg-hidden-check">
-                            <span class="seg-checkbox-box"></span>
-                            <span class="seg-checkbox-label">Bache</span>
-                        </label>
-                        <label class="seg-checkbox-card">
-                            <input type="checkbox" name="tipo_reporte" value="poste-luz" class="seg-hidden-check">
-                            <span class="seg-checkbox-box"></span>
-                            <span class="seg-checkbox-label">Poste de Luz</span>
-                        </label>
+                    <div class="dv-modal-group">
+                        <label class="mr-nico-label">Referencias del Lugar</label>
+                        <textarea id="regReferences" name="referencias"
+                            placeholder="Ej. Entre qué calles está, color de fachada..."
+                            class="seg-input-field dv-textarea" rows="2" required></textarea>
                     </div>
-                </div>
 
-                <div class="dv-modal-group">
-                    <label class="mr-nico-label">Referencias del Lugar</label>
-                    <textarea id="regReferences" name="referencias" placeholder="Ej. Entre qué calles está, color de fachada..." class="seg-input-field dv-textarea" rows="2" required></textarea>
-                </div>
+                    <!-- SECCIÓN DE FOTOS Y VALIDACIÓN OFICIAL -->
+                    <div class="dv-modal-group">
+                        <label class="mr-nico-label">Archivos y Evidencia Fotográfica</label>
 
-                <!-- SECCIÓN DE FOTOS Y VALIDACIÓN OFICIAL -->
-                <div class="dv-modal-group">
-                    <label class="mr-nico-label">Archivos y Evidencia Fotográfica</label>
-                    
-                    <div class="dv-upload-container">
-                        <label class="seg-checkbox-card dv-upload-file-card">
-                            <span class="dv-upload-emoji">🪪</span>
-                            <span class="seg-checkbox-label file-label-text">Sube el frente de tu INE</span>
-                            <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden">
-                        </label>
+                        <div class="dv-upload-container">
+                            <label class="seg-checkbox-card dv-upload-file-card">
+                                <span class="dv-upload-emoji">🪪</span>
+                                <span class="seg-checkbox-label file-label-text">Sube el frente de tu INE</span>
+                                <input type="file" name="ine_frente" accept="image/*" class="file-input-hidden">
+                            </label>
 
-                        <label class="seg-checkbox-card dv-upload-file-card">
-                            <span class="dv-upload-emoji">🔄</span>
-                            <span class="seg-checkbox-label file-label-text">Sube el reverso de tu INE</span>
-                            <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden">
-                        </label>
+                            <label class="seg-checkbox-card dv-upload-file-card">
+                                <span class="dv-upload-emoji">🔄</span>
+                                <span class="seg-checkbox-label file-label-text">Sube el reverso de tu INE</span>
+                                <input type="file" name="ine_reverso" accept="image/*" class="file-input-hidden">
+                            </label>
 
-                        <label class="seg-checkbox-card dv-upload-file-card">
-                            <span class="dv-upload-emoji">📸</span>
-                            <span class="seg-checkbox-label file-label-text">Foto de la incidencia (Evidencia)</span>
-                            <input type="file" name="selfie" accept="image/*" class="file-input-hidden">
-                        </label>
+                            <label class="seg-checkbox-card dv-upload-file-card">
+                                <span class="dv-upload-emoji">📸</span>
+                                <span class="seg-checkbox-label file-label-text">Foto de la incidencia
+                                    (Evidencia)</span>
+                                <input type="file" name="selfie" accept="image/*" class="file-input-hidden">
+                            </label>
+                        </div>
                     </div>
+                </form>
+
+            </div>
+
+            <div class="dv-modal-actions dv-modal-buttons-box">
+                <button type="button" class="btn-seg-action" id="mrBtnSubmitReport">Enviar</button>
+                <button type="button" class="btn-seg-action btn-seg-alt" id="mrBtnCloseModal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Registro para Empresa (Único y Aislado) -->
+    <div class="dv-comp-modal-overlay" id="dvCompRegisterModal">
+        <div class="dv-comp-modal-card">
+            <button class="dv-comp-modal-close-btn" id="dvCloseCompModal">&times;</button>
+            <div class="dv-comp-modal-header">
+                <div class="footer-brand-effects">DahliaVersa</div>
+                <h3>Registro de Empresa</h3>
+            </div>
+            <form id="dvCompRegisterForm" class="dv-comp-modal-form">
+                <div class="form-group">
+                    <label for="dvCompId">ID de Empresa</label>
+                    <input type="text" id="dvCompId" name="company_id" placeholder="Ej. EMP-1024" required>
                 </div>
+                <div class="form-group">
+                    <label for="dvCompName">Nombre de la Empresa</label>
+                    <input type="text" id="dvCompName" name="company_name"
+                        placeholder="Ej. Servicios de Infraestructura S.A." required>
+                </div>
+                <div class="form-group">
+                    <label for="dvCompPassword">Contraseña</label>
+                    <input type="password" id="dvCompPassword" name="company_password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-enviar style-modal-btn">Registrar Empresa</button>
             </form>
-
-        </div>
-
-        <div class="dv-modal-actions dv-modal-buttons-box">
-            <button type="button" class="btn-seg-action" id="mrBtnSubmitReport">Enviar</button>
-            <button type="button" class="btn-seg-action btn-seg-alt" id="mrBtnCloseModal">Cancelar</button>
         </div>
     </div>
-</div>
-<!-- Modal de Registro para Empresa (Único y Aislado) -->
-<div class="dv-comp-modal-overlay" id="dvCompRegisterModal">
-    <div class="dv-comp-modal-card">
-        <button class="dv-comp-modal-close-btn" id="dvCloseCompModal">&times;</button>
-        <div class="dv-comp-modal-header">
-            <div class="footer-brand-effects">DahliaVersa</div>
-            <h3>Registro de Empresa</h3>
-        </div>
-        <form id="dvCompRegisterForm" class="dv-comp-modal-form">
-            <div class="form-group">
-                <label for="dvCompId">ID de Empresa</label>
-                <input type="text" id="dvCompId" name="company_id" placeholder="Ej. EMP-1024" required>
-            </div>
-            <div class="form-group">
-                <label for="dvCompName">Nombre de la Empresa</label>
-                <input type="text" id="dvCompName" name="company_name" placeholder="Ej. Servicios de Infraestructura S.A." required>
-            </div>
-            <div class="form-group">
-                <label for="dvCompPassword">Contraseña</label>
-                <input type="password" id="dvCompPassword" name="company_password" placeholder="••••••••" required>
-            </div>
-            <button type="submit" class="btn-enviar style-modal-btn">Registrar Empresa</button>
-        </form>
-    </div>
-</div>
     <script src="index.js"></script>
 </body>
 
