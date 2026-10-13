@@ -425,6 +425,52 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => modalMap.invalidateSize(), 250);
     }
 
+    function initModalMap(lat = 19.7942, lon = -99.1024) {
+        const mapContainer = document.getElementById('mapModal');
+        if (!mapContainer || typeof L === 'undefined') return;
+
+        // Definir el icono personalizado con el círculo parpadeante
+        const pulsingIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: '<div class="dv-pulsing-marker"></div>',
+            iconSize: [22, 22],
+            iconAnchor: [11, 11]
+        });
+
+        if (modalMap) {
+            modalMap.setView([lat, lon], 15);
+            if (modalMarker) {
+                modalMarker.setLatLng([lat, lon]);
+            } else {
+                modalMarker = L.marker([lat, lon], { draggable: true, icon: pulsingIcon }).addTo(modalMap);
+            }
+            setTimeout(() => modalMap.invalidateSize(), 250);
+            return;
+        }
+
+        modalMap = L.map('mapModal', {
+            zoomControl: false
+        }).setView([lat, lon], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(modalMap);
+
+        // Añadir el marcador con el icono intermitente
+        modalMarker = L.marker([lat, lon], { draggable: true, icon: pulsingIcon }).addTo(modalMap);
+
+        modalMarker.on('dragend', function (event) {
+            const position = modalMarker.getLatLng();
+            const latLongInput = document.getElementById('latLongInput');
+            if (latLongInput) {
+                latLongInput.value = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
+            }
+        });
+
+        setTimeout(() => modalMap.invalidateSize(), 250);
+    }
+
     function abrirModalUbicacion(ubicacion) {
         if (ubicacion.trim() !== "") {
             if (locationText) locationText.textContent = `Ubicación: "${ubicacion}"`;
