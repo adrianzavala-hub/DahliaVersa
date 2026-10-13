@@ -3128,8 +3128,6 @@ body.modal-active .logo-icon .dahlia-center {
   color: #bae6fd !important;
 }
 
-/* --- ESTILOS INDEPENDIENTES PARA EL MODAL DE UBICACIÓN (DAHLIAVERSA) --- */
-/* --- FONDO UNIFICADO PARA TODOS LOS MODALES --- */
 .dv-modal-overlay {
   position: fixed !important;
   top: 0 !important;
@@ -3494,4 +3492,27 @@ body.modal-active .logo-icon .dahlia-center {
     transform: translate(-50%, -50%) scale(0.9);
     box-shadow: 0 0 5px #38bdf8, 0 0 0 0 rgba(56, 189, 248, 0);
   }
+}
+
+/* --- OCULTAR MARCA DE AGUA Y ATRIBUCIÓN DE LEAFLET --- */
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+/* --- CENTRAR LOS BOTONES DEL MODAL --- */
+.dv-modal-buttons-box,
+.dv-modal-actions {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-top: 18px !important;
+}
+
+/* Asegurar que los botones tengan un ancho equilibrado y se vean centrados */
+.dv-modal-buttons-box .btn-seg-action,
+.dv-modal-actions .btn-seg-action {
+  flex: 0 1 160px !important;
+  max-width: 160px !important;
+  text-align: center !important;
 }
