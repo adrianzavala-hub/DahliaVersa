@@ -833,7 +833,7 @@
             box-shadow: 0 0 6px rgba(47, 130, 120, 0.4);
         }
 
-        /* --- MAPA Y MARCADOR DE POSTE DE LUZ PARPADEANTE --- */
+        /* --- NUEVO DISEÑO DE MARCADOR DE POSTE CON COLORES DE LA PÁGINA --- */
         #mapModal {
             width: 100% !important;
             height: 120px !important;
@@ -850,43 +850,67 @@
             display: none !important;
         }
 
-        .dv-lamp-marker {
+        .dv-street-post-marker {
             position: relative;
-            width: 32px;
-            height: 36px;
-            transform: translate(-50%, -85%);
+            width: 30px;
+            height: 38px;
+            transform: translate(-50%, -90%);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
-        .dv-lamp-head {
+        .dv-post-arm {
+            width: 18px;
+            height: 4px;
+            background: linear-gradient(90deg, #c4e8e3, #2f8278);
+            border-radius: 2px;
+            box-shadow: 0 0 6px rgba(47, 130, 120, 0.6);
+        }
+
+        .dv-post-pole {
+            width: 3px;
+            height: 20px;
+            background: linear-gradient(180deg, #2f8278 0%, #1a4d46 100%);
+            border-radius: 2px;
+            margin-top: -2px;
+        }
+
+        .dv-post-lamp {
             position: absolute;
-            top: 0;
-            width: 24px;
-            height: 14px;
+            top: -2px;
+            right: 1px;
+            width: 12px;
+            height: 8px;
             background: #2f8278;
-            border-radius: 0 0 12px 12px;
-            box-shadow: 0 0 10px rgba(47, 130, 120, 0.8);
-            z-index: 2;
+            border-radius: 0 0 6px 6px;
+            border: 1px solid #c4e8e3;
         }
 
-        .dv-lamp-bulb {
+        .dv-post-light {
             position: absolute;
-            bottom: -4px;
-            left: 7px;
-            width: 10px;
-            height: 10px;
-            background: #a3e635;
+            bottom: -5px;
+            left: 2px;
+            width: 8px;
+            height: 8px;
+            background: #e4f4f1;
             border-radius: 50%;
-            box-shadow: 0 0 12px #a3e635, 0 0 24px #4ade80;
-            animation: mapBulbFlicker 0.4s steps(2, start) infinite;
+            box-shadow: 0 0 10px #c4e8e3, 0 0 18px #76c7bd;
+            animation: themePostFlicker 0.5s ease-in-out infinite alternate;
         }
 
-        @keyframes mapBulbFlicker {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.25); }
-            100% { opacity: 0.3; transform: scale(0.9); }
+        .dv-post-base {
+            width: 10px;
+            height: 3px;
+            background: #1a4d46;
+            border-radius: 2px;
+            margin-top: -1px;
+        }
+
+        @keyframes themePostFlicker {
+            0% { opacity: 0.3; transform: scale(0.85); box-shadow: 0 0 4px #76c7bd; }
+            50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 12px #e4f4f1, 0 0 22px #76c7bd; }
+            100% { opacity: 0.4; transform: scale(0.9); box-shadow: 0 0 6px #76c7bd; }
         }
 
         @media (max-width: 900px) {
@@ -1001,7 +1025,7 @@
             <div class="carousel-track-container">
                 <div class="carousel-track" id="carouselTrack">
 
-                    <!-- SLIDE 1: MAPA INTERACTIVO CON LEAFLET Y MARCADOR DE POSTE DE LUZ -->
+                    <!-- SLIDE 1: MAPA INTERACTIVO CON NUEVO MARCADOR -->
                     <div class="carousel-slide">
                         <h3>Ubicación Exacta</h3>
                         <div id="mapModal"></div>
@@ -1118,16 +1142,20 @@
         let mainMarker = null;
 
         function initMainMap(lat = 19.7942, lon = -99.1024) {
-            const lampIcon = L.divIcon({
-                className: 'custom-lamp-icon',
+            const customLampIcon = L.divIcon({
+                className: 'custom-lamp-theme-icon',
                 html: `
-                    <div class="dv-lamp-marker">
-                        <div class="dv-lamp-head"></div>
-                        <div class="dv-lamp-bulb"></div>
+                    <div class="dv-street-post-marker">
+                        <div class="dv-post-arm"></div>
+                        <div class="dv-post-lamp">
+                            <div class="dv-post-light"></div>
+                        </div>
+                        <div class="dv-post-pole"></div>
+                        <div class="dv-post-base"></div>
                     </div>
                 `,
-                iconSize: [32, 36],
-                iconAnchor: [16, 30]
+                iconSize: [30, 38],
+                iconAnchor: [15, 36]
             });
 
             if (mapLoaded && mainMap) {
@@ -1135,7 +1163,7 @@
                 if (mainMarker) {
                     mainMarker.setLatLng([lat, lon]);
                 } else {
-                    mainMarker = L.marker([lat, lon], { draggable: true, icon: lampIcon }).addTo(mainMap);
+                    mainMarker = L.marker([lat, lon], { draggable: true, icon: customLampIcon }).addTo(mainMap);
                 }
                 mainMap.invalidateSize();
                 return;
@@ -1147,7 +1175,7 @@
                 maxZoom: 19
             }).addTo(mainMap);
 
-            mainMarker = L.marker([lat, lon], { draggable: true, icon: lampIcon }).addTo(mainMap);
+            mainMarker = L.marker([lat, lon], { draggable: true, icon: customLampIcon }).addTo(mainMap);
 
             mainMarker.on('dragend', function (event) {
                 const position = mainMarker.getLatLng();
