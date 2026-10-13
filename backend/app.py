@@ -48,7 +48,7 @@ def validar_imagen_con_gemini(image_path, tipo_reporte):
     max_intentos = 3
     for intento in range(max_intentos):
         try:
-            response = client.models.generate_content(model='gemini-3.8-flash', contents=[imagen, prompt])
+            response = client.models.generate_content(model='gemini-2.5-flash', contents=[imagen, prompt])
             texto_respuesta = response.text.strip().replace("```json", "").replace("```", "").strip()
             resultado_ia = json.loads(texto_respuesta)
             return resultado_ia.get("valido", False), resultado_ia.get("razon", "Análisis completado.")
@@ -88,7 +88,7 @@ def enviar_reporte():
     if f_selfie:
         f_selfie.save(os.path.join(upload_dir, nombre_selfie))
         
-    # Validar con Gemini (si hay imagen de INE frente o usar la selfie para control de identidad/evidencia)
+    # Validar con Gemini
     if ruta_validar and os.path.exists(ruta_validar):
         es_valido, motivo = validar_imagen_con_gemini(ruta_validar, tipo_reporte)
     else:
@@ -127,19 +127,30 @@ def enviar_reporte():
         "motivo": motivo
     }), 200
 
-# LOGIN EMPRESA
-@app.route('/api/empresa/login', methods=['POST'])
-def empresa_login():
-    data = request.json
-    conn = obtener_conexion_db()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM empresa_usuarios WHERE usuario = %s AND password = %s", (data.get('usuario'), data.get('password')))
-    user = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    if user:
-        return jsonify({"status": "success"})
-    return jsonify({"status": "error", "message": "Credenciales incorrectas"}), 401
+# LOGIN EMPRESA (ENDPOINT PRINCIPAL DE ACCESO)
+@app.route('/api/login-empresa', methods=['POST'])
+def login_empresa():
+    data = request.get_json() or request.json
+    usuario = data.get('usuario')
+    password = data.get('password')
+
+    try:
+        conn = obtener_conexion_db()
+        cursor = conn.cursor()
+        query = "SELECT * FROM empresa_usuarios WHERE usuario = %s AND password = %s"
+        cursor.execute(query, (usuario, password))
+        resultado = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        if resultado:
+            return jsonify({"success": True, "message": "Acceso autorizado"}), 200
+        else:
+            return jsonify({"success": False, "message": "Usuario o contraseña incorrectos."}), 401
+
+    except Exception as err:
+        print("EXCEPCIÓN DETALLADA EN LOGIN:", str(err))
+        return jsonify({"success": False, "message": f"Error interno: {str(err)}"}), 500
 
 # OBTENER TODOS LOS REPORTES PARA LA EMPRESA
 @app.route('/api/empresa/reportes', methods=['GET'])
@@ -193,10 +204,6 @@ def seguimiento_reporte(tipo, reporte_id):
         })
     return jsonify({"error": "No encontrado"}), 404
 
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-
 # BUSCAR REPORTES DE UN USUARIO POR NOMBRE
 @app.route('/api/reportes', methods=['GET'])
 def obtener_reportes_por_nombre():
@@ -225,26 +232,7 @@ def obtener_reportes_por_nombre():
     cursor.close()
     conn.close()
     return jsonify(reportes)
-@app.route('/api/login-empresa', methods=['POST'])
-def login_empresa():
-    data = request.get_json()
-    usuario = data.get('usuario')
-    password = data.get('password')
 
-    try:
-        # Asegúrate de usar el objeto de conexión correcto que ya usas en las otras rutas de tu app
-        cursor = conexion.cursor() 
-        query = "SELECT * FROM empresa_usuarios WHERE usuario = %s AND password = %s"
-        cursor.execute(query, (usuario, password))
-        resultado = cursor.fetchone()
-        cursor.close()
-
-        if resultado:
-            return jsonify({"success": True, "message": "Acceso autorizado"}), 200
-        else:
-            return jsonify({"success": False, "message": "Usuario o contraseña incorrectos."}), 401
-
-    except Exception as err:
-        # Esto imprimirá el error real en los logs de tu consola o Render
-        print("EXCEPCIÓN DETALLADA EN LOGIN:", str(err))
-        return jsonify({"success": False, "message": f"Error interno: {str(err)}"}), 500
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
