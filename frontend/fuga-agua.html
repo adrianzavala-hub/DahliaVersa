@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DahliaVersa - Fuga de Agua</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="index.css">
     <style>
         * {
             margin: 0;
@@ -833,6 +835,51 @@
             .form-group-full { grid-column: span 1; }
             .upload-box { height: 95px; flex-direction: column; text-align: center; }
         }
+
+        #mapModal {
+            width: 100% !important;
+            height: 140px !important;
+            min-height: 140px !important;
+            border-radius: 12px !important;
+            margin-bottom: 8px !important;
+            border: 1px solid rgba(165, 195, 222, 0.4) !important;
+            z-index: 1 !important;
+            position: relative !important;
+            background: rgba(100, 135, 166, 0.25) !important;
+        }
+
+        /* Ocultar marca de agua de Leaflet */
+        .leaflet-control-attribution {
+            display: none !important;
+        }
+
+        /* Marcador personalizado con pulso luminiscente */
+        .dv-pulsing-marker {
+            position: relative;
+            width: 22px;
+            height: 22px;
+            background: #38bdf8;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #38bdf8, inset 0 0 5px rgba(255, 255, 255, 0.8);
+            transform: translate(-50%, -50%);
+            animation: pulseLight 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseLight {
+            0% {
+                transform: translate(-50%, -50%) scale(0.9);
+                box-shadow: 0 0 5px #38bdf8, 0 0 0 0 rgba(56, 189, 248, 0.7);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                box-shadow: 0 0 20px #38bdf8, 0 0 0 12px rgba(56, 189, 248, 0);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0.9);
+                box-shadow: 0 0 5px #38bdf8, 0 0 0 0 rgba(56, 189, 248, 0);
+            }
+        }
     </style>
 </head>
 
@@ -1018,7 +1065,7 @@
             </div>
         </div>
     </form>
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
         const track = document.getElementById('carouselTrack');
         const slides = Array.from(track.children);
@@ -1027,12 +1074,48 @@
         const indicators = document.querySelectorAll('.indicator');
 
         let currentIndex = 0;
+        let mapLoaded = false;
+        let mainMap = null;
+        let mainMarker = null;
+
+        function initMainMap() {
+            if (mapLoaded) {
+                if (mainMap) mainMap.invalidateSize();
+                return;
+            }
+
+            const pulsingIcon = L.divIcon({
+                className: 'custom-div-icon',
+                html: '<div class="dv-pulsing-marker"></div>',
+                iconSize: [22, 22],
+                iconAnchor: [11, 11]
+            });
+
+            mainMap = L.map('mapModal', { zoomControl: false }).setView([19.7942, -99.1024], 15);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19
+            }).addTo(mainMap);
+
+            mainMarker = L.marker([19.7942, -99.1024], { draggable: true, icon: pulsingIcon }).addTo(mainMap);
+
+            mainMarker.on('dragend', function (event) {
+                const position = mainMarker.getLatLng();
+                document.getElementById('latLongInput').value = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
+            });
+
+            mapLoaded = true;
+        }
 
         function updateCarousel(index) {
             track.style.transform = `translateX(-${index * 100}%)`;
             indicators.forEach((ind, i) => {
                 ind.classList.toggle('active', i === index);
             });
+
+            if (index === 0) {
+                setTimeout(initMainMap, 150);
+            }
         }
 
         nextButton.addEventListener('click', (e) => {
@@ -1047,29 +1130,9 @@
             updateCarousel(currentIndex);
         });
 
-        const gpsBox = document.getElementById('gpsBox');
-        const gpsText = document.getElementById('gpsText');
-        const latLongInput = document.getElementById('latLongInput');
-
-        gpsBox.addEventListener('click', () => {
-            if (navigator.geolocation) {
-                gpsText.textContent = "Obteniendo ubicación GPS...";
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
-                        latLongInput.value = `${lat}, ${lon}`;
-                        gpsText.textContent = `¡Ubicación fijada! (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
-                        gpsBox.style.borderColor = 'rgba(255, 255, 255, 0.9)';
-                    },
-                    () => {
-                        gpsText.textContent = "Error al obtener GPS. Intenta de nuevo.";
-                        alert("No se pudo obtener la geolocalización. Verifica los permisos de tu navegador.");
-                    }
-                );
-            } else {
-                alert("La geolocalización no es compatible con este navegador.");
-            }
+        // Inicializar mapa al cargar la página si el slide 1 está activo
+        window.addEventListener('DOMContentLoaded', () => {
+            initMainMap();
         });
 
         const fileInputs = document.querySelectorAll('.file-input-hidden');
@@ -1192,25 +1255,23 @@
 
             }, 2200);
         });
+
         const mainReportForm = document.getElementById('mainReportForm');
 
         mainReportForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(mainReportForm);
-            
-            // CAMBIAR SEGÚN LA PÁGINA: 'baches', 'fuga-agua' o 'poste-luz'
             formData.append('tipo_reporte', 'fuga-agua'); 
 
             try {
-    const response = await fetch('https://dahliaversa1.onrender.com/api/enviar-reporte', {
-        method: 'POST',
-        body: formData
-    });
+                const response = await fetch('https://dahliaversa1.onrender.com/api/enviar-reporte', {
+                    method: 'POST',
+                    body: formData
+                });
                 const res = await response.json();
 
                 if (response.ok) {
-                    // Ventana emergente flotante con el Nombre y el ID (Folio) asignado por la BD
-                    alert(`🎉 ¡Reporte Registrado Exitosamente!\n\nCiudadano: ${res.nombre}\nID de Seguimiento (Folio): #${res.folio}\nEstatus de Validación IA: ${res.status}\n\nNota: Guarda tu ID de Folio para consultar el estatus en tiempo real.`);
+                    alert(`🎉 ¡Reporte Registrado Exitosamente!\n\nCiudadano: ${res.nombre}\nID de Seguimiento (Folio): #${res.folio}\nEstatus de Validación IA: ${res.status}`);
                     window.location.href = 'index.html';
                 } else {
                     alert(`⚠️ Error al procesar el reporte: ${res.message}`);
