@@ -571,28 +571,25 @@
         </div>
     </div>
     <!-- Modal de Registro para Empresa -->
+<!-- Modal de Inicio de Sesión para Empresa -->
 <div class="dv-comp-modal-overlay" id="dvCompRegisterModal">
     <div class="dv-comp-modal-card">
         <button class="dv-comp-modal-close-btn" id="dvCloseCompModal">&times;</button>
         <div class="dv-comp-modal-header">
             <div class="footer-brand-effects">DahliaVersa</div>
-            <h3>Registro de Empresa</h3>
-            <p class="dv-comp-modal-subtitle">Ingresa las credenciales de tu empresa</p>
+            <h3>Acceso de Empresa</h3>
+            <p class="dv-comp-modal-subtitle">Inicia sesión con tus credenciales autorizadas</p>
         </div>
         <form id="dvCompRegisterForm" class="dv-comp-modal-form">
             <div class="form-group">
-                <label for="dvCompId">ID de Empresa</label>
-                <input type="text" id="dvCompId" name="company_id" placeholder="Ej. EMP-1024" required>
-            </div>
-            <div class="form-group">
-                <label for="dvCompName">Nombre de la Empresa</label>
-                <input type="text" id="dvCompName" name="company_name" placeholder="Ej. Servicios de Infraestructura S.A." required>
+                <label for="dvCompUsuario">Usuario</label>
+                <input type="text" id="dvCompUsuario" name="usuario" placeholder="Ej. admin" required>
             </div>
             <div class="form-group">
                 <label for="dvCompPassword">Contraseña</label>
-                <input type="password" id="dvCompPassword" name="company_password" placeholder="••••••••" required>
+                <input type="password" id="dvCompPassword" name="password" placeholder="••••••••" required>
             </div>
-            <button type="submit" class="dv-comp-modal-btn">Registrar Empresa</button>
+            <button type="submit" class="dv-comp-modal-btn">Iniciar Sesión</button>
         </form>
     </div>
 </div>
