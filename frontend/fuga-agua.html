@@ -845,31 +845,55 @@
             display: none !important;
         }
 
-        .dv-pulsing-marker {
+        /* --- MARCADOR PERSONALIZADO: TUBO CON FUGA DE AGUA --- */
+        .dv-map-leak-marker {
             position: relative;
-            width: 22px;
-            height: 22px;
-            background: #38bdf8;
-            border: 3px solid #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 0 15px #38bdf8, inset 0 0 5px rgba(255, 255, 255, 0.8);
-            transform: translate(-50%, -50%);
-            animation: pulseLight 1.5s infinite ease-in-out;
+            width: 32px;
+            height: 24px;
+            transform: translate(-50%, -70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes pulseLight {
-            0% {
-                transform: translate(-50%, -50%) scale(0.9);
-                box-shadow: 0 0 5px #38bdf8, 0 0 0 0 rgba(56, 189, 248, 0.7);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.2);
-                box-shadow: 0 0 20px #38bdf8, 0 0 0 12px rgba(56, 189, 248, 0);
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(0.9);
-                box-shadow: 0 0 5px #38bdf8, 0 0 0 0 rgba(56, 189, 248, 0);
-            }
+        .dv-map-pipe {
+            position: absolute;
+            bottom: 0;
+            width: 26px;
+            height: 10px;
+            background: linear-gradient(90deg, #386185 0%, #254663 50%, #1c3c59 100%);
+            border-radius: 3px;
+            border: 1px solid rgba(186, 230, 253, 0.7);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+        }
+
+        .dv-map-pipe::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 10px;
+            width: 4px;
+            height: 14px;
+            background: #ffffff;
+            border-radius: 2px;
+            box-shadow: 0 0 6px #ffffff;
+        }
+
+        .dv-map-jet {
+            position: absolute;
+            top: -16px;
+            left: 12px;
+            width: 3px;
+            height: 15px;
+            background: linear-gradient(180deg, #ffffff 0%, #38bdf8 100%);
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 0 10px #38bdf8;
+            animation: mapWaterSpray 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes mapWaterSpray {
+            0% { transform: translateY(0) scaleY(0.7); opacity: 0.6; }
+            100% { transform: translateY(-7px) scaleY(1.35); opacity: 1; }
         }
     </style>
 </head>
@@ -1004,7 +1028,7 @@
                     <div class="carousel-track-container">
                         <div class="carousel-track" id="carouselTrack">
 
-                            <!-- SLIDE 1: MAPA EN TIEMPO REAL CON BOTÓN GPS -->
+                            <!-- SLIDE 1: MAPA CON TUBERÍA CON FUGA COMO MARCADOR -->
                             <div class="carousel-slide">
                                 <h3>Ubicación Exacta</h3>
                                 <div id="mapModal"></div>
@@ -1072,11 +1096,18 @@
         let mainMarker = null;
 
         function initMainMap(lat = 19.7942, lon = -99.1024) {
-            const pulsingIcon = L.divIcon({
-                className: 'custom-div-icon',
-                html: '<div class="dv-pulsing-marker"></div>',
-                iconSize: [22, 22],
-                iconAnchor: [11, 11]
+            // Icono personalizado de tubería con fuga de agua
+            const leakPipeIcon = L.divIcon({
+                className: 'custom-leak-icon',
+                html: `
+                    <div class="dv-map-leak-marker">
+                        <div class="dv-map-pipe">
+                            <div class="dv-map-jet"></div>
+                        </div>
+                    </div>
+                `,
+                iconSize: [32, 24],
+                iconAnchor: [16, 20]
             });
 
             if (mapLoaded && mainMap) {
@@ -1084,7 +1115,7 @@
                 if (mainMarker) {
                     mainMarker.setLatLng([lat, lon]);
                 } else {
-                    mainMarker = L.marker([lat, lon], { draggable: true, icon: pulsingIcon }).addTo(mainMap);
+                    mainMarker = L.marker([lat, lon], { draggable: true, icon: leakPipeIcon }).addTo(mainMap);
                 }
                 mainMap.invalidateSize();
                 return;
@@ -1096,7 +1127,7 @@
                 maxZoom: 19
             }).addTo(mainMap);
 
-            mainMarker = L.marker([lat, lon], { draggable: true, icon: pulsingIcon }).addTo(mainMap);
+            mainMarker = L.marker([lat, lon], { draggable: true, icon: leakPipeIcon }).addTo(mainMap);
 
             mainMarker.on('dragend', function (event) {
                 const position = mainMarker.getLatLng();
