@@ -392,43 +392,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const mapContainer = document.getElementById('mapModal');
         if (!mapContainer || typeof L === 'undefined') return;
 
-        if (modalMap) {
-            modalMap.setView([lat, lon], 15);
-            if (modalMarker) {
-                modalMarker.setLatLng([lat, lon]);
-            } else {
-                modalMarker = L.marker([lat, lon], { draggable: true }).addTo(modalMap);
-            }
-            setTimeout(() => modalMap.invalidateSize(), 250);
-            return;
-        }
-
-        modalMap = L.map('mapModal', {
-            zoomControl: false
-        }).setView([lat, lon], 15);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(modalMap);
-
-        modalMarker = L.marker([lat, lon], { draggable: true }).addTo(modalMap);
-
-        modalMarker.on('dragend', function (event) {
-            const position = modalMarker.getLatLng();
-            const latLongInput = document.getElementById('latLongInput');
-            if (latLongInput) {
-                latLongInput.value = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
-            }
-        });
-
-        setTimeout(() => modalMap.invalidateSize(), 250);
-    }
-
-    function initModalMap(lat = 19.7942, lon = -99.1024) {
-        const mapContainer = document.getElementById('mapModal');
-        if (!mapContainer || typeof L === 'undefined') return;
-
         // Definir el icono personalizado con el círculo parpadeante
         const pulsingIcon = L.divIcon({
             className: 'custom-div-icon',
@@ -479,7 +442,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 modalLocationReport.style.display = "flex";
                 setTimeout(() => {
                     modalLocationReport.classList.add('active');
-                    // Carga directa del mapa sin diálogos de GPS del navegador
                     initModalMap();
                 }, 100);
                 body.classList.add('modal-active');
@@ -599,31 +561,30 @@ document.addEventListener("DOMContentLoaded", () => {
             if (formReport) formReport.reset();
         });
     }
-    // Referencias Únicas para el Modal de Empresa
+
+    // ==========================================================
+    // LÓGICA DE INICIO DE SESIÓN DE EMPRESA (VALIDACIÓN DE DB)
+    // ==========================================================
     const dvCompModal = document.getElementById('dvCompRegisterModal');
     const dvCloseCompModalBtn = document.getElementById('dvCloseCompModal');
     const dvCompRegisterForm = document.getElementById('dvCompRegisterForm');
 
-    // Función global para abrir el modal de empresa desde cualquier botón
     function openCompanyRegisterModal() {
         if (dvCompModal) {
             dvCompModal.classList.add('active');
         }
     }
 
-    // Función para cerrar el modal de empresa
     function closeCompanyRegisterModal() {
         if (dvCompModal) {
             dvCompModal.classList.remove('active');
         }
     }
 
-    // Evento de cierre con el botón (X)
     if (dvCloseCompModalBtn) {
         dvCloseCompModalBtn.addEventListener('click', closeCompanyRegisterModal);
     }
 
-    // Cerrar al hacer clic fuera del modal
     if (dvCompModal) {
         dvCompModal.addEventListener('click', (e) => {
             if (e.target === dvCompModal) {
@@ -632,39 +593,51 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Procesar Formulario Único de Registro de Empresa
+    // Procesar Inicio de Sesión contra la Base de Datos
     if (dvCompRegisterForm) {
         dvCompRegisterForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const companyId = document.getElementById('dvCompId').value;
-            const companyName = document.getElementById('dvCompName').value;
-            const companyPassword = document.getElementById('dvCompPassword').value;
+            const usuarioInput = document.getElementById('dvCompUsuario').value.trim();
+            const passwordInput = document.getElementById('dvCompPassword').value.trim();
 
-            const companyPayload = {
-                id_empresa: companyId,
-                nombre_empresa: companyName,
-                password: companyPassword
+            const credentials = {
+                usuario: usuarioInput,
+                password: passwordInput
             };
 
             try {
-                console.log("Enviando credenciales de empresa:", companyPayload);
-                alert(`🏢 ¡Empresa registrada correctamente!\n\nID: ${companyId}\nNombre: ${companyName}`);
+                const response = await fetch('https://dahliaversa1.onrender.com/api/login-empresa', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(credentials)
+                });
 
-                dvCompRegisterForm.reset();
-                closeCompanyRegisterModal();
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("🎉 ¡Inicio de sesión exitoso! Redirigiendo al panel de la empresa...");
+                    dvCompRegisterForm.reset();
+                    closeCompanyRegisterModal();
+                    // Redirige a la página de la empresa
+                    window.location.href = 'empresa-dashboard.html';
+                } else {
+                    alert(`⚠️ Error de acceso: ${result.message || 'Usuario o contraseña incorrectos.'}`);
+                }
             } catch (error) {
-                console.error("Error al registrar la empresa:", error);
-                alert("⚠️ No se pudo completar el registro de la empresa.");
+                console.error("Error al conectar con el servidor:", error);
+                alert("No se pudo conectar con el servidor de autenticación.");
             }
         });
     }
-    const accessNavBtn = document.getElementById('accessNavBtn');
 
-if (accessNavBtn) {
-    accessNavBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // Evita el salto del enlace '#'
-        openCompanyRegisterModal();
-    });
-}
+    const accessNavBtn = document.getElementById('accessNavBtn');
+    if (accessNavBtn) {
+        accessNavBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCompanyRegisterModal();
+        });
+    }
 });
