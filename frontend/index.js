@@ -659,4 +659,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    const accessNavBtn = document.getElementById('accessNavBtn');
+
+if (accessNavBtn) {
+    accessNavBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Evita el salto del enlace '#'
+        openCompanyRegisterModal();
+    });
+}
 });
