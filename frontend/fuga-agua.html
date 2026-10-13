@@ -169,7 +169,6 @@
             transition: transform 0.5s ease, opacity 0.5s ease;
         }
 
-        /* Fisura de la tubería */
         .broken-pipe::after {
             content: '';
             position: absolute;
@@ -182,7 +181,6 @@
             box-shadow: 0 0 6px #ffffff;
         }
 
-        /* Chorros de agua saliendo de la fisura */
         .water-jet {
             position: absolute;
             top: -16px;
@@ -212,7 +210,6 @@
             100% { transform: translateY(-6px) scaleY(1.3); opacity: 1; }
         }
 
-        /* --- TRABAJADOR MUNICIPAL REPARANDO LA FUGA --- */
         .worker-container {
             position: absolute;
             top: 50%;
@@ -267,13 +264,12 @@
             0% { left: -35px; opacity: 0; }
             20% { left: 5px; opacity: 1; }
             30% { transform: translateY(-60%) rotate(0deg); }
-            45% { transform: translateY(-60%) rotate(-20deg); } /* Girando llave */
+            45% { transform: translateY(-60%) rotate(-20deg); }
             60% { transform: translateY(-60%) rotate(10deg); }
             75% { left: 5px; opacity: 1; }
             100% { left: 50px; opacity: 0; }
         }
 
-        /* Estado al reparar la tubería */
         .road-scene-container.repairing .water-jet {
             transform: scale(0);
             opacity: 0;
@@ -652,9 +648,6 @@
             box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
         }
 
-        /* ==========================================
-           LOADER INDEPENDIENTE (FUGA DE AGUA)
-           ========================================== */
         .page-loader {
             position: fixed;
             top: 0;
@@ -838,22 +831,20 @@
 
         #mapModal {
             width: 100% !important;
-            height: 140px !important;
-            min-height: 140px !important;
-            border-radius: 12px !important;
-            margin-bottom: 8px !important;
+            height: 115px !important;
+            min-height: 115px !important;
+            border-radius: 10px !important;
+            margin-bottom: 4px !important;
             border: 1px solid rgba(165, 195, 222, 0.4) !important;
             z-index: 1 !important;
             position: relative !important;
             background: rgba(100, 135, 166, 0.25) !important;
         }
 
-        /* Ocultar marca de agua de Leaflet */
         .leaflet-control-attribution {
             display: none !important;
         }
 
-        /* Marcador personalizado con pulso luminiscente */
         .dv-pulsing-marker {
             position: relative;
             width: 22px;
@@ -1013,12 +1004,11 @@
                     <div class="carousel-track-container">
                         <div class="carousel-track" id="carouselTrack">
 
-                            <div class="carousel-slide">
-                              <!-- SLIDE 1: MAPA EN TIEMPO REAL CON BOTÓN GPS -->
+                            <!-- SLIDE 1: MAPA EN TIEMPO REAL CON BOTÓN GPS -->
                             <div class="carousel-slide">
                                 <h3>Ubicación Exacta</h3>
                                 <div id="mapModal"></div>
-                                <button type="button" id="btnGetGPS" class="carousel-btn" style="width: 100%; margin-top: 6px; padding: 6px; font-size: 0.8rem; background: rgba(56, 189, 248, 0.3); color: #fff; border: 1px solid rgba(56, 189, 248, 0.6);">
+                                <button type="button" id="btnGetGPS" class="carousel-btn" style="width: 100%; margin-top: 4px; padding: 5px; font-size: 0.75rem; background: rgba(56, 189, 248, 0.35); color: #fff; border: 1px solid rgba(56, 189, 248, 0.6);">
                                     📍 Activar Mi Ubicación GPS en Tiempo Real
                                 </button>
                                 <input type="hidden" name="lat_long" id="latLongInput" value="19.7942, -99.1024">
@@ -1067,6 +1057,7 @@
             </div>
         </div>
     </form>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
         const track = document.getElementById('carouselTrack');
@@ -1123,13 +1114,11 @@
         }
 
         function solicitarUbicacionGPS() {
-            // Verificar si el navegador soporta geolocalización y si está en entorno seguro (HTTPS o Localhost)
             if (!navigator.geolocation) {
                 alert("Tu navegador no soporta geolocalización.");
                 return;
             }
 
-            console.log("Solicitando permisos de ubicación al navegador...");
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const lat = position.coords.latitude;
@@ -1138,15 +1127,16 @@
                     if (mainMap && mainMarker) {
                         mainMap.setView([lat, lon], 16);
                         mainMarker.setLatLng([lat, lon]);
+                        mainMap.invalidateSize();
                     }
                     alert(`¡Ubicación GPS obtenida con éxito!\nLat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`);
                 },
                 (error) => {
                     console.error("Error de geolocalización:", error.code, error.message);
                     if (error.code === 1) {
-                        alert("Permiso de ubicación denegado. Por favor, habilita los permisos de ubicación en la configuración de tu navegador.");
+                        alert("Permiso de ubicación denegado. Habilítalo en la configuración de tu navegador.");
                     } else {
-                        alert("No se pudo determinar tu posición actual automáticamente. Puedes arrastrar el pin o hacer clic directamente en el mapa.");
+                        alert("No se pudo determinar tu posición actual automáticamente. Puedes arrastrar el pin o hacer clic en el mapa.");
                     }
                 },
                 { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
@@ -1162,7 +1152,7 @@
             if (index === 0) {
                 setTimeout(() => {
                     initMainMap();
-                    solicitarUbicacionGPS();
+                    if (mainMap) mainMap.invalidateSize();
                 }, 150);
             }
         }
@@ -1181,6 +1171,15 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             initMainMap();
+            
+            const btnGetGPS = document.getElementById('btnGetGPS');
+            if (btnGetGPS) {
+                btnGetGPS.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    solicitarUbicacionGPS();
+                });
+            }
+
             const mapContainer = document.getElementById('mapModal');
             if (mapContainer) {
                 mapContainer.addEventListener('click', () => {
@@ -1194,7 +1193,9 @@
             input.addEventListener('change', (e) => {
                 const fileName = e.target.files[0] ? e.target.files[0].name : "Archivo seleccionado";
                 const labelText = input.closest('.upload-box').querySelector('.file-label-text');
-                labelText.textContent = `Archivo: ${fileName}`;
+                if (labelText) {
+                    labelText.textContent = `Archivo: ${fileName}`;
+                }
                 input.closest('.upload-box').style.borderColor = 'rgba(255, 255, 255, 0.9)';
             });
         });
