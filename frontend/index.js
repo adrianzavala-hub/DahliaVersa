@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const modalCard = modalOverlay.querySelector('.modal-card');
         if (modalCard) {
             modalCard.style.position = 'relative';
-            
+
             let lamp = modalCard.querySelector('.glitch-lamp');
             if (!lamp) {
                 lamp = document.createElement('div');
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const statNumbers = document.querySelectorAll(".stat-card h3");
     statNumbers.forEach(h3 => {
         const text = h3.textContent;
-        
+
         if (text.includes("40%")) {
             let currentVal = 0;
             h3.textContent = "0%";
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (currentVal >= 40) clearInterval(interval);
             }, 30);
         }
-        
+
         if (text.includes("3 DÍAS")) {
             let currentVal = 0;
             h3.textContent = "0 DÍAS";
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 currentVal += 1;
                 h3.textContent = currentVal + " DÍAS";
                 if (currentVal >= 3) clearInterval(interval);
-            }, 250); 
+            }, 250);
         }
     });
 
@@ -195,8 +195,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (pageLoader && loadTriggers.length > 0) {
         loadTriggers.forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
-                e.preventDefault(); 
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
                 const targetUrl = this.getAttribute('href');
                 pageLoader.classList.add('active');
                 setTimeout(() => {
@@ -211,8 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (waterLeakLoader && waterTriggers.length > 0) {
         waterTriggers.forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
-                e.preventDefault(); 
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
                 const targetUrl = this.getAttribute('href');
                 waterLeakLoader.classList.add('active');
                 setTimeout(() => {
@@ -221,13 +221,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-    
+
     const lightPostTriggers = document.querySelectorAll('.light-post-loader-trigger, a[href="poste-luz.html"]');
     const lightPostLoader = document.getElementById('lightPostLoader');
 
     if (lightPostLoader && lightPostTriggers.length > 0) {
         lightPostTriggers.forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
+            trigger.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetUrl = this.getAttribute('href');
                 lightPostLoader.classList.add('active');
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnConsultarSeguimiento.addEventListener('click', async () => {
             const selectedCheck = document.querySelector('input[name="segTipoCheck"]:checked');
             const tipo = selectedCheck ? selectedCheck.value : null;
-            
+
             const id = document.getElementById('segId').value.trim();
             const nombreIngresado = document.getElementById('segNombre').value.trim();
             const resultadoDiv = document.getElementById('segResultado');
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         document.getElementById('resNombre').textContent = data.nombre;
                         document.getElementById('resFecha').textContent = data.fecha || "No especificada";
                         document.getElementById('resObs').textContent = data.observacion_ia || 'Sin observaciones registradas';
-                        
+
                         resultadoDiv.style.display = 'block';
                     } else {
                         alert("El nombre ingresado no coincide exactamente con el registro de este ID.");
@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     data.forEach(rep => {
                         const estadoClase = (rep.estado || "").toLowerCase().includes("resuelto") ? "mr-badge-done" : "mr-badge-process";
-                        
+
                         const itemCard = document.createElement('div');
                         itemCard.className = 'mr-nico-item';
                         itemCard.innerHTML = `
@@ -474,7 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function abrirModalUbicacion(ubicacion) {
         if (ubicacion.trim() !== "") {
             if (locationText) locationText.textContent = `Ubicación: "${ubicacion}"`;
-            
+
             if (modalLocationReport) {
                 modalLocationReport.style.display = "flex";
                 setTimeout(() => {
@@ -506,7 +506,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const div = document.createElement("div");
                     div.className = "mr-suggestion-item";
                     div.textContent = item;
-                    
+
                     div.addEventListener("click", () => {
                         searchInput.value = item;
                         abrirModalUbicacion(item);
@@ -588,7 +588,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Enviando reporte a la BD:", reportPayload);
 
             alert(`¡Reporte registrado con éxito!\n\nUbicación: ${locationQuery}\nTipos seleccionados: ${filtersArray.join(", ")}`);
-            
+
             if (modalLocationReport) {
                 modalLocationReport.classList.remove('active');
                 body.classList.remove('modal-active');
@@ -597,6 +597,66 @@ document.addEventListener("DOMContentLoaded", () => {
             if (searchInput) searchInput.value = "";
             const formReport = document.getElementById("mrReportForm");
             if (formReport) formReport.reset();
+        });
+    }
+    // Referencias Únicas para el Modal de Empresa
+    const dvCompModal = document.getElementById('dvCompRegisterModal');
+    const dvCloseCompModalBtn = document.getElementById('dvCloseCompModal');
+    const dvCompRegisterForm = document.getElementById('dvCompRegisterForm');
+
+    // Función global para abrir el modal de empresa desde cualquier botón
+    function openCompanyRegisterModal() {
+        if (dvCompModal) {
+            dvCompModal.classList.add('active');
+        }
+    }
+
+    // Función para cerrar el modal de empresa
+    function closeCompanyRegisterModal() {
+        if (dvCompModal) {
+            dvCompModal.classList.remove('active');
+        }
+    }
+
+    // Evento de cierre con el botón (X)
+    if (dvCloseCompModalBtn) {
+        dvCloseCompModalBtn.addEventListener('click', closeCompanyRegisterModal);
+    }
+
+    // Cerrar al hacer clic fuera del modal
+    if (dvCompModal) {
+        dvCompModal.addEventListener('click', (e) => {
+            if (e.target === dvCompModal) {
+                closeCompanyRegisterModal();
+            }
+        });
+    }
+
+    // Procesar Formulario Único de Registro de Empresa
+    if (dvCompRegisterForm) {
+        dvCompRegisterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const companyId = document.getElementById('dvCompId').value;
+            const companyName = document.getElementById('dvCompName').value;
+            const companyPassword = document.getElementById('dvCompPassword').value;
+
+            const companyPayload = {
+                id_empresa: companyId,
+                nombre_empresa: companyName,
+                password: companyPassword
+            };
+
+            try {
+                console.log("Enviando credenciales de empresa:", companyPayload);
+                alert(`🏢 ¡Empresa registrada correctamente!\n\nID: ${companyId}\nNombre: ${companyName}`);
+
+                dvCompRegisterForm.reset();
+                closeCompanyRegisterModal();
+            } catch (error) {
+                console.error("Error al registrar la empresa:", error);
+                alert("⚠️ No se pudo completar el registro de la empresa.");
+            }
         });
     }
 });
