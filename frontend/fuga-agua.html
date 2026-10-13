@@ -845,55 +845,58 @@
             display: none !important;
         }
 
-        /* --- MARCADOR PERSONALIZADO: TUBO CON FUGA DE AGUA --- */
-        .dv-map-leak-marker {
+        /* --- NUEVO DISEÑO DE MARCADOR: GOTA DE AGUA BRILLANTE CON ONDAS --- */
+        .dv-map-drop-marker {
             position: relative;
-            width: 32px;
-            height: 24px;
-            transform: translate(-50%, -70%);
+            width: 30px;
+            height: 30px;
+            transform: translate(-50%, -85%);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .dv-map-pipe {
+        .drop-core {
             position: absolute;
-            bottom: 0;
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #38bdf8 65%, #0284c7 100%);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            box-shadow: 0 0 12px #38bdf8, inset 0 0 4px #ffffff;
+            animation: dropFloat 1.5s ease-in-out infinite alternate;
+            z-index: 2;
+        }
+
+        .drop-ripple-1, .drop-ripple-2 {
+            position: absolute;
+            border: 1.5px solid rgba(56, 189, 248, 0.8);
+            border-radius: 50%;
+            animation: dropRippleExpand 2s infinite ease-out;
+            pointer-events: none;
+        }
+
+        .drop-ripple-1 {
             width: 26px;
             height: 10px;
-            background: linear-gradient(90deg, #386185 0%, #254663 50%, #1c3c59 100%);
-            border-radius: 3px;
-            border: 1px solid rgba(186, 230, 253, 0.7);
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+            bottom: -2px;
         }
 
-        .dv-map-pipe::after {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: 10px;
-            width: 4px;
-            height: 14px;
-            background: #ffffff;
-            border-radius: 2px;
-            box-shadow: 0 0 6px #ffffff;
+        .drop-ripple-2 {
+            width: 16px;
+            height: 6px;
+            bottom: 1px;
+            animation-delay: 1s;
         }
 
-        .dv-map-jet {
-            position: absolute;
-            top: -16px;
-            left: 12px;
-            width: 3px;
-            height: 15px;
-            background: linear-gradient(180deg, #ffffff 0%, #38bdf8 100%);
-            border-radius: 50% 50% 0 0;
-            box-shadow: 0 0 10px #38bdf8;
-            animation: mapWaterSpray 0.5s ease-in-out infinite alternate;
+        @keyframes dropFloat {
+            0% { transform: rotate(-45deg) translateY(0) scale(0.95); }
+            100% { transform: rotate(-45deg) translateY(-4px) scale(1.08); }
         }
 
-        @keyframes mapWaterSpray {
-            0% { transform: translateY(0) scaleY(0.7); opacity: 0.6; }
-            100% { transform: translateY(-7px) scaleY(1.35); opacity: 1; }
+        @keyframes dropRippleExpand {
+            0% { transform: scale(0.4); opacity: 1; }
+            100% { transform: scale(1.8); opacity: 0; }
         }
     </style>
 </head>
@@ -1028,7 +1031,7 @@
                     <div class="carousel-track-container">
                         <div class="carousel-track" id="carouselTrack">
 
-                            <!-- SLIDE 1: MAPA CON TUBERÍA CON FUGA COMO MARCADOR -->
+                            <!-- SLIDE 1: MAPA CON GOTA DE AGUA FLOTANTE Y ONDAS -->
                             <div class="carousel-slide">
                                 <h3>Ubicación Exacta</h3>
                                 <div id="mapModal"></div>
@@ -1096,18 +1099,18 @@
         let mainMarker = null;
 
         function initMainMap(lat = 19.7942, lon = -99.1024) {
-            // Icono personalizado de tubería con fuga de agua
-            const leakPipeIcon = L.divIcon({
-                className: 'custom-leak-icon',
+            // Icono personalizado de gota de agua flotante con ondas
+            const waterDropIcon = L.divIcon({
+                className: 'custom-drop-icon',
                 html: `
-                    <div class="dv-map-leak-marker">
-                        <div class="dv-map-pipe">
-                            <div class="dv-map-jet"></div>
-                        </div>
+                    <div class="dv-map-drop-marker">
+                        <div class="drop-core"></div>
+                        <div class="drop-ripple-1"></div>
+                        <div class="drop-ripple-2"></div>
                     </div>
                 `,
-                iconSize: [32, 24],
-                iconAnchor: [16, 20]
+                iconSize: [30, 30],
+                iconAnchor: [15, 25]
             });
 
             if (mapLoaded && mainMap) {
@@ -1115,7 +1118,7 @@
                 if (mainMarker) {
                     mainMarker.setLatLng([lat, lon]);
                 } else {
-                    mainMarker = L.marker([lat, lon], { draggable: true, icon: leakPipeIcon }).addTo(mainMap);
+                    mainMarker = L.marker([lat, lon], { draggable: true, icon: waterDropIcon }).addTo(mainMap);
                 }
                 mainMap.invalidateSize();
                 return;
@@ -1127,7 +1130,7 @@
                 maxZoom: 19
             }).addTo(mainMap);
 
-            mainMarker = L.marker([lat, lon], { draggable: true, icon: leakPipeIcon }).addTo(mainMap);
+            mainMarker = L.marker([lat, lon], { draggable: true, icon: waterDropIcon }).addTo(mainMap);
 
             mainMarker.on('dragend', function (event) {
                 const position = mainMarker.getLatLng();
