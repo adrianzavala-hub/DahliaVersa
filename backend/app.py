@@ -10,7 +10,6 @@ import json
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-# Inicialización segura de Gemini y Neon PostgreSQL mediante variables de entorno
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -24,7 +23,31 @@ def home():
         "message": "Bienvenido a la API de DahliaVersa - Servidor de Validación Inteligente Activo"
     })
 
-def validar_imagen_con_gemini(image_path, tipo_reporte):
+def validar_ine_con_gemini(image_path, parte):
+    try:
+        imagen = Image.open(image_path)
+    except Exception as e:
+        return False, f"Error al abrir la imagen de INE: {str(e)}"
+    
+    prompt = (
+        f"Analiza con atención esta fotografía. Se espera que sea el {parte} de una Credencial para Votar (INE de México). "
+        "Verifica si muestra los elementos oficiales característicos de una identificación oficial del INE. "
+        "Responde estrictamente en el siguiente formato JSON simulado (sin bloques de código markdown adicionales): "
+        '{"valido": true o false, "razon": "Explicación breve de por qué es o no una credencial válida"}'
+    )
+
+    for intento in range(3):
+        try:
+            response = client.models.generate_content(model='gemini-2.5-flash', contents=[imagen, prompt])
+            texto_respuesta = response.text.strip().replace("```json", "").replace("```", "").strip()
+            resultado_ia = json.loads(texto_respuesta)
+            return resultado_ia.get("valido", False), resultado_ia.get("razon", "Validación de INE completada.")
+        except Exception as e:
+            if intento == 2:
+                return False, f"Error en validación de INE con IA: {str(e)}"
+            time.sleep(2)
+
+def validar_incidencia_con_gemini(image_path, tipo_reporte):
     descripciones_esperadas = {
         "baches": "un bache, pavimento roto, bacheo o daño severo en la calle o asfalto",
         "fuga-agua": "una tubería rota, fuga de agua, chorro de agua o aniegos en la vía pública",
@@ -35,27 +58,25 @@ def validar_imagen_con_gemini(image_path, tipo_reporte):
     try:
         imagen = Image.open(image_path)
     except Exception as e:
-        return False, f"Error al abrir la imagen: {str(e)}"
+        return False, f"Error al abrir la imagen de incidencia: {str(e)}"
     
     prompt = (
-        f"Analiza con atención esta fotografía. El ciudadano reporta: '{tipo_reporte}'. "
+        f"Analiza con atención esta fotografía. El ciudadano reporta el problema de tipo: '{tipo_reporte}'. "
         f"Para ser considerada válida, la imagen debe mostrar claramente {criterio}. "
         "Responde estrictamente en el siguiente formato JSON simulado (sin bloques de código markdown adicionales): "
         '{"valido": true o false, "razon": "Explicación breve y clara del motivo"}'
     )
 
-    # Sistema de reintentos automáticos ante picos de alta demanda (Error 503)
-    max_intentos = 3
-    for intento in range(max_intentos):
+    for intento in range(3):
         try:
             response = client.models.generate_content(model='gemini-2.5-flash', contents=[imagen, prompt])
             texto_respuesta = response.text.strip().replace("```json", "").replace("```", "").strip()
             resultado_ia = json.loads(texto_respuesta)
-            return resultado_ia.get("valido", False), resultado_ia.get("razon", "Análisis completado.")
+            return resultado_ia.get("valido", False), resultado_ia.get("razon", "Análisis de incidencia completado.")
         except Exception as e:
-            if intento == max_intentos - 1:
-                return False, f"Error en validación con IA tras varios intentos: {str(e)}"
-            time.sleep(2) # Espera 2 segundos antes de reintentar automáticamente
+            if intento == 2:
+                return False, f"Error en validación de incidencia con IA: {str(e)}"
+            time.sleep(2)
 
 @app.route('/api/enviar-reporte', methods=['POST'])
 def enviar_reporte():
@@ -65,41 +86,71 @@ def enviar_reporte():
     fecha = request.form.get('fecha')
     referencias = request.form.get('referencias')
     lat_long = request.form.get('lat_long')
-    tipo_reporte = request.form.get('tipo_reporte') # 'baches', 'fuga-agua', 'poste-luz'
-    
-    # Capturar archivos múltiples del carrusel
+    tipo_reporte = request.form.get('tipo_reporte') 
     f_ine_frente = request.files.get('ine_frente')
     f_ine_reverso = request.files.get('ine_reverso')
-    f_selfie = request.files.get('selfie')
+    f_incidencia = request.files.get('foto_incidencia') or request.files.get('selfie')
     
     upload_dir = './uploads'
     os.makedirs(upload_dir, exist_ok=True)
     
     nombre_ine_frente = f_ine_frente.filename if f_ine_frente else ""
     nombre_ine_reverso = f_ine_reverso.filename if f_ine_reverso else ""
-    nombre_selfie = f_selfie.filename if f_selfie else ""
+    nombre_incidencia = f_incidencia.filename if f_incidencia else ""
     
-    ruta_validar = None
+    ruta_ine_frente = None
+    ruta_ine_reverso = None
+    ruta_incidencia = None
+    
     if f_ine_frente:
-        ruta_validar = os.path.join(upload_dir, nombre_ine_frente)
-        f_ine_frente.save(ruta_validar)
+        ruta_ine_frente = os.path.join(upload_dir, nombre_ine_frente)
+        f_ine_frente.save(ruta_ine_frente)
     if f_ine_reverso:
-        f_ine_reverso.save(os.path.join(upload_dir, nombre_ine_reverso))
-    if f_selfie:
-        f_selfie.save(os.path.join(upload_dir, nombre_selfie))
+        ruta_ine_reverso = os.path.join(upload_dir, nombre_ine_reverso)
+        f_ine_reverso.save(ruta_ine_reverso)
+    if f_incidencia:
+        ruta_incidencia = os.path.join(upload_dir, nombre_incidencia)
+        f_incidencia.save(ruta_incidencia)
         
-    # Validar con Gemini
-    if ruta_validar and os.path.exists(ruta_validar):
-        es_valido, motivo = validar_imagen_con_gemini(ruta_validar, tipo_reporte)
+    motivos_rechazo = []
+    es_valido = True
+
+    if ruta_ine_frente and os.path.exists(ruta_ine_frente):
+        val_frente, raz_frente = validar_ine_con_gemini(ruta_ine_frente, "anverso (frente)")
+        if not val_frente:
+            es_valido = False
+            motivos_rechazo.append(f"INE Frente inválido: {raz_frente}")
     else:
-        es_valido, motivo = True, "Registro aceptado sin validación visual estricta."
-        
+        es_valido = False
+        motivos_rechazo.append("Falta la fotografía del anverso de la INE.")
+
+    if ruta_ine_reverso and os.path.exists(ruta_ine_reverso):
+        val_reverso, raz_reverso = validar_ine_con_gemini(ruta_ine_reverso, "reverso")
+        if not val_reverso:
+            es_valido = False
+            motivos_rechazo.append(f"INE Reverso inválido: {raz_reverso}")
+    else:
+        es_valido = False
+        motivos_rechazo.append("Falta la fotografía del reverso de la INE.")
+
+    if ruta_incidencia and os.path.exists(ruta_incidencia):
+        val_inc, raz_inc = validar_incidencia_con_gemini(ruta_incidencia, tipo_reporte)
+        if not val_inc:
+            es_valido = False
+            motivos_rechazo.append(f"Foto de incidencia no coincide: {raz_inc}")
+    else:
+        es_valido = False
+        motivos_rechazo.append("Falta la fotografía de evidencia de la incidencia.")
+
+    motivo_final = " | ".join(motivos_rechazo) if not es_valido else "Todas las validaciones visuales fueron aprobadas correctamente."
     estado_inicial = "aprobado" if es_valido else "rechazado"
     
     tablas_map = {
         "baches": "baches",
         "fuga-agua": "fugas_agua",
-        "poste-luz": "postes_luz"
+        "poste-luz": "postes_luz",
+        "poste_luz": "postes_luz",
+        "postes-luz": "postes_luz"
     }
     tabla_db = tablas_map.get(tipo_reporte, "baches")
     
@@ -111,7 +162,7 @@ def enviar_reporte():
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id;
         """
-        cursor.execute(query, (nombre, edad, telefono, fecha, referencias, lat_long, nombre_ine_frente, nombre_ine_reverso, nombre_selfie, estado_inicial, motivo))
+        cursor.execute(query, (nombre, edad, telefono, fecha, referencias, lat_long, nombre_ine_frente, nombre_ine_reverso, nombre_incidencia, estado_inicial, motivo_final))
         nuevo_id = cursor.fetchone()[0]
         conn.commit()
         cursor.close()
@@ -124,10 +175,9 @@ def enviar_reporte():
         "nombre": nombre,
         "folio": nuevo_id,
         "tipo": tipo_reporte,
-        "motivo": motivo
+        "motivo": motivo_final
     }), 200
 
-# LOGIN EMPRESA (ENDPOINT PRINCIPAL DE ACCESO)
 @app.route('/api/login-empresa', methods=['POST'])
 def login_empresa():
     data = request.get_json() or request.json
@@ -152,7 +202,6 @@ def login_empresa():
         print("EXCEPCIÓN DETALLADA EN LOGIN:", str(err))
         return jsonify({"success": False, "message": f"Error interno: {str(err)}"}), 500
 
-# OBTENER TODOS LOS REPORTES PARA LA EMPRESA
 @app.route('/api/empresa/reportes', methods=['GET'])
 def obtener_todos_reportes():
     conn = obtener_conexion_db()
@@ -169,11 +218,10 @@ def obtener_todos_reportes():
     conn.close()
     return jsonify(reportes)
 
-# ACTUALIZAR ESTADO (Resuelto, En proceso, Rechazado)
 @app.route('/api/empresa/actualizar-estado', methods=['POST'])
 def actualizar_estado():
     data = request.json
-    tablas_map = {"baches": "baches", "fuga-agua": "fugas_agua", "poste-luz": "postes_luz"}
+    tablas_map = {"baches": "baches", "fuga-agua": "fugas_agua", "poste-luz": "postes_luz", "poste_luz": "postes_luz", "postes-luz": "postes_luz"}
     tabla = tablas_map.get(data.get('tipo'))
     
     conn = obtener_conexion_db()
@@ -184,10 +232,9 @@ def actualizar_estado():
     conn.close()
     return jsonify({"status": "success"})
 
-# SEGUIMIENTO EN TIEMPO REAL PARA EL USUARIO
 @app.route('/api/seguimiento/<tipo>/<int:reporte_id>', methods=['GET'])
 def seguimiento_reporte(tipo, reporte_id):
-    tablas_map = {"baches": "baches", "fuga-agua": "fugas_agua", "poste-luz": "postes_luz"}
+    tablas_map = {"baches": "baches", "fuga-agua": "fugas_agua", "poste-luz": "postes_luz", "poste_luz": "postes_luz", "postes-luz": "postes_luz"}
     tabla = tablas_map.get(tipo)
     
     conn = obtener_conexion_db()
@@ -204,7 +251,6 @@ def seguimiento_reporte(tipo, reporte_id):
         })
     return jsonify({"error": "No encontrado"}), 404
 
-# BUSCAR REPORTES DE UN USUARIO POR NOMBRE
 @app.route('/api/reportes', methods=['GET'])
 def obtener_reportes_por_nombre():
     nombre_buscado = request.args.get('nombre', '').strip().lower()
