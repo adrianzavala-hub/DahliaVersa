@@ -621,8 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert("🎉 ¡Inicio de sesión exitoso! Redirigiendo al panel de la empresa...");
                     dvCompRegisterForm.reset();
                     closeCompanyRegisterModal();
-                    // Redirige a la página de la empresa
-                    window.location.href = 'empresa-dashboard.html';
+                    window.location.href = 'dashboard-empresa.html';
                 } else {
                     alert(`⚠️ Error de acceso: ${result.message || 'Usuario o contraseña incorrectos.'}`);
                 }
