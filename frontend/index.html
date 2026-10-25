@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DahliaVersa</title>
     <link rel="stylesheet" href="index.css">
-    <!-- Leaflet CSS y JS para mapas en tiempo real -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
@@ -16,21 +15,14 @@
         <div class="loader-glass-window">
             <div class="loader-pothole-scene-smooth">
                 <div class="smooth-repair-scene">
-                    <!-- El suelo con la grieta inicial -->
                     <div class="road-surface-crack"></div>
-
-                    <!-- El asfalto líquido que rellena -->
                     <div class="liquid-asphalt-pour">
                         <div class="asphalt-drip drip-1"></div>
                         <div class="asphalt-drip drip-2"></div>
                     </div>
-
-                    <!-- La zona rellenada y el icono final -->
                     <div class="healed-road-patch">
                         <div class="repair-confirm-icon">✓</div>
                     </div>
-
-                    <!-- El icono del trabajador que vierte el material -->
                     <div class="worker-pour-icon">
                         <div class="worker-helmet-icon"></div>
                         <div class="worker-body-icon"></div>
@@ -482,8 +474,6 @@
             <p class="dv-modal-subtitle" id="mrSelectedLocationText">Ubicación aproximada detectada</p>
 
             <div class="dv-modal-scroll">
-
-                <!-- Mapa interactivo en tiempo real -->
                 <div id="mapModal" class="dv-real-map-box"></div>
 
                 <form id="mrReportForm" enctype="multipart/form-data">
@@ -505,8 +495,6 @@
                                 class="seg-input-field" required>
                         </div>
                     </div>
-
-                    <!-- Tipo de Incidencia con checkboxes estilizados -->
                     <div class="dv-modal-group">
                         <label class="mr-nico-label">Tipo de Incidencia</label>
                         <div class="seg-checkbox-group">
@@ -534,8 +522,6 @@
                             placeholder="Ej. Entre qué calles está, color de fachada..."
                             class="seg-input-field dv-textarea" rows="2" required></textarea>
                     </div>
-
-                    <!-- SECCIÓN DE FOTOS Y VALIDACIÓN OFICIAL -->
                     <div class="dv-modal-group">
                         <label class="mr-nico-label">Archivos y Evidencia Fotográfica</label>
 
@@ -570,8 +556,6 @@
             </div>
         </div>
     </div>
-    <!-- Modal de Registro para Empresa -->
-<!-- Modal de Inicio de Sesión para Empresa -->
 <div class="dv-comp-modal-overlay" id="dvCompRegisterModal">
     <div class="dv-comp-modal-card">
         <button class="dv-comp-modal-close-btn" id="dvCloseCompModal">&times;</button>

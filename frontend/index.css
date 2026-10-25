@@ -3350,7 +3350,6 @@ body.modal-active .logo-icon .dahlia-center {
   100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
 }
 
-/* --- DISEÑO EXCLUSIVO PARA EL MODAL DE REPORTE Y MAPA --- */
 .dv-row-2cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
