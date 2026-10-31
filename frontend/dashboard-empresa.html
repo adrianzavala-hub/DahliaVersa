@@ -28,6 +28,11 @@
             flex-direction: column;
         }
 
+        /* Ocultar marca de agua y atribuciones del mapa */
+        .leaflet-control-attribution, .leaflet-bottom.leaflet-right {
+            display: none !important;
+        }
+
         /* NAVBAR CON TONOS NARANJAS / ÁMBAR */
         .navbar {
             display: flex;
@@ -95,13 +100,36 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
+        .map-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
         .map-section-card h4 {
             font-size: 1.1rem;
             color: #fed7aa;
-            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .btn-location {
+            padding: 6px 14px;
+            background: rgba(249, 115, 22, 0.3);
+            border: 1px solid rgba(249, 115, 22, 0.5);
+            border-radius: 10px;
+            color: #fed7aa;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-location:hover {
+            background: rgba(249, 115, 22, 0.5);
+            color: #ffffff;
         }
 
         #companyMap {
@@ -219,7 +247,10 @@
 
         <!-- CUADRO DE MAPA GENERAL -->
         <section class="map-section-card">
-            <h4>🗺️ Mapa General de Incidencias (Agua, Baches y Postes)</h4>
+            <div class="map-header-bar">
+                <h4>🗺️ Mapa General de Incidencias (Agua, Baches y Postes)</h4>
+                <button class="btn-location" onclick="obtenerUbicacionTiempoReal()">📍 Mi Ubicación</button>
+            </div>
             <div id="companyMap"></div>
         </section>
 
@@ -300,22 +331,56 @@
     <script>
         let map;
         let markersLayer;
+        let userMarker;
 
         document.addEventListener("DOMContentLoaded", () => {
             inicializarMapa();
+            obtenerUbicacionTiempoReal();
             cargarReportesEmpresa();
         });
 
         function inicializarMapa() {
-            // Coordenadas predeterminadas (ej. centro de México / Estado de México)
-            map = L.map('companyMap').setView([19.5438, -99.1991], 12);
+            // Ubicación por defecto inicial
+            map = L.map('companyMap').setView([19.5438, -99.1991], 13);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap'
+                maxZoom: 19
             }).addTo(map);
 
             markersLayer = L.layerGroup().addTo(map);
+        }
+
+        // Obtiene la posición en tiempo real mediante el GPS/Navegador del dispositivo
+        function obtenerUbicacionTiempoReal() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+
+                        map.setView([lat, lng], 14);
+
+                        if (userMarker) {
+                            map.removeLayer(userMarker);
+                        }
+
+                        // Indicador con pulsación visual para el usuario
+                        const userIcon = L.divIcon({
+                            className: 'user-live-marker',
+                            html: `<div style="background-color: #38bdf8; width: 22px; height: 22px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 15px #38bdf8;"></div>`,
+                            iconSize: [22, 22],
+                            iconAnchor: [11, 11]
+                        });
+
+                        userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(map);
+                        userMarker.bindPopup("<b>📍 Tu ubicación en tiempo real</b>").openPopup();
+                    },
+                    (error) => {
+                        console.warn("No se pudo obtener la ubicación precisa en tiempo real:", error.message);
+                    },
+                    { enableHighAccuracy: true }
+                );
+            }
         }
 
         async function cargarReportesEmpresa() {
@@ -359,7 +424,7 @@
                         </td>
                     `;
 
-                    // Clasificación en tablas
+                    // Clasificación por tablas
                     if (tipo.includes('agua') || tipo.includes('fuga')) {
                         tablaFugas.appendChild(tr);
                         countFugas++;
@@ -371,37 +436,36 @@
                         countPostes++;
                     }
 
-                    // Agregar marcadores al mapa si tiene coordenadas lat_long (formato "lat,lng")
+                    // Renderizar marcadores dinámicos según coordenadas lat_long ("lat,lng")
                     if (rep.lat_long && rep.lat_long.includes(',')) {
                         const parts = rep.lat_long.split(',');
                         const lat = parseFloat(parts[0]);
                         const lng = parseFloat(parts[1]);
 
                         if (!isNaN(lat) && !isNaN(lng)) {
-                            let colorHex = '#38bdf8'; // Azul por defecto
+                            let colorHex = '#f97316';
                             let iconoTexto = '📍';
 
                             if (tipo.includes('agua') || tipo.includes('fuga')) {
-                                colorHex = '#0284c7'; // Azul agua
+                                colorHex = '#0284c7';
                                 iconoTexto = '💧';
                             } else if (tipo.includes('bache') || tipo.includes('pavimento')) {
-                                colorHex = '#f97316'; // Naranja bache
+                                colorHex = '#f97316';
                                 iconoTexto = '🕳️';
                             } else if (tipo.includes('luz') || tipo.includes('poste')) {
-                                colorHex = '#eab308'; // Amarillo poste
+                                colorHex = '#eab308';
                                 iconoTexto = '💡';
                             }
 
-                            // Crear marcador personalizado con Leaflet
                             const customIcon = L.divIcon({
                                 className: 'custom-map-marker',
-                                html: `<div style="background-color: ${colorHex}; width: 26px; height: 26px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">${iconoTexto}</div>`,
-                                iconSize: [26, 26],
-                                iconAnchor: [13, 13]
+                                html: `<div style="background-color: ${colorHex}; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 13px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">${iconoTexto}</div>`,
+                                iconSize: [28, 28],
+                                iconAnchor: [14, 14]
                             });
 
                             const marker = L.marker([lat, lng], { icon: customIcon });
-                            marker.bindPopup(`<b>${rep.tipo.toUpperCase()}</b><br>Ref: ${rep.referencias || 'Sin referencias'}<br>Estado: <b>${rep.estado}</b>`);
+                            marker.bindPopup(`<b>${rep.tipo.toUpperCase()} #${rep.id}</b><br>Ref: ${rep.referencias || 'Sin referencias'}<br>Estado: <b>${rep.estado}</b>`);
                             markersLayer.addLayer(marker);
                         }
                     }
