@@ -2781,6 +2781,229 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
+/* --- DISEÑO: TUBERÍAS DAÑADAS DE ALTA GAMA --- */
+
+.mr-nico-leak-right-complex {
+  position: absolute;
+  /* Anclaje milimétrico sobre el borde superior derecho de la tarjeta */
+  top: -46px;
+  right: 26px;
+  width: 76px;
+  height: 85px;
+  pointer-events: none;
+  z-index: 35;
+}
+
+.pipe-system-anchor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 80px;
+}
+
+/* 1. Tubería Horizontal Principal */
+.pipe-horizontal {
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  width: 44px;
+  height: 14px;
+  background: linear-gradient(135deg, rgba(226, 169, 179, 0.95) 0%, rgba(125, 95, 105, 0.98) 100%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 7px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+/* Fisura iluminada en la tubería horizontal */
+.pipe-crack-glow {
+  position: absolute;
+  top: 4px;
+  left: 20px;
+  width: 4px;
+  height: 6px;
+  background: #bae6fd;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: pipeCrackPulse 1.2s infinite ease-in-out alternate;
+}
+
+/* 2. Tubería Vertical de Derivación */
+.pipe-vertical {
+  position: absolute;
+  top: 14px;
+  right: 22px;
+  width: 14px;
+  height: 32px;
+  background: linear-gradient(135deg, rgba(226, 169, 179, 0.95) 0%, rgba(125, 95, 105, 0.98) 100%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 0 0 7px 7px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+/* Anillo / Unión de la tubería */
+.pipe-joint-collar {
+  position: absolute;
+  top: 6px;
+  left: -2px;
+  width: 18px;
+  height: 6px;
+  background: linear-gradient(90deg, #bae6fd, #7d5f69);
+  border-radius: 3px;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+/* 3. Fugas Laterales de Presión */
+.pipe-spray {
+  position: absolute;
+  top: 12px;
+  width: 16px;
+  height: 4px;
+  z-index: 4;
+}
+
+.pipe-spray.left {
+  left: 2px;
+}
+
+.pipe-spray.right {
+  right: -2px;
+}
+
+.pipe-beam {
+  position: absolute;
+  top: 0;
+  width: 14px;
+  height: 3px;
+  background: linear-gradient(90deg, #7dd3fc, rgba(56, 189, 248, 0.15));
+  border-radius: 2px;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pipeBeamPulse 0.8s infinite ease-in-out;
+}
+
+.pipe-spray.left .pipe-beam {
+  right: 0;
+  background: linear-gradient(270deg, #7dd3fc, rgba(56, 189, 248, 0.15));
+}
+
+.pipe-spray.right .pipe-beam {
+  left: 0;
+}
+
+.pipe-sparkle {
+  position: absolute;
+  top: -1px;
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.pipe-spray.left .pipe-sparkle {
+  left: -5px;
+  animation: pipePartLeft 1.3s infinite ease-in-out;
+}
+
+.pipe-spray.right .pipe-sparkle {
+  right: -5px;
+  animation: pipePartRight 1.3s infinite ease-in-out;
+}
+
+/* 4. Cascada Principal de Fuga y Ondas */
+.pipe-main-leak {
+  position: absolute;
+  bottom: 2px;
+  right: 26px;
+  width: 6px;
+  height: 26px;
+  z-index: 4;
+}
+
+.leak-stream {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  width: 4px;
+  height: 18px;
+  background: linear-gradient(to bottom, #7dd3fc, rgba(56, 189, 248, 0.15));
+  border-radius: 2px;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.leak-drop {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 6px;
+  height: 9px;
+  background: linear-gradient(to bottom, #ffffff, #38bdf8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: pipeDropFall 1.3s infinite cubic-bezier(0.3, 0, 0.7, 1);
+}
+
+.leak-ripple {
+  position: absolute;
+  bottom: -10px;
+  left: -3px;
+  border: 1.5px solid rgba(56, 189, 248, 0.85);
+  border-radius: 50%;
+  animation: pipeRippleExpand 1.3s infinite ease-out;
+}
+
+.leak-ripple.r1 {
+  width: 12px;
+  height: 4px;
+}
+
+.leak-ripple.r2 {
+  width: 6px;
+  height: 2px;
+  animation-delay: 0.65s;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes pipeCrackPulse {
+  0% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 4px #38bdf8; }
+  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 14px #7dd3fc; }
+}
+
+@keyframes pipeBeamPulse {
+  0%, 100% { transform: scaleX(0.8); opacity: 0.6; }
+  50% { transform: scaleX(1.2); opacity: 1; }
+}
+
+@keyframes pipePartLeft {
+  0% { transform: translateX(0) scale(0.4); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateX(-14px) scale(1.2); opacity: 0; }
+}
+
+@keyframes pipePartRight {
+  0% { transform: translateX(0) scale(0.4); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateX(14px) scale(1.2); opacity: 0; }
+}
+
+@keyframes pipeDropFall {
+  0% { transform: translateY(0) scale(0.4); opacity: 0; }
+  20% { opacity: 1; transform: translateY(4px) scale(1); }
+  85% { opacity: 1; transform: translateY(14px) scale(0.9); }
+  100% { transform: translateY(18px) scale(1.4, 0.35); opacity: 0; }
+}
+
+@keyframes pipeRippleExpand {
+  0%, 60% { transform: scale(0.2); opacity: 0; }
+  75% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* --- ESTILOS PARA EL MODAL Y FILTROS DE UBICACIÓN --- */
 .mr-wide-card {
   width: 480px !important;
   max-width: 90vw;
