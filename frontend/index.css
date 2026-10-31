@@ -2928,6 +2928,7 @@ body.modal-active .logo-icon .dahlia-center {
     0% { width: 2px; height: 2px; opacity: 1; transform: scale(1); }
     100% { width: 30px; height: 12px; opacity: 0; transform: scale(1.5); }
 }
+
 .mr-wide-card {
   width: 480px !important;
   max-width: 90vw;
