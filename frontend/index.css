@@ -2891,9 +2891,6 @@ body.modal-active .modal-overlay {
   color: #e2a9b3;
 }
 
-/* ==========================================================
-   DISEÑO RESPONSIVO (MEDIA QUERIES)
-   ========================================================== */
 @media (max-width: 900px) {
   .hero-right-bottom {
     position: relative;
@@ -2953,4 +2950,359 @@ body.modal-active .modal-overlay {
     flex: none;
     width: 100%;
   }
+}
+
+/* ==========================================================
+   CARGADORES DE PÁGINA Y ANIMACIONES (TONOS AZULES Y CIANES)
+   ========================================================== */
+.page-loader {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-color: rgba(7, 27, 52, 0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 99999;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.page-loader.active {
+  opacity: 1; visibility: visible;
+}
+
+.loader-glass-window {
+  position: relative;
+  width: 380px;
+  padding: 40px 30px;
+  background: rgba(7, 27, 52, 0.85);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45), inset 0 0 25px rgba(56, 189, 248, 0.15);
+  border-radius: 32px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+}
+
+.page-loader.active .loader-glass-window {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* 1. Loader de Baches (Asfalto y carritos en tonos azules) */
+.loader-pothole-scene-smooth {
+  position: relative; width: 200px; height: 140px; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; overflow: visible;
+}
+
+.smooth-repair-scene { position: relative; width: 100%; height: 100%; }
+
+.road-surface-crack {
+  position: absolute; top: 50px; left: 60px; width: 80px; height: 25px;
+  background: #020617; border-radius: 50%;
+  box-shadow: inset 0 3px 8px rgba(2, 132, 199, 0.6), 0 0 10px rgba(56, 189, 248, 0.3);
+  animation: crackOpenClose 3s ease-in-out infinite; z-index: 1;
+}
+
+.liquid-asphalt-pour {
+  position: absolute; top: -40px; left: 90px; width: 20px; height: 60px;
+  pointer-events: none; z-index: 3;
+  animation: pourContainerMove 3s ease-in-out infinite;
+}
+
+.asphalt-drip {
+  position: absolute; width: 6px; height: 6px;
+  background: linear-gradient(135deg, #bae6fd, #38bdf8);
+  border-radius: 50%; opacity: 0;
+}
+
+.drip-1 { left: 7px; animation: dripFall1 3s ease-in infinite; }
+.drip-2 { left: 7px; animation: dripFall2 3s ease-in infinite 0.2s; }
+
+.healed-road-patch {
+  position: absolute; top: 50px; left: 60px; width: 80px; height: 25px;
+  background: linear-gradient(135deg, #38bdf8, #0284c7); border-radius: 50%;
+  opacity: 0; box-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
+  animation: patchHeal 3s ease-in-out infinite; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.repair-confirm-icon {
+  color: #ffffff; font-size: 1.5rem; font-weight: bold; opacity: 0;
+  animation: checkmarkPop 3s ease-in-out infinite;
+}
+
+.worker-pour-icon {
+  position: absolute; top: 15px; left: 75px; width: 40px; height: 40px;
+  z-index: 4; animation: workerTilt 3s ease-in-out infinite;
+}
+
+.worker-helmet-icon {
+  position: absolute; top: 0; left: 13px; width: 14px; height: 7px;
+  background: #bae6fd; border-radius: 7px 7px 2px 2px;
+}
+
+.worker-body-icon {
+  position: absolute; top: 8px; left: 11px; width: 18px; height: 18px;
+  background: linear-gradient(135deg, #38bdf8, #0284c7); border-radius: 5px;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+}
+
+@keyframes crackOpenClose {
+  0%, 15%, 100% { transform: scale(0.1); opacity: 0; }
+  20%, 95% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes workerTilt {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  60% { transform: rotate(10deg); }
+}
+
+@keyframes pourContainerMove {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  60% { transform: translateX(10px); }
+}
+
+@keyframes dripFall1 {
+  0%, 25% { transform: translateY(0); opacity: 0; }
+  30% { opacity: 1; }
+  60%, 100% { transform: translateY(90px); opacity: 0; }
+}
+
+@keyframes dripFall2 {
+  0%, 28% { transform: translateY(0); opacity: 0; }
+  33% { opacity: 1; }
+  63%, 100% { transform: translateY(90px); opacity: 0; }
+}
+
+@keyframes patchHeal {
+  0%, 38% { transform: scale(0.5); opacity: 0; }
+  45%, 90% { transform: scale(1); opacity: 1; }
+  95%, 100% { transform: scale(1.2); opacity: 0; }
+}
+
+@keyframes checkmarkPop {
+  0%, 55% { transform: scale(0.5); opacity: 0; }
+  60%, 85% { transform: scale(1); opacity: 1; }
+  90%, 100% { transform: scale(0.5); opacity: 0; }
+}
+
+/* 2. Loader de Fugas de Agua */
+.water-leak-animation-scene {
+  position: relative; width: 100px; height: 100px; margin-bottom: 25px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.water-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  animation: waterRingPulse 3s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+  pointer-events: none;
+}
+
+.r-one { width: 35px; height: 35px; animation-delay: 0s; }
+.r-two { width: 55px; height: 55px; animation-delay: 1s; }
+
+@keyframes waterRingPulse {
+  0% { transform: scale(0.6); opacity: 0.85; border-color: rgba(186, 230, 253, 0.9); }
+  100% { transform: scale(1.2); opacity: 0; border-color: rgba(2, 132, 199, 0.1); }
+}
+
+.outer-ripple {
+  position: absolute; width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.7); box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  opacity: 0; animation: outerRippleExpand 2.8s cubic-bezier(0.1, 0.7, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+.or-1 { animation-delay: 0s; }
+.or-2 { animation-delay: 0.7s; }
+.or-3 { animation-delay: 1.4s; }
+.or-4 { animation-delay: 2.1s; }
+
+@keyframes outerRippleExpand {
+  0% { width: 32px; height: 32px; opacity: 1; transform: scale(1); }
+  100% { width: 96px; height: 96px; opacity: 0; transform: scale(1.18); border-color: rgba(186, 230, 253, 0.03); }
+}
+
+.water-core-source {
+  position: relative; width: 32px; height: 32px;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #bae6fd 40%, rgba(56, 189, 248, 0.5) 80%, transparent 100%);
+  border-radius: 50%; box-shadow: 0 0 22px rgba(56, 189, 248, 0.8), inset 0 0 10px #ffffff;
+  animation: coreWaveBounce 2s ease-in-out infinite alternate;
+  display: flex; align-items: center; justify-content: center; z-index: 2;
+}
+
+.core-highlight {
+  position: absolute; top: 7px; left: 8px; width: 8px; height: 8px;
+  background: radial-gradient(circle, #ffffff 0%, rgba(186, 230, 253, 0.5) 70%, transparent 100%);
+  border-radius: 50%; box-shadow: 0 0 8px #ffffff;
+}
+
+@keyframes coreWaveBounce {
+  0% { transform: scale(0.92) translateY(0); box-shadow: 0 0 12px rgba(56, 189, 248, 0.6); }
+  100% { transform: scale(1.08) translateY(-2px); box-shadow: 0 0 28px rgba(56, 189, 248, 0.95), inset 0 0 12px #ffffff; }
+}
+
+.rising-bubble {
+  position: absolute; bottom: 40px;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #bae6fd);
+  border-radius: 50%; box-shadow: 0 0 8px rgba(56, 189, 248, 0.85);
+  opacity: 0; pointer-events: none; z-index: 3;
+}
+
+.rb-1 { width: 6px; height: 6px; animation: bubbleDrift1 1.8s ease-in-out infinite; }
+.rb-2 { width: 4px; height: 4px; animation: bubbleDrift2 1.4s ease-in-out infinite; animation-delay: 0.5s; }
+.rb-3 { width: 5px; height: 5px; animation: bubbleDrift3 2s ease-in-out infinite; animation-delay: 0.9s; }
+.rb-4 { width: 3px; height: 3px; animation: bubbleDrift4 1.2s ease-in-out infinite; animation-delay: 0.3s; }
+
+@keyframes bubbleDrift1 {
+  0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(-14px, -34px) scale(1.2); opacity: 0; }
+}
+
+@keyframes bubbleDrift2 {
+  0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(16px, -28px) scale(1.1); opacity: 0; }
+}
+
+@keyframes bubbleDrift3 {
+  0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(4px, -38px) scale(1.3); opacity: 0; }
+}
+
+@keyframes bubbleDrift4 {
+  0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(-8px, -24px) scale(1.0); opacity: 0; }
+}
+
+.water-leak-loader .loader-status-progress {
+  background: linear-gradient(90deg, transparent, #bae6fd, #38bdf8, transparent);
+}
+
+/* 3. Loader de Poste de Luz */
+.light-post-animation-scene {
+  position: relative; width: 100px; height: 100px; margin-bottom: 25px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.street-lamp-structure {
+  position: absolute; top: 18px; display: flex; flex-direction: column; align-items: center; z-index: 3;
+}
+
+.pole-bracket {
+  width: 28px; height: 6px; background: linear-gradient(90deg, #bae6fd, #38bdf8);
+  border-radius: 4px; box-shadow: 0 0 10px rgba(186, 230, 253, 0.6); position: relative;
+}
+
+.pole-bracket::after {
+  content: ''; position: absolute; top: 6px; left: 11px; width: 6px; height: 16px;
+  background: #bae6fd; border-radius: 2px; box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.pole-head {
+  width: 36px; height: 22px; background: linear-gradient(135deg, #38bdf8, #0284c7);
+  border-radius: 0 0 18px 18px; box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+  display: flex; align-items: center; justify-content: center; margin-top: 14px; position: relative;
+}
+
+.lamp-bulb-core {
+  position: relative; width: 16px; height: 16px;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #bae6fd 45%, #38bdf8 80%, #0284c7 100%);
+  border-radius: 50%; box-shadow: 0 0 22px rgba(186, 230, 253, 0.95), inset 0 0 6px #ffffff;
+  animation: bulbFlickerAndGlow 1.6s ease-in-out infinite alternate;
+}
+
+.bulb-highlight {
+  position: absolute; top: 3px; left: 3px; width: 4px; height: 4px;
+  background: #ffffff; border-radius: 50%; box-shadow: 0 0 6px #ffffff;
+}
+
+@keyframes bulbFlickerAndGlow {
+  0% { transform: scale(0.85); opacity: 0.6; box-shadow: 0 0 8px rgba(56, 189, 248, 0.5); }
+  30% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 25px rgba(186, 230, 253, 0.95), inset 0 0 6px #ffffff; }
+  35% { transform: scale(0.9); opacity: 0.4; }
+  40% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px rgba(186, 230, 253, 1), inset 0 0 8px #ffffff; }
+  100% { transform: scale(1.05); opacity: 0.95; box-shadow: 0 0 25px rgba(186, 230, 253, 0.95), inset 0 0 6px #ffffff; }
+}
+
+.energy-wave {
+  position: absolute; top: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(186, 230, 253, 0.7);
+  animation: energyWaveExpand 2.4s cubic-bezier(0.1, 0.7, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+.ew-1 { width: 30px; height: 30px; animation-delay: 0s; }
+.ew-2 { width: 50px; height: 50px; animation-delay: 0.8s; }
+
+@keyframes energyWaveExpand {
+  0% { transform: scale(0.5); opacity: 0.9; border-color: rgba(255, 255, 255, 0.95); }
+  100% { transform: scale(1.6); opacity: 0; border-color: rgba(56, 189, 248, 0.05); }
+}
+
+.electric-arc {
+  position: absolute; top: 42px; width: 24px; height: 24px; border-radius: 50%;
+  border: 2px dashed rgba(56, 189, 248, 0.85); box-shadow: 0 0 10px rgba(186, 230, 253, 0.6);
+  opacity: 0; pointer-events: none;
+}
+
+.ea-1 { left: 20px; animation: electricArcSpin1 2s linear infinite; }
+.ea-2 { right: 20px; animation: electricArcSpin2 1.6s linear infinite; }
+
+@keyframes electricArcSpin1 {
+  0% { transform: rotate(0deg) scale(0.8); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: rotate(180deg) scale(1.3); opacity: 0; }
+}
+
+@keyframes electricArcSpin2 {
+  0% { transform: rotate(0deg) scale(0.8); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: rotate(-180deg) scale(1.3); opacity: 0; }
+}
+
+/* 4. Carritos animados en las cápsulas o elementos de baches */
+.car-container {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 25px;
+  z-index: 15; pointer-events: none; overflow: hidden; border-radius: 0 0 16px 16px;
+}
+
+.mini-car {
+  position: absolute; bottom: 2px; left: -50px; width: 36px; height: 16px;
+  background: linear-gradient(135deg, #bae6fd 0%, #38bdf8 100%);
+  border-radius: 6px 10px 4px 4px;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  animation: driveCar 5s infinite linear;
+}
+
+.mini-car::before {
+  content: ''; position: absolute; top: -6px; left: 10px; width: 16px; height: 8px;
+  background: rgba(7, 27, 52, 0.9); border-radius: 4px 4px 0 0;
+}
+
+.car-wheel {
+  position: absolute; bottom: -3px; width: 8px; height: 8px;
+  background: #020617; border: 1px solid #bae6fd; border-radius: 50%;
+}
+
+.car-wheel.front { right: 6px; }
+.car-wheel.rear { left: 6px; }
+
+@keyframes driveCar {
+  0% { left: -50px; transform: translateY(0) rotate(0deg); }
+  46% { left: calc(50% - 18px); transform: translateY(0) rotate(0deg); }
+  50% { left: 50%; transform: translateY(4px) rotate(6deg); }
+  53% { left: calc(50% + 10px); transform: translateY(-3px) rotate(-4deg); }
+  56% { left: calc(50% + 20px); transform: translateY(1px) rotate(2deg); }
+  60% { left: calc(50% + 30px); transform: translateY(0) rotate(0deg); }
+  100% { left: 102%; transform: translateY(0) rotate(0deg); }
 }
