@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Empresa - DahliaVersa</title>
+    <!-- Leaflet CSS para el Mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
         * {
             margin: 0;
@@ -68,7 +70,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 25px;
         }
 
         .dashboard-header h3 {
@@ -80,6 +82,34 @@
         .subtitle {
             color: #fed7aa;
             font-size: 0.9rem;
+        }
+
+        /* CUADRO DEL MAPA GENERAL */
+        .map-section-card {
+            background: rgba(55, 25, 12, 0.65);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(249, 115, 22, 0.4);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .map-section-card h4 {
+            font-size: 1.1rem;
+            color: #fed7aa;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #companyMap {
+            width: 100%;
+            height: 380px;
+            border-radius: 16px;
+            border: 1px solid rgba(249, 115, 22, 0.4);
+            z-index: 1;
         }
 
         /* CONTENEDOR DE LOS 3 CUADROS SEPARADOS */
@@ -183,9 +213,15 @@
 
     <main class="dashboard-wrapper">
         <div class="dashboard-header">
-            <h3>Gestión de Incidencias por Categoría</h3>
-            <p class="subtitle">Monitorea y actualiza los reportes ciudadanos divididos por tipo de problema.</p>
+            <h3>Gestión de Incidencias Georreferenciadas</h3>
+            <p class="subtitle">Visualiza todas las incidencias en el mapa interactivo y administra sus estados.</p>
         </div>
+
+        <!-- CUADRO DE MAPA GENERAL -->
+        <section class="map-section-card">
+            <h4>🗺️ Mapa General de Incidencias (Agua, Baches y Postes)</h4>
+            <div id="companyMap"></div>
+        </section>
 
         <div class="categories-grid">
             <!-- CUADRO 1: FUGAS DE AGUA -->
@@ -259,10 +295,28 @@
         </div>
     </main>
 
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
+        let map;
+        let markersLayer;
+
         document.addEventListener("DOMContentLoaded", () => {
+            inicializarMapa();
             cargarReportesEmpresa();
         });
+
+        function inicializarMapa() {
+            // Coordenadas predeterminadas (ej. centro de México / Estado de México)
+            map = L.map('companyMap').setView([19.5438, -99.1991], 12);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            markersLayer = L.layerGroup().addTo(map);
+        }
 
         async function cargarReportesEmpresa() {
             const tablaFugas = document.getElementById('tablaFugas');
@@ -278,6 +332,7 @@
                 tablaFugas.innerHTML = '';
                 tablaBaches.innerHTML = '';
                 tablaPostes.innerHTML = '';
+                markersLayer.clearLayers();
 
                 let countFugas = 0, countBaches = 0, countPostes = 0;
 
@@ -304,6 +359,7 @@
                         </td>
                     `;
 
+                    // Clasificación en tablas
                     if (tipo.includes('agua') || tipo.includes('fuga')) {
                         tablaFugas.appendChild(tr);
                         countFugas++;
@@ -313,6 +369,41 @@
                     } else if (tipo.includes('luz') || tipo.includes('poste')) {
                         tablaPostes.appendChild(tr);
                         countPostes++;
+                    }
+
+                    // Agregar marcadores al mapa si tiene coordenadas lat_long (formato "lat,lng")
+                    if (rep.lat_long && rep.lat_long.includes(',')) {
+                        const parts = rep.lat_long.split(',');
+                        const lat = parseFloat(parts[0]);
+                        const lng = parseFloat(parts[1]);
+
+                        if (!isNaN(lat) && !isNaN(lng)) {
+                            let colorHex = '#38bdf8'; // Azul por defecto
+                            let iconoTexto = '📍';
+
+                            if (tipo.includes('agua') || tipo.includes('fuga')) {
+                                colorHex = '#0284c7'; // Azul agua
+                                iconoTexto = '💧';
+                            } else if (tipo.includes('bache') || tipo.includes('pavimento')) {
+                                colorHex = '#f97316'; // Naranja bache
+                                iconoTexto = '🕳️';
+                            } else if (tipo.includes('luz') || tipo.includes('poste')) {
+                                colorHex = '#eab308'; // Amarillo poste
+                                iconoTexto = '💡';
+                            }
+
+                            // Crear marcador personalizado con Leaflet
+                            const customIcon = L.divIcon({
+                                className: 'custom-map-marker',
+                                html: `<div style="background-color: ${colorHex}; width: 26px; height: 26px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">${iconoTexto}</div>`,
+                                iconSize: [26, 26],
+                                iconAnchor: [13, 13]
+                            });
+
+                            const marker = L.marker([lat, lng], { icon: customIcon });
+                            marker.bindPopup(`<b>${rep.tipo.toUpperCase()}</b><br>Ref: ${rep.referencias || 'Sin referencias'}<br>Estado: <b>${rep.estado}</b>`);
+                            markersLayer.addLayer(marker);
+                        }
                     }
                 });
 
