@@ -1,416 +1,271 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control de Incidencias</title>
+    <title>Panel de Empresa - DahliaVersa</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
             text-decoration: none;
             list-style: none;
         }
 
         body {
             background-color: #d8a4b0;
-            background-image: url('img/empresa.jpeg');
+            background-image: url('img/fondo.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             color: #ffffff;
-            font-family: system-ui, -apple-system, sans-serif;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            margin: 0;
         }
 
         .navbar {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
-            position: relative;
-            z-index: 100;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            position: relative;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: spin 20s linear infinite;
-        }
-
-        .dahlia-petal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: linear-gradient(135deg, #f8a594 0%, #e06c5f 50%, #b8403b 100%);
-            border-radius: 50% 50% 10% 10% / 80% 80% 20% 20%;
-            transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
-            box-shadow: 0 0 4px rgba(184, 64, 59, 0.3);
-        }
-
-        .dahlia-petal.outer {
-            width: 9px;
-            height: 16px;
-            background: linear-gradient(135deg, #e06c5f 0%, #ca4e46 60%, #9e322d 100%);
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-10px);
-        }
-
-        .dahlia-petal.mid {
-            width: 7px;
-            height: 13px;
-            background: linear-gradient(135deg, #f8a594 0%, #e06c5f 60%, #ca4e46 100%);
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-7px);
-        }
-
-        .dahlia-petal.inner {
-            width: 5px;
-            height: 9px;
-            background: linear-gradient(135deg, #fcd5ce 0%, #f8a594 50%, #e06c5f 100%);
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-4px);
-        }
-
-        .dahlia-neon-outline {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 11px;
-            height: 18px;
-            background: transparent;
-            border: 1.5px solid #f8a594;
-            border-radius: 50% 50% 10% 10% / 80% 80% 20% 20%;
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-10.5px);
-            box-shadow: 0 0 6px rgba(248, 165, 148, 0.6), inset 0 0 4px rgba(224, 108, 95, 0.4);
-            pointer-events: none;
-        }
-
-        .dahlia-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 6px;
-            height: 6px;
-            background-color: #fcd5ce;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 8px rgba(224, 108, 95, 0.9);
-            transition: transform 0.5s ease;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
+            padding: 20px 40px;
             background: rgba(120, 35, 40, 0.55);
             -webkit-backdrop-filter: blur(14px);
             backdrop-filter: blur(14px);
-            padding: 10px 24px;
-            border-radius: 30px;
-            border: 1px solid rgba(248, 165, 148, 0.35);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), inset 0 0 15px rgba(224, 108, 95, 0.2);
+            border-bottom: 1px solid rgba(248, 165, 148, 0.35);
+        }
+
+        .logo h2 {
+            font-size: 1.3rem;
+            color: #ffffff;
+            font-weight: 700;
         }
 
         .nav-links a {
-            color: #ffffff;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
+            color: #fcd5ce;
+            font-weight: 600;
+            padding: 8px 18px;
+            background: rgba(248, 165, 148, 0.2);
+            border: 1px solid rgba(248, 165, 148, 0.3);
+            border-radius: 12px;
+            transition: background 0.3s, transform 0.2s;
         }
 
         .nav-links a:hover {
-            color: #fcd5ce;
+            background: rgba(248, 165, 148, 0.4);
+            transform: translateY(-2px);
         }
 
-        .btn-nav {
-            background: linear-gradient(135deg, #f8a594 0%, #e06c5f 100%);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 10px 22px;
-            border-radius: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(224, 108, 95, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-        }
-
-        .btn-nav:hover {
-            background: linear-gradient(135deg, #fcd5ce 0%, #f8a594 100%);
-            color: #5c181b;
-            transform: translateY(-3px) scale(1.04);
-            box-shadow: 0 6px 20px rgba(248, 165, 148, 0.6);
-        }
-
-        /* ESTRUCTURA DE LA VISTA Y PANELES */
-        .dashboard-container {
+        .dashboard-wrapper {
             width: 90%;
-            max-width: 1200px;
-            margin: 30px auto;
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        .main-content {
+            max-width: 1300px;
+            margin: 40px auto;
             flex: 1;
-            min-width: 300px;
-            background: rgba(120, 35, 40, 0.35);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(248, 165, 148, 0.3);
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .reports-sidebar {
-            width: 420px;
-            max-width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .report-card {
-            background: rgba(120, 35, 40, 0.55);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+        .admin-section {
+            background: rgba(120, 35, 40, 0.5);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(248, 165, 148, 0.35);
-            border-radius: 20px;
-            padding: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 12px rgba(224, 108, 95, 0.15);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(224, 108, 95, 0.15);
         }
 
-        .report-card h3 {
-            font-size: 0.95rem;
-            color: #fcd5ce;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border-bottom: 1px solid rgba(248, 165, 148, 0.25);
-            padding-bottom: 8px;
-        }
-
-        .report-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 180px;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(248, 165, 148, 0.5) transparent;
-        }
-
-        .report-item {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 8px 10px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-        }
-
-        .report-item span {
-            display: block;
+        .admin-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
             color: #ffffff;
+        }
+
+        .subtitle {
+            color: #fcd5ce;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .reports-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .reports-table th, .reports-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .reports-table th {
+            background: rgba(248, 165, 148, 0.2);
+            color: #fcd5ce;
             font-weight: 600;
         }
 
-        .report-item small {
-            color: #f8a594;
+        .reports-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        /* DISTRIBUCIÓN DE LOS RECUADROS */
-        .card-water {
-            grid-column: span 2; /* Fugas de agua arriba ocupando todo el ancho */
+        .status-select {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #ffffff;
+            outline: none;
+            cursor: pointer;
         }
 
-        .card-pothole {
-            grid-column: 1; /* Baches abajo a la izquierda */
+        .status-select option {
+            background: #782328;
+            color: #ffffff;
         }
 
-        .card-light {
-            grid-column: 2; /* Postes de luz abajo a la derecha */
+        .btn-update {
+            padding: 8px 14px;
+            background: linear-gradient(135deg, #f8a594 0%, #e06c5f 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(224, 108, 95, 0.3);
+            transition: transform 0.2s, filter 0.2s;
         }
 
-        @media (max-width: 850px) {
-            .dashboard-container {
-                flex-direction: column;
-            }
-            .reports-sidebar {
-                width: 100%;
-            }
+        .btn-update:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
         }
     </style>
 </head>
-
 <body>
     <header class="navbar">
-        <div class="logo" id="logoTrigger">
-            <div class="logo-icon" id="logoIcon">
-                <span class="dahlia-neon-outline" style="--angle: 0deg;"></span>
-                <span class="dahlia-neon-outline" style="--angle: 45deg;"></span>
-                <span class="dahlia-neon-outline" style="--angle: 90deg;"></span>
-                <span class="dahlia-neon-outline" style="--angle: 135deg;"></span>
-                <span class="dahlia-neon-outline" style="--angle: 180deg;"></span>
-                <span class="dahlia-neon-outline" style="--angle: 225deg;"></span>
-                <span class="dahlia-neon-outline" style="--angle: 270deg;"></span>
-                <span class="dahlia-neon-outline" style="--angle: 315deg;"></span>
-                <span class="dahlia-petal outer" style="--angle: 0deg;"></span>
-                <span class="dahlia-petal outer" style="--angle: 45deg;"></span>
-                <span class="dahlia-petal outer" style="--angle: 90deg;"></span>
-                <span class="dahlia-petal outer" style="--angle: 135deg;"></span>
-                <span class="dahlia-petal outer" style="--angle: 180deg;"></span>
-                <span class="dahlia-petal outer" style="--angle: 225deg;"></span>
-                <span class="dahlia-petal outer" style="--angle: 270deg;"></span>
-                <span class="dahlia-petal outer" style="--angle: 315deg;"></span>
-                <span class="dahlia-petal mid" style="--angle: 22.5deg;"></span>
-                <span class="dahlia-petal mid" style="--angle: 67.5deg;"></span>
-                <span class="dahlia-petal mid" style="--angle: 112.5deg;"></span>
-                <span class="dahlia-petal mid" style="--angle: 157.5deg;"></span>
-                <span class="dahlia-petal mid" style="--angle: 202.5deg;"></span>
-                <span class="dahlia-petal mid" style="--angle: 247.5deg;"></span>
-                <span class="dahlia-petal mid" style="--angle: 292.5deg;"></span>
-                <span class="dahlia-petal mid" style="--angle: 337.5deg;"></span>
-                <span class="dahlia-petal inner" style="--angle: 0deg;"></span>
-                <span class="dahlia-petal inner" style="--angle: 45deg;"></span>
-                <span class="dahlia-petal inner" style="--angle: 90deg;"></span>
-                <span class="dahlia-petal inner" style="--angle: 135deg;"></span>
-                <span class="dahlia-petal inner" style="--angle: 180deg;"></span>
-                <span class="dahlia-petal inner" style="--angle: 225deg;"></span>
-                <span class="dahlia-petal inner" style="--angle: 270deg;"></span>
-                <span class="dahlia-petal inner" style="--angle: 315deg;"></span>
-                <span class="dahlia-center" id="dahliaCenter"></span>
-            </div>
+        <div class="logo">
+            <h2>Panel de Control - DahliaVersa</h2>
         </div>
-        <nav class="nav-container">
-            <ul class="nav-links">
-                <li><a href="#">Cerrar sesión</a></li>
-                <li><a href="mailto:olguinzavalaadrian099@gmail.com">Contáctanos</a></li>
-                <li><a href="#">Cambiar de usuario</a></li>
-            </ul>
+        <nav class="nav-links">
+            <a href="index.html">Cerrar Sesión</a>
         </nav>
-        <a href="index.html" class="btn-nav" id="backToHomeBtn">Volver al Inicio</a>
     </header>
 
-    <main class="dashboard-container">
-        <section class="main-content">
-            <h2>Panel General de Control</h2>
-            <p style="margin-top: 10px; color: #fcd5ce; font-size: 0.9rem;">
-                Visualización de incidencias activas sincronizadas con la base de datos de DahliaVersa.
-            </p>
+    <main class="dashboard-wrapper">
+        <section class="admin-section">
+            <h3>Gestión de Incidencias Registradas</h3>
+            <p class="subtitle">Actualiza el estado de los reportes ciudadanos en tiempo real desde la base de datos.</p>
+            
+            <div class="table-container">
+                <table class="reports-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                            <th>Ciudadano</th>
+                            <th>Teléfono</th>
+                            <th>Fecha</th>
+                            <th>Referencias</th>
+                            <th>Estado Actual</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaReportesEmpresa">
+                        <tr>
+                            <td colspan="8" style="text-align: center;">Cargando reportes desde el servidor...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
-
-        <!-- LADO DERECHO: RECUADROS CONECTADOS A LA BD -->
-        <aside class="reports-sidebar">
-            <!-- FUGAS DE AGUA (Arriba) -->
-            <div class="report-card card-water">
-                <h3>💧 Fugas de Agua</h3>
-                <div class="report-list" id="listaFugas">
-                    <div class="report-item"><small>Cargando registros...</small></div>
-                </div>
-            </div>
-
-            <!-- BACHES (Abajo izquierda) -->
-            <div class="report-card card-pothole">
-                <h3>🕳️ Baches</h3>
-                <div class="report-list" id="listaBaches">
-                    <div class="report-item"><small>Cargando registros...</small></div>
-                </div>
-            </div>
-
-            <!-- POSTES DE LUZ (Abajo derecha) -->
-            <div class="report-card card-light">
-                <h3>💡 Postes de Luz</h3>
-                <div class="report-list" id="listaPostes">
-                    <div class="report-item"><small>Cargando registros...</small></div>
-                </div>
-            </div>
-        </aside>
     </main>
 
     <script>
-        // Función para consultar la base de datos y rellenar dinámicamente los recuadros
-        async function cargarIncidenciasDB() {
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarReportesEmpresa();
+        });
+
+        async function cargarReportesEmpresa() {
+            const tablaBody = document.getElementById('tablaReportesEmpresa');
+            
             try {
-                const response = await fetch('https://dahliaversa1.onrender.com/api/reportes'); // Endpoint de tu API
-                if (!response.ok) throw new Error("Error al obtener los datos");
-                
+                const response = await fetch('https://dahliaversa1.onrender.com/api/empresa/reportes');
+                if (!response.ok) throw new Error("Error al obtener los reportes de la empresa");
+
                 const reportes = await response.json();
+                tablaBody.innerHTML = '';
 
-                const contenedorFugas = document.getElementById('listaFugas');
-                const contenedorBaches = document.getElementById('listaBaches');
-                const contenedorPostes = document.getElementById('listaPostes');
-
-                contenedorFugas.innerHTML = '';
-                contenedorBaches.innerHTML = '';
-                contenedorPostes.innerHTML = '';
-
-                let countFugas = 0, countBaches = 0, countPostes = 0;
+                if (reportes.length === 0) {
+                    tablaBody.innerHTML = `<tr><td colspan="8" style="text-align: center;">No hay reportes registrados en este momento.</td></tr>`;
+                    return;
+                }
 
                 reportes.forEach(rep => {
-                    const tipo = (rep.tipo || '').toLowerCase();
-                    const itemHTML = `
-                        <div class="report-item">
-                            <span>${rep.ubicacion || 'Ubicación no especificada'}</span>
-                            <small>Estado: ${rep.estado || 'En Proceso'}</small>
-                        </div>
+                    const tr = document.createElement('tr');
+                    
+                    tr.innerHTML = `
+                        <td>#${rep.id}</td>
+                        <td><span style="text-transform: uppercase; font-weight: 600; color: #fcd5ce;">${rep.tipo}</span></td>
+                        <td>${rep.nombre}</td>
+                        <td>${rep.telefono || 'N/D'}</td>
+                        <td>${rep.fecha ? new Date(rep.fecha).toLocaleDateString() : 'N/D'}</td>
+                        <td>${rep.referencias || 'Sin referencias'}</td>
+                        <td>
+                            <select class="status-select" id="status-${rep.tipo}-${rep.id}">
+                                <option value="aprobado" ${rep.estado === 'aprobado' ? 'selected' : ''}>Aprobado</option>
+                                <option value="en proceso" ${rep.estado === 'en proceso' ? 'selected' : ''}>En Proceso</option>
+                                <option value="atendido" ${rep.estado === 'atendido' ? 'selected' : ''}>Atendido</option>
+                                <option value="rechazado" ${rep.estado === 'rechazado' ? 'selected' : ''}>Rechazado</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn-update" onclick="actualizarEstadoReporte('${rep.tipo}', ${rep.id})">Guardar</button>
+                        </td>
                     `;
-
-                    // Clasificamos según la categoría que venga de tu base de datos
-                    if (tipo.includes('agua') || tipo.includes('fuga')) {
-                        contenedorFugas.innerHTML += itemHTML;
-                        countFugas++;
-                    } else if (tipo.includes('bache') || tipo.includes('pavimento')) {
-                        contenedorBaches.innerHTML += itemHTML;
-                        countBaches++;
-                    } else if (tipo.includes('luz') || tipo.includes('poste')) {
-                        contenedorPostes.innerHTML += itemHTML;
-                        countPostes++;
-                    }
+                    tablaBody.appendChild(tr);
                 });
 
-                if (countFugas === 0) contenedorFugas.innerHTML = '<div class="report-item"><small>Sin reportes activos</small></div>';
-                if (countBaches === 0) contenedorBaches.innerHTML = '<div class="report-item"><small>Sin reportes activos</small></div>';
-                if (countPostes === 0) contenedorPostes.innerHTML = '<div class="report-item"><small>Sin reportes activos</small></div>';
-
             } catch (error) {
-                console.error("No se pudieron cargar las incidencias:", error);
+                console.error("Error cargando panel:", error);
+                tablaBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #f8a594;">Error al conectar con el servidor de la API.</td></tr>`;
             }
         }
 
-        // Ejecutar al cargar la página
-        document.addEventListener("DOMContentLoaded", cargarIncidenciasDB);
+        async function actualizarEstadoReporte(tipo, id) {
+            const selectElement = document.getElementById(`status-${tipo}-${id}`);
+            const nuevoEstado = selectElement.value;
+
+            try {
+                const response = await fetch('https://dahliaversa1.onrender.com/api/empresa/actualizar-estado', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        tipo: tipo,
+                        id: id,
+                        estado: nuevoEstado
+                    })
+                });
+
+                const resultado = await response.json();
+
+                if (response.ok && resultado.status === 'success') {
+                    alert(`¡Éxito! El reporte #${id} (${tipo}) se actualizó a: ${nuevoEstado.toUpperCase()}`);
+                    cargarReportesEmpresa(); 
+                } else {
+                    alert("⚠️ No se pudo actualizar el estado en la base de datos.");
+                }
+            } catch (error) {
+                console.error("Error de conexión:", error);
+                alert("Error de conexión al intentar actualizar el estado.");
+            }
+        }
     </script>
 </body>
-
 </html>
