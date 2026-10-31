@@ -2087,7 +2087,9 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px rgba(125, 211, 252, 0.7);
 }
 
+/* --- ANIMACIONES --- */
 
+/* Ciclo de la grieta (Aparece y desaparece) */
 @keyframes crackOpenClose {
 
   0%,
@@ -3348,6 +3350,7 @@ body.modal-active .logo-icon .dahlia-center {
   100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
 }
 
+/* --- DISEÑO EXCLUSIVO PARA EL MODAL DE REPORTE Y MAPA --- */
 .dv-row-2cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
