@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control incidencias</title>
+    <title>Control de Incidencias</title>
     <style>
         * {
             margin: 0;
@@ -168,7 +168,7 @@
             box-shadow: 0 6px 20px rgba(248, 165, 148, 0.6);
         }
 
-        /* ESTILOS DE LA SECCIÓN PRINCIPAL Y CONTENEDORES DE REPORTES */
+        /* ESTRUCTURA DE LA VISTA Y PANELES */
         .dashboard-container {
             width: 90%;
             max-width: 1200px;
@@ -190,7 +190,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* LADO DERECHO: GRID CON LOS TRES RECUADROS DE INCIDENCIAS */
         .reports-sidebar {
             width: 420px;
             max-width: 100%;
@@ -210,20 +209,14 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .report-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(248, 165, 148, 0.7);
         }
 
         .report-card h3 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #fcd5ce;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             border-bottom: 1px solid rgba(248, 165, 148, 0.25);
             padding-bottom: 8px;
         }
@@ -256,9 +249,9 @@
             color: #f8a594;
         }
 
-        /* POSICIONAMIENTO ESPECÍFICO DE LOS 3 RECUADROS */
+        /* DISTRIBUCIÓN DE LOS RECUADROS */
         .card-water {
-            grid-column: span 2; /* Fugas de Agua ocupa todo el ancho superior */
+            grid-column: span 2; /* Fugas de agua arriba ocupando todo el ancho */
         }
 
         .card-pothole {
@@ -330,54 +323,94 @@
     </header>
 
     <main class="dashboard-container">
-        <!-- ÁREA PRINCIPAL -->
         <section class="main-content">
-            <h2>Gestión de Control de Incidencias</h2>
+            <h2>Panel General de Control</h2>
             <p style="margin-top: 10px; color: #fcd5ce; font-size: 0.9rem;">
-                Selecciona o administra los reportes registrados en la plataforma.
+                Visualización de incidencias activas sincronizadas con la base de datos de DahliaVersa.
             </p>
         </section>
 
-        <!-- LADO DERECHO CON LOS RECUADROS PEDIDOS -->
+        <!-- LADO DERECHO: RECUADROS CONECTADOS A LA BD -->
         <aside class="reports-sidebar">
-            <!-- RECUADRO SUPERIOR: FUGAS DE AGUA -->
+            <!-- FUGAS DE AGUA (Arriba) -->
             <div class="report-card card-water">
                 <h3>💧 Fugas de Agua</h3>
-                <div class="report-list">
-                    <div class="report-item">
-                        <span>Av. Hidalgo #120</span>
-                        <small>Estado: En revisión</small>
-                    </div>
-                    <div class="report-item">
-                        <span>Calle Juárez s/n</span>
-                        <small>Estado: Atendido</small>
-                    </div>
+                <div class="report-list" id="listaFugas">
+                    <div class="report-item"><small>Cargando registros...</small></div>
                 </div>
             </div>
 
-            <!-- RECUADRO INFERIOR IZQUIERDO: BACHES -->
+            <!-- BACHES (Abajo izquierda) -->
             <div class="report-card card-pothole">
                 <h3>🕳️ Baches</h3>
-                <div class="report-list">
-                    <div class="report-item">
-                        <span>Calle 5 de Mayo</span>
-                        <small>Pendiente</small>
-                    </div>
+                <div class="report-list" id="listaBaches">
+                    <div class="report-item"><small>Cargando registros...</small></div>
                 </div>
             </div>
 
-            <!-- RECUADRO INFERIOR DERECHO/EN MEDIO ABAJO: POSTES DE LUZ -->
+            <!-- POSTES DE LUZ (Abajo derecha) -->
             <div class="report-card card-light">
                 <h3>💡 Postes de Luz</h3>
-                <div class="report-list">
-                    <div class="report-item">
-                        <span>Poste #402 Centro</span>
-                        <small>Foco fundido</small>
-                    </div>
+                <div class="report-list" id="listaPostes">
+                    <div class="report-item"><small>Cargando registros...</small></div>
                 </div>
             </div>
         </aside>
     </main>
+
+    <script>
+        // Función para consultar la base de datos y rellenar dinámicamente los recuadros
+        async function cargarIncidenciasDB() {
+            try {
+                const response = await fetch('https://dahliaversa1.onrender.com/api/reportes'); // Endpoint de tu API
+                if (!response.ok) throw new Error("Error al obtener los datos");
+                
+                const reportes = await response.json();
+
+                const contenedorFugas = document.getElementById('listaFugas');
+                const contenedorBaches = document.getElementById('listaBaches');
+                const contenedorPostes = document.getElementById('listaPostes');
+
+                contenedorFugas.innerHTML = '';
+                contenedorBaches.innerHTML = '';
+                contenedorPostes.innerHTML = '';
+
+                let countFugas = 0, countBaches = 0, countPostes = 0;
+
+                reportes.forEach(rep => {
+                    const tipo = (rep.tipo || '').toLowerCase();
+                    const itemHTML = `
+                        <div class="report-item">
+                            <span>${rep.ubicacion || 'Ubicación no especificada'}</span>
+                            <small>Estado: ${rep.estado || 'En Proceso'}</small>
+                        </div>
+                    `;
+
+                    // Clasificamos según la categoría que venga de tu base de datos
+                    if (tipo.includes('agua') || tipo.includes('fuga')) {
+                        contenedorFugas.innerHTML += itemHTML;
+                        countFugas++;
+                    } else if (tipo.includes('bache') || tipo.includes('pavimento')) {
+                        contenedorBaches.innerHTML += itemHTML;
+                        countBaches++;
+                    } else if (tipo.includes('luz') || tipo.includes('poste')) {
+                        contenedorPostes.innerHTML += itemHTML;
+                        countPostes++;
+                    }
+                });
+
+                if (countFugas === 0) contenedorFugas.innerHTML = '<div class="report-item"><small>Sin reportes activos</small></div>';
+                if (countBaches === 0) contenedorBaches.innerHTML = '<div class="report-item"><small>Sin reportes activos</small></div>';
+                if (countPostes === 0) contenedorPostes.innerHTML = '<div class="report-item"><small>Sin reportes activos</small></div>';
+
+            } catch (error) {
+                console.error("No se pudieron cargar las incidencias:", error);
+            }
+        }
+
+        // Ejecutar al cargar la página
+        document.addEventListener("DOMContentLoaded", cargarIncidenciasDB);
+    </script>
 </body>
 
 </html>
