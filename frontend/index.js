@@ -9,13 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnConsultarSeguimiento = document.getElementById('btnConsultarSeguimiento');
     const body = document.body;
 
-    // Elementos para el nuevo modal de Mis Reportes
     const misReportesNavBtn = document.getElementById('misReportesNavBtn');
     const modalMisReportes = document.getElementById('modalMisReportes');
     const mrNicoBtnClose = document.getElementById('mrNicoBtnClose');
     const mrNicoBtnSearch = document.getElementById('mrNicoBtnSearch');
 
-    // Asegurar estado inicial oculto
     if (modalOverlay) modalOverlay.style.display = 'none';
     if (modalSeguimiento) modalSeguimiento.style.display = 'none';
     if (modalMisReportes) modalMisReportes.style.display = 'none';
@@ -77,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 1. ABRIR GUÍA RÁPIDA (Logo)
     if (logoTrigger && modalOverlay) {
         logoTrigger.addEventListener('click', () => {
             if (modalSeguimiento) {
@@ -96,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // CERRAR GUÍA RÁPIDA
     if (btnClose && modalOverlay) {
         btnClose.addEventListener('click', () => {
             modalOverlay.classList.remove('active');
@@ -105,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2. ABRIR SEGUIMIENTO (Navbar)
     if (seguimientoNavBtn && modalSeguimiento) {
         seguimientoNavBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -125,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // CERRAR SEGUIMIENTO
     if (btnCloseSeguimiento && modalSeguimiento) {
         btnCloseSeguimiento.addEventListener('click', () => {
             modalSeguimiento.classList.remove('active');
@@ -134,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. ABRIR / CERRAR MODAL MIS REPORTES
     if (misReportesNavBtn && modalMisReportes) {
         misReportesNavBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -155,7 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Animación de aparición de estadísticas
     const statCards = document.querySelectorAll(".stat-card");
     statCards.forEach((card, index) => {
         setTimeout(() => {
@@ -163,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 300 + (index * 250));
     });
 
-    // Contadores estadísticos
     const statNumbers = document.querySelectorAll(".stat-card h3");
     statNumbers.forEach(h3 => {
         const text = h3.textContent;
@@ -189,7 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Loaders de navegación
     const loadTriggers = document.querySelectorAll('.load-trigger');
     const pageLoader = document.getElementById('pageLoader');
 
@@ -238,7 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Consulta API de Seguimiento
     if (btnConsultarSeguimiento) {
         btnConsultarSeguimiento.addEventListener('click', async () => {
             const selectedCheck = document.querySelector('input[name="segTipoCheck"]:checked');
@@ -284,7 +273,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Lógica API para Buscar Mis Reportes por Nombre
     if (mrNicoBtnSearch) {
         mrNicoBtnSearch.addEventListener('click', async () => {
             const nombreIngresado = document.getElementById('mrNicoInputName').value.trim();
@@ -332,7 +320,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cierre global al hacer clic fuera de los modales
     window.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
             modalOverlay.classList.remove('active');
@@ -351,9 +338,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ==========================================================
-    // LÓGICA AVANZADA DEL BUSCADOR, MAPA EN TIEMPO REAL Y MODAL
-    // ==========================================================
     const searchInput = document.querySelector(".hero-search-input");
     const searchBtn = document.querySelector(".hero-search-btn");
     const searchContainer = document.querySelector(".hero-search-container");
@@ -362,7 +346,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnCloseModal = document.getElementById("mrBtnCloseModal");
     const btnSubmitReport = document.getElementById("mrBtnSubmitReport");
 
-    // Variables globales para el mapa de Leaflet
     let modalMap = null;
     let modalMarker = null;
 
@@ -392,7 +375,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const mapContainer = document.getElementById('mapModal');
         if (!mapContainer || typeof L === 'undefined') return;
 
-        // Definir el icono personalizado con el círculo parpadeante
         const pulsingIcon = L.divIcon({
             className: 'custom-div-icon',
             html: '<div class="dv-pulsing-marker"></div>',
@@ -420,7 +402,6 @@ document.addEventListener("DOMContentLoaded", () => {
             attribution: '© OpenStreetMap'
         }).addTo(modalMap);
 
-        // Añadir el marcador con el icono intermitente
         modalMarker = L.marker([lat, lon], { draggable: true, icon: pulsingIcon }).addTo(modalMap);
 
         modalMarker.on('dragend', function (event) {
@@ -462,9 +443,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const coincidencias = baseUbicaciones.filter(ubi => ubi.toLowerCase().includes(query));
+            const unicaCoincidencia = coincidencias.slice(0, 1);
 
-            if (coincidencias.length > 0) {
-                coincidencias.forEach(item => {
+            if (unicaCoincidencia.length > 0) {
+                unicaCoincidencia.forEach(item => {
                     const div = document.createElement("div");
                     div.className = "mr-suggestion-item";
                     div.textContent = item;
@@ -562,9 +544,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ==========================================================
-    // LÓGICA DE INICIO DE SESIÓN DE EMPRESA (VALIDACIÓN DE DB)
-    // ==========================================================
     const dvCompModal = document.getElementById('dvCompRegisterModal');
     const dvCloseCompModalBtn = document.getElementById('dvCloseCompModal');
     const dvCompRegisterForm = document.getElementById('dvCompRegisterForm');
@@ -593,7 +572,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Procesar Inicio de Sesión contra la Base de Datos
     if (dvCompRegisterForm) {
         dvCompRegisterForm.addEventListener('submit', async (e) => {
             e.preventDefault();
