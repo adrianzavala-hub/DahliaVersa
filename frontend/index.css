@@ -3341,7 +3341,7 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .dv-comp-modal-close-btn:hover {
-  color: #38bdf8 !important;
+  color: #7dd3fc !important;
   transform: scale(1.1) !important;
 }
 
@@ -3414,7 +3414,7 @@ body.modal-active .logo-icon .dahlia-center {
   width: 100% !important;
   margin-top: 8px !important;
   padding: 11px !important;
-  background: linear-gradient(135deg, #38bdf8, #0284c7) !important;
+  background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%) !important;
   color: #ffffff !important;
   border: none !important;
   border-radius: 12px !important;
