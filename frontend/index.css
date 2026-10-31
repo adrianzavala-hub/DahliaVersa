@@ -1,3 +1,6 @@
+/* ==========================================================
+   RESET GLOBAL Y CONFIGURACIÓN DE BASE
+   ========================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -141,10 +144,10 @@ body.modal-active .main-wrapper {
   left: 50%;
   width: 6px;
   height: 6px;
-  background-color: #fbcfe8;
+  background-color: #bae6fd;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 6px rgba(244, 114, 182, 0.6);
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.8);
   transition: transform 0.5s ease;
 }
 
@@ -161,13 +164,13 @@ body.modal-active .main-wrapper {
 .nav-links {
   display: flex;
   gap: 25px;
-  background: rgba(125, 95, 105, 0.45);
+  background: rgba(7, 27, 52, 0.55);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   padding: 10px 24px;
   border-radius: 30px;
-  border: 1px solid rgba(226, 169, 179, 0.35);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(226, 169, 179, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(56, 189, 248, 0.1);
   overflow: visible !important;
 }
 
@@ -178,7 +181,7 @@ body.modal-active .main-wrapper {
 }
 
 .nav-links a:hover {
-  color: #ffffff;
+  color: #bae6fd;
 }
 
 .btn-nav {
@@ -207,7 +210,7 @@ body.modal-active .main-wrapper {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(125, 95, 105, 0.5);
+  background-color: rgba(7, 27, 52, 0.6);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   display: flex;
@@ -221,14 +224,14 @@ body.modal-active .main-wrapper {
 }
 
 .modal-card {
-  background: rgba(125, 95, 105, 0.85);
-  border: 1px solid rgba(226, 169, 179, 0.4);
+  background: rgba(7, 27, 52, 0.88);
+  border: 1px solid rgba(56, 189, 248, 0.4);
   padding: 30px 40px 50px 40px;
   border-radius: 30px;
   width: 90%;
   max-width: 480px;
   text-align: left;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(226, 169, 179, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(56, 189, 248, 0.15);
   transform: translateY(20px) scale(0.95);
   transition: transform 0.4s ease;
   position: relative;
@@ -248,7 +251,7 @@ body.modal-active .modal-overlay {
   color: #ffffff;
   margin-bottom: 16px;
   font-size: 1.4rem;
-  border-bottom: 1px solid rgba(226, 169, 179, 0.3);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.3);
   padding-bottom: 12px;
 }
 
@@ -258,7 +261,7 @@ body.modal-active .modal-overlay {
   padding-right: 8px;
   margin-bottom: 20px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(226, 169, 179, 0.5) rgba(125, 95, 105, 0.3);
+  scrollbar-color: rgba(56, 189, 248, 0.5) rgba(7, 27, 52, 0.3);
 }
 
 .modal-body-scroll::-webkit-scrollbar {
@@ -266,19 +269,19 @@ body.modal-active .modal-overlay {
 }
 
 .modal-body-scroll::-webkit-scrollbar-track {
-  background: rgba(125, 95, 105, 0.3);
+  background: rgba(7, 27, 52, 0.3);
   border-radius: 10px;
 }
 
 .modal-body-scroll::-webkit-scrollbar-thumb {
-  background: rgba(226, 169, 179, 0.5);
+  background: rgba(56, 189, 248, 0.5);
   border-radius: 10px;
 }
 
 .guide-step {
   margin-bottom: 14px;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(226, 169, 179, 0.2);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .guide-step:last-child {
@@ -296,13 +299,13 @@ body.modal-active .modal-overlay {
 
 .guide-step p {
   font-size: 0.85rem;
-  color: #fbe8ec;
+  color: #bae6fd;
   line-height: 1.4;
   margin-bottom: 0;
 }
 
 .guide-step strong {
-  color: #e2a9b3;
+  color: #38bdf8;
   font-weight: 600;
 }
 
@@ -343,12 +346,12 @@ body.modal-active .modal-overlay {
   top: -30px;
   width: 10px;
   height: 18px;
-  background: linear-gradient(135deg, #c8d4e3 0%, #97aab7 50%, #e2a9b3 100%);
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #38bdf8 100%);
   border-radius: 50% 50% 10% 10% / 80% 80% 20% 20%;
   filter: blur(var(--blur, 1px));
   opacity: 0.9;
   animation: fallSlow linear infinite;
-  box-shadow: 0 0 8px rgba(199, 212, 227, 0.6);
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.6);
 }
 
 @keyframes fallSlow {
@@ -386,11 +389,11 @@ body.modal-active .modal-overlay {
   top: 100%;
   left: 0;
   margin-top: 10px;
-  background: rgba(125, 95, 105, 0.9);
+  background: rgba(7, 27, 52, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(226, 169, 179, 0.35);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(226, 169, 179, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(56, 189, 248, 0.1);
   border-radius: 20px;
   padding: 12px 0;
   min-width: 180px;
@@ -417,14 +420,14 @@ body.modal-active .modal-overlay {
 .dropdown-menu a {
   display: block;
   padding: 8px 20px;
-  color: #fbe8ec;
+  color: #bae6fd;
   font-size: 0.85rem;
   white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 .dropdown-menu a:hover {
-  background: rgba(226, 169, 179, 0.25);
+  background: rgba(56, 189, 248, 0.25);
   color: #ffffff;
 }
 
@@ -469,7 +472,7 @@ body.modal-active .logo-icon .dahlia-center {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(125, 95, 105, 0.55);
+  background: rgba(7, 27, 52, 0.55);
   padding: 4px 10px;
   border-radius: 15px;
   font-size: 10.5px;
@@ -478,9 +481,9 @@ body.modal-active .logo-icon .dahlia-center {
   margin-bottom: 30px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(226, 169, 179, 0.35);
+  border: 1px solid rgba(56, 189, 248, 0.35);
   width: max-content;
-  color: #fbe8ec;
+  color: #bae6fd;
 }
 
 .hero-title {
@@ -515,7 +518,7 @@ body.modal-active .logo-icon .dahlia-center {
 
 .hero-description {
   font-size: 1.1rem;
-  color: #fbe8ec;
+  color: #bae6fd;
   margin-top: 10px;
   margin-bottom: 10px;
   line-height: 1.6;
@@ -525,15 +528,15 @@ body.modal-active .logo-icon .dahlia-center {
 .hero-search-container {
   display: flex;
   align-items: center;
-  background: rgba(125, 95, 105, 0.55);
-  border: 1px solid rgba(226, 169, 179, 0.35);
+  background: rgba(7, 27, 52, 0.55);
+  border: 1px solid rgba(56, 189, 248, 0.35);
   padding: 8px 8px 8px 18px;
   border-radius: 30px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   max-width: 480px;
   margin-top: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(226, 169, 179, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(56, 189, 248, 0.1);
   z-index: 50;
 }
 
@@ -547,7 +550,7 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .hero-search-input::placeholder {
-  color: #fbe8ec;
+  color: #bae6fd;
   opacity: 0.7;
 }
 
@@ -595,13 +598,13 @@ body.modal-active .logo-icon .dahlia-center {
 
 .stat-card {
   flex: 1;
-  background: rgba(125, 95, 105, 0.55);
+  background: rgba(7, 27, 52, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 169, 179, 0.35);
+  border: 1px solid rgba(56, 189, 248, 0.35);
   padding: 16px 18px;
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 12px rgba(226, 169, 179, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 12px rgba(56, 189, 248, 0.1);
   transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
@@ -614,9 +617,9 @@ body.modal-active .logo-icon .dahlia-center {
 
 .stat-card:hover {
   transform: translateY(-3px);
-  background: rgba(125, 95, 105, 0.75);
-  border-color: rgba(226, 169, 179, 0.7);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(226, 169, 179, 0.3);
+  background: rgba(7, 27, 52, 0.75);
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.3);
 }
 
 .stat-card h3 {
@@ -627,7 +630,7 @@ body.modal-active .logo-icon .dahlia-center {
 
 .stat-card p {
   font-size: 0.65rem;
-  color: #fbe8ec;
+  color: #bae6fd;
   letter-spacing: 0.5px;
   line-height: 1.3;
 }
@@ -682,12 +685,12 @@ body.modal-active .logo-icon .dahlia-center {
   position: relative;
   z-index: 10;
   overflow: hidden;
-  background: rgba(125, 95, 105, 0.55);
+  background: rgba(7, 27, 52, 0.55);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-radius: 30px;
-  border: 1px solid rgba(226, 169, 179, 0.35);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(226, 169, 179, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(56, 189, 248, 0.1);
 }
 
 .footer-content {
@@ -709,9 +712,9 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .footer-socials a {
-  color: #fbe8ec;
-  background: rgba(125, 95, 105, 0.4);
-  border: 1px solid rgba(226, 169, 179, 0.3);
+  color: #bae6fd;
+  background: rgba(7, 27, 52, 0.4);
+  border: 1px solid rgba(56, 189, 248, 0.3);
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -723,10 +726,10 @@ body.modal-active .logo-icon .dahlia-center {
 
 .footer-socials a:hover {
   color: #ffffff;
-  background: rgba(226, 169, 179, 0.35);
-  border-color: #e2a9b3;
+  background: rgba(56, 189, 248, 0.35);
+  border-color: #38bdf8;
   transform: translateY(-2px);
-  box-shadow: 0 0 10px rgba(226, 169, 179, 0.5);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
 .footer-brand-effect {
@@ -755,13 +758,13 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .footer-links a {
-  color: #000;
+  color: #020617;
   font-size: 0.85rem;
   transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-  color: #e2a9b3;
+  color: #bae6fd;
 }
 
 @media (max-width: 768px) {
@@ -800,16 +803,16 @@ body.modal-active .logo-icon .dahlia-center {
 .street-bracket {
   width: 6px;
   height: 8px;
-  background: linear-gradient(135deg, #444 0%, #222 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  border: 1px solid rgba(186, 230, 253, 0.3);
   border-radius: 2px;
 }
 
 .street-head {
   width: 52px;
   height: 16px;
-  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, #071b34 0%, #020617 100%);
+  border: 1px solid rgba(56, 189, 248, 0.35);
   border-radius: 8px 8px 14px 14px;
   position: relative;
   display: flex;
@@ -821,63 +824,62 @@ body.modal-active .logo-icon .dahlia-center {
 .lamp-bulb {
   width: 36px;
   height: 6px;
-  background-color: #c8d4e3;
+  background-color: #bae6fd;
   border-radius: 4px;
-  box-shadow: 0 0 12px #c8d4e3, 0 0 25px rgba(199, 212, 227, 0.8), 0 0 40px rgba(151, 170, 183, 0.4);
+  box-shadow: 0 0 12px #bae6fd, 0 0 25px rgba(186, 230, 253, 0.8), 0 0 40px rgba(56, 189, 248, 0.4);
   animation: lamp-glitch 2.2s infinite steps(1);
 }
 
 @keyframes lamp-glitch {
-
   0%,
   100% {
     opacity: 1;
-    background-color: #c8d4e3;
-    box-shadow: 0 0 12px #c8d4e3, 0 0 25px rgba(199, 212, 227, 0.8);
+    background-color: #bae6fd;
+    box-shadow: 0 0 12px #bae6fd, 0 0 25px rgba(186, 230, 253, 0.8);
   }
 
   8% {
     opacity: 0.15;
-    background-color: #111;
+    background-color: #020617;
     box-shadow: none;
   }
 
   14% {
     opacity: 1;
-    background-color: #c8d4e3;
-    box-shadow: 0 0 15px #c8d4e3, 0 0 30px rgba(199, 212, 227, 0.9);
+    background-color: #bae6fd;
+    box-shadow: 0 0 15px #bae6fd, 0 0 30px rgba(186, 230, 253, 0.9);
   }
 
   30% {
     opacity: 0.3;
-    background-color: #97aab7;
-    box-shadow: 0 0 5px #c8d4e3;
+    background-color: #7dd3fc;
+    box-shadow: 0 0 5px #bae6fd;
   }
 
   40%,
   43% {
     opacity: 0;
-    background-color: #000;
+    background-color: #020617;
     box-shadow: none;
   }
 
   50% {
     opacity: 0.85;
-    background-color: #c8d4e3;
-    box-shadow: 0 0 18px #c8d4e3;
+    background-color: #bae6fd;
+    box-shadow: 0 0 18px #bae6fd;
   }
 
   68% {
     opacity: 0.1;
-    background-color: #111;
+    background-color: #020617;
     box-shadow: none;
   }
 
   72%,
   82% {
     opacity: 1;
-    background-color: #e2a9b3;
-    box-shadow: 0 0 20px #e2a9b3, 0 0 40px rgba(226, 169, 179, 1);
+    background-color: #38bdf8;
+    box-shadow: 0 0 20px #38bdf8, 0 0 40px rgba(56, 189, 248, 1);
   }
 }
 
@@ -896,8 +898,8 @@ body.modal-active .logo-icon .dahlia-center {
 .pipe-structure {
   width: 22px;
   height: 12px;
-  background: linear-gradient(135deg, #71717a 0%, #3f3f46 100%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, #0284c7 0%, #071b34 100%);
+  border: 1px solid rgba(186, 230, 253, 0.35);
   border-radius: 0 0 4px 4px;
   position: relative;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -909,9 +911,9 @@ body.modal-active .logo-icon .dahlia-center {
   left: 7px;
   width: 8px;
   height: 3px;
-  background-color: #09090b;
+  background-color: #020617;
   border-radius: 50%;
-  box-shadow: 0 0 6px #c8d4e3;
+  box-shadow: 0 0 6px #bae6fd;
 }
 
 .water-cascade-container {
@@ -927,9 +929,9 @@ body.modal-active .logo-icon .dahlia-center {
   top: 0;
   right: 0;
   width: 3px;
-  background: linear-gradient(180deg, #c8d4e3 0%, #97aab7 60%, rgba(151, 170, 183, 0) 100%);
+  background: linear-gradient(180deg, #bae6fd 0%, #7dd3fc 60%, rgba(56, 189, 248, 0) 100%);
   border-radius: 3px;
-  box-shadow: 0 0 8px #c8d4e3, 0 0 15px rgba(199, 212, 227, 0.6);
+  box-shadow: 0 0 8px #bae6fd, 0 0 15px rgba(186, 230, 253, 0.6);
   opacity: 0;
   animation: cascadeDown 0.9s infinite linear;
 }
@@ -942,7 +944,7 @@ body.modal-active .logo-icon .dahlia-center {
   height: 6px;
   background: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 6px #c8d4e3;
+  box-shadow: 0 0 6px #bae6fd;
   opacity: 0;
   animation: dropDownFall 0.9s infinite ease-in;
 }
@@ -1017,9 +1019,9 @@ body.modal-active .logo-icon .dahlia-center {
   left: -50px;
   width: 36px;
   height: 16px;
-  background: linear-gradient(135deg, #c8d4e3 0%, #97aab7 100%);
+  background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
   border-radius: 6px 10px 4px 4px;
-  box-shadow: 0 0 10px rgba(199, 212, 227, 0.6);
+  box-shadow: 0 0 10px rgba(186, 230, 253, 0.6);
   animation: driveCar 5s infinite linear;
 }
 
@@ -1030,7 +1032,7 @@ body.modal-active .logo-icon .dahlia-center {
   left: 10px;
   width: 16px;
   height: 8px;
-  background: rgba(125, 95, 105, 0.9);
+  background: rgba(7, 27, 52, 0.9);
   border-radius: 4px 4px 0 0;
 }
 
@@ -1039,8 +1041,8 @@ body.modal-active .logo-icon .dahlia-center {
   bottom: -3px;
   width: 8px;
   height: 8px;
-  background: #18181b;
-  border: 1px solid #c8d4e3;
+  background: #020617;
+  border: 1px solid #bae6fd;
   border-radius: 50%;
 }
 
@@ -1059,9 +1061,9 @@ body.modal-active .logo-icon .dahlia-center {
   transform: translateX(-50%);
   width: 22px;
   height: 4px;
-  background-color: #09090b;
+  background-color: #020617;
   border-radius: 50%;
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 0 5px rgba(199, 212, 227, 0.3);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 0 5px rgba(186, 230, 253, 0.3);
 }
 
 @keyframes driveCar {
@@ -1104,9 +1106,9 @@ body.modal-active .logo-icon .dahlia-center {
 .mini-car.pink-truck {
   width: 55px;
   height: 22px;
-  background: linear-gradient(135deg, #e2a9b3 0%, #d3919c 100%);
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
   border-radius: 8px 10px 6px 6px;
-  box-shadow: 0 0 12px rgba(226, 169, 179, 0.8);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
   animation: driveTogether 5s infinite linear;
   animation-delay: -2.5s;
   z-index: 1;
@@ -1119,7 +1121,7 @@ body.modal-active .logo-icon .dahlia-center {
   left: 32px;
   width: 18px;
   height: 12px;
-  background: rgba(125, 95, 105, 0.95);
+  background: rgba(7, 27, 52, 0.95);
   border-radius: 4px 4px 0 0;
 }
 
@@ -1130,14 +1132,14 @@ body.modal-active .logo-icon .dahlia-center {
   left: 4px;
   width: 26px;
   height: 16px;
-  background: rgba(226, 169, 179, 0.3);
+  background: rgba(56, 189, 248, 0.3);
   border-radius: 2px;
 }
 
 .mini-car.pink-truck .car-wheel {
   width: 9px;
   height: 9px;
-  border: 1.5px solid #e2a9b3;
+  border: 1.5px solid #bae6fd;
   bottom: -4px;
 }
 
@@ -1963,7 +1965,6 @@ body.modal-active .logo-icon .dahlia-center {
   opacity: 1;
 }
 
-/* Escena interior del loader (más limpia y amplia) */
 .loader-pothole-scene-smooth {
   position: relative;
   width: 200px;
@@ -1981,7 +1982,6 @@ body.modal-active .logo-icon .dahlia-center {
   height: 100%;
 }
 
-/* 1. La grieta que aparece y desaparece (bucle) */
 .road-surface-crack {
   position: absolute;
   top: 50px;
@@ -1989,18 +1989,15 @@ body.modal-active .logo-icon .dahlia-center {
   width: 80px;
   height: 25px;
   background: #0f172a;
-  /* Color de asfalto oscuro */
   border-radius: 50%;
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.9);
   animation: crackOpenClose 3s ease-in-out infinite;
   z-index: 1;
 }
 
-/* 2. El asfalto líquido que cae */
 .liquid-asphalt-pour {
   position: absolute;
   top: -40px;
-  /* Comienza fuera de escena */
   left: 90px;
   width: 20px;
   height: 60px;
@@ -2028,7 +2025,6 @@ body.modal-active .logo-icon .dahlia-center {
   animation: dripFall2 3s ease-in infinite 0.2s;
 }
 
-/* 3. El parche de asfalto que sana y confirma */
 .healed-road-patch {
   position: absolute;
   top: 50px;
@@ -2054,12 +2050,10 @@ body.modal-active .logo-icon .dahlia-center {
   animation: checkmarkPop 3s ease-in-out infinite;
 }
 
-/* 4. El icono del trabajador vertiendo */
 .worker-pour-icon {
   position: absolute;
   top: 15px;
   left: 75px;
-  /* Misma posición horizontal que el vertido */
   width: 40px;
   height: 40px;
   z-index: 4;
@@ -2087,9 +2081,6 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 0 8px rgba(125, 211, 252, 0.7);
 }
 
-/* --- ANIMACIONES --- */
-
-/* Ciclo de la grieta (Aparece y desaparece) */
 @keyframes crackOpenClose {
 
   0%,
@@ -2106,7 +2097,6 @@ body.modal-active .logo-icon .dahlia-center {
   }
 }
 
-/* Ciclo del icono de trabajador (Se inclina para ver) */
 @keyframes workerTilt {
 
   0%,
@@ -2123,7 +2113,6 @@ body.modal-active .logo-icon .dahlia-center {
   }
 }
 
-/* Movimiento del contenedor de gotas (sigue al trabajador) */
 @keyframes pourContainerMove {
 
   0%,
@@ -2140,7 +2129,6 @@ body.modal-active .logo-icon .dahlia-center {
   }
 }
 
-/* Ciclo de caída de gotas 1 */
 @keyframes dripFall1 {
 
   0%,
@@ -2160,7 +2148,6 @@ body.modal-active .logo-icon .dahlia-center {
   }
 }
 
-/* Ciclo de caída de gotas 2 */
 @keyframes dripFall2 {
 
   0%,
@@ -2180,7 +2167,6 @@ body.modal-active .logo-icon .dahlia-center {
   }
 }
 
-/* Ciclo del parche de asfalto (Aparece cuando caen las gotas) */
 @keyframes patchHeal {
 
   0%,
@@ -2223,23 +2209,30 @@ body.modal-active .logo-icon .dahlia-center {
   }
 }
 
-/* --- MODAL DE SEGUIMIENTO (Diseño Compacto, Luminoso y Estilizado) --- */
-
 .modal-overlay-seguimiento {
   position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(125, 95, 105, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  display: flex; justify-content: center; align-items: center;
-  opacity: 0; visibility: hidden; pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.35s ease, visibility 0.35s ease;
   z-index: 2000;
   overflow: visible;
 }
 
 .modal-overlay-seguimiento.active {
-  opacity: 1; visibility: visible; pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .modal-card-seguimiento {
@@ -2247,15 +2240,17 @@ body.modal-active .logo-icon .dahlia-center {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(226, 169, 179, 0.5);
-  padding: 24px 30px; 
+  padding: 24px 30px;
   border-radius: 24px;
-  width: 85%; max-width: 400px; 
+  width: 85%;
+  max-width: 400px;
   text-align: left;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(226, 169, 179, 0.15);
   transform: translateY(15px) scale(0.95);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); 
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 2003;
-  display: flex; flex-direction: column; 
+  display: flex;
+  flex-direction: column;
   max-height: 80vh;
   position: relative;
 }
@@ -2265,10 +2260,10 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .modal-card-seguimiento h2 {
-  text-align: center; 
-  color: #ffffff; 
+  text-align: center;
+  color: #ffffff;
   margin-bottom: 14px;
-  font-size: 1.25rem; 
+  font-size: 1.25rem;
   font-weight: 700;
   border-bottom: 1px solid rgba(226, 169, 179, 0.3);
   padding-bottom: 10px;
@@ -2276,36 +2271,35 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .modal-body-scroll-seg {
-  overflow-y: auto; 
-  max-height: 45vh; 
-  padding-right: 4px; 
+  overflow-y: auto;
+  max-height: 45vh;
+  padding-right: 4px;
   margin-bottom: 15px;
 }
 
 .seg-step {
-  margin-bottom: 12px; 
-  padding-bottom: 10px; 
+  margin-bottom: 12px;
+  padding-bottom: 10px;
   border-bottom: 1px solid rgba(226, 169, 179, 0.2);
 }
 
 .seg-step h3 {
-  font-size: 0.85rem; 
-  color: #ffffff; 
-  margin-bottom: 6px; 
+  font-size: 0.85rem;
+  color: #ffffff;
+  margin-bottom: 6px;
   font-weight: 600;
 }
 
-/* Campos de texto (Folio y Nombre) */
 .seg-input-field {
-  width: 100%; 
-  background: rgba(255, 255, 255, 0.25); 
-  border: 1px solid rgba(226, 169, 179, 0.4); 
+  width: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(226, 169, 179, 0.4);
   padding: 10px 12px;
-  border-radius: 10px; 
-  color: #ffffff; 
-  font-size: 0.9rem; 
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
   font-weight: 500;
-  outline: none; 
+  outline: none;
   margin-top: 4px;
   transition: all 0.3s ease;
 }
@@ -2316,11 +2310,10 @@ body.modal-active .logo-icon .dahlia-center {
 
 .seg-input-field:focus {
   background: rgba(255, 255, 255, 0.35);
-  border-color: #38bdf8; 
+  border-color: #38bdf8;
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
-/* Grupo de Checkboxes Estilizados */
 .seg-checkbox-group {
   display: flex;
   flex-direction: column;
@@ -2368,20 +2361,20 @@ body.modal-active .logo-icon .dahlia-center {
   font-weight: 500;
 }
 
-.seg-hidden-check:checked + .seg-checkbox-box {
+.seg-hidden-check:checked+.seg-checkbox-box {
   background: #38bdf8;
   border-color: #38bdf8;
   box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
 }
 
-.seg-hidden-check:checked + .seg-checkbox-box::after {
+.seg-hidden-check:checked+.seg-checkbox-box::after {
   content: '✓';
   color: #0f172a;
   font-size: 11px;
   font-weight: 900;
 }
 
-.seg-hidden-check:checked ~ .seg-checkbox-label {
+.seg-hidden-check:checked~.seg-checkbox-label {
   color: #ffffff;
   font-weight: 700;
 }
@@ -2393,58 +2386,57 @@ body.modal-active .logo-icon .dahlia-center {
 
 /* Caja de Resultados */
 .seg-result-box {
-  display: none; 
-  margin-top: 14px; 
+  display: none;
+  margin-top: 14px;
   padding: 12px;
   background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.4); 
+  border: 1px solid rgba(56, 189, 248, 0.4);
   border-radius: 12px;
 }
 
-.seg-result-text { 
-  margin: 0 0 6px 0; 
-  font-size: 0.85rem; 
-  color: #ffffff; 
+.seg-result-text {
+  margin: 0 0 6px 0;
+  font-size: 0.85rem;
+  color: #ffffff;
 }
 
-.seg-result-text span { 
-  color: #bae6fd; 
-  font-weight: 700; 
+.seg-result-text span {
+  color: #bae6fd;
+  font-weight: 700;
 }
 
-.seg-result-obs { 
-  margin: 0; 
-  font-size: 0.8rem; 
-  color: #fbe8ec; 
-  line-height: 1.3; 
+.seg-result-obs {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #fbe8ec;
+  line-height: 1.3;
 }
 
-.seg-actions-container { 
-  display: flex; 
-  gap: 10px; 
-  margin-top: 10px; 
+.seg-actions-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-/* Botones Claros y Estilizados */
 .btn-seg-action {
-  align-self: center; 
-  width: 100%; 
+  align-self: center;
+  width: 100%;
   max-width: 180px;
   background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
-  color: #0f172a; 
+  color: #0f172a;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  padding: 10px 20px; 
-  border-radius: 12px; 
-  font-weight: 700; 
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
   font-size: 0.85rem;
-  cursor: pointer; 
+  cursor: pointer;
   box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin: 0;
 }
 
 .btn-seg-alt {
-  background: rgba(255, 255, 255, 0.25); 
+  background: rgba(255, 255, 255, 0.25);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -2461,7 +2453,6 @@ body.modal-active .logo-icon .dahlia-center {
   color: #0f172a;
 }
 
-/* Contenedor principal anclado en la esquina superior izquierda */
 .seg-modal-lamp-complex {
   position: absolute;
   top: -45px;
@@ -2475,7 +2466,6 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
 }
 
-/* 1. Soporte de fijación superior */
 .lamp-mount {
   width: 14px;
   height: 6px;
@@ -2484,14 +2474,12 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* 2. Cadena o cable colgante */
 .lamp-chain {
   width: 3px;
   height: 10px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(226,169,179,0.8));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(226, 169, 179, 0.8));
 }
 
-/* 3. Tapa superior de la linterna */
 .lamp-cap {
   width: 26px;
   height: 10px;
@@ -2500,7 +2488,6 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* 4. Cuerpo central de la linterna (cristal translúcido) */
 .lamp-body {
   width: 32px;
   height: 36px;
@@ -2516,7 +2503,6 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 0 8px rgba(125, 211, 252, 0.3);
 }
 
-/* Costillas metálicas decorativas del cuerpo */
 .lamp-ribbon-left,
 .lamp-ribbon-right {
   position: absolute;
@@ -2525,10 +2511,15 @@ body.modal-active .logo-icon .dahlia-center {
   height: 100%;
   background: rgba(255, 255, 255, 0.6);
 }
-.lamp-ribbon-left { left: 9px; }
-.lamp-ribbon-right { right: 9px; }
 
-/* 5. Núcleo de luz interior (El foco/cristal que parpadea en azul) */
+.lamp-ribbon-left {
+  left: 9px;
+}
+
+.lamp-ribbon-right {
+  right: 9px;
+}
+
 .lamp-core-glow {
   width: 16px;
   height: 16px;
@@ -2538,7 +2529,6 @@ body.modal-active .logo-icon .dahlia-center {
   animation: complexLampGlitch 3.5s infinite ease-in-out;
 }
 
-/* 6. Remate inferior de la linterna */
 .lamp-base-finial {
   width: 10px;
   height: 8px;
@@ -2547,27 +2537,42 @@ body.modal-active .logo-icon .dahlia-center {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* --- ANIMACIÓN DE PARPADEO E INTENSIDAD AZUL --- */
 @keyframes complexLampGlitch {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     background: #ffffff;
     box-shadow: 0 0 15px 4px #7dd3fc, 0 0 30px 10px #38bdf8;
   }
-  3%, 9%, 15%, 25%, 78%, 85% {
+
+  3%,
+  9%,
+  15%,
+  25%,
+  78%,
+  85% {
     opacity: 0.15;
     background: #bae6fd;
     box-shadow: 0 0 4px #7dd3fc;
   }
-  6%, 12%, 20%, 28%, 82%, 88% {
+
+  6%,
+  12%,
+  20%,
+  28%,
+  82%,
+  88% {
     opacity: 1;
     background: #e0f2fe;
     box-shadow: 0 0 20px 6px #7dd3fc, 0 0 40px 12px #38bdf8;
   }
+
   92% {
     opacity: 0.4;
     box-shadow: 0 0 8px #7dd3fc;
   }
+
   95% {
     opacity: 1;
     background: #ffffff;
@@ -2577,19 +2582,28 @@ body.modal-active .logo-icon .dahlia-center {
 
 .mr-nico-overlay {
   position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(125, 95, 105, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  display: flex; justify-content: center; align-items: center;
-  opacity: 0; visibility: hidden; pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.35s ease, visibility 0.35s ease;
   z-index: 2000;
   overflow: visible;
 }
 
 .mr-nico-overlay.active {
-  opacity: 1; visibility: visible; pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mr-nico-card {
@@ -2597,18 +2611,20 @@ body.modal-active .logo-icon .dahlia-center {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(226, 169, 179, 0.5);
-  padding: 24px 30px; 
+  padding: 24px 30px;
   border-radius: 24px;
-  width: 85%; max-width: 400px; 
+  width: 85%;
+  max-width: 400px;
   text-align: left;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(226, 169, 179, 0.15);
   transform: translateY(15px) scale(0.95);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); 
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 2003;
-  display: flex; flex-direction: column; 
+  display: flex;
+  flex-direction: column;
   max-height: 80vh;
   position: relative;
-  overflow: visible !important; 
+  overflow: visible !important;
 }
 
 .mr-nico-overlay.active .mr-nico-card {
@@ -2616,10 +2632,10 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .mr-nico-title {
-  text-align: center; 
-  color: #ffffff; 
+  text-align: center;
+  color: #ffffff;
   margin-bottom: 14px;
-  font-size: 1.25rem; 
+  font-size: 1.25rem;
   font-weight: 700;
   border-bottom: 1px solid rgba(226, 169, 179, 0.3);
   padding-bottom: 10px;
@@ -2627,9 +2643,9 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .mr-nico-scroll {
-  overflow-y: auto; 
-  max-height: 45vh; 
-  padding-right: 4px; 
+  overflow-y: auto;
+  max-height: 45vh;
+  padding-right: 4px;
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
@@ -2637,28 +2653,28 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 .mr-nico-group {
-  margin-bottom: 4px; 
-  padding-bottom: 4px; 
+  margin-bottom: 4px;
+  padding-bottom: 4px;
 }
 
 .mr-nico-label {
-  font-size: 0.85rem; 
-  color: #ffffff; 
-  margin-bottom: 6px; 
+  font-size: 0.85rem;
+  color: #ffffff;
+  margin-bottom: 6px;
   font-weight: 600;
   display: block;
 }
 
 .mr-nico-field {
-  width: 100%; 
-  background: rgba(255, 255, 255, 0.25); 
-  border: 1px solid rgba(226, 169, 179, 0.4); 
+  width: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(226, 169, 179, 0.4);
   padding: 10px 12px;
-  border-radius: 10px; 
-  color: #ffffff; 
-  font-size: 0.9rem; 
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
   font-weight: 500;
-  outline: none; 
+  outline: none;
   margin-top: 4px;
   transition: all 0.3s ease;
 }
@@ -2669,7 +2685,7 @@ body.modal-active .logo-icon .dahlia-center {
 
 .mr-nico-field:focus {
   background: rgba(255, 255, 255, 0.35);
-  border-color: #38bdf8; 
+  border-color: #38bdf8;
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
@@ -2737,31 +2753,31 @@ body.modal-active .logo-icon .dahlia-center {
   color: rgba(255, 255, 255, 0.75);
 }
 
-.mr-nico-actions { 
-  display: flex; 
-  gap: 10px; 
-  margin-top: 10px; 
+.mr-nico-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .mr-nico-btn {
-  align-self: center; 
-  width: 100%; 
+  align-self: center;
+  width: 100%;
   max-width: 180px;
   background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
-  color: #0f172a; 
+  color: #0f172a;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  padding: 10px 20px; 
-  border-radius: 12px; 
-  font-weight: 700; 
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
   font-size: 0.85rem;
-  cursor: pointer; 
+  cursor: pointer;
   box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin: 0;
 }
 
 .mr-nico-btn-alt {
-  background: rgba(255, 255, 255, 0.25); 
+  background: rgba(255, 255, 255, 0.25);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -2795,7 +2811,7 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .mr-map-pin {
@@ -2818,7 +2834,6 @@ body.modal-active .logo-icon .dahlia-center {
   border-radius: 10px;
 }
 
-/* Rejilla de Checkboxes */
 .mr-checkbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2855,9 +2870,20 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 @keyframes mapPinPulse {
-  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
-  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
-  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+  }
+
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+  }
 }
 
 /* --- CONTENEDOR Y SUGERENCIAS DEL BUSCADOR (CORREGIDO Z-INDEX) --- */
@@ -2876,7 +2902,8 @@ body.modal-active .logo-icon .dahlia-center {
   border: 1px solid rgba(255, 255, 255, 0.35) !important;
   border-radius: 16px !important;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
-  z-index: 999999 !important; /* Capa ultra alta para evitar el footer */
+  z-index: 999999 !important;
+  /* Capa ultra alta para evitar el footer */
   max-height: 220px !important;
   overflow-y: auto !important;
   box-sizing: border-box !important;
@@ -2906,7 +2933,8 @@ body.modal-active .logo-icon .dahlia-center {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  background-color: rgba(125, 95, 105, 0.6) !important; /* Mismo tono y claridad que los demás */
+  background-color: rgba(125, 95, 105, 0.6) !important;
+  /* Mismo tono y claridad que los demás */
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   display: none;
@@ -2989,7 +3017,7 @@ body.modal-active .logo-icon .dahlia-center {
   align-items: center !important;
   justify-content: center !important;
   overflow: hidden !important;
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.25) !important;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.25) !important;
 }
 
 .dv-map-pin {
@@ -3117,12 +3145,22 @@ body.modal-active .logo-icon .dahlia-center {
 }
 
 @keyframes dvMapPulse {
-  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
-  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
-  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+  }
+
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+  }
 }
 
-/* --- DISEÑO EXCLUSIVO PARA EL MODAL DE REPORTE Y MAPA --- */
 .dv-row-2cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3167,7 +3205,6 @@ body.modal-active .logo-icon .dahlia-center {
   display: none;
 }
 
-/* Sincronización exacta con el estilo global de tus tarjetas modales */
 .dv-modal-card {
   background: rgba(125, 95, 105, 0.85) !important;
   backdrop-filter: blur(20px) !important;
@@ -3195,7 +3232,6 @@ body.modal-active .logo-icon .dahlia-center {
   text-align: center;
 }
 
-/* --- ESTILOS PARA EL MAPA Y CONTENEDORES DEL MODAL --- */
 .dv-real-map-box {
   width: 100%;
   height: 160px;
@@ -3238,7 +3274,6 @@ body.modal-active .logo-icon .dahlia-center {
   background: rgba(125, 95, 105, 0.3) !important;
 }
 
-/* --- MARCADOR PERSONALIZADO CON EFECTO DE PULSO LUMINOSO --- */
 .dv-pulsing-marker {
   position: relative;
   width: 22px;
@@ -3256,22 +3291,22 @@ body.modal-active .logo-icon .dahlia-center {
     transform: translate(-50%, -50%) scale(0.9);
     box-shadow: 0 0 5px #38bdf8, 0 0 0 0 rgba(56, 189, 248, 0.7);
   }
+
   50% {
     transform: translate(-50%, -50%) scale(1.2);
     box-shadow: 0 0 20px #38bdf8, 0 0 0 12px rgba(56, 189, 248, 0);
   }
+
   100% {
     transform: translate(-50%, -50%) scale(0.9);
     box-shadow: 0 0 5px #38bdf8, 0 0 0 0 rgba(56, 189, 248, 0);
   }
 }
 
-/* --- OCULTAR MARCA DE AGUA Y ATRIBUCIÓN DE LEAFLET --- */
 .leaflet-control-attribution {
   display: none !important;
 }
 
-/* --- CENTRAR LOS BOTONES DEL MODAL --- */
 .dv-modal-buttons-box,
 .dv-modal-actions {
   display: flex !important;
@@ -3281,15 +3316,12 @@ body.modal-active .logo-icon .dahlia-center {
   margin-top: 18px !important;
 }
 
-/* Asegurar que los botones tengan un ancho equilibrado y se vean centrados */
 .dv-modal-buttons-box .btn-seg-action,
 .dv-modal-actions .btn-seg-action {
   flex: 0 1 160px !important;
   max-width: 160px !important;
   text-align: center !important;
 }
-
-/* --- MODAL DE EMPRESA CON LA PALETA DE COLORES EXACTA DEL SISTEMA --- */
 
 .dv-comp-modal-overlay {
   position: fixed !important;
@@ -3313,6 +3345,7 @@ body.modal-active .logo-icon .dahlia-center {
   opacity: 1 !important;
   visibility: visible !important;
 }
+
 .dv-comp-modal-card {
   position: relative !important;
   background: rgba(125, 95, 105, 0.85) !important;
