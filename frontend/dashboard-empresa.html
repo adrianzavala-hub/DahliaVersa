@@ -63,7 +63,6 @@
             animation: spin 20s linear infinite;
         }
 
-        /* Pétalos con tonos rosa coral, rojo salmón y vino suave inspirados en las dahlias */
         .dahlia-petal {
             position: absolute;
             top: 50%;
@@ -123,15 +122,10 @@
         }
 
         @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Navbar con tono rojo cálido traslúcido tipo cristal */
         .nav-links {
             display: flex;
             gap: 25px;
@@ -154,7 +148,6 @@
             color: #fcd5ce;
         }
 
-        /* Botón con degradado rojo coral cálido */
         .btn-nav {
             background: linear-gradient(135deg, #f8a594 0%, #e06c5f 100%);
             color: #ffffff;
@@ -173,6 +166,116 @@
             color: #5c181b;
             transform: translateY(-3px) scale(1.04);
             box-shadow: 0 6px 20px rgba(248, 165, 148, 0.6);
+        }
+
+        /* ESTILOS DE LA SECCIÓN PRINCIPAL Y CONTENEDORES DE REPORTES */
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(120, 35, 40, 0.35);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(248, 165, 148, 0.3);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* LADO DERECHO: GRID CON LOS TRES RECUADROS DE INCIDENCIAS */
+        .reports-sidebar {
+            width: 420px;
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .report-card {
+            background: rgba(120, 35, 40, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(248, 165, 148, 0.35);
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 12px rgba(224, 108, 95, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .report-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(248, 165, 148, 0.7);
+        }
+
+        .report-card h3 {
+            font-size: 1rem;
+            color: #fcd5ce;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(248, 165, 148, 0.25);
+            padding-bottom: 8px;
+        }
+
+        .report-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(248, 165, 148, 0.5) transparent;
+        }
+
+        .report-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 8px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .report-item span {
+            display: block;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .report-item small {
+            color: #f8a594;
+        }
+
+        /* POSICIONAMIENTO ESPECÍFICO DE LOS 3 RECUADROS */
+        .card-water {
+            grid-column: span 2; /* Fugas de Agua ocupa todo el ancho superior */
+        }
+
+        .card-pothole {
+            grid-column: 1; /* Baches abajo a la izquierda */
+        }
+
+        .card-light {
+            grid-column: 2; /* Postes de luz abajo a la derecha */
+        }
+
+        @media (max-width: 850px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            .reports-sidebar {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -225,6 +328,56 @@
         </nav>
         <a href="index.html" class="btn-nav" id="backToHomeBtn">Volver al Inicio</a>
     </header>
+
+    <main class="dashboard-container">
+        <!-- ÁREA PRINCIPAL -->
+        <section class="main-content">
+            <h2>Gestión de Control de Incidencias</h2>
+            <p style="margin-top: 10px; color: #fcd5ce; font-size: 0.9rem;">
+                Selecciona o administra los reportes registrados en la plataforma.
+            </p>
+        </section>
+
+        <!-- LADO DERECHO CON LOS RECUADROS PEDIDOS -->
+        <aside class="reports-sidebar">
+            <!-- RECUADRO SUPERIOR: FUGAS DE AGUA -->
+            <div class="report-card card-water">
+                <h3>💧 Fugas de Agua</h3>
+                <div class="report-list">
+                    <div class="report-item">
+                        <span>Av. Hidalgo #120</span>
+                        <small>Estado: En revisión</small>
+                    </div>
+                    <div class="report-item">
+                        <span>Calle Juárez s/n</span>
+                        <small>Estado: Atendido</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECUADRO INFERIOR IZQUIERDO: BACHES -->
+            <div class="report-card card-pothole">
+                <h3>🕳️ Baches</h3>
+                <div class="report-list">
+                    <div class="report-item">
+                        <span>Calle 5 de Mayo</span>
+                        <small>Pendiente</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECUADRO INFERIOR DERECHO/EN MEDIO ABAJO: POSTES DE LUZ -->
+            <div class="report-card card-light">
+                <h3>💡 Postes de Luz</h3>
+                <div class="report-list">
+                    <div class="report-item">
+                        <span>Poste #402 Centro</span>
+                        <small>Foco fundido</small>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
 </body>
 
 </html>
