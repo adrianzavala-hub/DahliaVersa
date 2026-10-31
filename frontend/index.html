@@ -294,7 +294,6 @@
             </div>
             <h2>Seguimiento de Reporte</h2>
             <div class="modal-body-scroll-seg">
-                <!-- Tipo de Incidencia con Botones de Selección (Checkboxes visuales) -->
                 <div class="seg-step">
                     <h3>Tipo de Incidencia</h3>
                     <div class="seg-checkbox-group">
@@ -340,6 +339,7 @@
         </div>
     </div>
 
+<!-- MODAL MIS REPORTES CON ANIMACIÓN DE FUGA DE AGUA REFINADA -->
     <div class="mr-nico-overlay" id="modalMisReportes">
         <div class="mr-nico-card">
 
@@ -368,44 +368,42 @@
                 </div>
             </div>
 
-        </div>
-    </div>
+            <h2 class="mr-nico-title">Mis Reportes Ciudadanos</h2>
 
-    <h2 class="mr-nico-title">Mis Reportes Ciudadanos</h2>
-
-    <div class="mr-nico-scroll">
-        <div class="mr-nico-group">
-            <label class="mr-nico-label">Nombre Registrado</label>
-            <input type="text" id="mrNicoInputName" placeholder="Tu nombre completo" class="mr-nico-field">
-        </div>
-
-        <div id="mrNicoResultsBox" class="mr-nico-results" style="display: none;">
-            <span class="mr-nico-subtitle">Historial de Reportes:</span>
-
-            <div class="mr-nico-item">
-                <div class="mr-nico-row">
-                    <span class="mr-nico-type">Fuga de Agua</span>
-                    <span class="mr-nico-badge mr-badge-process">En Proceso</span>
+            <div class="mr-nico-scroll">
+                <div class="mr-nico-group">
+                    <label class="mr-nico-label">Nombre Registrado</label>
+                    <input type="text" id="mrNicoInputName" placeholder="Tu nombre completo" class="mr-nico-field">
                 </div>
-                <span class="mr-nico-date">Fecha: 10/10/2026</span>
+
+                <div id="mrNicoResultsBox" class="mr-nico-results" style="display: none;">
+                    <span class="mr-nico-subtitle">Historial de Reportes:</span>
+
+                    <div class="mr-nico-item">
+                        <div class="mr-nico-row">
+                            <span class="mr-nico-type">Fuga de Agua</span>
+                            <span class="mr-nico-badge mr-badge-process">En Proceso</span>
+                        </div>
+                        <span class="mr-nico-date">Fecha: 10/10/2026</span>
+                    </div>
+
+                    <div class="mr-nico-item">
+                        <div class="mr-nico-row">
+                            <span class="mr-nico-type">Bache</span>
+                            <span class="mr-nico-badge mr-badge-done">Resuelto</span>
+                        </div>
+                        <span class="mr-nico-date">Fecha: 05/09/2026</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="mr-nico-item">
-                <div class="mr-nico-row">
-                    <span class="mr-nico-type">Bache</span>
-                    <span class="mr-nico-badge mr-badge-done">Resuelto</span>
-                </div>
-                <span class="mr-nico-date">Fecha: 05/09/2026</span>
+            <div class="mr-nico-actions">
+                <button class="mr-nico-btn" id="mrNicoBtnSearch">Buscar Reportes</button>
+                <button class="mr-nico-btn mr-nico-btn-alt" id="mrNicoBtnClose">Cerrar</button>
             </div>
-        </div>
-    </div>
 
-    <div class="mr-nico-actions">
-        <button class="mr-nico-btn" id="mrNicoBtnSearch">Buscar Reportes</button>
-        <button class="mr-nico-btn mr-nico-btn-alt" id="mrNicoBtnClose">Cerrar</button>
-    </div>
-    </div>
-    </div>
+        </div> <!-- /.mr-nico-card -->
+    </div> <!-- /.mr-nico-overlay -->
 
     <footer class="site-footer">
         <div class="footer-content">
