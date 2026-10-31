@@ -341,70 +341,45 @@
     </div>
 
     <div class="mr-nico-overlay" id="modalMisReportes">
-    <div class="mr-nico-card">
+        <div class="mr-nico-card">
 
-        <!-- ANIMACIÓN DE FUGA DE AGUA PULIDA Y DE ALTA GAMA -->
-        <div class="mr-nico-leak-polished">
-            <div class="pipe-system">
-                <!-- Tubería Industrial Principal -->
-                <div class="pipe-main">
-                    <div class="pipe-crack-glow"></div>
-                </div>
-                <div class="pipe-joint-collar"></div>
-
-                <!-- Chorro de Alta Presión Secundario -->
-                <div class="pressure-spray">
-                    <div class="spray-particle p1"></div>
-                    <div class="spray-particle p2"></div>
-                    <div class="spray-particle p3"></div>
-                </div>
-
-                <!-- Cascada Principal de Agua, Gota y Ondas de Impacto -->
-                <div class="main-water-stream">
-                    <div class="water-drip"></div>
-                    <div class="impact-ripple ring-1"></div>
-                    <div class="impact-ripple ring-2"></div>
-                </div>
-            </div>
         </div>
-
     </div>
-</div>
 
-            <h2 class="mr-nico-title">Mis Reportes Ciudadanos</h2>
+    <h2 class="mr-nico-title">Mis Reportes Ciudadanos</h2>
 
-            <div class="mr-nico-scroll">
-                <div class="mr-nico-group">
-                    <label class="mr-nico-label">Nombre Registrado</label>
-                    <input type="text" id="mrNicoInputName" placeholder="Tu nombre completo" class="mr-nico-field">
+    <div class="mr-nico-scroll">
+        <div class="mr-nico-group">
+            <label class="mr-nico-label">Nombre Registrado</label>
+            <input type="text" id="mrNicoInputName" placeholder="Tu nombre completo" class="mr-nico-field">
+        </div>
+
+        <div id="mrNicoResultsBox" class="mr-nico-results" style="display: none;">
+            <span class="mr-nico-subtitle">Historial de Reportes:</span>
+
+            <div class="mr-nico-item">
+                <div class="mr-nico-row">
+                    <span class="mr-nico-type">Fuga de Agua</span>
+                    <span class="mr-nico-badge mr-badge-process">En Proceso</span>
                 </div>
-
-                <div id="mrNicoResultsBox" class="mr-nico-results" style="display: none;">
-                    <span class="mr-nico-subtitle">Historial de Reportes:</span>
-
-                    <div class="mr-nico-item">
-                        <div class="mr-nico-row">
-                            <span class="mr-nico-type">Fuga de Agua</span>
-                            <span class="mr-nico-badge mr-badge-process">En Proceso</span>
-                        </div>
-                        <span class="mr-nico-date">Fecha: 10/10/2026</span>
-                    </div>
-
-                    <div class="mr-nico-item">
-                        <div class="mr-nico-row">
-                            <span class="mr-nico-type">Bache</span>
-                            <span class="mr-nico-badge mr-badge-done">Resuelto</span>
-                        </div>
-                        <span class="mr-nico-date">Fecha: 05/09/2026</span>
-                    </div>
-                </div>
+                <span class="mr-nico-date">Fecha: 10/10/2026</span>
             </div>
 
-            <div class="mr-nico-actions">
-                <button class="mr-nico-btn" id="mrNicoBtnSearch">Buscar Reportes</button>
-                <button class="mr-nico-btn mr-nico-btn-alt" id="mrNicoBtnClose">Cerrar</button>
+            <div class="mr-nico-item">
+                <div class="mr-nico-row">
+                    <span class="mr-nico-type">Bache</span>
+                    <span class="mr-nico-badge mr-badge-done">Resuelto</span>
+                </div>
+                <span class="mr-nico-date">Fecha: 05/09/2026</span>
             </div>
         </div>
+    </div>
+
+    <div class="mr-nico-actions">
+        <button class="mr-nico-btn" id="mrNicoBtnSearch">Buscar Reportes</button>
+        <button class="mr-nico-btn mr-nico-btn-alt" id="mrNicoBtnClose">Cerrar</button>
+    </div>
+    </div>
     </div>
 
     <footer class="site-footer">
@@ -549,27 +524,27 @@
             </div>
         </div>
     </div>
-<div class="dv-comp-modal-overlay" id="dvCompRegisterModal">
-    <div class="dv-comp-modal-card">
-        <button class="dv-comp-modal-close-btn" id="dvCloseCompModal">&times;</button>
-        <div class="dv-comp-modal-header">
-            <div class="footer-brand-effects">DahliaVersa</div>
-            <h3>Acceso de Empresa</h3>
-            <p class="dv-comp-modal-subtitle">Inicia sesión con tus credenciales autorizadas</p>
+    <div class="dv-comp-modal-overlay" id="dvCompRegisterModal">
+        <div class="dv-comp-modal-card">
+            <button class="dv-comp-modal-close-btn" id="dvCloseCompModal">&times;</button>
+            <div class="dv-comp-modal-header">
+                <div class="footer-brand-effects">DahliaVersa</div>
+                <h3>Acceso de Empresa</h3>
+                <p class="dv-comp-modal-subtitle">Inicia sesión con tus credenciales autorizadas</p>
+            </div>
+            <form id="dvCompRegisterForm" class="dv-comp-modal-form">
+                <div class="form-group">
+                    <label for="dvCompUsuario">Usuario</label>
+                    <input type="text" id="dvCompUsuario" name="usuario" placeholder="Ej. admin" required>
+                </div>
+                <div class="form-group">
+                    <label for="dvCompPassword">Contraseña</label>
+                    <input type="password" id="dvCompPassword" name="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="dv-comp-modal-btn">Iniciar Sesión</button>
+            </form>
         </div>
-        <form id="dvCompRegisterForm" class="dv-comp-modal-form">
-            <div class="form-group">
-                <label for="dvCompUsuario">Usuario</label>
-                <input type="text" id="dvCompUsuario" name="usuario" placeholder="Ej. admin" required>
-            </div>
-            <div class="form-group">
-                <label for="dvCompPassword">Contraseña</label>
-                <input type="password" id="dvCompPassword" name="password" placeholder="••••••••" required>
-            </div>
-            <button type="submit" class="dv-comp-modal-btn">Iniciar Sesión</button>
-        </form>
     </div>
-</div>
     <script src="index.js"></script>
 </body>
 
